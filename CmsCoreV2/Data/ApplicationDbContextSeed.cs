@@ -141,14 +141,26 @@ namespace CmsCoreV2.Data
             l.IsActive = true;
             l.AppTenantId = tenant.AppTenantId;
             context.Languages.Add(l);
+
+            var eng = new Language();
+            eng.AppTenantId = tenant.AppTenantId;
+            eng.Name = "English";
+            eng.NativeName = "İngilizce";
+            eng.Culture = "eng";
+            eng.IsActive = true;
+            context.Languages.Add(eng);
             context.SaveChanges();
+
             return l.Id;
+
+
         }
         public static void AddPages(ApplicationDbContext context, AppTenant tenant, long languageId)
         {
            
             context.AddRange(
                 new Page { Title = "Anasayfa", Slug = "anasayfa", Template = "Index", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now , AppTenantId = tenant.AppTenantId},
+                new Page { Title = "AnaOkulu", Slug = "anaokulu", Template = "kindergarten", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Haberler", Slug = "haberler", Template = "Posts", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Blog", Slug = "blog", Template = "Blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Ön Kayıt Formu", Slug = "on-kayit-formu", Template = "PreRegistration", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now , AppTenantId = tenant.AppTenantId },
