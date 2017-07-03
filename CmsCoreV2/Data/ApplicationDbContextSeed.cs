@@ -154,8 +154,19 @@ namespace CmsCoreV2.Data
             l.IsActive = true;
             l.AppTenantId = tenant.AppTenantId;
             context.Languages.Add(l);
+
+            var eng = new Language();
+            eng.AppTenantId = tenant.AppTenantId;
+            eng.Name = "English";
+            eng.NativeName = "İngilizce";
+            eng.Culture = "eng";
+            eng.IsActive = true;
+            context.Languages.Add(eng);
             context.SaveChanges();
+
             return l.Id;
+
+
         }
         public static void AddPages(ApplicationDbContext context, AppTenant tenant, long languageId)
         {
