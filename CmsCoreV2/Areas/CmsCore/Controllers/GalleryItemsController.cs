@@ -125,7 +125,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 return NotFound();
             }
-            ViewData["GalleryId"] = new SelectList(_context.Galleries.ToList(), "Id", "Id", galleryItem.GalleryId);
+            ViewData["GalleryId"] = new SelectList(_context.Galleries.ToList(), "Id", "Name", galleryItem.GalleryId);
             ViewBag.CategoryList = GetGalleryItemCategories();
             ViewBag.CheckList = galleryItem.GalleryItemGalleryItemCategories;
 
@@ -171,7 +171,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["GalleryId"] = new SelectList(_context.Galleries.ToList(), "Id", "Id", galleryItem.GalleryId);
+            ViewData["GalleryId"] = new SelectList(_context.Galleries.ToList(), "Id", "Name", galleryItem.GalleryId);
             return View(galleryItem);
         }
 
