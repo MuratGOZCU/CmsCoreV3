@@ -118,10 +118,12 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
 
             var menuItem = await _context.MenuItems.SingleOrDefaultAsync(m => m.Id == id);
+            // var parentMenuItem = await _context.MenuItems.SingleOrDefaultAsync(m => m.Id == id);
             if (menuItem == null)
             {
                 return NotFound();
             }
+          
             ViewData["MenuId"] = new SelectList(_context.Menus.ToList(), "Id", "Name", menuItem.MenuId);
 
             var parentMenuItem = _context.MenuItems.ToList();
@@ -129,7 +131,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             recurseMenuItem(ref parentMenuItem, null, 0, ref result);
             ViewBag.ParentMenuItem = result;
 
-            //ViewData["ParentMenuItemId"] = new SelectList(_context.MenuItems.Where(mi => mi.Id != id && mi.ParentMenuItem != menuItem).ToList(), "Id", "Name", menuItem.ParentMenuItemId);
+            ViewData["ParentMenuItemId"] = new SelectList(_context.MenuItems.Where(mi => mi.Id != id && mi.ParentMenuItem != menuItem).ToList(), "Id", "Name", menuItem.ParentMenuItemId);
 
             return View(menuItem);
         }
