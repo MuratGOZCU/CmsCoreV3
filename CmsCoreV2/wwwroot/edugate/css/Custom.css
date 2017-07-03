@@ -524,7 +524,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 .background-opacity:before {
     background-image: url(/edugate/images/kindergarten.png) !important;
     background-size: cover;
-    padding-bottom:20px;
+    
 }
 
 .search-input {
@@ -559,8 +559,13 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 
 }
 
-.page-title {
-   
-    height: 425px !important;
-
+@media screen and (min-height: 1500px) {
+    .page-title {
+        height: 300px !important;
+    }
 }
+
+.page-title {
+        height: 400px;
+ }
+
