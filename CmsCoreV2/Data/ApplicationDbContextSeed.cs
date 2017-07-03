@@ -120,6 +120,7 @@ namespace CmsCoreV2.Data
 
 
                 );
+            context.SaveChanges();
         }
 
         private static void AddFeedbackValues(ApplicationDbContext context, AppTenant tenant)
