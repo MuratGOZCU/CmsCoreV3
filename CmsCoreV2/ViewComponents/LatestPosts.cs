@@ -25,7 +25,21 @@ namespace CmsCoreV2.ViewComponents
         }
         private async Task<List<Post>> GetItems(string categoryNames, int count)
         {
-            List<Post> posts = GetPostsInCategoryNames(categoryNames.Split(','), count).Where(w => w.IsPublished == true).ToList();
+            string[] categories;
+            if (categoryNames == "")
+            {
+                categories = new string[0];
+            }
+            else
+            {
+                categories = categoryNames.Split(',');
+            }
+            for (var i = 0; i < categories.Length; i++)
+            {
+                categories[i] = categories[i].Trim().ToLower();
+            }
+
+            List<Post> posts = GetPostsInCategoryNames(categories, count).Where(w => w.IsPublished == true).ToList();
             return await Task.FromResult(posts);
         }
 
