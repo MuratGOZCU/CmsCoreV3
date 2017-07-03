@@ -21,44 +21,54 @@
                     </div>
                 </div>
             </div>
-            <div class="form-horizontal">
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Title" class="form-control" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Position" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Position" class="form-control" />
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Position" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.Photo)</label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <input asp-for="Photo" class="form-control" />
+                  <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Photo')">...</a>
+                    </span>
                 </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+    </div>
                 <div class="form-group">
-                    <label asp-for="Description" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Position" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Position" class="form-control" />
-                        <span asp-validation-for="Position" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Photo" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Photo" class="form-control" />
-                        <span asp-validation-for="Photo" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Video" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
+                    <label asp-for="Position" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.Video)</label>
+                     <div class="col-md-10">
+                    <div class="input-group">
                         <input asp-for="Video" class="form-control" />
-                        <span asp-validation-for="Video" class="text-danger"></span>
+                        <span class="input-group-btn">
+                            <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Video')">...</a>
+                        </span>
                     </div>
                 </div>
+                    @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
+                    </div>
                 <div class="form-group">
                     <label asp-for="Meta1" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
@@ -85,28 +95,28 @@
                 <div class="form-group">
                     <label asp-for="CreateDate" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="CreateDate" class="form-control" readonly/>
+                        <input readonly asp-for="CreateDate" class="form-control" />
                         <span asp-validation-for="CreateDate" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="CreatedBy" class="form-control" readonly/>
+                        <input readonly asp-for="CreatedBy" class="form-control" />
                         <span asp-validation-for="CreatedBy" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="UpdateDate" class="form-control" readonly/>
+                        <input  readonly asp-for="UpdateDate" class="form-control" />
                         <span asp-validation-for="UpdateDate" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="UpdatedBy" class="form-control" readonly />
+                        <input readonly asp-for="UpdatedBy" class="form-control" />
                         <span asp-validation-for="UpdatedBy" class="text-danger"></span>
                     </div>
                 </div>
@@ -131,24 +141,7 @@
     <script src="/metronic/global/plugins/jstree/dist/jstree.js"></script>
 
 
-    <script>
-        $(function () {
-            $("#uploadModal").click(function () {
-                $.ajax({
-                    cache: false,
-                    type: "GET",
-                    url: "/Media/Create",
-                    success: function (view) {
-                        $('.modal-body').html(view);
-                        $('.modal').modal();
-                    },
-                    error: function (err) {
-                        alert("bilinmeyen bir hata oluştu!" + err);
-                    }
-                });
-            });
-        });
-    </script>
+  
     <script>
         var handleSample = function () {
             $('#tree').jstree({
