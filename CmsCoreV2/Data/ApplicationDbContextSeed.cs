@@ -61,13 +61,15 @@ namespace CmsCoreV2.Data
         private static void AddPostPostCategories(ApplicationDbContext context, AppTenant tenant)
         {
             context.AddRange(
-                new PostPostCategory { PostId=1,PostCategoryId=1, AppTenantId = tenant.AppTenantId },
-                new PostPostCategory { PostId = 3, PostCategoryId = 1,AppTenantId=tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 3, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 4, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 5, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 6, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 2, PostCategoryId = 3, AppTenantId = tenant.AppTenantId },
-                new PostPostCategory { PostId = 1, PostCategoryId = 4, AppTenantId = tenant.AppTenantId }
+                new PostPostCategory { PostId = 1, PostCategoryId = 4, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 4, AppTenantId = tenant.AppTenantId }
+
                 );
             context.SaveChanges();
         }
