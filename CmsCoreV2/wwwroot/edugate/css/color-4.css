@@ -3563,13 +3563,7 @@ footer {
     font-weight: bold
 }
 
-.bg-w-form .form-input {
-    background-color: #fafafa;
-    border-radius: 0px;
-    height: 50px;
-    border: none;
-    box-shadow: none
-}
+
 
 .bg-w-form .form-input:focus, .bg-w-form .form-input:active {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2)
