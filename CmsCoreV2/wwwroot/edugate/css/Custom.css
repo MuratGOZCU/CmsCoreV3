@@ -533,10 +533,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 
 }
 
-.btn {
-    float:right;
-    right:70px;
-}
+
 
 .background-opacity:before {
     position: absolute;
@@ -552,12 +549,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     padding: 20px 0 !important;
 }
 
-@media screen and (max-width: 591px) {
-    .btn {
-        position: static !important;
-    }
 
-}
 
 @media screen and (min-height: 1500px) {
     .page-title {
@@ -568,4 +560,17 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 .page-title {
         height: 400px;
  }
+
+
+@media screen and (max-width: 550px) {
+    .btn {
+        width: 100%;
+    }
+
+   .search-input .form-select, .search-input .form-submit, .search-input .sbHolder {
+        width: 100% !important;
+
+    }
+}
+
 
