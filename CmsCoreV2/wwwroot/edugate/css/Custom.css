@@ -573,4 +573,6 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     }
 }
 
-
+.grecaptcha-badge {
+    display: none !important;
+}
