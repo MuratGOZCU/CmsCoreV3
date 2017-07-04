@@ -34,6 +34,7 @@
         var canvas = $("#map_canvas");
         var latitude = @Html.Raw(ViewBag.MapLat);
         var longitude = @Html.Raw(ViewBag.MapLon);
+        var mapTitle = "@Html.Raw(ViewBag.MapTitle)";
         var latlng = new google.maps.LatLng(latitude, longitude);
         var options = {
             scrollwheel: false,
@@ -41,11 +42,24 @@
             center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+
+
+        infowindow = new google.maps.InfoWindow({ content: mapTitle });
+
         var map = new google.maps.Map(canvas[0], options);
+
+
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(latitude, longitude),
             map: map
         });
+        marker.addListener('click', function () {
+            infowindow.open(map, marker);
+
+        });
+        infowindow.open(map, marker);
+
+
     }
     $(function () {
         initialize();
