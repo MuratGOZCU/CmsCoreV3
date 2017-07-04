@@ -75,7 +75,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     setting.UpdatedBy = User.Identity.Name ?? "username";
                     setting.UpdateDate = DateTime.Now;
                     setting.AppTenantId = tenant.AppTenantId;
+                    _context.Update(setting);
                     await _context.SaveChangesAsync();
+                    ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
