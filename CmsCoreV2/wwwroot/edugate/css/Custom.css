@@ -550,16 +550,9 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 }
 
 
-
-@media screen and (min-height: 2050px) {
-    .page-title {
-        height: 280px !important;
-    }
-}
-
 .page-title {
-        height: 400px;
- }
+    padding-top: 26.0417%;
+}
 
 
 @media screen and (max-width: 550px) {
