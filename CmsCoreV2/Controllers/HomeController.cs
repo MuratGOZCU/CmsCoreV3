@@ -39,14 +39,18 @@ namespace CmsCoreV2.Controllers
         {
             return Redirect(HttpContext.Items["NewUrl"].ToString());
         }
-        public IActionResult Index(string slug, string culture = "tr")
+        public IActionResult Index(string slug, string culture)
         {
             if (culture == "no")
             {
                 return Redirect("/tr");
             }
+            else if (culture == "eng")
+            {
+                return Redirect("/en");
+            }
             slug = slug.ToLower();
-            var page = _context.SetFiltered<Page>().FirstOrDefault(p => p.Slug.ToLower() == slug);
+            var page = _context.SetFiltered<Page>().FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
             if (page == null || page.IsPublished == false)
             {
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
