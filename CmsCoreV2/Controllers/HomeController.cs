@@ -91,6 +91,7 @@ namespace CmsCoreV2.Controllers
                 var setting = _context.SetFiltered<Setting>().FirstOrDefault();
                 ViewBag.MapLat = setting.MapLat;
                 ViewBag.MapLon = setting.MapLon;
+                ViewBag.MapTitle = setting.MapTitle;
                 PageViewModel pageVM = new PageViewModel();
                 pageVM.Id = page.Id;
                 pageVM.Title = page.Title;

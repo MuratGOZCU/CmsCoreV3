@@ -13,6 +13,8 @@ namespace CmsCoreV2.Models
         public string GoogleAnalytics { get; set; }
         public string FooterScript { get; set; }
         [StringLength(200)]
+        public string MapTitle { get; set; }
+        [StringLength(200)]
         public string MapLat { get; set; }
         [StringLength(200)]
         public string MapLon { get; set; }

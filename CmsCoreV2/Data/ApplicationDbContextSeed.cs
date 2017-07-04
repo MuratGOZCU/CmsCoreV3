@@ -206,6 +206,7 @@ namespace CmsCoreV2.Data
             s.UpdatedBy = "username";
             s.MapLat = "40.985149";
             s.MapLon = "29.028575";
+            s.MapTitle = "Bilişim Eğitim Merkezi";
             context.Settings.Add(s);
             context.SaveChanges();
             
