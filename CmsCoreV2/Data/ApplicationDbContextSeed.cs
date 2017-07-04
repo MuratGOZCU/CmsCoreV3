@@ -34,7 +34,6 @@ namespace CmsCoreV2.Data
             AddCustomization(context, tenant);
             AddMenus(context,tenant);            
             AddMenuItems(context,tenant);
-            AddPostCategories(context, tenant, languageId);
             context.SaveChanges();
             AddHomePageSlider(context, tenant);
             AddHomePageSlide(context, tenant);
@@ -55,7 +54,7 @@ namespace CmsCoreV2.Data
 
 
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
 
         }
@@ -67,46 +66,33 @@ namespace CmsCoreV2.Data
                 new PostPostCategory { PostId = 4, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 5, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 6, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new PostPostCategory { PostId = 2, PostCategoryId = 3, AppTenantId = tenant.AppTenantId }
-
-
+                new PostPostCategory { PostId = 2, PostCategoryId = 3, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 4, AppTenantId = tenant.AppTenantId }
                 );
+            context.SaveChanges();
         }
         private static void AddGalleryItemGalleryItemCategories(ApplicationDbContext context, AppTenant tenant)
         {
             context.AddRange(
                 new GalleryItemGalleryItemCategory { GalleryItemId=1,GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 4, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 5, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 6, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 8, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 12, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 14, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 15, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 16, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 17, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 18, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 19, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 20, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 21, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 22, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 23, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 12, GalleryItemCategoryId = 2, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 13, GalleryItemCategoryId = 2, AppTenantId = tenant.AppTenantId },
-                new GalleryItemGalleryItemCategory { GalleryItemId = 14, GalleryItemCategoryId = 2, AppTenantId = tenant.AppTenantId }
+                new GalleryItemGalleryItemCategory { GalleryItemId = 1, GalleryItemCategoryId = 2, AppTenantId = tenant.AppTenantId },
+                new GalleryItemGalleryItemCategory { GalleryItemId = 2, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new GalleryItemGalleryItemCategory { GalleryItemId = 2, GalleryItemCategoryId = 2, AppTenantId = tenant.AppTenantId }
 
 
                 );
+            context.SaveChanges();
         }
         private static void AddPostCategories(ApplicationDbContext context, AppTenant tenant)
         {
             context.AddRange(
                 new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description=null,LanguageId=1,Name= "Haberler",ParentCategoryId=null,Slug= "haberler", AppTenantId = tenant.AppTenantId },
                 new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = null, LanguageId = 1, Name = "Kadromuz", ParentCategoryId = null, Slug = "kadromuz", AppTenantId = tenant.AppTenantId },
-                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "blog", LanguageId = 1, Name = "Blog", ParentCategoryId = null, Slug = "blog", AppTenantId = tenant.AppTenantId }
-
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "blog", LanguageId = 1, Name = "Blog", ParentCategoryId = null, Slug = "blog", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Anaokulu", LanguageId = 1, Name = "Anaokulu", ParentCategoryId = 1, Slug = "anaokulu", AppTenantId = tenant.AppTenantId }
 
                 );
+            context.SaveChanges();
         }
         private static void AddPosts(ApplicationDbContext context, AppTenant tenant)
         {
@@ -120,6 +106,7 @@ namespace CmsCoreV2.Data
 
 
                 );
+            context.SaveChanges();
         }
 
         private static void AddFeedbackValues(ApplicationDbContext context, AppTenant tenant)
@@ -154,14 +141,26 @@ namespace CmsCoreV2.Data
             l.IsActive = true;
             l.AppTenantId = tenant.AppTenantId;
             context.Languages.Add(l);
+
+            var eng = new Language();
+            eng.AppTenantId = tenant.AppTenantId;
+            eng.Name = "English";
+            eng.NativeName = "İngilizce";
+            eng.Culture = "eng";
+            eng.IsActive = true;
+            context.Languages.Add(eng);
             context.SaveChanges();
+
             return l.Id;
+
+
         }
         public static void AddPages(ApplicationDbContext context, AppTenant tenant, long languageId)
         {
            
             context.AddRange(
                 new Page { Title = "Anasayfa", Slug = "anasayfa", Template = "Index", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now , AppTenantId = tenant.AppTenantId},
+                new Page { Title = "AnaOkulu", Slug = "anaokulu", Template = "kindergarten", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Haberler", Slug = "haberler", Template = "Posts", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Blog", Slug = "blog", Template = "Blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Ön Kayıt Formu", Slug = "on-kayit-formu", Template = "PreRegistration", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now , AppTenantId = tenant.AppTenantId },
@@ -187,13 +186,6 @@ namespace CmsCoreV2.Data
                 );     
 
         }
-        private static void AddPostCategories(ApplicationDbContext context,AppTenant tenant, long languageId)
-        {
-            context.AddRange(
-                new PostCategory { Name = "Haberler", Slug = "haberler", LanguageId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new PostCategory { Name = "Kadromuz", Slug = "kadromuz", LanguageId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-                );
-        }
 
 
         private static void AddSettings(ApplicationDbContext context,AppTenant tenant)
@@ -203,8 +195,6 @@ namespace CmsCoreV2.Data
             s.HeaderString = "";
             s.GoogleAnalytics = "";
             s.FooterScript = "";
-            s.MapLat = "";
-            s.MapLon = "";
             s.SmtpUserName = "denemecvhavuzu@gmail.com";
             s.SmtpPassword = "123:Asdfg";
             s.SmtpHost = "smtp.gmail.com";
@@ -214,6 +204,8 @@ namespace CmsCoreV2.Data
             s.CreatedBy = "username";
             s.UpdateDate = DateTime.Now;
             s.UpdatedBy = "username";
+            s.MapLat = "40.985149";
+            s.MapLon = "29.028575";
             context.Settings.Add(s);
             context.SaveChanges();
             
