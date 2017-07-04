@@ -195,8 +195,6 @@ namespace CmsCoreV2.Data
             s.HeaderString = "";
             s.GoogleAnalytics = "";
             s.FooterScript = "";
-            s.MapLat = "";
-            s.MapLon = "";
             s.SmtpUserName = "denemecvhavuzu@gmail.com";
             s.SmtpPassword = "123:Asdfg";
             s.SmtpHost = "smtp.gmail.com";
@@ -206,6 +204,8 @@ namespace CmsCoreV2.Data
             s.CreatedBy = "username";
             s.UpdateDate = DateTime.Now;
             s.UpdatedBy = "username";
+            s.MapLat = "40.985149";
+            s.MapLon = "29.028575";
             context.Settings.Add(s);
             context.SaveChanges();
             
