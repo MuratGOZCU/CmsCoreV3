@@ -1,9 +1,9 @@
-﻿@{
+﻿@inject CustomLocalizer Localizer
+@{
     ViewData["Title"] = "";
 }
 
 @await Component.InvokeAsync("Slider", new { Name = "Anasayfa Slider"})
-@inject CustomLocalizer Localizer
 <!-- CHOOSE COURSES-->
 <div class="section section-padding choose-course">
     <div class="container">
@@ -72,7 +72,7 @@
 <!-- WHY CHOOSE US-->
 
 
-@await Component.InvokeAsync("Slider", new { Name = "Anasayfa İkinci Slider" })
+@await Component.InvokeAsync("Slider", new { Name = Localizer["Anasayfa İkinci Slider"].ToString() })
 
 
 <!-- PICTURE AND GALLERY-->

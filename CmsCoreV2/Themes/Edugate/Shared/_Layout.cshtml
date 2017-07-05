@@ -6,8 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Tenant.Title</title>
-
-
+    <meta name="description" content="@ViewData["Description"]">
+    @if (!String.IsNullOrEmpty(ViewData["Keywords"].ToString())) { 
+        <meta name="keywords" content="@ViewData["Keywords"]">
+    }
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -60,9 +62,7 @@
     </environment>
     <link href="~/edugate/css/Custom.css" type="text/css" rel="stylesheet" />
     <link href="~/home/customcss" type="text/css" rel="stylesheet" />
-
-
-    
+    <link rel="icon" type="image/png" href="~/edugate/images/favicon.png" />
 </head>
 <body style="margin:0px; padding:0px;">
     <header>
@@ -85,7 +85,7 @@
                     <div class="navbar-header">
                         <div class="logo pull-left">
                             <a href="/" class="header-logo">
-                                <img src="~/edugate/images/logo.png" alt="Bilgi Koleji" />
+                                <img src="~/edugate/images/logo.png" alt="@Tenant.Title" />
                             </a>
                         </div>
                         <button type="button" data-toggle="collapse" data-target=".navigation" class="navbar-toggle edugate-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
