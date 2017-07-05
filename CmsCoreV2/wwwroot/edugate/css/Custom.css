@@ -521,10 +521,23 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 }
 
 
-.background-opacity:before {
+#kindergarten.background-opacity:before {
     background-image: url(/edugate/images/kindergarten.png) !important;
     background-size: cover;
-    
+}
+
+#primaryschool.background-opacity:before {
+    background-image: url(/edugate/images/primaryschool.png) !important;
+    background-size: cover;
+}
+
+#middleschool.background-opacity:before {
+    background-image: url(/edugate/images/middleschool.png) !important;
+    background-size: cover;
+}
+#highschool.background-opacity:before {
+    background-image: url(/edugate/images/highschool.png) !important;
+    background-size: cover;
 }
 
 .search-input {
@@ -534,6 +547,18 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 }
 
 
+#primaryschool.search-input {
+    background-color: #ff791a !important;
+}
+
+#middleschool.search-input {
+    background-color: #34b44a !important;
+}
+
+#highschool.search-input {
+    background-color: #34b44a !important;
+}
+
 
 .background-opacity:before {
     position: absolute;
@@ -542,7 +567,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(10, 15, 28, 1)!important;
+    background-color: rgba(10, 15, 28, 1) !important;
 }
 
 .search-input .search-input-wrapper {

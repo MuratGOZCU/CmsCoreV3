@@ -75,7 +75,9 @@ namespace CmsCoreV2.Controllers
                     postVM.SeoDescription = post.SeoDescription;
                     postVM.SeoKeywords = post.SeoKeywords;
                     postVM.Photo = post.Photo;
-
+                    ViewData["Title"] = post.SeoTitle;
+                    ViewData["Description"] = post.SeoDescription;
+                    ViewData["Keywords"] = post.SeoKeywords;
                     post.ViewCount++;
                     postVM.ViewCount = post.ViewCount;
 
@@ -103,7 +105,9 @@ namespace CmsCoreV2.Controllers
                 pageVM.SeoTitle = page.SeoTitle;
                 pageVM.SeoKeywords = page.SeoKeywords;
                 pageVM.SeoDescription = page.SeoDescription;
-
+                ViewData["Title"] = page.SeoTitle;
+                ViewData["Description"] = page.SeoDescription;
+                ViewData["Keywords"] = page.SeoKeywords;
                 page.ViewCount++;
                 _context.Update(page);
                 _context.SaveChanges();
@@ -124,6 +128,20 @@ namespace CmsCoreV2.Controllers
         }
 
         public IActionResult kindergarten()
+        {
+            return View();
+        }
+
+        public IActionResult primaryschool()
+        {
+            return View();
+        }
+        public IActionResult middleschool()
+        {
+            return View();
+        }
+
+        public IActionResult highschool()
         {
             return View();
         }
