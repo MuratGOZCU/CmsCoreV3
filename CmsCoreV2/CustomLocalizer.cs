@@ -23,6 +23,7 @@ namespace CmsCoreV2
             {
                 CurrentCulture = "tr";
             }
+        
 
             _internalLocalizer = WithCulture(new CultureInfo(CurrentCulture));
             _languageService = (ILanguageService)httpContextAccessor.HttpContext.RequestServices.GetService(typeof(ILanguageService));

@@ -10,6 +10,7 @@ using CmsCoreV2.Services;
 using Microsoft.AspNetCore.Http;
 using Z.EntityFramework.Plus;
 using SaasKit.Multitenancy;
+using Microsoft.EntityFrameworkCore;
 
 namespace CmsCoreV2.Controllers
 {
@@ -45,12 +46,9 @@ namespace CmsCoreV2.Controllers
             {
                 return Redirect("/tr");
             }
-            else if (culture == "eng")
-            {
-                return Redirect("/en");
-            }
+           
             slug = slug.ToLower();
-            var page = _context.SetFiltered<Page>().FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
+            var page = _context.SetFiltered<Page>().Include(i=> i.Language).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
             if (page == null || page.IsPublished == false)
             {
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
