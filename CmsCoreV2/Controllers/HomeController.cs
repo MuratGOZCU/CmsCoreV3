@@ -130,6 +130,20 @@ namespace CmsCoreV2.Controllers
             return View();
         }
 
+        public IActionResult primaryschool()
+        {
+            return View();
+        }
+        public IActionResult middleschool()
+        {
+            return View();
+        }
+
+        public IActionResult highschool()
+        {
+            return View();
+        }
+
         public IActionResult Successful()
         {
             return View("Successful");
