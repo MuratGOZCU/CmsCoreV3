@@ -17,7 +17,10 @@
     <Content Include="wwwroot\edugate\font\Interstate Regular Italic_TR.TTF" />
     <Content Include="wwwroot\edugate\font\Interstate-RegularTR.TTF" />
     <Content Include="wwwroot\edugate\images\bg-404.jpg" />
+    <Content Include="wwwroot\edugate\images\highschool.png" />
     <Content Include="wwwroot\edugate\images\kindergarten.png" />
+    <Content Include="wwwroot\edugate\images\middleschool.png" />
+    <Content Include="wwwroot\edugate\images\primaryschool.png" />
     <Content Include="wwwroot\edugate\images\video_foto.png" />
     <Content Include="wwwroot\metronic\global\scripts\portlet-reload-icon-white.png" />
     <Content Include="wwwroot\uploads\13036596003383465.mov" />

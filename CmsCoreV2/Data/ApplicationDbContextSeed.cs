@@ -68,7 +68,13 @@ namespace CmsCoreV2.Data
                 new PostPostCategory { PostId = 6, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 2, PostCategoryId = 3, AppTenantId = tenant.AppTenantId },
                 new PostPostCategory { PostId = 1, PostCategoryId = 4, AppTenantId = tenant.AppTenantId },
-                new PostPostCategory { PostId = 2, PostCategoryId = 4, AppTenantId = tenant.AppTenantId }
+                new PostPostCategory { PostId = 2, PostCategoryId = 4, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 5, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 5, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 6, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 6, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 7, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 7, AppTenantId = tenant.AppTenantId }
 
                 );
             context.SaveChanges();
@@ -91,7 +97,10 @@ namespace CmsCoreV2.Data
                 new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description=null,LanguageId=1,Name= "Haberler",ParentCategoryId=null,Slug= "haberler", AppTenantId = tenant.AppTenantId },
                 new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = null, LanguageId = 1, Name = "Kadromuz", ParentCategoryId = null, Slug = "kadromuz", AppTenantId = tenant.AppTenantId },
                 new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "blog", LanguageId = 1, Name = "Blog", ParentCategoryId = null, Slug = "blog", AppTenantId = tenant.AppTenantId },
-                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Anaokulu", LanguageId = 1, Name = "Anaokulu", ParentCategoryId = 1, Slug = "anaokulu", AppTenantId = tenant.AppTenantId }
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Anaokulu", LanguageId = 1, Name = "Anaokulu", ParentCategoryId = 1, Slug = "anaokulu", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "İlkokul", LanguageId = 1, Name = "İlkokul", ParentCategoryId = 1, Slug = "ilkokul", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Ortaokul", LanguageId = 1, Name = "ortaokul", ParentCategoryId = 1, Slug = "ortaokul", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Lise", LanguageId = 1, Name = "lise", ParentCategoryId = 1, Slug = "lise", AppTenantId = tenant.AppTenantId }
 
                 );
             context.SaveChanges();
@@ -163,6 +172,11 @@ namespace CmsCoreV2.Data
             context.AddRange(
                 new Page { Title = "Anasayfa", Slug = "anasayfa", Template = "Index", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now , AppTenantId = tenant.AppTenantId},
                 new Page { Title = "AnaOkulu", Slug = "anaokulu", Template = "kindergarten", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "İlkokul", Slug = "ilkokul", Template = "primaryschool", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "Ortaokul", Slug = "ortaokul", Template = "middleschool", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "Lise", Slug = "lise", Template = "highschool", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+
+
                 new Page { Title = "Haberler", Slug = "haberler", Template = "Posts", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Blog", Slug = "blog", Template = "Blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Ön Kayıt Formu", Slug = "on-kayit-formu", Template = "PreRegistration", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now , AppTenantId = tenant.AppTenantId },
