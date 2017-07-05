@@ -157,7 +157,7 @@ namespace CmsCoreV2.Data
             eng.AppTenantId = tenant.AppTenantId;
             eng.Name = "English";
             eng.NativeName = "İngilizce";
-            eng.Culture = "eng";
+            eng.Culture = "en";
             eng.IsActive = true;
             context.Languages.Add(eng);
             context.SaveChanges();

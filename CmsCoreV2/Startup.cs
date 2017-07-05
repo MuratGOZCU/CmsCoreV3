@@ -154,6 +154,7 @@ namespace CmsCoreV2
                     {
                         oldUrl = new RedirectRouteConstraint()
                     });
+                
                 routes.MapRoute(
                     name: "cultureRoute",
                     template: "{culture}/{*slug}",
