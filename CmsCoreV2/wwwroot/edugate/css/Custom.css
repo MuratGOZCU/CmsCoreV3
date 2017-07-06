@@ -431,6 +431,9 @@ li.accordion {
 #floatingForm input.form-control, #floatingForm select.form-control {
     font-size: 12px !important;
 }
+{
+    background-color: red !important;
+}
 
 #floatingForm .btn-sm {
     background: #5cb85c;
@@ -597,3 +600,11 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 .grecaptcha-badge {
     display: none !important;
 }
+#back-top a {
+    border: 2px solid #092f87 !important;
+    background-color: #092f87 !important;
+    color: white !important;
+}
+    #back-top a:hover {
+        color: #0082cb !important;
+    }
