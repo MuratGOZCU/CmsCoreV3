@@ -54,8 +54,8 @@ namespace CmsCoreV2.Controllers
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
                 if (post == null)
                 {
-                    ViewData["Title"] = "Yazı bulunamadı";
-                    ViewData["Description"] = "Aradığınız yazı adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak yazıyı arayabilirsiniz";
+                    ViewData["Title"] = "404 - Sayfa bulunamadı";
+                    ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfayı arayabilirsiniz.";
                     ViewData["Keywords"] = "404";
                     return View("Page404");
                 }
@@ -63,8 +63,8 @@ namespace CmsCoreV2.Controllers
                 {
                     if (post == null || post.IsPublished == false)
                     {
-                        ViewData["Title"] = "Yazı bulunamadı";
-                        ViewData["Description"] = "Aradığınız yazı adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak yazıyı arayabilirsiniz";
+                        ViewData["Title"] = "404 - Sayfa bulunamadı";
+                        ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfa arayabilirsiniz.";
                         ViewData["Keywords"] = "404";
                         return View("Page404");
                     }
@@ -96,7 +96,7 @@ namespace CmsCoreV2.Controllers
             {
                 if (page.IsPublished == false)
                 {
-                    ViewData["Title"] = "Sayfa bulunamadı";
+                    ViewData["Title"] = "404 - Sayfa bulunamadı";
                     ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfayı arayabilirsiniz";
                     ViewData["Keywords"] = "404";
                     return View("Page404");

@@ -1,4 +1,5 @@
 ﻿@model CmsCoreV2.Models.Form
+@inject CustomLocalizer Localizer
 @addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <form action="/Home/PostForm"  method="post" id="kindergartenForm">
@@ -22,13 +23,13 @@
             }
         }
         <div class="contact-submit">
-            <button type="submit" style="background-color:green;" class="btn btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onContactFormSubmit' data-badge="inline"><span>Gönder</span></button>
+            <button type="submit" style="background-color:green;" class="btn btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onContactFormSubmit' data-badge="inline"><span>@Localizer["Gönder"]</span></button>
         </div>
     </fieldset>
 }
 else
 {
-    <p> Form bulunamadı!</p>
+    <p>@Localizer["Form bulunamadı!"]</p>
 }
     
 

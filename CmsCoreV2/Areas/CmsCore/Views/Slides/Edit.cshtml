@@ -40,18 +40,28 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Photo" class="col-md-2 control-label"></label>
+            <label asp-for="Photo" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.Photo)</label>
             <div class="col-md-10">
-                <input asp-for="Photo" class="form-control" />
-                <span asp-validation-for="Photo" class="text-danger"></span>
+                <div class="input-group">
+                    <input asp-for="Photo" class="form-control" />
+                    <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Photo')">...</a>
+                    </span>
+                </div>
             </div>
+            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            <label asp-for="Video" class="col-md-2 control-label"></label>
+            <label asp-for="Video" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.Video)</label>
             <div class="col-md-10">
-                <input asp-for="Video" class="form-control" />
-                <span asp-validation-for="Video" class="text-danger"></span>
+                <div class="input-group">
+                    <input asp-for="Video" class="form-control" />
+                    <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Video')">...</a>
+                    </span>
+                </div>
             </div>
+            @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label asp-for="CallToActionText" class="col-md-2 control-label"></label>
@@ -126,7 +136,8 @@
         </div>
     </div>
 </form>
-
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Photo" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Video" } })
 <div>
     <a asp-action="Index">Listeye Geri Dön</a>
 </div>
