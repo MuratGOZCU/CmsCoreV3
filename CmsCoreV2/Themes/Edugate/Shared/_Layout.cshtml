@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Tenant.Title</title>
     <meta name="description" content="@ViewData["Description"]">
-    @if (!String.IsNullOrEmpty(ViewData["Keywords"].ToString())) { 
+    @if (ViewData["Keywords"] != null && ViewData["Keywords"].ToString() != "") { 
         <meta name="keywords" content="@ViewData["Keywords"]">
     }
 
