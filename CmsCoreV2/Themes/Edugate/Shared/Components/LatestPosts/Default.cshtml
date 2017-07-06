@@ -19,7 +19,7 @@
                                 <div class="edugate-layout-2">
                                     <div class="edugate-layout-2-wrapper">
                                         <div class="edugate-content">
-                                            <a href="@item.Slug" class="title">@item.Title</a>
+                                            <a href="/@ViewData["Culture"]/@item.Slug" class="title">@item.Title</a>
                                             <div class="info">
                                                 <div class="date-time item">@item.CreateDate.ToString("dd MMM yyyy")</div>
                                             </div>
@@ -34,7 +34,7 @@
                                                     </div>
                                                 </div>*@
                                             <div class="description" style="text-overflow: ellipsis;">@Html.Raw(item.Description)</div>
-                                            <button onclick="window.location.href='@item.Slug'" class="btn btn-green"><span>@Localizer["Detaylı Bilgi"]</span></button>
+                                            <button onclick="window.location.href='/@ViewData["Culture"]/@item.Slug'" class="btn btn-green"><span>@Localizer["Detaylı Bilgi"]</span></button>
                                         </div>
                                         <div class="edugate-image"><img src="@item.Photo" alt="" class="img-responsive" /></div>
                                     </div>

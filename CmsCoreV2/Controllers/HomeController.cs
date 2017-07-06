@@ -46,7 +46,7 @@ namespace CmsCoreV2.Controllers
             {
                 return Redirect("/tr");
             }
-           
+            ViewData["Culture"] = culture;
             slug = slug.ToLower();
             var page = _context.SetFiltered<Page>().Include(i=> i.Language).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
             if (page == null || page.IsPublished == false)
