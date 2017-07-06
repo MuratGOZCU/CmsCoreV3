@@ -652,8 +652,11 @@ namespace CmsCoreV2.Data
                 new Resource { Name = "Detaylı Bilgi", Value = "More Information", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Resource { Name = "Görün Ve Hissedin", Value = "See and Feel", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Resource { Name = "Galeri", Value = "Gallery", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new Resource { Name = "Daha Fazla Fotoğraf", Value = "More photographs", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-
+                new Resource { Name = "Daha Fazla Fotoğraf", Value = "More photographs", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Gönder", Value = "Send", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Form bulunamadı!", Value = "Form can't find!", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "EN İYİSİNDEN ÖĞRENİN", Value = "Learn The Best", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                
 
 
             );

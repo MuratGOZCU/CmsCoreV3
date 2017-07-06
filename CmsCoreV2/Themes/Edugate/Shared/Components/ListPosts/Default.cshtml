@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<Post>
+@inject CustomLocalizer Localizer
+
 <div class="section section-padding positionRelative best-staff">
     <div class="container">
         <div class="group-title-index">
-            <h4 class="top-title">EN İYİSİNDEN ÖĞRENİN</h4>
+            <h4 class="top-title">@Localizer["EN İYİSİNDEN ÖĞRENİN"]</h4>
 
-            <h2 class="center-title">KADROMUZ</h2>
+            <h2 class="center-title">@Localizer["KADROMUZ"]</h2>
 
             <div class="bottom-title"><i class="bottom-icon icon-icon-05"></i></div>
         </div>
