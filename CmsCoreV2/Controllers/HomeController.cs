@@ -54,12 +54,18 @@ namespace CmsCoreV2.Controllers
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
                 if (post == null)
                 {
+                    ViewData["Title"] = "Yazı bulunamadı";
+                    ViewData["Description"] = "Aradığınız yazı adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak yazıyı arayabilirsiniz";
+                    ViewData["Keywords"] = "404";
                     return View("Page404");
                 }
                 else
                 {
                     if (post == null || post.IsPublished == false)
                     {
+                        ViewData["Title"] = "Yazı bulunamadı";
+                        ViewData["Description"] = "Aradığınız yazı adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak yazıyı arayabilirsiniz";
+                        ViewData["Keywords"] = "404";
                         return View("Page404");
                     }
                     PostViewModel postVM = new PostViewModel();
@@ -90,6 +96,9 @@ namespace CmsCoreV2.Controllers
             {
                 if (page.IsPublished == false)
                 {
+                    ViewData["Title"] = "Sayfa bulunamadı";
+                    ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfayı arayabilirsiniz";
+                    ViewData["Keywords"] = "404";
                     return View("Page404");
                 }
                 var setting = _context.SetFiltered<Setting>().FirstOrDefault();
@@ -127,24 +136,7 @@ namespace CmsCoreV2.Controllers
             return View();
         }
 
-        public IActionResult kindergarten()
-        {
-            return View();
-        }
-
-        public IActionResult primaryschool()
-        {
-            return View();
-        }
-        public IActionResult middleschool()
-        {
-            return View();
-        }
-
-        public IActionResult highschool()
-        {
-            return View();
-        }
+       
 
         public IActionResult Successful()
         {
