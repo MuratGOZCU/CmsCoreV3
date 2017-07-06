@@ -31,7 +31,8 @@ namespace CmsCoreV2.Services
         }
         public LocalizedString GetResource(string name, string currentCulture)
         {
-            var resource = Resources.SingleOrDefault(r => r.Name == name);
+            var langId = Languages.SingleOrDefault(l => l.Culture == currentCulture).Id;
+            var resource = Resources.SingleOrDefault(r => r.Name == name && r.LanguageId == langId);
             var value = name;
             if (resource != null)
             {
