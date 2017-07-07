@@ -1,6 +1,8 @@
 (function($) {
     "use strict";
-    $(function(){
+    $(function () {
+        $("#myCarousel").carousel();
+    
         // BACK TOP
         $('#back-top a').on('click', function () {
             $('body,html').animate({
@@ -271,6 +273,7 @@
                 }
             }
         });
+        
 
          // owl carousel event-detail-list-staff
         $('.event-detail-list-staff').owlCarousel({
