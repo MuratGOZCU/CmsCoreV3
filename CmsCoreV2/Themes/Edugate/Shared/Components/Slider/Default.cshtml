@@ -10,7 +10,7 @@
                 @{
                     var index = 0;
                 }
-                @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).ToList())
+                @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).ToList().Take(5).OrderBy(f => f.Position))
                 {
 
                     <li data-target="#myCarousel" data-slide-to="@index" class="@(index==0?"active":"")"></li>
