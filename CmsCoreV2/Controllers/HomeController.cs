@@ -10,6 +10,7 @@ using CmsCoreV2.Services;
 using Microsoft.AspNetCore.Http;
 using Z.EntityFramework.Plus;
 using SaasKit.Multitenancy;
+using System.IO;
 
 namespace CmsCoreV2.Controllers
 {
@@ -181,11 +182,39 @@ namespace CmsCoreV2.Controllers
         }
        
         [HttpPost]
-        public IActionResult PostForm(IFormCollection formCollection)
+        public IActionResult PostForm(IFormCollection formCollection,IFormFile[] upload)
+
         {
-            feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId);
-            
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.Length > 0)
+                {
+                    foreach (var file in upload)
+                    {
+                        if (Path.GetExtension(file.FileName) == ".jpg" || Path.GetExtension(file.FileName) == ".jpeg" || Path.GetExtension(file.FileName) == ".png" || Path.GetExtension(file.FileName) == ".doc"
+                           || Path.GetExtension(file.FileName) == ".pdf"
+                           || Path.GetExtension(file.FileName) == ".rtf"
+                           || Path.GetExtension(file.FileName) == ".docx")
+                        {
+                            feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
+                              return RedirectToAction("Successful");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("FileName", "Dosya uzantısı izin verilen uzantılardan olmalıdır.");
+                        }
+                    }
+
+
+                }
+                else
+                {
+                  ModelState.AddModelError("FileExist", "Lütfen bir dosya seçiniz!"); 
+                }
+
+            }
             return RedirectToAction("Successful");
+
         }
 
         public IActionResult About()

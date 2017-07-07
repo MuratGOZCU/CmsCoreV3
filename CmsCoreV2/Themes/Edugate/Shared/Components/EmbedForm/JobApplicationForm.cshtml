@@ -1,7 +1,7 @@
 ﻿@model CmsCoreV2.Models.Form
 @addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<form class="bg-w-form contact-form" action="/Home/PostForm" method="post" id="jobRecourseForm">
+<form class="bg-w-form contact-form" action="/Home/PostForm" method="post" id="jobRecourseForm" enctype="multipart/form-data">
     <div class="row">
         @if (Model != null && Model.Id > 0)
         {
