@@ -28,7 +28,8 @@ namespace CmsCoreV2.ViewComponents
         }
         public IEnumerable<MenuItem> GetMenuItemsByLocationName(string menuLocation)
         {
-            var menu = _context.Menus.Include(m => m.MenuItems).Where(m => m.MenuLocation == menuLocation).FirstOrDefault();
+            List<Language> language = _context.Languages.ToList();
+            var menu = _context.Menus.Include(m => m.MenuItems).Where(m => m.MenuLocation == menuLocation && m.LanguageId == language.FirstOrDefault().Id).FirstOrDefault();
             IList<MenuItem> menuItems;
             if (menu != null && menu.MenuItems != null)
             {
