@@ -1,5 +1,6 @@
 ﻿@addTagHelper *, Sakura.AspNetCore.Mvc.PagedList
 @model Sakura.AspNetCore.IPagedList<Post>
+@inject CustomLocalizer Localizer
 
 @foreach (var item in Model)
 {
