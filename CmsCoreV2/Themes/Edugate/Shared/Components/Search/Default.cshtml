@@ -1,5 +1,7 @@
 ﻿@addTagHelper *, Sakura.AspNetCore.Mvc.PagedList
 @model Sakura.AspNetCore.IPagedList<CmsCoreV2.Models.Dtos.SearchDto>
+@inject CustomLocalizer Localizer
+
 @if (Model != null)
 {
     @foreach (var item in Model)
@@ -11,7 +13,7 @@
                 <div class="description">
                     @Html.Raw(item.Description)
                 </div>
-                <a href="/@item.Culture/@item.Slug" class="btn btn-green"><span>Devamını oku...</span></a>
+                <a href="/@item.Culture/@item.Slug" class="btn btn-green"><span>@Localizer["Devamını oku..."]</span></a>
             </div>
         </div>
 
