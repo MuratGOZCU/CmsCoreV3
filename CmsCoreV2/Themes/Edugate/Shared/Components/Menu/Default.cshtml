@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<MenuItem>
+@inject CustomLocalizer Localizer
+
 <ul class="nav-links nav navbar-nav">
     @foreach (var item in Model.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
     {
 
         <li @(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "class=dropdown" : "")>
             <a href="#" class="main-menu" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
-                @item.Name
+                @Localizer[item.Name]
                 @Html.Raw(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "<span class='fa fa-angle-down icons-dropdown'></span>" : "")
             </a>
             @if (item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0)
@@ -13,7 +15,7 @@
                 <ul class="dropdown-menu edugate-dropdown-menu-1">
                     @foreach (var childItem in item.ChildMenuItems.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
                     {
-                        <li><a href="/tr/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@childItem.Name</a></li>
+                        <li><a href="/tr/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
                     }
 
                 </ul>
@@ -24,7 +26,7 @@
     <li class="button-search"><p class="main-menu"><i class="fa fa-search"></i></p></li>
     <div class="nav-search hide">
         <form action="/tr/arama">
-            <input type="text" name="query" placeholder="Ara" class="searchbox" />
+            <input type="text" name="query" placeholder=@Localizer["Ara"] class="searchbox" />
             <button type="submit" class="searchbutton fa fa-search"></button>
         </form>
     </div>

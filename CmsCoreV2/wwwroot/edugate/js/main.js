@@ -1,6 +1,8 @@
 (function($) {
     "use strict";
-    $(function(){
+    $(function () {
+        $("#myCarousel").carousel();
+    
         // BACK TOP
         $('#back-top a').on('click', function () {
             $('body,html').animate({
@@ -258,6 +260,7 @@
             animateIn: 'fadeIn',
             nav: false,
             responsiveClass: true,
+            autoHeight: true,
             autoplay:true,
             autoplayTimeout: 7000,
             smartSpeed: 800,
@@ -270,6 +273,7 @@
                 }
             }
         });
+        
 
          // owl carousel event-detail-list-staff
         $('.event-detail-list-staff').owlCarousel({
