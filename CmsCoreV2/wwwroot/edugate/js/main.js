@@ -258,6 +258,7 @@
             animateIn: 'fadeIn',
             nav: false,
             responsiveClass: true,
+            autoHeight: true,
             autoplay:true,
             autoplayTimeout: 7000,
             smartSpeed: 800,
