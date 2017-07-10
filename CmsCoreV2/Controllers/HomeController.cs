@@ -191,7 +191,7 @@ namespace CmsCoreV2.Controllers
                            || Path.GetExtension(file.FileName) == ".docx")
                         {
                             feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
-                              return RedirectToAction("Successful");
+                            return RedirectToAction("Successful");
                         }
                         else
                         {
@@ -203,11 +203,13 @@ namespace CmsCoreV2.Controllers
                 }
                 else
                 {
-                  ModelState.AddModelError("FileExist", "Lütfen bir dosya seçiniz!"); 
-                }
+                    ModelState.AddModelError("FileExist", "Lütfen bir dosya seçiniz!");
 
+                }
             }
-            return RedirectToAction("Successful");
+            return Redirect(Request.Headers["Referer"].ToString());
+
+
 
         }
 
