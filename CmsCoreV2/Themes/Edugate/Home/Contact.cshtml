@@ -15,7 +15,7 @@
                         <div class="contact-main-wrapper">
                             <div class="row contact-method">
                                 @Html.Raw(Model.Body)
-                                @await Component.InvokeAsync("EmbedForm", new { name = @Localizer["İletişim"], template = "ContactForm" })
+                                @await Component.InvokeAsync("EmbedForm", new { name = "İletişim", template = "ContactForm" })
                             </div>
                         </div>
                     </div>
