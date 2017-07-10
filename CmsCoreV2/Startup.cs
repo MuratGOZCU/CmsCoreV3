@@ -154,7 +154,9 @@ namespace CmsCoreV2
                     {
                         oldUrl = new RedirectRouteConstraint()
                     });
-                
+                routes.MapRoute(name: "formRoute",
+                   template: "{culture}/form/{*slug}",
+                    defaults: new { controller = "Home", action = "Form", culture = "no", slug = "" });
                 routes.MapRoute(
                     name: "cultureRoute",
                     template: "{culture}/{*slug}",
@@ -166,7 +168,7 @@ namespace CmsCoreV2
 
                 routes.MapRoute(name: "areaRoute",
                     template: "{area:exists}/{controller=Dashboard}/{action=Index}");
-
+                
 
                 routes.MapRoute(name: "default",
                    template: "{controller=Home}/{action=Page404}");

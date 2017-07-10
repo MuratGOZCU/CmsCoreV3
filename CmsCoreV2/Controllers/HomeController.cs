@@ -138,10 +138,14 @@ namespace CmsCoreV2.Controllers
             return View();
         }
 
-       
-
-        public IActionResult Successful()
+        public IActionResult kindergarten()
         {
+            return View();
+        }
+
+        public IActionResult Successful(int id)
+        {
+            ViewBag.FormClosingDescription = _context.Forms.Where(f => f.Id == id).FirstOrDefault().ClosingDescription;
             return View("Successful");
         }
         public ActionResult RedirectToDefaultLanguage()
@@ -192,7 +196,7 @@ namespace CmsCoreV2.Controllers
                            || Path.GetExtension(file.FileName) == ".docx")
                         {
                             feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
-                            return RedirectToAction("Successful");
+                            return RedirectToAction("Successful", new { id = formCollection["id"] });
                         }
                         else
                         {
@@ -227,6 +231,18 @@ namespace CmsCoreV2.Controllers
 
             return View();
         }
+
+
+        public IActionResult Form(string slug, string culture = "tr")
+        {
+            if (culture == "no")
+            {
+                return Redirect("/tr");
+            }
+            ViewBag.Slug = slug;
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Subscribe(Subscription subscription)
         { var subs = _context.Subscriptions.FirstOrDefault(s => s.Email == subscription.Email);
