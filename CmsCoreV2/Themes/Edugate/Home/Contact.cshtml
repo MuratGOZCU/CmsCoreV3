@@ -33,10 +33,10 @@
     <script type="text/javascript">
     function initialize() {
         var canvas = $("#map_canvas");
-        var latitude = @Html.Raw(ViewBag.MapLat);
-        var longitude = @Html.Raw(ViewBag.MapLon);
+        var lng = @Html.Raw(ViewBag.MapLon);
+        var lat = @Html.Raw(ViewBag.MapLat);
         var mapTitle = "@Html.Raw(ViewBag.MapTitle)";
-        var latlng = new google.maps.LatLng(latitude, longitude);
+        var latlng = new google.maps.LatLng(lat, lng);
         var options = {
             scrollwheel: false,
             zoom: 16,
@@ -51,7 +51,7 @@
 
 
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(latitude, longitude),
+            position: new google.maps.LatLng(lat, lng),
             map: map
         });
         marker.addListener('click', function () {
@@ -59,38 +59,57 @@
 
         });
 
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+                    //: icon
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+
+                map.setCenter(pos);
+
+                var content = "Konum bulundu"
+
+                //konumumuzu harita üzerinde isaretler
+                google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+                    return function () {
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+                    };
+                })(marker, content, infowindow));
+
+                var data = [
+                    { "enlem": position.coords.latitude, "boylam": position.coords.longitude },
+                    { "enlem": lat, "boylam": lng },
+
+                ];
+
+                //rotayi çizen metodu çagiriyoruz ve baslangiç bitis noktalarini gönderiyoruz.
+                RotaCiz(data);
 
 
-
-
-
-        google.maps.event.addListener(map, "click", function (event) {
-            var lat = event.latLng.lat(); //enlem
-            var lng = event.latLng.lng(); //boylam
-
-            yer = new google.maps.LatLng(lat, lng);
-
-            marker = new google.maps.Marker({
-                position: yer,
-                map: map
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
             });
+        } else {
+            // enlem ve boylam alinamazsa
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
 
-            //baslangiç ve bitis noktasi olusturuyoruz.
-            var data = [
-                { "enlem": latitude, "boylam": longitude },
-                { "enlem": lat, "boylam": lng },
 
-            ];
 
-            //rotayi çizen metodu çagiriyoruz ve baslangiç bitis noktalarini gönderiyoruz.
-            RotaCiz(data);
-
-            //aldigimiz konumu görmek için isterseniz silebilirsiniz.
-            alert("Enlem=" + lat + "; Boylam=" + lng);
-        });	
+   
         infowindow.open(map, marker);
 
-
+      
     }
     $(function () {
         initialize();
@@ -108,7 +127,7 @@
             });
             directionsDisplay.setMap(map);
 
-            calculateAndDisplayRoute(directionsService, directionsDisplay, data); //Rota hesaplama 
+            calculateAndDisplayRoute(directionsService, directionsDisplay, data); //Rota hesaplama
 
         }
 
@@ -134,88 +153,6 @@
                 }
             });
         }
-
-
-
-
-
-        function konumBul() {
-            var map = new google.maps.Map(document.getElementById('harita'), {
-                center: { lat: 40.00, lng: 28.00 },
-                zoom: 6
-            });
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-                        //: icon
-                    });
-
-                    var infowindow = new google.maps.InfoWindow();
-
-                    map.setCenter(pos);
-
-                    var content = "Konum bulundu"
-
-                    //konumumuzu harita üzerinde isaretler
-                    google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
-                        return function () {
-                            infowindow.setContent(content);
-                            infowindow.open(map, marker);
-                        };
-                    })(marker, content, infowindow));
-
-                    //haritaya tikladigimizda tikladigimiz yerin koordinatlarini almamizi saglar
-                    google.maps.event.addListener(map, "click", function (event) {
-                        var lat = event.latLng.lat(); //enlem
-                        var lng = event.latLng.lng(); //boylam
-
-                        yer = new google.maps.LatLng(lat, lng);
-
-                        marker = new google.maps.Marker({
-                            position: yer,
-                            map: map
-                        });
-
-                        //baslangiç ve bitis noktasi olusturuyoruz.
-                        var data = [
-                            { "enlem": position.coords.latitude, "boylam": position.coords.longitude },
-                            { "enlem": lat, "boylam": lng },
-
-                        ];
-
-                        //rotayi çizen metodu çagiriyoruz ve baslangiç bitis noktalarini gönderiyoruz.
-                        RotaCiz(data);
-
-                        //aldigimiz konumu görmek için isterseniz silebilirsiniz.
-                        alert("Enlem=" + lat + "; Boylam=" + lng);
-                    });
-
-
-                }, function () {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            } else {
-                // enlem ve boylam alinamazsa
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
-        }
-
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: Enlem ve boylam alinamadi.' :
-                'Error: Tarayiniciniz desteklemiyor.');
-        }
-
-
-
     </script>
 }
 

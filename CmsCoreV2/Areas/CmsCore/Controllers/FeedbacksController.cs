@@ -63,10 +63,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(IFormCollection formCollection)
+        public IActionResult Create(IFormCollection formCollection,IFormFile[] upload)
         {
 
-            feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId);
+            feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId,upload);
 
             return RedirectToAction("Index");
         }
