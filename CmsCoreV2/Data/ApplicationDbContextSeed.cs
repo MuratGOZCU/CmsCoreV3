@@ -265,7 +265,7 @@ namespace CmsCoreV2.Data
                 new Form { FormName = "Sizi Arayalım", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Form { FormName = "İletişim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Form { FormName = "Anaokulu iletişim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                 new Form { FormName = "İş Başvuru Formu", EmailTo = "arzugedik312@gmail.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                 new Form { FormName = "İş Başvuru Formu", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
 
                 );
             context.SaveChanges();
