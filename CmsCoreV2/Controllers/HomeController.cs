@@ -10,6 +10,7 @@ using CmsCoreV2.Services;
 using Microsoft.AspNetCore.Http;
 using Z.EntityFramework.Plus;
 using SaasKit.Multitenancy;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 
 namespace CmsCoreV2.Controllers
@@ -40,25 +41,33 @@ namespace CmsCoreV2.Controllers
         {
             return Redirect(HttpContext.Items["NewUrl"].ToString());
         }
-        public IActionResult Index(string slug, string culture = "tr")
+        public IActionResult Index(string slug, string culture)
         {
             if (culture == "no")
             {
                 return Redirect("/tr");
             }
+            ViewData["Culture"] = culture;
+            HttpContext.Items["Culture"] = culture;
             slug = slug.ToLower();
-            var page = _context.SetFiltered<Page>().FirstOrDefault(p => p.Slug.ToLower() == slug);
+            var page = _context.SetFiltered<Page>().Include(i=> i.Language).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
             if (page == null || page.IsPublished == false)
             {
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
                 if (post == null)
                 {
+                    ViewData["Title"] = "404 - Sayfa bulunamadı";
+                    ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfayı arayabilirsiniz.";
+                    ViewData["Keywords"] = "404";
                     return View("Page404");
                 }
                 else
                 {
                     if (post == null || post.IsPublished == false)
                     {
+                        ViewData["Title"] = "404 - Sayfa bulunamadı";
+                        ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfa arayabilirsiniz.";
+                        ViewData["Keywords"] = "404";
                         return View("Page404");
                     }
                     PostViewModel postVM = new PostViewModel();
@@ -74,7 +83,9 @@ namespace CmsCoreV2.Controllers
                     postVM.SeoDescription = post.SeoDescription;
                     postVM.SeoKeywords = post.SeoKeywords;
                     postVM.Photo = post.Photo;
-
+                    ViewData["Title"] = post.SeoTitle;
+                    ViewData["Description"] = post.SeoDescription;
+                    ViewData["Keywords"] = post.SeoKeywords;
                     post.ViewCount++;
                     postVM.ViewCount = post.ViewCount;
 
@@ -87,11 +98,15 @@ namespace CmsCoreV2.Controllers
             {
                 if (page.IsPublished == false)
                 {
+                    ViewData["Title"] = "404 - Sayfa bulunamadı";
+                    ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfayı arayabilirsiniz";
+                    ViewData["Keywords"] = "404";
                     return View("Page404");
                 }
                 var setting = _context.SetFiltered<Setting>().FirstOrDefault();
                 ViewBag.MapLat = setting.MapLat;
                 ViewBag.MapLon = setting.MapLon;
+                ViewBag.MapTitle = setting.MapTitle;
                 PageViewModel pageVM = new PageViewModel();
                 pageVM.Id = page.Id;
                 pageVM.Title = page.Title;
@@ -101,7 +116,9 @@ namespace CmsCoreV2.Controllers
                 pageVM.SeoTitle = page.SeoTitle;
                 pageVM.SeoKeywords = page.SeoKeywords;
                 pageVM.SeoDescription = page.SeoDescription;
-
+                ViewData["Title"] = page.SeoTitle;
+                ViewData["Description"] = page.SeoDescription;
+                ViewData["Keywords"] = page.SeoKeywords;
                 page.ViewCount++;
                 _context.Update(page);
                 _context.SaveChanges();
@@ -164,10 +181,41 @@ namespace CmsCoreV2.Controllers
         }
        
         [HttpPost]
-        public IActionResult PostForm(IFormCollection formCollection)
+        public IActionResult PostForm(IFormCollection formCollection,IFormFile[] upload)
+
         {
-            feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId);
-            return RedirectToAction("Successful", new { id = formCollection["id"] });
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.Length > 0)
+                {
+                    foreach (var file in upload)
+                    {
+                        if (Path.GetExtension(file.FileName) == ".jpg" || Path.GetExtension(file.FileName) == ".jpeg" || Path.GetExtension(file.FileName) == ".png" || Path.GetExtension(file.FileName) == ".doc"
+                           || Path.GetExtension(file.FileName) == ".pdf"
+                           || Path.GetExtension(file.FileName) == ".rtf"
+                           || Path.GetExtension(file.FileName) == ".docx")
+                        {
+                            feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
+                            return RedirectToAction("Successful", new { id = formCollection["id"] });
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("FileName", "Dosya uzantısı izin verilen uzantılardan olmalıdır.");
+                        }
+                    }
+
+
+                }
+                else
+                {
+                    ModelState.AddModelError("FileExist", "Lütfen bir dosya seçiniz!");
+
+                }
+            }
+            return Redirect(Request.Headers["Referer"].ToString());
+
+
+
         }
 
         public IActionResult About()

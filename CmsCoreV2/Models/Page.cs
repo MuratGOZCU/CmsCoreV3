@@ -16,6 +16,7 @@ namespace CmsCoreV2.Models
             ChildPages = new HashSet<Page>();
             LanguageId = 1;
             Template = "page";
+            LayoutTemplate = "_Layout";
         }
         [StringLength(200)]
         [Required]
@@ -63,6 +64,22 @@ namespace CmsCoreV2.Models
 
         [Display(Name = "Dil")]
         public long? LanguageId { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Resim")]
+        public string Photo { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Meta1")]
+        public string Meta1 { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Meta2")]
+        public string Meta2 { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Tasarım Şablonu")]
+        public string LayoutTemplate { get; set; }
 
 
         [ForeignKey("LanguageId")]

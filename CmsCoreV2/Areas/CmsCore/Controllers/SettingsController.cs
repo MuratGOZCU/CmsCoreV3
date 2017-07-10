@@ -61,7 +61,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("HeaderString,GoogleAnalytics,FooterScript,MapLat,MapLon,SmtpUserName,SmtpPassword,SmtpHost,SmtpPort,SmtpUseSSL,Name,Value,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Setting setting)
+        public async Task<IActionResult> Edit(long id, [Bind("MapTitle,HeaderString,GoogleAnalytics,FooterScript,MapLat,MapLon,SmtpUserName,SmtpPassword,SmtpHost,SmtpPort,SmtpUseSSL,Name,Value,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Setting setting)
         {
             if (id != setting.Id)
             {
@@ -75,7 +75,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     setting.UpdatedBy = User.Identity.Name ?? "username";
                     setting.UpdateDate = DateTime.Now;
                     setting.AppTenantId = tenant.AppTenantId;
+                    _context.Update(setting);
                     await _context.SaveChangesAsync();
+                    ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
                 }
                 catch (DbUpdateConcurrencyException)
                 {

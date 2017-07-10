@@ -573,7 +573,19 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<long?>("LanguageId");
 
+                    b.Property<string>("LayoutTemplate")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Meta1")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Meta2")
+                        .HasMaxLength(200);
+
                     b.Property<long?>("ParentPageId");
+
+                    b.Property<string>("Photo")
+                        .HasMaxLength(200);
 
                     b.Property<string>("SeoDescription");
 
@@ -833,6 +845,9 @@ namespace CmsCoreV2.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("MapLon")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("MapTitle")
                         .HasMaxLength(200);
 
                     b.Property<string>("SmtpHost")

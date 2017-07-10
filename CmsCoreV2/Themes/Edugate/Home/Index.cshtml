@@ -1,9 +1,10 @@
-﻿@{
+﻿@inject CustomLocalizer Localizer
+@{
     ViewData["Title"] = "";
 }
 
 @await Component.InvokeAsync("Slider", new { Name = "Anasayfa Slider"})
-@inject CustomLocalizer Localizer
+
 <!-- CHOOSE COURSES-->
 <div class="section section-padding choose-course">
     <div class="container">
@@ -68,14 +69,14 @@
 <!-- KADROMUZ -->
 @*@await Component.InvokeAsync("ListPosts", new { categoryNames = "Kadromuz", count = 100 })*@
 <!-- LATEST POSTS -->
-@await Component.InvokeAsync("LatestPosts", new { categoryNames = "Haberler", count = 4 })
+@await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["Haberler"].ToString(), count = 4 })
 <!-- WHY CHOOSE US-->
 
 
-@await Component.InvokeAsync("Slider", new { Name = "Anasayfa İkinci Slider" })
+@await Component.InvokeAsync("Slider", new { Name = Localizer["Anasayfa İkinci Slider"].ToString() })
 
 
 <!-- PICTURE AND GALLERY-->
-@await Component.InvokeAsync("Gallery", new { Name = "Anasayfa Galeri" })
+@await Component.InvokeAsync("Gallery", new { Name = @Localizer["Anasayfa Galeri"].ToString() })
 <!-- SLIDER LOGO-->
-@await Component.InvokeAsync("Slider", new { Name = "Logo Slider" })
+@await Component.InvokeAsync("Slider", new { Name = @Localizer["Logo Slider"].ToString() })

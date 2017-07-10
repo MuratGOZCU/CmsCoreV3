@@ -1,4 +1,6 @@
 ﻿@model CmsCoreV2.Models.Form
+@inject CustomLocalizer Localizer
+
 @addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
 @if (Model != null && Model.Id > 0)
 {
@@ -25,7 +27,7 @@
                     </div>
                     }
                     <div style="text-align:right;">
-                        <input type="submit" value="Gönder" class="btn-sm btn-success" id="embedFormSubmit" />
+                        <input type="submit" value=@Localizer["Gönder"] class="btn-sm btn-success" id="embedFormSubmit" />
                     </div>
                 </fieldset>
             </div>
@@ -34,5 +36,5 @@
 }
 else
 {
-    <p>Form bulunamadı!</p>
+    <p>@Localizer["Form bulunamadı!"]</p>
 }

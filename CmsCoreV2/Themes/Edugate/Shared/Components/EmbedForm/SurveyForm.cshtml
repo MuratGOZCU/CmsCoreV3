@@ -1,4 +1,6 @@
 ﻿@model CmsCoreV2.Models.Form
+@inject CustomLocalizer Localizer
+
 @addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <form class="bg-w-form contact-form" action="/Home/PostForm" method="post" id="surveyForm">
@@ -30,7 +32,7 @@
         }
         else
         {
-            <p> Form bulunamadı!</p>
+            <p> @Localizer["Form bulunamadı!"]</p>
         }
     </div>
     <script>
@@ -39,7 +41,7 @@
         }
     </script>
     <div class="contact-submit">
-        <button type="submit" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onSurveyFormSubmit'><span>Gönder</span></button>
+        <button type="submit" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onSurveyFormSubmit' data-badge="inline"><span>Gönder</span></button>
     </div>
 </form>
 @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

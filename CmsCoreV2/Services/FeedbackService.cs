@@ -7,6 +7,7 @@ using MimeKit;
 using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -17,8 +18,8 @@ namespace CmsCoreV2.Services
     {
         IEnumerable<Form> Search(string search, int sortColumnIndex, string sortDirection, int displayStart, int displayLength, out int totalRecords, out int totalDisplayRecords);
     
-        void FeedbackPost(IFormCollection collection, string ip, string appTenantId);
-        void FeedbackPostMail(string body, long id);
+        void FeedbackPost(IFormCollection collection, string ip, string appTenantId, IFormFile[] upload);
+        void FeedbackPostMail(string body, long id, IFormFile[] upload);
         Form GetForm(long id);
         Form GetForm(string name);
   
@@ -40,7 +41,7 @@ namespace CmsCoreV2.Services
             this.dbSet = DbContext.Feedbacks;
         }
 
-        public void FeedbackPost(IFormCollection collection, string ip, string appTenantId)
+        public void FeedbackPost(IFormCollection collection, string ip, string appTenantId, IFormFile[] upload)
         {
             Feedback feed_back = new Feedback();
             feed_back.IP = ip;
@@ -96,7 +97,7 @@ namespace CmsCoreV2.Services
             CreateFeedback(feed_back);
             SaveFeedback();
             body = body + "<br>" + "Gönderilme Tarihi : " + DateTime.Now;
-            FeedbackPostMail(body, form.Id);
+            FeedbackPostMail(body, form.Id,upload);
             //return feed_back.FeedbackValues.ToList();
 
         }
@@ -113,7 +114,7 @@ namespace CmsCoreV2.Services
 
 
 
-        public void FeedbackPostMail(string body, long id)
+        public void FeedbackPostMail(string body, long id, IFormFile[] upload)
         {
             var form = GetForm(id);
             if (form.EmailBcc != null || form.EmailCc != null || form.EmailTo != null)
@@ -151,6 +152,25 @@ namespace CmsCoreV2.Services
                 //{
                 //message.Body += EmailString(item).ToString() + "<br/>";
                 bodyBuilder.HtmlBody += body;
+                //}
+                //foreach (var file in upload)
+                //{
+                //    if (upload != null)
+                //    {
+                          //using (var fileStream = file.OpenReadStream())
+                          //  using (var ms = new MemoryStream())
+                          //  {
+                          //      fileStream.CopyTo(ms);
+                          //      var fileBytes = ms.ToArray();
+                          //      string s = Convert.ToBase64String(fileBytes);
+                          //      // act on the Base64 data
+                          //  }
+                        foreach (var attachment in upload)
+                        {
+                          
+                            bodyBuilder.Attachments.Add(attachment.FileName,attachment.OpenReadStream(), ContentType.Parse(attachment.ContentType));
+                        }
+                //    }
                 //}
                 message.Body = bodyBuilder.ToMessageBody();
                 try

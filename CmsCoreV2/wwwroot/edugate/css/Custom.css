@@ -431,6 +431,9 @@ li.accordion {
 #floatingForm input.form-control, #floatingForm select.form-control {
     font-size: 12px !important;
 }
+{
+    background-color: red !important;
+}
 
 #floatingForm .btn-sm {
     background: #5cb85c;
@@ -521,8 +524,22 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 }
 
 
-.background-opacity:before {
-    background-image: url("http://www.waterwhale.com/wp-content/uploads/2014/12/empire-state-1500x300.jpg") !important;
+#kindergarten.background-opacity:before {
+    background-image: url(/edugate/images/kindergarten.png) !important;
+    background-size: cover;
+}
+
+#primaryschool.background-opacity:before {
+    background-image: url(/edugate/images/primaryschool.png) !important;
+    background-size: cover;
+}
+
+#middleschool.background-opacity:before {
+    background-image: url(/edugate/images/middleschool.png) !important;
+    background-size: cover;
+}
+#highschool.background-opacity:before {
+    background-image: url(/edugate/images/highschool.png) !important;
     background-size: cover;
 }
 
@@ -532,7 +549,62 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 
 }
 
-.btn {
-    float:right;
-    right:70px;
+
+#primaryschool.search-input {
+    background-color: #ff791a !important;
 }
+
+#middleschool.search-input {
+    background-color: #34b44a !important;
+}
+
+#highschool.search-input {
+    background-color: #ed2867 !important;
+}
+
+
+.background-opacity:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(10, 15, 28, 1) !important;
+}
+
+.search-input .search-input-wrapper {
+    padding: 20px 0 !important;
+}
+
+
+.page-title {
+    padding-top: 26.0417%;
+}
+
+
+@media screen and (max-width: 550px) {
+    .btn {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+        margin-left: 6px !important;
+        margin-right: 6px !important;
+    }
+
+   .search-input .form-select, .search-input .form-submit, .search-input .sbHolder {
+        width: 100% !important;
+
+    }
+}
+
+.grecaptcha-badge {
+    display: none !important;
+}
+#back-top a {
+    border: 2px solid #092f87 !important;
+    background-color: #092f87 !important;
+    color: white !important;
+}
+    #back-top a:hover {
+        color: #0082cb !important;
+    }
