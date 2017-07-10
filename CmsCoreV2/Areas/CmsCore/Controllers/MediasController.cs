@@ -55,12 +55,12 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Medias/Create
         public IActionResult Create(string element = "")
         {
-            //if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-            //{
+            if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
                 ViewBag.Element = element;
                 return View("ModalCreate");
-            //}
-            //return View();
+            }
+            return View();
         }
 
         public JsonResult ModalCreate(string Title, string Description, IFormFile uploadFile)
