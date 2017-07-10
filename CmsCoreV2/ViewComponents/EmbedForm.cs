@@ -18,9 +18,9 @@ namespace CmsCoreV2.ViewComponents
             this._context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string name, string template)
+        public async Task<IViewComponentResult> InvokeAsync(string template, string name="", string slug="")
         {
-            var form = await GetForm(name, template);
+            var form = await GetForm(name, template, slug);
             if (form == null)
             {
                 form = new Form();
@@ -51,16 +51,27 @@ namespace CmsCoreV2.ViewComponents
             var form = GetById(id, "FormFields");
             return form;
         }
-        public Form GetForm(string name)
+        public Form GetForm(string name, string slug)
         {
-            name = name.ToLower();
-            var form = Get(f => f.FormName.ToLower() == name, "FormFields");
+            Form form; 
+            if (slug == "")
+            {
+                name = name.ToLower();
+                form = Get(f => f.FormName.ToLower() == name, "FormFields");
+                
+            }
+            else
+            {
+                slug = slug.ToLower();
+                form = Get(f => f.Slug.ToLower() == slug, "FormFields");
+                
+            }
             return form;
         }
 
-        private async Task<CmsCoreV2.Models.Form> GetForm(string formName, string template)
+        private async Task<CmsCoreV2.Models.Form> GetForm(string formName, string template, string slug)
         {
-            return await Task.FromResult(GetForm(formName));
+            return await Task.FromResult(GetForm(formName, slug));
         }
     }
 }

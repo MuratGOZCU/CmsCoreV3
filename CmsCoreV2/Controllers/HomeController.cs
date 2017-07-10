@@ -10,6 +10,7 @@ using CmsCoreV2.Services;
 using Microsoft.AspNetCore.Http;
 using Z.EntityFramework.Plus;
 using SaasKit.Multitenancy;
+using Microsoft.EntityFrameworkCore;
 
 namespace CmsCoreV2.Controllers
 {
@@ -125,8 +126,9 @@ namespace CmsCoreV2.Controllers
             return View();
         }
 
-        public IActionResult Successful()
+        public IActionResult Successful(int id)
         {
+            ViewBag.FormClosingDescription = _context.Forms.Where(f => f.Id == id).FirstOrDefault().ClosingDescription;
             return View("Successful");
         }
         public ActionResult RedirectToDefaultLanguage()
@@ -165,8 +167,7 @@ namespace CmsCoreV2.Controllers
         public IActionResult PostForm(IFormCollection formCollection)
         {
             feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId);
-            
-            return RedirectToAction("Successful");
+            return RedirectToAction("Successful", new { id = formCollection["id"] });
         }
 
         public IActionResult About()
@@ -182,6 +183,18 @@ namespace CmsCoreV2.Controllers
 
             return View();
         }
+
+
+        public IActionResult Form(string slug, string culture = "tr")
+        {
+            if (culture == "no")
+            {
+                return Redirect("/tr");
+            }
+            ViewBag.Slug = slug;
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Subscribe(Subscription subscription)
         { var subs = _context.Subscriptions.FirstOrDefault(s => s.Email == subscription.Email);
