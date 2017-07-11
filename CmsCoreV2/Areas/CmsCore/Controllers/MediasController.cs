@@ -112,23 +112,21 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                         string dosyaismi = Path.GetFileName(uploadFile.FileName);
                         var yuklemeYeri = Path.Combine(FilePath, dosyaismi);
                         media.FileUrl =  "tenant/" + category + "/";
-                        try
-                        {
+                      
                             if (!Directory.Exists(FilePath))
                             {
                                 Directory.CreateDirectory(FilePath);//Eðer klasör yoksa oluþtur    
                             }
                             using (var stream = new FileStream(yuklemeYeri, FileMode.Create))
                             {
-                                uploadFile.CopyToAsync(stream);
+                                uploadFile.CopyTo(stream);
                             }
 
 
                             _context.Add(media);
                             _context.SaveChangesAsync();
                             return Json(new { result = AssetsUrl + media.FileUrl + media.FileName });
-                        }
-                        catch (Exception exc) { ModelState.AddModelError("FileName", "Hata: " + exc.Message); }
+                       
                     }
                     else
                     {

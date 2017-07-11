@@ -68,7 +68,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Form form)
+        public async Task<IActionResult> Create([Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,Slug,AppTenantId")] Form form)
         {
             form.CreatedBy = User.Identity.Name ?? "username";
             form.CreateDate = DateTime.Now;
@@ -107,7 +107,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Form form)
+        public async Task<IActionResult> Edit(long id, [Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,Slug,AppTenantId")] Form form)
         {
             if (id != form.Id)
             {
