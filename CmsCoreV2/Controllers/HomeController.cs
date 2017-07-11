@@ -138,10 +138,14 @@ namespace CmsCoreV2.Controllers
             return View();
         }
 
-       
-
-        public IActionResult Successful()
+        public IActionResult kindergarten()
         {
+            return View();
+        }
+
+        public IActionResult Successful(int id)
+        {
+            ViewBag.FormClosingDescription = _context.Forms.Where(f => f.Id == id).FirstOrDefault().ClosingDescription;
             return View("Successful");
         }
         public ActionResult RedirectToDefaultLanguage()
@@ -178,7 +182,6 @@ namespace CmsCoreV2.Controllers
        
         [HttpPost]
         public IActionResult PostForm(IFormCollection formCollection,IFormFile[] upload)
-
         {
             if (ModelState.IsValid)
             {
@@ -186,32 +189,19 @@ namespace CmsCoreV2.Controllers
                 {
                     foreach (var file in upload)
                     {
-                        if (Path.GetExtension(file.FileName) == ".jpg" || Path.GetExtension(file.FileName) == ".jpeg" || Path.GetExtension(file.FileName) == ".png" || Path.GetExtension(file.FileName) == ".doc"
+                        if (!(Path.GetExtension(file.FileName) == ".jpg" || Path.GetExtension(file.FileName) == ".jpeg" || Path.GetExtension(file.FileName) == ".png" || Path.GetExtension(file.FileName) == ".doc"
                            || Path.GetExtension(file.FileName) == ".pdf"
                            || Path.GetExtension(file.FileName) == ".rtf"
-                           || Path.GetExtension(file.FileName) == ".docx")
+                           || Path.GetExtension(file.FileName) == ".docx"))
                         {
-                            feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
-                            return RedirectToAction("Successful");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("FileName", "Dosya uzantısı izin verilen uzantılardan olmalıdır.");
+                            return Redirect(Request.Headers["Referer"].ToString()+ "?message=Dosya uzantısı izin verilen uzantılardan olmalıdır." );
                         }
                     }
-
-
                 }
-                else
-                {
-                    ModelState.AddModelError("FileExist", "Lütfen bir dosya seçiniz!");
-
-                }
+                feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
+                return RedirectToAction("Successful", new { id = formCollection["id"] });
             }
-            return Redirect(Request.Headers["Referer"].ToString());
-
-
-
+            return Redirect(Request.Headers["Referer"].ToString()+"?message=Gönderdiğiniz formda geçersiz alanlar var");
         }
 
         public IActionResult About()
@@ -227,6 +217,18 @@ namespace CmsCoreV2.Controllers
 
             return View();
         }
+
+
+        public IActionResult Form(string slug, string culture = "tr")
+        {
+            if (culture == "no")
+            {
+                return Redirect("/tr");
+            }
+            ViewBag.Slug = slug;
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Subscribe(Subscription subscription)
         { var subs = _context.Subscriptions.FirstOrDefault(s => s.Email == subscription.Email);

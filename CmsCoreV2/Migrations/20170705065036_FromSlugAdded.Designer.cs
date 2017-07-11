@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170705065036_FromSlugAdded")]
+    partial class FromSlugAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -573,19 +574,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<long?>("LanguageId");
 
-                    b.Property<string>("LayoutTemplate")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Meta1")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Meta2")
-                        .HasMaxLength(200);
-
                     b.Property<long?>("ParentPageId");
-
-                    b.Property<string>("Photo")
-                        .HasMaxLength(200);
 
                     b.Property<string>("SeoDescription");
 
@@ -845,9 +834,6 @@ namespace CmsCoreV2.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("MapLon")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("MapTitle")
                         .HasMaxLength(200);
 
                     b.Property<string>("SmtpHost")
