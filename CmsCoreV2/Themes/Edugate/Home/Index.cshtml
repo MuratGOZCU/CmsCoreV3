@@ -67,7 +67,7 @@
 </div>
 
 <!-- KADROMUZ -->
-@*@await Component.InvokeAsync("ListPosts", new { categoryNames = "Kadromuz", count = 100 })*@
+@await Component.InvokeAsync("ListPosts", new { categoryNames = "Kadromuz", count = 100 })
 <!-- LATEST POSTS -->
 @await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["Haberler"].ToString(), count = 4 })
 <!-- WHY CHOOSE US-->
