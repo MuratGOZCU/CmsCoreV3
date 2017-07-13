@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class Attributes
+    public class Attributes:BaseEntity
     {
-        public int Id { get; set; }
+
         [Display(Name = "Ad")]
 
         [MaxLength(200)]
