@@ -40,7 +40,10 @@ namespace CmsCoreV2.Models
         public virtual ICollection<FormField> FormFields { get; set; }
         [Display(Name = "Yayında mı?")]
         public bool IsPublished { get; set; }
-
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Slug")]
+        public string Slug { get; set; }
         [Display(Name = "Dil")]
         public long? LanguageId { get; set; }
         [ForeignKey("LanguageId")]
