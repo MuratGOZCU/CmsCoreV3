@@ -26,6 +26,9 @@ namespace CmsCoreV2.Models
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
 
+        [Display(Name = "Ürün Nitelik Kimliği")]
+        public long? ProductAttributeId { get; set; }
+
         [ForeignKey("ProductAttributeId")]
         [Display(Name = "Ürün Niteliği")]
         public Attributes Attribute { get; set; }
