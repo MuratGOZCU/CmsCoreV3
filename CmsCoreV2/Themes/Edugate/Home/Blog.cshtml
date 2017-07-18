@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject CustomLocalizer Localizer
+@{
     ViewData["Title"] = "Blog";
 }
 <!-- WRAPPER-->
@@ -19,13 +20,13 @@
                                 <div class="col-md-3 sidebar layout-right">
                                     <div class="row">
                                         <div class="recent-post-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
-                                            <div class="title-widget">Son Yazılar</div>
+                                            <div class="title-widget">@Localizer["Son Yazılar"]</div>
                                             <div class="content-widget">
                                                 @await Component.InvokeAsync("LatestsPostsWidget", new { categoryNames = "Blog", count = 4, id = (long)-1 })
                                             </div>
                                         </div>
                                         <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
-                                            <div class="title-widget">Çok Okunanlar</div>
+                                            <div class="title-widget">@Localizer["Çok Okunanlar"]</div>
                                             <div class="content-widget">
                                                 @await Component.InvokeAsync("PopularPosts", new { total = 4, id = (long)-1 })
                                             </div>

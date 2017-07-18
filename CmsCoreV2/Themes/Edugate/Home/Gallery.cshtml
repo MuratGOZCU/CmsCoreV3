@@ -1,4 +1,7 @@
-﻿<div id="wrapper-content">
+﻿@inject CustomLocalizer Localizer
+
+
+<div id="wrapper-content">
     <!-- PAGE WRAPPER-->
     <div id="page-wrapper">
         <!-- MAIN CONTENT-->
@@ -9,9 +12,9 @@
 
                 <div class="section section-padding gallery-page gallery-mansonry">
                     <div class="container">
-                        @await Component.InvokeAsync("Gallery", new { Name = "Galeri Sayfası" })
+                        @await Component.InvokeAsync("Gallery", new { Name = @Localizer["Galeri Sayfası"] })
                         <div class="load-more">
-                            <button class="btn btn-green"><span>Diğer</span></button>
+                            <button class="btn btn-green"><span>@Localizer["Diğer"]</span></button>
                         </div>
                     </div>
                 </div>
