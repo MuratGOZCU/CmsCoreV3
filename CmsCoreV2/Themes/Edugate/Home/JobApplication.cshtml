@@ -17,7 +17,7 @@
                             <div class="row contact-method">
                                 <h1 class="event-detail-title">@Model.Title</h1>
                                 @Html.Raw(Model.Body)
-                                @await Component.InvokeAsync("EmbedForm", new { name = Localizer["İş Başvuru Formu"], template = "JobApplicationForm" })
+                                @await Component.InvokeAsync("EmbedForm", new { name = Localizer["İş Başvuru Formu"].ToString(), template = "JobApplicationForm" })
                             </div>
                         </div>
                     </div>
