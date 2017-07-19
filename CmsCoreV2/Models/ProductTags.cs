@@ -8,7 +8,8 @@ namespace CmsCoreV2.Models
 {
     public class ProductTags:BaseEntity
     {
-   
+
+        [Required]
         [Display(Name = "Ad")]
         [StringLength(200)]
         public string Name { get; set; }

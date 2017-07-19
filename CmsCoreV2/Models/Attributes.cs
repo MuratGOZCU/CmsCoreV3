@@ -9,8 +9,8 @@ namespace CmsCoreV2.Models
     public class Attributes:BaseEntity
     {
 
+        [Required]
         [Display(Name = "Ad")]
-
         [StringLength(200)]
         public string Name { get; set; }
 

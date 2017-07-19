@@ -9,6 +9,12 @@ namespace CmsCoreV2.Models
 {
     public class Setting:BaseEntity
     {
+        public Setting()
+        {
+            ShippingRegions = new HashSet<SettingRegion>();
+            SalesLocations = new HashSet<SaleRegion>();
+            ShippingLocations = new HashSet<ShippingRegion>();
+        }
         //INDEX
         public string HeaderString { get; set; }
         public string GoogleAnalytics { get; set; }
@@ -32,6 +38,35 @@ namespace CmsCoreV2.Models
         public string SmtpPort { get; set; }
         public bool SmtpUseSSL { get; set; }
         //E-STORE
+        public CustomerLocation CustomerLocation { get; set; }
+        public CurrencyPosition CurrencyPosition { get; set; }
+        public WeightUnit WeightUnit { get; set; }
+        public StorePageView StorePageView { get; set; }
+        public CatalogOrderBy CatalogOrderBy { get; set; }
+        public CategoryView CategoryView { get; set; }
+        public StockDisplayFormat StockDisplayFormat { get; set; }
+        public FileDownloadMethod FileDownloadMethod { get; set; }
+        public ShippingTaxClass ShippingTaxClass { get; set; }
+        public CalculateTaxAccordingTo CalculateTaxAccordingTo { get; set; }
+        public ShowPricesInStore ShowPricesInStore { get; set; }
+        public ShowPricesOnCartAndPay ShowPricesOnCartAndPay { get; set; }
+        public ShowTaxTotal ShowTaxTotal { get; set; }
+        public ShippingMethod ShippingMethod { get; set; }
+        public ShippingCalculation ShippingCalculation { get; set; }
+        public ShippingDestination ShippingDestination { get; set; }
+        public ApiPermission ApiPermission { get; set; }
+        public DimensionUnit DimensionUnit { get; set; }
+        [Display(Name = "Gönderi Bölgeleri")]
+        public virtual ICollection<SettingRegion> ShippingRegions { get; set; }
+        [Display(Name = "Satış Konumları")]
+        public virtual ICollection<SaleRegion> SalesLocations { get; set; }
+        [Display(Name = "Gönderi Konumları")]
+        public virtual ICollection<ShippingRegion> ShippingLocations { get; set; }
+        [Display(Name = "Ana Konum")]
+        public long? MainLocationId { get; set; }
+        [ForeignKey("MainLocationId")]
+        [Display(Name = "Ana Konum")]
+        public Region MainLocation { get; set; }
         [Display(Name = "Vergilendirmeyi ve vergi hesaplamalarını etkinleştir")]
         public bool EnableTaxes { get; set; }
         [Display(Name = "Site genelinde mağaza duyuru metnini etkinleştir")]

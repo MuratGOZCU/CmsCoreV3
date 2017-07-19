@@ -8,6 +8,7 @@ namespace CmsCoreV2.Models
 {
     public class EmailTemplate:BaseEntity
     {
+        public EmailType EmailType { get; set; }
         [Display(Name = "Etkinleştir")]
         public bool EnableThisEmailNotification { get; set; }
         [Display(Name = "Alıcılar")]

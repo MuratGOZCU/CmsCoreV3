@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,11 @@ namespace CmsCoreV2.Models
 {
     public class TaxRate:BaseEntity
     {
+        [Display(Name = "İlçe")]
+        public long? DistrictId { get; set; }
+        [ForeignKey("DistrictId")]
+        [Display(Name = "İlçe")]
+        public Region District { get; set; }
         [StringLength(200)]
         [Display(Name ="Ülke Kodu")]
         public string CountryCode { get; set; }
