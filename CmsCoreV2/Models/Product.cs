@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,15 @@ namespace CmsCoreV2.Models
 {
     public class Product : BaseEntity
     {
+        public Product()
+        {
+            Products = new HashSet<Product>();
+            ExcludeProducts = new HashSet<Product>();
+        }
+        [Display(Name = "Ürünler")]
+        public virtual ICollection<Product> Products { get; set; }
+        [Display(Name = "Ürünleri Hariç Tut")]
+        public virtual ICollection<Product> ExcludeProducts { get; set; }
         public string Name { get; set; }
         public string Slug { get; set; }
         public string Description { get; set; }
