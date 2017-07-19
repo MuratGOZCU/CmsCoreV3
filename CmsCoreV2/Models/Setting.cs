@@ -9,6 +9,12 @@ namespace CmsCoreV2.Models
 {
     public class Setting:BaseEntity
     {
+        public Setting()
+        {
+            ShippingRegions = new HashSet<SettingRegion>();
+            SalesLocations = new HashSet<SaleRegion>();
+            ShippingLocations = new HashSet<ShippingRegion>();
+        }
         //INDEX
         public string HeaderString { get; set; }
         public string GoogleAnalytics { get; set; }
