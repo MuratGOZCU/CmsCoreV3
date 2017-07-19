@@ -247,8 +247,8 @@ namespace CmsCoreV2.Data
             s.CreatedBy = "username";
             s.UpdateDate = DateTime.Now;
             s.UpdatedBy = "username";
-            s.MapLat = "40.985149";
-            s.MapLon = "29.028575";
+            s.MapLat = "40.989143";
+            s.MapLon = "29.0289560";
             s.MapTitle = "Bilişim Eğitim Merkezi";
             context.Settings.Add(s);
             context.SaveChanges();
