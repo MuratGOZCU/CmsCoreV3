@@ -20,8 +20,7 @@
                     <div id="middleschool" class="search-input">
                         <div class="container">
                             <div class="search-input-wrapper">
-                                <h2> Buraya form gelicek</h2>
-                                @*@await Component.InvokeAsync("EmbedForm", new { name = "Anaokulu iletişim", template = "kindergartenform" })*@
+                                @await Component.InvokeAsync("EmbedForm", new { name = Localizer["OrtaOkul iletişim"].ToString(), template = "MiddleSchoolForm" })
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -32,7 +31,7 @@
                         <div class="group-title-index">
                             <h1 class="center-title">@Localizer["ORTAOKUL"]</h1>
                             <br />
-                            @await Component.InvokeAsync("LatestPosts", new { categoryNames = Localizer["ortaokul"], count = 6 })
+                            @await Component.InvokeAsync("LatestPosts", new { categoryNames = Localizer["ortaokul"].ToString(), count = 6 })
                         </div>
                     </div>
                 </div>
