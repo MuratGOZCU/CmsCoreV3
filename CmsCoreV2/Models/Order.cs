@@ -13,6 +13,8 @@ namespace CmsCoreV2.Models
         {
             OrderMetaFields = new HashSet<OrderMetaField>();
             OrderOrderItems = new HashSet<OrderOrderItem>();
+            OrderItems= new HashSet<OrderItem>();
+            OrderNotes= new HashSet<OrderNote>();
         }
        
         [Required(ErrorMessage = "Sipariş Tarihi boş bırakılamaz.")]

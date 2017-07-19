@@ -9,6 +9,11 @@ namespace CmsCoreV2.Models
 {
     public class Region:BaseEntity
     {
+        public Region()
+        {
+            ChildRegions = new HashSet<Region>();
+        }
+
         [StringLength(200)]
         [Required]
         [Display(Name = "Bölge Adı")]
