@@ -8,6 +8,11 @@ namespace CmsCoreV2.Models
 {
     public class OrderItem:BaseEntity
     {
+        public OrderItem()
+        {
+            OrderOrderItems = new HashSet<OrderOrderItem>();
+        }
+
         [Display(Name = "Adet")]
         public int Quantity { get; set; }
         [Display(Name = "Toplam Fiyat")]

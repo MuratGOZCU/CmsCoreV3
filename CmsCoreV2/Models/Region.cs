@@ -14,6 +14,7 @@ namespace CmsCoreV2.Models
             ShippingRegions = new HashSet<SettingRegion>();
             SalesLocations = new HashSet<SaleRegion>();
             ShippingLocations = new HashSet<ShippingRegion>();
+            ChildRegions = new HashSet<Region>();
         }
         [Display(Name = "Gönderi Bölgeleri")]
         public virtual ICollection<SettingRegion> ShippingRegions { get; set; }
