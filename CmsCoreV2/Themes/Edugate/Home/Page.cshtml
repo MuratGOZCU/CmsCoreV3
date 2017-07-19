@@ -1,4 +1,5 @@
-﻿@model PageViewModel
+﻿@inject CustomLocalizer Localizer
+@model PageViewModel
 @{
     ViewData["Title"] = Model.SeoTitle;
 }
@@ -26,7 +27,7 @@
                                 <div class="col-md-3 sidebar layout-right">
                                     <div class="row">
                                         <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
-                                            <div class="title-widget">İlgili Sayfalar</div>
+                                            <div class="title-widget">@Localizer["İlgili Sayfalar"]</div>
                                             <div class="content-widget">
                                                 <ul class="category-widget list-unstyled">
                                                     @* BURAYA GELECEK *@
