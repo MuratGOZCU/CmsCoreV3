@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class Attributes:BaseEntity
+    public class Attribute:BaseEntity
     {
 
         [Required]
@@ -25,12 +25,12 @@ namespace CmsCoreV2.Models
         bool Variations { get; set; }
 
         [Display(Name = "Nitelik Türü")]
-        [EnumDataType(typeof(AttributeTypes))]
-        public AttributeTypes AttributeType { get; set; }
+        [EnumDataType(typeof(AttributeType))]
+        public AttributeType AttributeType { get; set; }
 
         [Display(Name = "Sıralama Düzeni")]
-        [EnumDataType(typeof(AttributePositions))]
-        public AttributePositions AttributePosition { get; set; }
+        [EnumDataType(typeof(AttributePosition))]
+        public AttributePosition AttributePosition { get; set; }
 
 
     }

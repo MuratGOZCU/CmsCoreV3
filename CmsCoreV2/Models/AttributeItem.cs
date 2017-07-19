@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class AttributeItems:BaseEntity
+    public class AttributeItem:BaseEntity
     {
 
         [Required]
@@ -32,7 +32,7 @@ namespace CmsCoreV2.Models
 
         [ForeignKey("ProductAttributeId")]
         [Display(Name = "Ürün Niteliği")]
-        public Attributes Attribute { get; set; }
+        public Attribute ProductAttribute { get; set; }
 
         
     }

@@ -7,9 +7,9 @@ namespace CmsCoreV2.Models
 {
     public enum TaxClass
     {
-        standard = 1,
+        Standard = 1,
         Reduced = 2,
-        zero = 3
+        Zero = 3
 
     }
 }

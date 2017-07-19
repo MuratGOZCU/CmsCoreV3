@@ -7,9 +7,9 @@ namespace CmsCoreV2.Models
 {
     public class ShippingRegion
     {
-        public int RegionId { get; set; }
+        public long RegionId { get; set; }
         public Region Region { get; set; }
-        public int SettingId { get; set; }
+        public long SettingId { get; set; }
         public Setting Setting { get; set; }
     }
 }

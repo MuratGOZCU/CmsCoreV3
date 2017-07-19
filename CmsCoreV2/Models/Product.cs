@@ -36,7 +36,7 @@ namespace CmsCoreV2.Models
         public ICollection<Product> UpSells { get; set; }
         public ICollection<Product> CrossSells { get; set; }
         public ICollection<Product> GroupedProducts { get; set; }
-        public ICollection<ProducProductAttribute> ProductAttributes { get; set; }
+        public ICollection<ProductAttribute> ProductAttributes { get; set; }
         public string purchaseNote { get; set; }
         public int MenuOrder { get; set; }
         public ICollection<ProductProductCategory> ProductCategories { get; set; }

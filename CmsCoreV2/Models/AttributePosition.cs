@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public enum AttributePositions
+    public enum AttributePosition
     {
-        [Display(Name = "İsim")]
+        [Display(Name = "İsime Göre Sırala")]
         Name = 1,
-        [Display(Name = "Nitelik Kimliği")]
-        Id = 1
-
+        [Display(Name = "Nitelik Kimliğine Göre Sırala")]
+        PositionId = 2
     }
 }

@@ -10,7 +10,7 @@ namespace CmsCoreV2.Models
     {
         [StringLength(200)]
         [Display(Name ="Para Birimi")]
-        public string Currencies { get; set; }
+        public string CurrencyCode { get; set; }
         [StringLength(200)]
         [Display(Name = "Binlik Ayırıcı")]
         public string ThousandsSeparator { get; set; }

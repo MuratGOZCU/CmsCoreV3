@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,9 @@ namespace CmsCoreV2.Models
 {
     public class PaymentMethod:BaseEntity
     {
-        public bool  Enable { get; set; }
+        [StringLength(200)]
         public string Title { get; set; }
+        public bool Enable { get; set; }
         public string Description { get; set; }
         public string Instructions { get; set; }
         public string AccountName { get; set; }
@@ -18,7 +20,7 @@ namespace CmsCoreV2.Models
         public string BIC { get; set; }
         public bool EnableCheckPayments { get; set; }
         public bool EnablePayAtTheDoor { get; set; }
-        public EnableForShipmentMethods EnableForShipmentMethods { get; set; }
+        public ShippingMethod EnableForShipmentMethods { get; set; }
         public bool AcceptForVirtualOrders { get; set; }
         public bool EnablePayPalStandart { get; set; }
         public string PayPalEmail { get; set; }

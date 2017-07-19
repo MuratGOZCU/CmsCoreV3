@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class ProductTags:BaseEntity
+    public class ProductTag:BaseEntity
     {
 
         [Required]

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class Coupon
+    public class Coupon:BaseEntity
     {
         public Coupon()
         {
@@ -14,12 +14,11 @@ namespace CmsCoreV2.Models
             ExcludeProducts = new HashSet<Product>();
             ProductCategories = new HashSet<ProductCategory>();
             ExcludeProductCategories = new HashSet<ProductCategory>();
-            RestictedEmail = new HashSet<String>();
         }
         [Display(Name = "Kupon Başına Kullanım Sınırı")]
         public int LimitPerCoupon { get; set; }
         [Display(Name = "Kullanımı X Ögeleriyle Sınırla")]
-        public int LimitUse { get; set; }
+        public int? LimitUse { get; set; }
         [Display(Name = "Kullanıcı Başına Kullanım Sınırı")]
         public int LimitPerUser { get; set; }
         public DiscountType DiscountType { get; set; }
@@ -31,7 +30,7 @@ namespace CmsCoreV2.Models
         [Display(Name = "Kupon Tutarı")]
         public decimal CouponAmount { get; set; }
         [Display(Name = "Ücretsiz gönderime izin ver")]
-        public bool AllowFreePosting { get; set; }
+        public bool AllowFreeShipping { get; set; }
         [Display(Name ="Kupon son kullanım tarihi")]
         public DateTime ExpirationDate { get; set; }
         [Display(Name = "Asgari Harcama")]
@@ -39,19 +38,19 @@ namespace CmsCoreV2.Models
         [Display(Name = "Azami Harcama")]
         public decimal MaximumSpending { get; set; }
         [Display(Name = "Sadece Bireysel Kullanım")]
-        public bool İndividual { get; set; }
+        public bool OnlyIndividualUse { get; set; }
         [Display(Name = "İndirimdeki Ürünler Hariç")]
-        public bool WithoutDiscountProduct { get; set; }
+        public bool ExcludeDiscountProduct { get; set; }
         [Display(Name = "Ürünler")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<CouponProduct> Products { get; set; }
         [Display(Name = "Ürünleri Hariç Tut")]
-        public virtual ICollection<Product> ExcludeProducts { get; set; }
+        public virtual ICollection<CouponProduct> ExcludeProducts { get; set; }
         [Display(Name = "Ürün Kategorileri")]
-        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        public virtual ICollection<CouponProductCategory> ProductCategories { get; set; }
         [Display(Name = "Kategorileri Hariç Tut")]
-        public virtual ICollection<ProductCategory> ExcludeProductCategories { get; set; }
+        public virtual ICollection<CouponProductCategory> ExcludeProductCategories { get; set; }
         [Display(Name = "E-posta Kısıtlamaları")]
-        public virtual ICollection<String> RestictedEmail { get; set; }
+        public string RestrictedEmails { get; set; }
 
     }
 }

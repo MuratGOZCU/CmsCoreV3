@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CmsCoreV2.Models
 {
   
-        public enum AttributeTypes
+        public enum AttributeType
         {
             [Display(Name = "Metin")]
             Text = 1

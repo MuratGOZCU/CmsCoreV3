@@ -19,6 +19,6 @@ namespace CmsCoreV2.Models
         [Display(Name = @"Artan fiyata göre sırala")]
         RisingPrice = 5,
         [Display(Name = @"Azalan fiyata göre sırala")]
-        DecreasingPrice = 6,
+        DecreasingPrice = 6
     }
 }

@@ -13,7 +13,7 @@ namespace CmsCoreV2.Models
         [Display(Name = @"Alt kategorileri göster")]
         ShowSubcategories = 2,
         [Display(Name = @"Alt kategorileri & ürünleri göster")]
-        ShowSubcategoriesAndShowProduct = 3,
+        ShowSubcategoriesAndShowProduct = 3
 
     }
 }
