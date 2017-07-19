@@ -7,6 +7,10 @@ namespace CmsCoreV2.Models
 {
     public class MetaField:BaseEntity
     {
+        public MetaField()
+        {
+            OrderMetaFields = new HashSet<OrderMetaField>();
+        }
         
         public string Name { get; set; }
         public string Value { get; set; }

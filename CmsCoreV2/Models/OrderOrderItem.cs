@@ -11,5 +11,6 @@ namespace CmsCoreV2.Models
         public Order Order { get; set; }
         public long OrderItemId { get; set; }
         public OrderItem OrderItem { get; set; }
+        public string AppTenantId { get; set; }
     }
 }

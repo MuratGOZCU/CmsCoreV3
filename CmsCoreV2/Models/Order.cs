@@ -14,6 +14,9 @@ namespace CmsCoreV2.Models
             OrderMetaFields = new HashSet<OrderMetaField>();
             OrderOrderItems = new HashSet<OrderOrderItem>();
         }
+       
+        [Required(ErrorMessage = "Sipariş Tarihi boş bırakılamaz.")]
+        [DataType(DataType.Date)]
         [Display(Name = "Sipariş Tarihi")]
         public DateTime OrderDate { get; set; }
         [Display(Name = "Sipariş Durumu")]
@@ -22,8 +25,10 @@ namespace CmsCoreV2.Models
         [ForeignKey("CustomerId")]
         public long? CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
+        [StringLength(200)]
         [Display(Name = "E Posta")]
         public string Email { get; set; }
+        [StringLength(200)]
         [Display(Name = "Telefon")]
         public string Phone { get; set; }
         [Display(Name = "Ürünler")]
