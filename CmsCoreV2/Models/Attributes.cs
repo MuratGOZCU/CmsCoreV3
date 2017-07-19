@@ -11,11 +11,11 @@ namespace CmsCoreV2.Models
 
         [Display(Name = "Ad")]
 
-        [MaxLength(200)]
+        [StringLength(200)]
         public string Name { get; set; }
 
         [Display(Name = "Bağlantı")]
-        [MaxLength(200)]
+        [StringLength(200)]
         public string Slug { get; set; }
 
         [Display(Name = "Görünsün mü?")]

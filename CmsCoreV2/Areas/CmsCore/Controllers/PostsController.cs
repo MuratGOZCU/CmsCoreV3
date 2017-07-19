@@ -203,7 +203,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var post = await _context.Posts.SingleOrDefaultAsync(m => m.Id == id);
+            var post = await _context.Posts.Include(p=>p.PostPostCategories).SingleOrDefaultAsync(m => m.Id == id);
+            post.PostPostCategories.Clear();
+            _context.SaveChanges();
             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
