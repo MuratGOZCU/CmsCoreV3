@@ -1,4 +1,6 @@
 ﻿@model PageViewModel
+@inject CustomLocalizer Localizer
+
 @{
     ViewData["Title"] = Model.SeoTitle;
 }
@@ -15,7 +17,7 @@
                             <h1 class="event-detail-title">@Model.Title</h1>
                             @Html.Raw(Model.Body)
                             <div class="row contact-method">
-                                @await Component.InvokeAsync("EmbedForm", new { name = "Survey", template = "SurveyForm" })
+                                @await Component.InvokeAsync("EmbedForm", new { name = Localizer["Survey"], template = "SurveyForm" })
                             </div>
                         </div>
                     </div>

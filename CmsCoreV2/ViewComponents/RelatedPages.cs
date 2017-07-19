@@ -33,15 +33,15 @@ namespace CmsCoreV2.ViewComponents
         
         public IEnumerable<Page> ChildPagesWeb(long id,bool isPublished)
         {
-            Page page = context.Pages.Where(p => p.Id == id).FirstOrDefault();
+            Page page = context.Pages.Include(g=>g.ParentPage).Where(p => p.Id == id).FirstOrDefault();
             IEnumerable<Page> childs;
             if (page.ParentPageId == null)
             {
-                childs = context.Pages.Where(p => p.Id == id && p.IsPublished == isPublished).Include(p => p.ChildPages).AsEnumerable<Page>();
+                childs = context.Pages.Include(p => p.ChildPages).Where(p => p.Id == id && p.IsPublished == isPublished).AsEnumerable<Page>();
             }
             else
             {
-                childs = context.Pages.Where(w => w.ParentPageId == page.ParentPageId).ToList();
+                childs = context.Pages.Include(p=>p.ParentPage).Where(w => w.ParentPageId == page.ParentPageId && w.IsPublished == isPublished).ToList();
             }
             return childs;
         }

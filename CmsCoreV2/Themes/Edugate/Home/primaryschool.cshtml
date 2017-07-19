@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "İlkokul";
 }
+@inject CustomLocalizer Localizer
 
 <div id="wrapper-content">
     <!-- PAGE WRAPPER-->
@@ -29,9 +30,9 @@
                 <div class="section section-padding courses">
                     <div class="container">
                         <div class="group-title-index">
-                            <h1 class="center-title">İLKOKUL</h1>
+                            <h1 class="center-title">@Localizer["İLKOKUL"]</h1>
                             <br />
-                            @await Component.InvokeAsync("LatestPosts", new { categoryNames = "ilkokul", count = 6 })
+                            @await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["ilkokul"], count = 6 })
                         </div>
                     </div>
                 </div>

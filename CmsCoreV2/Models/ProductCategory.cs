@@ -8,6 +8,15 @@ namespace CmsCoreV2.Models
 {
     public class ProductCategory : BaseEntity
     {
+        public ProductCategory()
+        {
+            ProductCategories = new HashSet<ProductCategory>();
+            ExcludeProductCategories = new HashSet<ProductCategory>();
+        }
+        [Display(Name = "Ürün Kategorileri")]
+        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        [Display(Name = "Kategorileri Hariç Tut")]
+        public virtual ICollection<ProductCategory> ExcludeProductCategories { get; set; }
         [StringLength(200)]
         [Required]
         [Display(Name = "Ad")]

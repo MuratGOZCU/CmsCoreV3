@@ -288,7 +288,9 @@ namespace CmsCoreV2.Data
                 new Form { FormName = "Sizi Arayalım", Slug = "sizi-arayalim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Form { FormName = "İletişim", Slug = "iletisim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Form { FormName = "Anaokulu iletişim", Slug = "anaokulu-iletisim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new Form { FormName = "İş Başvuru Formu", Slug = "is-basvuru-formu", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                new Form { FormName = "İş Başvuru Formu", Slug = "is-basvuru-formu", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Form { FormName = "OrtaOkul iletişim", Slug = "ortaokul-iletisim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                 new Form { FormName = "Lise iletişim", Slug = "lise-iletisim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
 
                 );
             context.SaveChanges();
@@ -328,6 +330,22 @@ namespace CmsCoreV2.Data
                     
 
                 );
+            context.SaveChanges();
+
+            context.AddRange(
+                new FormField { Name = "Ad Soyad", FormId = 5, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Yaş Grubu", FormId = 5, FieldType = FieldType.email, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Telefon Numarası", FormId = 5, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                  new FormField { Name = "Veli Adı Soyadı", FormId = 5, FieldType = FieldType.file, Position = 4, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                   
+                );
+            context.SaveChanges();
+            context.AddRange(
+              new FormField { Name = "Ad Soyad", FormId = 6, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+              new FormField { Name = "Yaş Grubu", FormId = 6, FieldType = FieldType.smallText, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+              new FormField { Name = "Telefon Numarası", FormId = 6, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+              new FormField { Name = "Veli Adı Soyadı", FormId = 6, FieldType = FieldType.fullName, Position = 4, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+              );
             context.SaveChanges();
         }
 
@@ -740,7 +758,24 @@ namespace CmsCoreV2.Data
                 new Resource { Name = "Kampüs", Value = "Campus", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Resource { Name = "ANAOKULU", Value = "KINDERGARTEN", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Resource { Name = "İletişim", Value = "Contact", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new Resource { Name = "İlgili Sayfalar", Value = "Related Pages", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                new Resource { Name = "Buraya form gelicek", Value = "Forms should come here.", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "LİSE", Value = "HIGH SCHOOL", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Son Yazılar", Value = "Last Posts", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Çok Okunanlar", Value = "Most Read", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İş Başvuru Formu", Value = "Job Application Form", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Galeri Sayfası", Value = "Gallery Page", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Diğer", Value = "Other", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Anaokulu iletişim", Value = "Kindergarten Contact", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "AnaOkulu", Value = "Kindergarten", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "ORTAOKUL", Value = "MIDDLE SCHOOL", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "ortaokul", Value = "MiddleSchool", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İlgili Sayfalar", Value = "Related Pages", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Son Yazılar", Value = "Last Posts", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İLKOKUL", Value = "PRIMARY SCHOOL", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "ilkokul", Value = "PrimarySchool", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Survey", Value = "Anket", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                
+
             //new Resource { Name = "Kurumsal", Value = "Corporate", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
             //new Resource { Name = "Vizyon Misyon", Value = "Vission Mission", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
             //new Resource { Name = "Kadromuz", Value = "Our Staff", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
