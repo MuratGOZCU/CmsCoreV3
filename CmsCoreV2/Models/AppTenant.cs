@@ -20,6 +20,7 @@ namespace CmsCoreV2.Models
         public string ConnectionString { get; set; }
         [StringLength(200)]
         public string Folder { get; set; }
+        public bool RequireSSL { get; set; }
 
     }
 

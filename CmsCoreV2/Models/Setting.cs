@@ -11,9 +11,11 @@ namespace CmsCoreV2.Models
     {
         public Setting()
         {
+            /*
             ShippingRegions = new HashSet<SettingRegion>();
             SalesLocations = new HashSet<SaleRegion>();
             ShippingLocations = new HashSet<ShippingRegion>();
+            */
         }
         //INDEX
         public string HeaderString { get; set; }
@@ -38,6 +40,7 @@ namespace CmsCoreV2.Models
         public string SmtpPort { get; set; }
         public bool SmtpUseSSL { get; set; }
         //E-STORE
+        /*
         public CustomerLocation CustomerLocation { get; set; }
         public CurrencyPosition CurrencyPosition { get; set; }
         public WeightUnit WeightUnit { get; set; }
@@ -245,5 +248,6 @@ namespace CmsCoreV2.Models
         [ForeignKey("ApiUserId")]
         [Display(Name ="Kullanıcı")]
         public ApplicationUser ApiUser { get; set; }
+        */
     }
 }

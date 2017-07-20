@@ -10,10 +10,10 @@ namespace CmsCoreV2.Models
     {
         public Coupon()
         {
-            Products = new HashSet<Product>();
-            ExcludeProducts = new HashSet<Product>();
-            ProductCategories = new HashSet<ProductCategory>();
-            ExcludeProductCategories = new HashSet<ProductCategory>();
+            Products = new HashSet<CouponProduct>();
+            ExcludeProducts = new HashSet<CouponProduct>();
+            ProductCategories = new HashSet<CouponProductCategory>();
+            ExcludeProductCategories = new HashSet<CouponProductCategory>();
         }
         [Display(Name = "Kupon Başına Kullanım Sınırı")]
         public int LimitPerCoupon { get; set; }
