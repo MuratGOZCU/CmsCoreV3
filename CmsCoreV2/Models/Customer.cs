@@ -8,7 +8,7 @@ namespace CmsCoreV2.Models
 {
     public class Customer:BaseEntity
     {
-        [StringLength(200)]
+        [StringLength(4000)]
         public string BillingAddress { get; set; }
         [StringLength(200)]
         public string BillingFirstName { get; set; }
@@ -24,7 +24,7 @@ namespace CmsCoreV2.Models
         public string BillingZipCode { get; set; }
         public long? BillingCountryId { get; set; }
         public virtual Region BillingCountry { get; set; }
-        [StringLength(200)]
+        [StringLength(4000)]
         public string ShippingAddress { get; set; }
         [StringLength(200)]
         public string ShippingFirstName { get; set; }
