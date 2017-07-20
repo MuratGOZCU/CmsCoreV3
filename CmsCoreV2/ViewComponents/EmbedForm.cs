@@ -25,6 +25,10 @@ namespace CmsCoreV2.ViewComponents
             {
                 form = new Form();
             }
+            if (String.IsNullOrEmpty(template))
+            {
+                template = form.Template;
+            }
             return View(template, form);
 
         }
