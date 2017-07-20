@@ -120,6 +120,7 @@ namespace CmsCoreV2.Controllers
                 pageVM.SeoTitle = page.SeoTitle;
                 pageVM.SeoKeywords = page.SeoKeywords;
                 pageVM.SeoDescription = page.SeoDescription;
+                ViewData["Search"] = Request.Query["query"].ToString();
                 ViewData["Title"] = page.SeoTitle;
                 ViewData["Description"] = page.SeoDescription;
                 ViewData["Keywords"] = page.SeoKeywords;

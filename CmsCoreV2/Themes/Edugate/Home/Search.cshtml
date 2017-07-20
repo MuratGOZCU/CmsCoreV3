@@ -15,7 +15,7 @@
                             <div class="search-input-wrapper">
                                 <form action="/ara" method="get">
                                     <div class="form-group form-inline">
-                                        <input type="text" placeholder=@Localizer["Arayınız..."] name="query" class="form-input" />
+                                        <input type="text" placeholder=@Localizer["Arayınız..."] name="query" class="form-input" value="@ViewData["Search"]"/>
                                         <button type="submit" class="form-submit btn btn-blue"><span>@Localizer["Hızlı Ara"]<i class="fa fa-search"></i></span></button>
                                         <div class="clearfix"></div>
                                     </div>
