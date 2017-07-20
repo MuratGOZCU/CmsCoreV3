@@ -1,8 +1,8 @@
 ﻿@inject CustomLocalizer Localizer
+@model PageViewModel
 @{
     ViewData["Title"] = "Anaokulu";
 }
-
 <!-- WRAPPER-->
 <div id="wrapper-content">
     <!-- PAGE WRAPPER-->
@@ -33,6 +33,11 @@
                     <div class="container">
                         <div class="group-title-index">
                             <h1 class="center-title">@Localizer["ANAOKULU"]</h1>
+                            <div class="event-detail-des">
+                                <div class="event-detail-des-content">
+                                    @Html.Raw(Model.Body)
+                                </div>
+                            </div>
                             <br />
                             @await Component.InvokeAsync("LatestPosts", new { categoryNames = "AnaOkulu", count = 6 })
 
