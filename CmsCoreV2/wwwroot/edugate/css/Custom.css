@@ -156,6 +156,8 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
+    margin-bottom:40px;
+
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(2) {
@@ -163,6 +165,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
+    margin-bottom: 40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(3) {
@@ -170,6 +173,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
+    margin-bottom: 40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(4) {
@@ -177,6 +181,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
+    margin-bottom: 40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(5) {
@@ -184,6 +189,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
+    margin-bottom: 40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot.active {
@@ -226,6 +232,7 @@ video {
 
 #homeSlider2 .slider-item > div {
     padding-top: 120px;
+    height:500px !important;
 }
 
 .staff-item {
