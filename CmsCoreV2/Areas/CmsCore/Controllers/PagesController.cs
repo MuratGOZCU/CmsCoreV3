@@ -88,7 +88,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Slug,Body,ViewCount,ParentPageId,Photo,Meta1,Meta2,LayoutTemplate,SeoTitle,SeoDescription,SeoKeywords,IsPublished,Template,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Page page)
+        public async Task<IActionResult> Create([Bind("Title,Slug,Body,Position,ViewCount,ParentPageId,Photo,Meta1,Meta2,LayoutTemplate,SeoTitle,SeoDescription,SeoKeywords,IsPublished,Template,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Page page)
         {
 
 
@@ -143,7 +143,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Title,Slug,Body,ViewCount,ParentPageId,Photo,Meta1,Meta2,LayoutTemplate,SeoTitle,SeoDescription,SeoKeywords,IsPublished,Template,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Page page)
+        public async Task<IActionResult> Edit(long id, [Bind("Title,Slug,Body,Position,ViewCount,ParentPageId,Photo,Meta1,Meta2,LayoutTemplate,SeoTitle,SeoDescription,SeoKeywords,IsPublished,Template,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Page page)
         {
             if (id != page.Id)
             {

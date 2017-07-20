@@ -84,10 +84,10 @@ namespace CmsCoreV2.Data
             builder.Entity<PostPostCategory>().HasKey(pc => new { pc.PostId, pc.PostCategoryId });
             builder.Entity<PostPostCategory>().HasOne(bc => bc.Post)
                 .WithMany(b => b.PostPostCategories)
-                .HasForeignKey(bc => bc.PostId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
+                .HasForeignKey(bc => bc.PostId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
             builder.Entity<PostPostCategory>().HasOne(bc => bc.PostCategory)
                 .WithMany(c => c.PostPostCategories)
-                .HasForeignKey(bc => bc.PostCategoryId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
+                .HasForeignKey(bc => bc.PostCategoryId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
             
             builder.Entity<GalleryItemGalleryItemCategory>().HasKey(pc => new { pc.GalleryItemId, pc.GalleryItemCategoryId });
             builder.Entity<GalleryItemGalleryItemCategory>().HasOne(bc => bc.GalleryItem)

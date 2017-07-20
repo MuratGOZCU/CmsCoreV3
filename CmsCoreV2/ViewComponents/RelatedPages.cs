@@ -38,10 +38,12 @@ namespace CmsCoreV2.ViewComponents
             if (page.ParentPageId == null)
             {
                 childs = context.Pages.Include(p => p.ChildPages).Where(p => p.Id == id && p.IsPublished == isPublished).AsEnumerable<Page>();
+                childs = childs.OrderBy(p => p.Position);
             }
             else
             {
                 childs = context.Pages.Include(p=>p.ParentPage).Where(w => w.ParentPageId == page.ParentPageId && w.IsPublished == isPublished).ToList();
+                childs = childs.OrderBy(p => p.Position);
             }
             return childs;
         }
