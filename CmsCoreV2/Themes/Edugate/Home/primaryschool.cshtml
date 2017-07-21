@@ -20,8 +20,8 @@
                     <div id="primaryschool" class="search-input">
                         <div class="container">
                             <div class="search-input-wrapper">
-                               <h2> Buraya form gelicek</h2>
-                                @*@await Component.InvokeAsync("EmbedForm", new { name = "Anaokulu iletişim", template = "kindergartenform" })*@
+                               @*<h2> Buraya form gelicek</h2>*@
+                                @await Component.InvokeAsync("EmbedForm", new { name = Localizer["İlkOkul iletişim"].ToString(), template = "PrimarySchoolForm" })
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <br />
-                            @await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["ilkokul"], count = 6 })
+                            @await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["ilkokul"].ToString(), count = 6 })
                         </div>
                     </div>
                 </div>
