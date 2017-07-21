@@ -32,6 +32,9 @@ namespace CmsCoreV2.Models
         [Display(Name = "İçerik")]
         public string Body { get; set; }
 
+        [Display(Name = "Pozisyon")]
+        public int Position { get; set; }
+
         [Display(Name = "Görüntülenme Sayısı")]
         public long ViewCount { get; set; }
 
