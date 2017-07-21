@@ -8,6 +8,10 @@ namespace CmsCoreV2.Models
 {
     public class ProductTag:BaseEntity
     {
+        public ProductTag()
+        {
+            ProductProductTags = new HashSet<ProductProductTag>();
+        }
 
         [Required]
         [Display(Name = "Ad")]
@@ -15,5 +19,7 @@ namespace CmsCoreV2.Models
         public string Name { get; set; }
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
+
+        public ICollection<ProductProductTag> ProductProductTags { get; set; }
     }
 }

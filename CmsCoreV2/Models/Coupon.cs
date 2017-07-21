@@ -10,10 +10,10 @@ namespace CmsCoreV2.Models
     {
         public Coupon()
         {
-            Products = new HashSet<CouponProduct>();
-            ExcludeProducts = new HashSet<CouponProduct>();
-            ProductCategories = new HashSet<CouponProductCategory>();
-            ExcludeProductCategories = new HashSet<CouponProductCategory>();
+            CouponProducts = new HashSet<CouponProduct>();
+            ExcludeCouponProducts = new HashSet<ExcludeCouponProduct>();
+            CouponProductCategories = new HashSet<CouponProductCategory>();
+            ExcludeCouponProductCategories = new HashSet<ExcludeCouponProductCategory>();
         }
         [Display(Name = "Kupon Başına Kullanım Sınırı")]
         public int LimitPerCoupon { get; set; }
@@ -42,13 +42,13 @@ namespace CmsCoreV2.Models
         [Display(Name = "İndirimdeki Ürünler Hariç")]
         public bool ExcludeDiscountProduct { get; set; }
         [Display(Name = "Ürünler")]
-        public virtual ICollection<CouponProduct> Products { get; set; }
+        public virtual ICollection<CouponProduct> CouponProducts { get; set; }
         [Display(Name = "Ürünleri Hariç Tut")]
-        public virtual ICollection<CouponProduct> ExcludeProducts { get; set; }
+        public virtual ICollection<ExcludeCouponProduct> ExcludeCouponProducts { get; set; }
         [Display(Name = "Ürün Kategorileri")]
-        public virtual ICollection<CouponProductCategory> ProductCategories { get; set; }
+        public virtual ICollection<CouponProductCategory> CouponProductCategories { get; set; }
         [Display(Name = "Kategorileri Hariç Tut")]
-        public virtual ICollection<CouponProductCategory> ExcludeProductCategories { get; set; }
+        public virtual ICollection<ExcludeCouponProductCategory> ExcludeCouponProductCategories { get; set; }
         [Display(Name = "E-posta Kısıtlamaları")]
         public string RestrictedEmails { get; set; }
 
