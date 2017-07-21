@@ -204,7 +204,7 @@ namespace CmsCoreV2.Controllers
                     }
                 }
                 feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
-                return RedirectToAction("Successful", new { id = formCollection["id"] });
+                return RedirectToAction("Successful", new { id = formCollection["FormId"]});
             }
             return Redirect(Request.Headers["Referer"].ToString()+"?message=Gönderdiğiniz formda geçersiz alanlar var");
         }
