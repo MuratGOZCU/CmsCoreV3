@@ -55,7 +55,7 @@ namespace CmsCoreV2.ViewComponents
             var form = GetById(id, "FormFields");
             return form;
         }
-        public Form GetForm(string name, string slug)
+        public Form GetForm(string name="", string slug="")
         {
             Form form; 
             if (slug == "")
