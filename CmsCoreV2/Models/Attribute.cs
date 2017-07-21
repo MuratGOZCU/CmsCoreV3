@@ -8,6 +8,10 @@ namespace CmsCoreV2.Models
 {
     public class Attribute:BaseEntity
     {
+        public Attribute()
+        {
+            ProductAttributes = new HashSet<ProductAttribute>();
+        }
 
         [Required]
         [Display(Name = "Ad")]
@@ -27,6 +31,8 @@ namespace CmsCoreV2.Models
         [Display(Name = "Nitelik Türü")]
         [EnumDataType(typeof(AttributeType))]
         public AttributeType AttributeType { get; set; }
+
+        public ICollection<ProductAttribute> ProductAttributes { get; set; }
 
         [Display(Name = "Sıralama Düzeni")]
         [EnumDataType(typeof(AttributePosition))]

@@ -10,13 +10,14 @@ namespace CmsCoreV2.Models
     {
         public Product()
         {
-            Products = new HashSet<Product>();
-            ExcludeProducts = new HashSet<Product>();
+            CouponProducts = new HashSet<CouponProduct>();
+            ExcludeCouponProducts = new HashSet<ExcludeCouponProduct>();
+            ProductAttributes = new HashSet<ProductAttribute>();
         }
-        [Display(Name = "Ürünler")]
-        public virtual ICollection<Product> Products { get; set; }
-        [Display(Name = "Ürünleri Hariç Tut")]
-        public virtual ICollection<Product> ExcludeProducts { get; set; }
+        [Display(Name = "Kuponlar")]
+        public virtual ICollection<CouponProduct> CouponProducts { get; set; }
+        [Display(Name = "Hariç tutulan kuponlar")]
+        public virtual ICollection<ExcludeCouponProduct> ExcludeCouponProducts { get; set; }
         public string Name { get; set; }
         public string Slug { get; set; }
         public string Description { get; set; }
@@ -39,8 +40,8 @@ namespace CmsCoreV2.Models
         public ICollection<ProductAttribute> ProductAttributes { get; set; }
         public string purchaseNote { get; set; }
         public int MenuOrder { get; set; }
-        public ICollection<ProductProductCategory> ProductCategories { get; set; }
-        public ICollection<ProductProductTag> ProductTags { get; set; }
+        public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
+        public ICollection<ProductProductTag> ProductProductTags { get; set; }
         public string ProductImage { get; set; }
         public string ShortDescription { get; set; }
         public ICollection<ProductMedia> ProductMedias { get; set; }
