@@ -11,11 +11,11 @@ namespace CmsCoreV2.Models
     {
         public Setting()
         {
-            /*
+            
             ShippingRegions = new HashSet<SettingRegion>();
             SalesLocations = new HashSet<SaleRegion>();
             ShippingLocations = new HashSet<ShippingRegion>();
-            */
+            
         }
         //INDEX
         public string HeaderString { get; set; }
@@ -243,11 +243,8 @@ namespace CmsCoreV2.Models
         public bool EnableRestApi { get; set; }
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
-        [Display(Name = "Kullanıcı")]
-        public long? ApiUserId { get; set; }
-        [ForeignKey("ApiUserId")]
         [Display(Name ="Kullanıcı")]
-        public ApplicationUser ApiUser { get; set; }
+        public string ApiUser { get; set; }
      
     }
 }

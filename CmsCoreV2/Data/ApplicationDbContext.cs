@@ -103,6 +103,7 @@ namespace CmsCoreV2.Data
         public DbSet<TaxRate> TaxRates { get; set; }
         public DbSet<ExcludeCouponProduct> ExcludeCouponProducts { get; set; }
         public DbSet<ExcludeCouponProductCategory> ExcludeCouponProductCategories { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
 
 
 
@@ -226,6 +227,35 @@ namespace CmsCoreV2.Data
                 .WithMany(c => c.ShippingRegions)
                 .HasForeignKey(bc => bc.RegionId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
 
+            builder.Entity<SaleRegion>().HasKey(pc => new { pc.SettingId, pc.RegionId });
+            builder.Entity<SaleRegion>().HasOne(bc => bc.Setting)
+                .WithMany(b => b.SalesLocations)
+                .HasForeignKey(bc => bc.SettingId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
+            builder.Entity<SaleRegion>().HasOne(bc => bc.Region)
+                .WithMany(c => c.SalesLocations)
+                .HasForeignKey(bc => bc.RegionId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
+
+            builder.Entity<ShippingRegion>().HasKey(pc => new { pc.SettingId, pc.RegionId });
+            builder.Entity<ShippingRegion>().HasOne(bc => bc.Setting)
+                .WithMany(b => b.ShippingLocations)
+                .HasForeignKey(bc => bc.SettingId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
+            builder.Entity<ShippingRegion>().HasOne(bc => bc.Region)
+                .WithMany(c => c.ShippingLocations)
+                .HasForeignKey(bc => bc.RegionId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
+
+            builder.Entity<Product>()
+            .HasMany(e => e.UpSells) 
+            .WithOne(e => e.UpSell) 
+            .HasForeignKey(e => e.UpSellId);
+
+            builder.Entity<Product>()
+            .HasMany(e => e.CrossSells)
+            .WithOne(e => e.CrossSell)
+            .HasForeignKey(e => e.CrossSellId);
+            builder.Entity<Product>()
+            .HasMany(e => e.GroupedProducts)
+            .WithOne(e => e.GroupedProduct)
+            .HasForeignKey(e => e.GroupedProductId);
         }
         // diğer dbsetler buraya eklenir
 

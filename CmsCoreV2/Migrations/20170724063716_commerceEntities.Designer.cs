@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170724063716_commerceEntities")]
+    partial class commerceEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -189,7 +190,7 @@ namespace CmsCoreV2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Coupons");
+                    b.ToTable("Coupon");
                 });
 
             modelBuilder.Entity("CmsCoreV2.Models.CouponProduct", b =>
@@ -1665,7 +1666,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<int>("ApiPermission");
 
-                    b.Property<string>("ApiUser");
+                    b.Property<Guid>("ApiUserId");
 
                     b.Property<string>("AppTenantId");
 
@@ -1889,6 +1890,8 @@ namespace CmsCoreV2.Migrations
                     b.Property<int>("WeightUnit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApiUserId");
 
                     b.HasIndex("BasketPageId");
 
@@ -2551,6 +2554,11 @@ namespace CmsCoreV2.Migrations
 
             modelBuilder.Entity("CmsCoreV2.Models.Setting", b =>
                 {
+                    b.HasOne("CmsCoreV2.Models.ApplicationUser", "ApiUser")
+                        .WithMany()
+                        .HasForeignKey("ApiUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CmsCoreV2.Models.Page", "BasketPage")
                         .WithMany()
                         .HasForeignKey("BasketPageId");
