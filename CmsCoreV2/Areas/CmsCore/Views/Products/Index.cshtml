@@ -106,6 +106,9 @@
                 @Html.DisplayNameFor(model => model.GroupedProduct)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.UpSell)
             </th>
             <th></th>
@@ -202,13 +205,16 @@
                 @Html.DisplayFor(modelItem => item.AppTenantId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CrossSell.Id)
+                @Html.DisplayFor(modelItem => item.CrossSell.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GroupedProduct.Id)
+                @Html.DisplayFor(modelItem => item.GroupedProduct.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpSell.Id)
+                @Html.DisplayFor(modelItem => item.Language.Culture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpSell.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

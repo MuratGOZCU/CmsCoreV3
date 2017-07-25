@@ -37,7 +37,7 @@
                         </div>
 
                     </div>
-                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname//@ViewData["culture"]/ilkokul">@Localizer["İlkokul"]</a></div>
+                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ilkokul">@Localizer["İlkokul"]</a></div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -48,7 +48,7 @@
                             <div class="info-back"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ortaokul"><img src="~/edugate/images/ortaokul-kiz.png" alt="ortaokul" border="0" style="width:100%" /></a></div>
                         </div>
                     </div>
-                    <div class="name-course"><a href="/ortaokul">@Localizer["Ortaokul"]</a></div>
+                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ortaokul">@Localizer["Ortaokul"]</a></div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -59,7 +59,7 @@
                             <div class="info-back"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/lise"><img src="~/edugate/images/lise-kiz.png" alt="lise" border="0" style="width:100%" /></a></div>
                         </div>
                     </div><
-                    <div class="name-course"><a href="/lise">@Localizer["Lise"]</a></div>
+                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/lise">@Localizer["Lise"]</a></div>
                 </div>
             </div>
         </div>

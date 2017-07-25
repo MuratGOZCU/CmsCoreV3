@@ -31,7 +31,12 @@ namespace CmsCoreV2.Models
         [Display(Name = "Açıklama"),
             MinLength(3, ErrorMessage = "{0} en az {1} karakter olmalıdır."),
          MaxLength(500, ErrorMessage = "{0} en fazla {1} karakter olmalıdır.")]
-        public string Description { get; set; }      
+        public string Description { get; set; }
+        [Display(Name = "Dil")]
+        public long? LanguageId { get; set; }
+        [ForeignKey("LanguageId")]
+        [Display(Name = "Dil")]
+        public Language Language { get; set; }
         [DisplayName("Birim Fiyat"), Required(ErrorMessage = "Lütfen bir {0} değeri giriniz."),
         DataType(DataType.Currency)]
         public float? UnitPrice { get; set; }
