@@ -16,15 +16,17 @@
         <div class="form-group">
             <label asp-for="Name" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Name" class="form-control" />
+                <input type="text" asp-for="Name" class="form-control" tabindex="1" autofocus="autofocus" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Name').val().toLowerCase(),'-'));}" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
+
         <div class="form-group">
             <label asp-for="Slug" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input type="text" asp-for="Slug" class="form-control" tabindex="2" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Title').val().toLowerCase(),'-'));}" />
+                <input type="text" asp-for="Slug" class="form-control" tabindex="2" autofocus="autofocus" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Name').val().toLowerCase(),'-'));}" />
                 <span class="text-danger" asp-validation-for="Slug"></span>
+
             </div>
         </div>
         <div class="form-group">
@@ -174,7 +176,7 @@
                 <div class="input-group">
                     <input asp-for="ProductImage" class="form-control" />
                     <span class="input-group-btn">
-                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Photo')">...</a>
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('ProductImage')">...</a>
                     </span>
                 </div>
             </div>
@@ -257,3 +259,4 @@
     <a asp-action="Index">Listeye Geri Dön</a>
 </div>
 
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "ProductImage" } })
