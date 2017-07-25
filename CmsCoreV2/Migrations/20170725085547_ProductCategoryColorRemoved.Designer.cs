@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170725085547_ProductCategoryColorRemoved")]
+    partial class ProductCategoryColorRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -1323,8 +1324,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<long?>("CrossSellId");
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(500);
+                    b.Property<string>("Description");
 
                     b.Property<long?>("GroupedProductId");
 
@@ -1332,15 +1332,11 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<bool>("IsFeatured");
 
-                    b.Property<long?>("LanguageId");
-
                     b.Property<double>("Length");
 
                     b.Property<int>("MenuOrder");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(250);
+                    b.Property<string>("Name");
 
                     b.Property<string>("ProductImage");
 
@@ -1352,8 +1348,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<int>("SaleCount");
 
-                    b.Property<float?>("SalePrice")
-                        .IsRequired();
+                    b.Property<decimal>("SalePrice");
 
                     b.Property<string>("ShortDescription");
 
@@ -1369,8 +1364,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<int>("TaxStatus");
 
-                    b.Property<float?>("UnitPrice")
-                        .IsRequired();
+                    b.Property<decimal>("UnitPrice");
 
                     b.Property<long?>("UpSellId");
 
@@ -1390,8 +1384,6 @@ namespace CmsCoreV2.Migrations
                     b.HasIndex("CrossSellId");
 
                     b.HasIndex("GroupedProductId");
-
-                    b.HasIndex("LanguageId");
 
                     b.HasIndex("UpSellId");
 
@@ -2467,10 +2459,6 @@ namespace CmsCoreV2.Migrations
                     b.HasOne("CmsCoreV2.Models.Product", "GroupedProduct")
                         .WithMany("GroupedProducts")
                         .HasForeignKey("GroupedProductId");
-
-                    b.HasOne("CmsCoreV2.Models.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId");
 
                     b.HasOne("CmsCoreV2.Models.Product", "UpSell")
                         .WithMany("UpSells")
