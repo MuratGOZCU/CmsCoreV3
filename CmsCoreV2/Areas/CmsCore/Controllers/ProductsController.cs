@@ -25,7 +25,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Products
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Products.Include(p => p.CrossSell).Include(p => p.GroupedProduct).Include(p => p.UpSell);
+            var applicationDbContext = _context.Products.Include(p => p.CrossSell).Include(p => p.GroupedProduct).Include(p => p.Language).Include(p => p.UpSell);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -40,6 +40,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             var product = await _context.Products
                 .Include(p => p.CrossSell)
                 .Include(p => p.GroupedProduct)
+                .Include(p => p.Language)
                 .Include(p => p.UpSell)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (product == null)
@@ -53,9 +54,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Products/Create
         public IActionResult Create()
         {
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Id");
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Id");
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Id");
+            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name");
+            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name");
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture");
+            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name");
             return View();
         }
 
@@ -64,7 +66,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Slug,Description,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product)
+        public async Task<IActionResult> Create([Bind("Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -72,9 +74,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Id", product.CrossSellId);
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Id", product.GroupedProductId);
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Id", product.UpSellId);
+            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name", product.CrossSellId);
+            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
+            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             return View(product);
         }
 
@@ -91,9 +94,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 return NotFound();
             }
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Id", product.CrossSellId);
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Id", product.GroupedProductId);
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Id", product.UpSellId);
+            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name", product.CrossSellId);
+            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
+            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             return View(product);
         }
 
@@ -102,7 +106,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Name,Slug,Description,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product)
+        public async Task<IActionResult> Edit(long id, [Bind("Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product)
         {
             if (id != product.Id)
             {
@@ -129,9 +133,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Id", product.CrossSellId);
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Id", product.GroupedProductId);
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Id", product.UpSellId);
+            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name", product.CrossSellId);
+            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
+            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             return View(product);
         }
 
@@ -146,6 +151,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             var product = await _context.Products
                 .Include(p => p.CrossSell)
                 .Include(p => p.GroupedProduct)
+                .Include(p => p.Language)
                 .Include(p => p.UpSell)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (product == null)
