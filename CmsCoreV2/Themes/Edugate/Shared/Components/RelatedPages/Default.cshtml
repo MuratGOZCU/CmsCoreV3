@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<Page>
+@inject AppTenant Tenant
 @foreach (var item in Model)
 {
     
         <li>
-            <div><a href="/@ViewData["Culture"]/@Html.Raw(item.Slug)" class="link title">@(item.Title)</a></div>
+            <div><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Html.Raw(item.Slug)" class="link title">@(item.Title)</a></div>
         </li>
 
 }

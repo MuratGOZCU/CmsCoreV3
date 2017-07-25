@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<Post>
+@inject AppTenant Tenant
 @foreach (var item in Model)
 {
     <div class="media">
-        <div class="media-left"><a href="/@ViewData["Culture"]/@item.Slug" class="link"><img src="@Html.Raw(item.Photo)" alt="" class="media-image" /></a></div>
+        <div class="media-left"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link"><img src="@Html.Raw(item.Photo)" alt="" class="media-image" /></a></div>
         <div class="media-right">
             <div class="info">
-                <div class="date-created item"><a href="/@ViewData["Culture"]/@item.Slug"><span>@item.CreateDate.ToString().Substring(0, 10)</span></a></div>
+                <div class="date-created item"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><span>@item.CreateDate.ToString().Substring(0, 10)</span></a></div>
             </div>
-            <a href="/@ViewData["Culture"]/@item.Slug" class="link title">@(item.Title)</a>
+            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link title">@(item.Title)</a>
         </div>
     </div>
 }

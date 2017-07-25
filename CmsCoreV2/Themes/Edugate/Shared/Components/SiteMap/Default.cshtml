@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<Page>
+@inject AppTenant Tenant
 
 @foreach (var item in Model)
 {
     <ul>
 
         <li>
-            <a href="/@item.Language.Culture/@item.Slug" class="link title">@(item.Title)</a>
+            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Language.Culture/@item.Slug" class="link title">@(item.Title)</a>
             @if (item.ChildPages != null)
             {
                 @await Component.InvokeAsync("SiteMap", new { parentPageId = item.Id })
