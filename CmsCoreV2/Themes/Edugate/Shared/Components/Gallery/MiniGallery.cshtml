@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<GalleryItem>
 @inject CustomLocalizer Localizer
+@inject AppTenant Tenant
 <div class="gallery-widget widget">
     <div class="title-widget">@Localizer["Galeri"]</div>
     <div class="content-widget">
@@ -11,6 +12,6 @@
 
         </div>
         <div class="clearfix"></div>
-        <a href="/galeri" class="view-more">@Localizer["Daha Fazla Fotoğraf"]&nbsp;<i class="fa fa-angle-double-right mls"></i></a>
+        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri" class="view-more">@Localizer["Daha Fazla Fotoğraf"]&nbsp;<i class="fa fa-angle-double-right mls"></i></a>
     </div>
 </div>

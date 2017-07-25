@@ -1,0 +1,216 @@
+﻿@model CmsCoreV2.Models.Product
+
+@{
+    ViewData["Title"] = "Ürün Detayları";
+}
+
+<h2>Detaylar</h2>
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Slug)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Slug)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SalePrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SalePrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxClass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StockCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StockCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StockCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StockCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StockStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StockStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseNote)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseNote)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuOrder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuOrder)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductImage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ViewCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaleCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaleCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CatalogVisibility)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CatalogVisibility)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFeatured)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsFeatured)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AppTenantId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AppTenantId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CrossSell)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CrossSell.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupedProduct)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GroupedProduct.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Language)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Language.Culture)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpSell)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpSell.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>

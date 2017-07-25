@@ -1,38 +1,87 @@
 ﻿@model CmsCoreV2.Models.ProductTag
-@{
-    ViewData["Title"] = "Ürün Etiketi Düzenle";
-}
 
-<h2>Ürün Etiketi Düzenle</h2>
-<form asp-action="Edit" asp-controller="ProductTags" method="post" asp-route-id="@Model.Id">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="row">
-        <div class="col-md-2">
-            <label asp-for="Name" class="control-label"></label>
+@{
+    ViewData["Title"] = "Etiketi Düzenle";
+}
+<link href="/metronic/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css">
+<script src="~/js/generate-slug.js"> </script>
+
+<h2>Düzenle</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input type="text" asp-for="Name" class="form-control" tabindex="1" autofocus="autofocus" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Name').val().toLowerCase(),'-'));}" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
         </div>
-        <div class="col-md-10">
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Slug" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input type="text" asp-for="Slug" class="form-control" tabindex="2" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Name').val().toLowerCase(),'-'));}" />
+                <span class="text-danger" asp-validation-for="Slug"></span>
+            </div>
         </div>
-        <div class="col-md-2">
-            <label asp-for="Slug" class="control-label"></label>
+        <div class="form-group">
+            <label asp-for="Description" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
         </div>
-        <div class="col-md-10">
-            <input asp-for="Slug" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+    <input type="hidden" asp-for="Id" />
+        @*<div class="form-group">
+            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
         </div>
-        <div class="col-md-2">
-            <label asp-for="Description" class="control-label"></label>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
         </div>
-        <div class="col-md-10">
-            <textarea asp-for="Description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UpdateDate" class="form-control" />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+            </div>
         </div>
-        <div class="col-md-2">
-            
+        <div class="form-group">
+            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UpdatedBy" class="form-control" />
+                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
         </div>
-        <div class="col-md-10">
-            <input type="submit" name="submit" value="Kaydet" />
+        <div class="form-group">
+            <label asp-for="AppTenantId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AppTenantId" class="form-control" />
+                <span asp-validation-for="AppTenantId" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-default" />
+            </div>
         </div>
     </div>
 </form>
+
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
