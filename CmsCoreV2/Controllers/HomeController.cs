@@ -120,6 +120,7 @@ namespace CmsCoreV2.Controllers
                 pageVM.SeoTitle = page.SeoTitle;
                 pageVM.SeoKeywords = page.SeoKeywords;
                 pageVM.SeoDescription = page.SeoDescription;
+                ViewData["Search"] = Request.Query["query"].ToString();
                 ViewData["Title"] = page.SeoTitle;
                 ViewData["Description"] = page.SeoDescription;
                 ViewData["Keywords"] = page.SeoKeywords;
@@ -203,7 +204,7 @@ namespace CmsCoreV2.Controllers
                     }
                 }
                 feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
-                return RedirectToAction("Successful", new { id = formCollection["id"] });
+                return RedirectToAction("Successful", new { id = formCollection["FormId"]});
             }
             return Redirect(Request.Headers["Referer"].ToString()+"?message=Gönderdiğiniz formda geçersiz alanlar var");
         }

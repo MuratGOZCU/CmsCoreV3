@@ -84,7 +84,7 @@
                 <div class="header-main-wrapper">
                     <div class="navbar-header">
                         <div class="logo pull-left">
-                            <a href="/@ViewData["Culture"]" class="header-logo">
+                            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@ViewData["Culture"]" class="header-logo">
                                 <img src="~/edugate/images/logo.png" alt="@Tenant.Title" />
                             </a>
                         </div>
@@ -176,7 +176,7 @@
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <ul class="list-unstyled">
-                                                        <li><i class="fa fa-angle-right"></i><a href="http://bilgistore.bilgikoleji.com" rel=”nofollow” >@Localizer["Bilgi Store"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/bilgistore" rel=”nofollow” >@Localizer["Bilgi Store"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="/tr/veli-iletisim">@Localizer["Veli İletişim"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="/tr/ek-alanlar">@Localizer["Ek Alanlar"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="/tr/site-haritasi">@Localizer["Site Haritası"]</a></li>

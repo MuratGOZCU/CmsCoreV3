@@ -2331,16 +2331,18 @@ footer {
 .why-choose-us .why-choose-us-wrapper {
     text-align: left;
     width: 100%
+
 }
 
 .why-choose-us .why-choose-us-wrapper-top {
     position: relative
 }
 
-.why-choose-us .why-choose-us-wrapper-top .why-choose-us-wrapper {
-    padding: 60px 0;
-    padding-right: 25%
-}
+    .why-choose-us .why-choose-us-wrapper-top .why-choose-us-wrapper {
+        padding: 60px 0;
+        padding-right: 25%;
+      
+    }
 
 .why-choose-us .why-choose-us-wrapper-top .why-choose-us-wrapper p {
     color: #d1d8eb;
@@ -6081,12 +6083,13 @@ h5 {
     }
 
     .slider-banner .slider-item .slider-2 {
-        background-position: -210px
+        background-position: -210px;
     }
 
-    .slider-banner .slider-item .slider-3 {
-        background-position: -130px
-    }
+        .slider-banner .slider-item .slider-3 {
+            background-position: -130px;
+        
+        }
 
     .news-page .news-masonry .gird-item {
         width: 50%

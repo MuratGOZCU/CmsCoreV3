@@ -10,13 +10,13 @@ namespace CmsCoreV2.Models
     {
         public ProductCategory()
         {
-            ProductCategories = new HashSet<ProductCategory>();
-            ExcludeProductCategories = new HashSet<ProductCategory>();
+            CouponProductCategories = new HashSet<CouponProductCategory>();
+            ExcludeCouponProductCategories = new HashSet<ExcludeCouponProductCategory>();
         }
         [Display(Name = "Ürün Kategorileri")]
-        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        public virtual ICollection<CouponProductCategory> CouponProductCategories { get; set; }
         [Display(Name = "Kategorileri Hariç Tut")]
-        public virtual ICollection<ProductCategory> ExcludeProductCategories { get; set; }
+        public virtual ICollection<ExcludeCouponProductCategory> ExcludeCouponProductCategories { get; set; }
         [StringLength(200)]
         [Required]
         [Display(Name = "Ad")]
@@ -34,5 +34,7 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         [Display(Name = "Renk")]
         public string Color { get; set; }
+
+        public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
     }
 }

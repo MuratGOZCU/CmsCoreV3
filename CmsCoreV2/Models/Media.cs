@@ -30,5 +30,7 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         public string FileType { get; set; }
 
+        public ICollection<ProductMedia> ProductMedias { get; set; }
+
     }
 }
