@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using Microsoft.AspNetCore.Authorization;
+using SaasKit.Multitenancy;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
     [Authorize(Roles = "ADMIN")]
     [Area("CmsCore")]
-    public class ProductsController : Controller
+    public class ProductsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public ProductsController(ApplicationDbContext context)
+ 
+        public ProductsController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
         {
-            _context = context;    
+                
         }
 
         // GET: CmsCore/Products
@@ -54,11 +54,17 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Products/Create
         public IActionResult Create()
         {
+            var product = new Product();
+            product.CreatedBy = User.Identity.Name ?? "username";
+            product.CreateDate = DateTime.Now;
+            product.UpdatedBy = User.Identity.Name ?? "username";
+            product.UpdateDate = DateTime.Now;
+            product.AppTenantId = tenant.AppTenantId;
             ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name");
             ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name");
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture");
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name");
-            return View();
+            return View(product);
         }
 
         // POST: CmsCore/Products/Create

@@ -1,14 +1,19 @@
-@model CmsCoreV2.Models.Product
+﻿@model CmsCoreV2.Models.Product
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Ürün Oluştur";
 }
 
-<h2>Create</h2>
+<link href="/metronic/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css">
+<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
+<script src="~/js/generate-slug.js"> </script>
+
+<h2>Ürün Oluştur</h2>
+<hr />
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Product</h4>
+        <h4>Ürün</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -21,8 +26,9 @@
         <div class="form-group">
             <label asp-for="Slug" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Slug" class="form-control" />
-                <span asp-validation-for="Slug" class="text-danger"></span>
+                <input type="text" asp-for="Slug" class="form-control" tabindex="2" autofocus="autofocus" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Title').val().toLowerCase(),'-'));}" />
+                <span class="text-danger" asp-validation-for="Slug"></span>
+
             </div>
         </div>
         <div class="form-group">
@@ -35,7 +41,9 @@
         <div class="form-group">
             <label asp-for="LanguageId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="LanguageId" class ="form-control" asp-items="ViewBag.LanguageId"></select>
+                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.LanguageId">
+                    <option value="">Seçiniz...</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -81,11 +89,9 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    <input asp-for="StockStatus" />
-                    <label asp-for="StockStatus"></label>
-                </div>
+            <label asp-for="StockStatus" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="StockCount" class="form-control" />
             </div>
         </div>
         <div class="form-group">
@@ -163,11 +169,16 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ProductImage" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ProductImage" class="form-control" />
-                <span asp-validation-for="ProductImage" class="text-danger"></span>
+            <label asp-for="ProductImage" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.ProductImage)</label>
+            <div class="col-md-9">
+                <div class="input-group">
+                    <input asp-for="ProductImage" class="form-control" />
+                    <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Photo')">...</a>
+                    </span>
+                </div>
             </div>
+            @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label asp-for="ShortDescription" class="col-md-2 control-label"></label>
@@ -208,47 +219,40 @@
         <div class="form-group">
             <label asp-for="CreateDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CreateDate" class="form-control" />
+                <input readonly asp-for="CreateDate" class="form-control" />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CreatedBy" class="form-control" />
+                <input readonly asp-for="CreatedBy" class="form-control" />
                 <span asp-validation-for="CreatedBy" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="UpdateDate" class="form-control" />
+                <input readonly asp-for="UpdateDate" class="form-control" />
                 <span asp-validation-for="UpdateDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="UpdatedBy" class="form-control" />
+                <input readonly asp-for="UpdatedBy" class="form-control" />
                 <span asp-validation-for="UpdatedBy" class="text-danger"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="AppTenantId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="AppTenantId" class="form-control" />
-                <span asp-validation-for="AppTenantId" class="text-danger"></span>
-            </div>
-        </div>
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Listeye Geri Dön</a>
 </div>
-
