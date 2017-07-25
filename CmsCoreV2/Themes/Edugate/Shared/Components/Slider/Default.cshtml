@@ -1,5 +1,6 @@
 ﻿@inject CustomLocalizer Localizer
 @model CmsCoreV2.Models.Slider
+@inject AppTenant Tenant
 @if (Model != null && Model.Id > 0)
 {
     <div id="homeSlider container" style="clear:both;">
