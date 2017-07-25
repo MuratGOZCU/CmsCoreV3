@@ -1303,7 +1303,8 @@ header .header-main .navigation .nav-links li .main-menu {
     color: #242c42;
     position: relative;
     background-color: transparent;
-    transition: all .3s ease-in-out
+    transition: all .3s ease-in-out;
+    font-weight:bold;
 }
 
 header .header-main .navigation .nav-links li .main-menu:after {
@@ -1372,7 +1373,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     text-transform: capitalize;
     color: #242c42;
     border: none;
-    font-weight: normal
+    font-weight: bold;
 }
 
 header .header-main .edugate-dropdown-menu-1 li:hover, header .header-main .edugate-dropdown-menu-2 li:hover {

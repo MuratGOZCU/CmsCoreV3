@@ -225,6 +225,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <span class="title">Ürün Kategorileri</span>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a asp-controller="ProductTags" asp-action="Index" class="nav-link">
+                                        <span class="title">Ürün Etiketleri</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="links"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="linkcategories"?"active":string.Empty) ">
