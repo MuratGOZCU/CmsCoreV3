@@ -791,8 +791,10 @@ namespace CmsCoreV2.Data
                 new Resource { Name = "Son Yazılar", Value = "Last Posts", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Resource { Name = "İLKOKUL", Value = "PRIMARY SCHOOL", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Resource { Name = "ilkokul", Value = "PrimarySchool", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new Resource { Name = "Survey", Value = "Anket", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-                
+                new Resource { Name = "Survey", Value = "Anket", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Arayınız...", Value = "Search...", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Hızlı Ara", Value = "Fast Search", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
 
             //new Resource { Name = "Kurumsal", Value = "Corporate", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
             //new Resource { Name = "Vizyon Misyon", Value = "Vission Mission", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
