@@ -1,14 +1,15 @@
-﻿@model CmsCoreV2.Models.ProductTag
+﻿@model CmsCoreV2.Models.Attribute
 
 @{
-    ViewData["Title"] = "Sil";
+    ViewData["Title"] = "Delete";
 }
 
-<h2>Etiketi Sil</h2>
+<h2>Delete</h2>
 
 <h3>Silmek istediğinize emin misiniz?</h3>
 <div>
     <form asp-action="Delete" asp-route-id="@Model.Id">
+
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -24,10 +25,28 @@
                 @Html.DisplayFor(model => model.Slug)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.IsVisible)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Description)
+                @Html.DisplayFor(model => model.IsVisible)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Variations)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Variations)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AttributeType)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AttributeType)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AttributePosition)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AttributePosition)
             </dd>
             <input type="hidden" asp-for="Id" />
             <dt>
@@ -62,9 +81,9 @@
             </dd>
         </dl>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Sil" class="btn btn-danger" /> |
-            <a asp-action="Index">Listeye Geri Dön</a>
-        </div>
-    </form>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-action="Index">Listeye Geri Dön</a>
+            </div>
+        </form>
 </div>

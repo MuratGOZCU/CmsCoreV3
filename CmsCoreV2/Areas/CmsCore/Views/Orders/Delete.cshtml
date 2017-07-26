@@ -1,35 +1,66 @@
-﻿@model CmsCoreV2.Models.ProductTag
+﻿@model CmsCoreV2.Models.Order
 
 @{
-    ViewData["Title"] = "Sil";
+    ViewData["Title"] = "Siparişi Sil";
 }
 
-<h2>Etiketi Sil</h2>
+<h2>Sil</h2>
 
 <h3>Silmek istediğinize emin misiniz?</h3>
+
 <div>
     <form asp-action="Delete" asp-route-id="@Model.Id">
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Name)
+              Müşteri
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Name)
+                @Html.DisplayFor(model => model.Customer.Id)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.OrderStatus)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Slug)
+                @Html.DisplayNameFor(model => model.Email)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Slug)
+                @Html.DisplayFor(model => model.Email)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Phone)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.Description)
+                @Html.DisplayFor(model => model.Phone)
             </dd>
-            <input type="hidden" asp-for="Id" />
+            <dt>
+                @Html.DisplayNameFor(model => model.TransactionId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TransactionId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CustomerNote)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CustomerNote)
+            </dd>
+            <dt>
+               Ödeme Yöntemleri
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PaymentMethod.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.OrderDate)
+            </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.CreateDate)
             </dt>
@@ -60,11 +91,13 @@
             <dd>
                 @Html.DisplayFor(model => model.AppTenantId)
             </dd>
+            
+            
         </dl>
 
         <div class="form-actions no-color">
             <input type="submit" value="Sil" class="btn btn-danger" /> |
             <a asp-action="Index">Listeye Geri Dön</a>
         </div>
-    </form>
+        </form>
 </div>
