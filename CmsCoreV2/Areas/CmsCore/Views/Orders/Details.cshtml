@@ -1,49 +1,62 @@
-﻿@model CmsCoreV2.Models.Attribute
+﻿@model CmsCoreV2.Models.Order
 
 @{
-    ViewData["Title"] = "Detaylar";
+    ViewData["Title"] = "Sipariş Detayları";
 }
 
 <h2>Detaylar</h2>
 
 <div>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+         Müşteri
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Customer.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Slug)
+            @Html.DisplayNameFor(model => model.OrderDate)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Slug)
+            @Html.DisplayFor(model => model.OrderDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IsVisible)
+            @Html.DisplayNameFor(model => model.OrderStatus)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IsVisible)
+            @Html.DisplayFor(model => model.OrderStatus)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Variations)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Variations)
+            @Html.DisplayFor(model => model.Email)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AttributeType)
+            @Html.DisplayNameFor(model => model.Phone)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AttributeType)
+            @Html.DisplayFor(model => model.Phone)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AttributePosition)
+            @Html.DisplayNameFor(model => model.TransactionId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.AttributePosition)
+            @Html.DisplayFor(model => model.TransactionId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerNote)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerNote)
+        </dd>
+        <dt>
+            Ödeme Yöntemleri
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMethod.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.CreateDate)
@@ -75,9 +88,12 @@
         <dd>
             @Html.DisplayFor(model => model.AppTenantId)
         </dd>
+       
+     
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a>
     <a asp-action="Index">Listeye Geri Dön</a>
 </div>
+
