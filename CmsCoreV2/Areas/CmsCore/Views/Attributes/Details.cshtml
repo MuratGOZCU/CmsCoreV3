@@ -1,13 +1,12 @@
-@model CmsCoreV2.Models.Attribute
+﻿@model CmsCoreV2.Models.Attribute
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detaylar";
 }
 
-<h2>Details</h2>
+<h2>Detaylar</h2>
 
 <div>
-    <h4>Attribute</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,6 +20,18 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Slug)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVisible)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsVisible)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Variations)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Variations)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.AttributeType)
@@ -67,6 +78,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+    <a asp-action="Index">Listeye Geri Dön</a>
 </div>
