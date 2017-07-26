@@ -1,0 +1,103 @@
+﻿@model CmsCoreV2.Models.TaxRate
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h3>Vergi Oranı Detayları</h3>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CountryCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CityPlateCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CityPlateCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.District.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxRatePriority)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxRatePriority)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxRateCompound)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxRateCompound)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaxRateShipping)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaxRateShipping)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AppTenantId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AppTenantId)
+        </dd>
+       
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a class="btn btn-default" asp-action="Index">Listeye Geri Dön</a>
+</div>

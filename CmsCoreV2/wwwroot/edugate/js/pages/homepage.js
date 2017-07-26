@@ -54,7 +54,8 @@
         $(".fancybox-button").fancybox({
             prevEffect		: 'none',
             nextEffect		: 'none',
-            closeBtn		: false,
+            closeBtn: false,
+            type: 'image',
             helpers		: {
                 title	: { type : 'inside' },
                 buttons	: {}

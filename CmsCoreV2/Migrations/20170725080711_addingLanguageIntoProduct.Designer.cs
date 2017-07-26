@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170725080711_addingLanguageIntoProduct")]
+    partial class addingLanguageIntoProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -1417,6 +1418,9 @@ namespace CmsCoreV2.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AppTenantId");
+
+                    b.Property<string>("Color")
+                        .HasMaxLength(200);
 
                     b.Property<DateTime>("CreateDate");
 
