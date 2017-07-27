@@ -57,7 +57,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             taxRate.UpdateDate = DateTime.Now;
             taxRate.AppTenantId = tenant.AppTenantId;
             ViewData["DistrictId"] = new SelectList(_context.Regions, "Id", "Name");
-            return View();
+            return View(taxRate);
         }
 
         // POST: CmsCore/TaxRates/Create

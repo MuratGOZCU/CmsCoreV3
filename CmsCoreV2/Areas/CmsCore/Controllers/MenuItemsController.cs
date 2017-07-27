@@ -79,9 +79,6 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 _context.Add(menuItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
-
-
-
             }
 
             var parentMenuItem = _context.MenuItems.ToList();

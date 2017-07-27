@@ -1,12 +1,13 @@
-﻿@model CmsCoreV2.Models.Attribute
+﻿@model CmsCoreV2.Models.Region
 
 @{
-    ViewData["Title"] = "Detaylar";
+    ViewData["Title"] = "Details";
 }
 
-<h2>Detaylar</h2>
+<h3>Bölge Detayları</h3>
 
 <div>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,34 +17,16 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Slug)
+            @Html.DisplayNameFor(model => model.Code)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Slug)
+            @Html.DisplayFor(model => model.Code)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IsVisible)
+            @Html.DisplayNameFor(model => model.RegionType)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IsVisible)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Variations)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Variations)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AttributeType)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AttributeType)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AttributePosition)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AttributePosition)
+            @Html.DisplayFor(model => model.RegionType)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.CreateDate)
@@ -75,9 +58,15 @@
         <dd>
             @Html.DisplayFor(model => model.AppTenantId)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentRegion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParentRegion.Name)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
-    <a asp-action="Index">Listeye Geri Dön</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+    <a class="btn btn-default" asp-action="Index">Listeye Geri Dön</a>
 </div>

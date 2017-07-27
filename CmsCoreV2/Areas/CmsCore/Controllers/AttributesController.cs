@@ -63,7 +63,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Slug,AttributeType,AttributePosition,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Models.Attribute attribute)
+        public async Task<IActionResult> Create([Bind("Name,Slug,IsVisible,Variations,AttributeType,AttributePosition,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Models.Attribute attribute)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Name,Slug,AttributeType,AttributePosition,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Models.Attribute attribute)
+        public async Task<IActionResult> Edit(long id, [Bind("Name,Slug,IsVisible,Variations,AttributeType,AttributePosition,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Models.Attribute attribute)
         {
             if (id != attribute.Id)
             {
