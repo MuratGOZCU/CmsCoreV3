@@ -21,6 +21,7 @@ namespace CmsCoreV2.Models
         public int? LimitUse { get; set; }
         [Display(Name = "Kullanıcı Başına Kullanım Sınırı")]
         public int LimitPerUser { get; set; }
+        [Display(Name = "İndirim Türü")]
         public DiscountType DiscountType { get; set; }
         [StringLength(200)]
         [Display(Name ="Kupon Kodu")]

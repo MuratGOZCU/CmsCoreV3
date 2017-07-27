@@ -305,6 +305,49 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="WooCommerce"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="Orders"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="Coupons"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Reports"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Settings"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Customers"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Regions"?"active":string.Empty)">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="fa fa-cubes"></i>
+                            <span class="title">E-Ticaret</span>
+                            <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a asp-controller="Orders" asp-action="Index" class="nav-link">
+                                        <span class="title">Siparişler</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Cupons" asp-action="Edit" class="nav-link">
+                                        <span class="title">Kuponlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Reports" asp-action="CustomCss" class="nav-link">
+                                        <span class="title">Raporlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="CommerceSettings" asp-action="Index" class="nav-link">
+                                        <span class="title">Ayarlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="Index" class="nav-link">
+                                        <span class="title">Müşteriler</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Regions" asp-action="Index" class="nav-link">
+                                        <span class="title">Bölgeler</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="themes"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="menus"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="menuitems"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-cubes"></i>
