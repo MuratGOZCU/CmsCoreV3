@@ -218,7 +218,7 @@
             $('.logo .header-logo img').attr('src', 'assets/images/logo-' + color + '.png');    
             setTimeout(function(){
                 $('.theme-loading').hide();
-            }, 1000);
+            }, 200);
         };
 
         list_color.on('click', function() {

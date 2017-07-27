@@ -1,6 +1,7 @@
 (function($) {
     "use strict";
-    $(function(){
+    $(function () {
+
         // AMIMATED NUMBER
         $('.progress-bar-number').appear(function(){
             setTimeout(function(){
@@ -66,10 +67,9 @@
         $('.body-2').width($(window).width());
         $('.body-2').height($(window).height());
         // LOADING FOR HOMEPAGE
-        setTimeout(function() {
-            $('.body-2').removeClass('loading');
-            $('.body-2').addClass('loaded');
-        }, 800);
+        $('.body-2').removeClass('loading');
+        $('.body-2').addClass('loaded');
+
 
     });
 
