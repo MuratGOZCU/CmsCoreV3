@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170728071328_SettingFixed")]
+    partial class SettingFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -85,8 +86,6 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(200);
 
-                    b.Property<bool>("IsVisible");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200);
@@ -98,8 +97,6 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(200);
-
-                    b.Property<bool>("Variations");
 
                     b.HasKey("Id");
 
@@ -1327,8 +1324,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<long?>("CrossSellId");
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(500);
+                    b.Property<string>("Description");
 
                     b.Property<long?>("GroupedProductId");
 
@@ -1336,15 +1332,11 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<bool>("IsFeatured");
 
-                    b.Property<long?>("LanguageId");
-
                     b.Property<double>("Length");
 
                     b.Property<int>("MenuOrder");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(250);
+                    b.Property<string>("Name");
 
                     b.Property<string>("ProductImage");
 
@@ -1356,8 +1348,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<int>("SaleCount");
 
-                    b.Property<float?>("SalePrice")
-                        .IsRequired();
+                    b.Property<decimal>("SalePrice");
 
                     b.Property<string>("ShortDescription");
 
@@ -1373,8 +1364,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<int>("TaxStatus");
 
-                    b.Property<float?>("UnitPrice")
-                        .IsRequired();
+                    b.Property<decimal>("UnitPrice");
 
                     b.Property<long?>("UpSellId");
 
@@ -1394,8 +1384,6 @@ namespace CmsCoreV2.Migrations
                     b.HasIndex("CrossSellId");
 
                     b.HasIndex("GroupedProductId");
-
-                    b.HasIndex("LanguageId");
 
                     b.HasIndex("UpSellId");
 
@@ -1421,6 +1409,9 @@ namespace CmsCoreV2.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AppTenantId");
+
+                    b.Property<string>("Color")
+                        .HasMaxLength(200);
 
                     b.Property<DateTime>("CreateDate");
 
@@ -1506,10 +1497,6 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Slug")
                         .IsRequired()
                         .HasMaxLength(200);
 
@@ -2477,10 +2464,6 @@ namespace CmsCoreV2.Migrations
                     b.HasOne("CmsCoreV2.Models.Product", "GroupedProduct")
                         .WithMany("GroupedProducts")
                         .HasForeignKey("GroupedProductId");
-
-                    b.HasOne("CmsCoreV2.Models.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId");
 
                     b.HasOne("CmsCoreV2.Models.Product", "UpSell")
                         .WithMany("UpSells")
