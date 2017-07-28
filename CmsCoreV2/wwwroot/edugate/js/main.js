@@ -27,11 +27,11 @@
         // -------------------------------------//
 
         // WOW JS
-        new WOW().init();
+        //new WOW().init();
         // -------------------------------------//
 
         // CHANGE SELECTBOX
-        $(".selectbox").selectbox();
+        //$(".selectbox").selectbox();
         // -------------------------------------//
 
         // SHOW - HIDE - BOX SEARCH ON MENU
