@@ -708,3 +708,13 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     border: 2px solid white;
     background-color: #092f87;
 }
+
+.morecontent span {
+    display: none;
+}
+
+a.morelink {
+    text-decoration: none;
+    outline: none;
+    font-weight:bold;
+}
