@@ -215,6 +215,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 250px;
     right: 65px;
     color: white;
+    border-radius:20px !important;
 }
 
 video {
@@ -234,6 +235,8 @@ video {
 
 .btn {
     text-transform: capitalize;
+    border-radius: 20px !important;
+    
 }
 
 #homeSlider2 .slider-item > div {
@@ -255,7 +258,11 @@ video {
     color: #fff;
 }
 
-li.accordion {
+.btn.btn-green:after {
+
+    border-radius:20px !important;
+}
+    li .accordion {
     background-color: #eee;
     color: #444;
     cursor: pointer;
@@ -607,6 +614,27 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     }
 }
 
+
+
+
+
+.category-widget li, .archive-widget li {
+    margin-top: 10px !important;
+    border-radius: 25px !important;
+    background-color: #d6edf7 !important;
+    text-align: center !important;
+    width: 100%;
+    display: inline-block;
+    padding-bottom:15px !important;
+}
+
+
+.widget .title-widget {
+    border-radius: 25px !important;
+}
+
+
+
 .grecaptcha-badge {
     display: none !important;
 }
@@ -614,6 +642,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     border: 2px solid #092f87 !important;
     background-color: #092f87 !important;
     color: white !important;
+    border-radius:25px !important;
 }
     #back-top a:hover {
         color: #0082cb !important;
@@ -707,4 +736,14 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     height: 20px;
     border: 2px solid white;
     background-color: #092f87;
+}
+
+.morecontent span {
+    display: none;
+}
+
+a.morelink {
+    text-decoration: none;
+    outline: none;
+    font-weight:bold;
 }
