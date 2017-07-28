@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = Model.Title;
 }
+
+@Html.Raw(Model.HeaderScript)
+
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <link href="~/edugate/css/Custom.css" rel="stylesheet" />
 <style>
@@ -12,6 +15,7 @@
         background-size: cover;
             }
 </style>
+
 <!-- WRAPPER-->
 <div id="wrapper-content">
     <!-- PAGE WRAPPER-->
@@ -37,6 +41,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="section section-padding courses">
                     <div class="container">
                         <div class="group-title-index">
