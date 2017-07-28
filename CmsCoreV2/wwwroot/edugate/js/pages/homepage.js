@@ -1,19 +1,19 @@
 (function($) {
     "use strict";
     $(function () {
-
+        
         // AMIMATED NUMBER
-        $('.progress-bar-number').appear(function(){
-            setTimeout(function(){
-                $('.progress-bar-number .num').countTo();
-            },1000);
-        });
+        //$('.progress-bar-number').appear(function(){
+        //    setTimeout(function(){
+        //        $('.progress-bar-number .num').countTo();
+        //    },1000);
+        //});
 
-        $('.pricing').appear(function(){
-            setTimeout(function(){
-                $('.pricing .inner-number').countTo();
-            },1000);
-        });
+        //$('.pricing').appear(function(){
+        //    setTimeout(function(){
+        //        $('.pricing .inner-number').countTo();
+        //    },1000);
+        //});
         // -------------------------------------//
         // WFECT FOR SECTION PRICING
         if ($(window).width() > 600) {
@@ -63,13 +63,13 @@
             }
         });
         // -------------------------------------//
+        
         // SET WIDTH - HEIGHT FOR LOADING
         $('.body-2').width($(window).width());
         $('.body-2').height($(window).height());
         // LOADING FOR HOMEPAGE
         $('.body-2').removeClass('loading');
         $('.body-2').addClass('loaded');
-
 
     });
 

@@ -74,6 +74,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
             if (ModelState.IsValid)
             {
+                region.CreatedBy = User.Identity.Name ?? "username";
+                region.CreateDate = DateTime.Now;
+                region.UpdatedBy = User.Identity.Name ?? "username";
+                region.UpdateDate = DateTime.Now;
+                region.AppTenantId = tenant.AppTenantId;
                 _context.Add(region);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -133,6 +138,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             if (ModelState.IsValid)
             {
+                region.UpdatedBy = User.Identity.Name ?? "username";
+                region.UpdateDate = DateTime.Now;
+                region.AppTenantId = tenant.AppTenantId;
                 try
                 {
                     _context.Update(region);
