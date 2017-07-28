@@ -1,7 +1,11 @@
 ﻿.dots-loader:not(:required) {
-    box-shadow: rgb(233,29,177) -14px -14px 0 7px, rgb(248,156,36) 14px -14px 0 7px, rgb(63,174,72) 14px 14px 0 7px, rgb(0,130,190) -14px 14px 0 7px;
-    -webkit-animation: dots-loader2 5s infinite ease-in-out;
-    animation: dots-loader2 5s infinite ease-in-out;
+    -webkit-animation: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+    width: 225px !important;
+    height: 163px !important;
+    margin-left: -116px !important;
+    margin-top: -86px !important;
 }
 nav, .category-widget, header .header-main .edugate-dropdown-menu-1 li .link-page {
     font-weight: bold !important;
@@ -440,9 +444,6 @@ li.accordion {
 #floatingForm input.form-control, #floatingForm select.form-control {
     font-size: 12px !important;
 }
-{
-    background-color: red !important;
-}
 
 #floatingForm .btn-sm {
     background: #5cb85c;
@@ -588,7 +589,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 
 
 .page-title {
-    padding-top: 26.65%;
+    padding-top: 20.78% !important;
 }
 
 

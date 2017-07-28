@@ -55,10 +55,11 @@ namespace CmsCoreV2.Models
         public ShowPricesOnCartAndPay ShowPricesOnCartAndPay { get; set; }
         public ShowTaxTotal ShowTaxTotal { get; set; }
         public ShippingMethod ShippingMethod { get; set; }
-        public ShippingCalculation ShippingCalculation { get; set; }
         public ShippingDestination ShippingDestination { get; set; }
         public ApiPermission ApiPermission { get; set; }
         public DimensionUnit DimensionUnit { get; set; }
+        public SalesLocationOptions SalesLocationOptions { get; set; }
+        public ShippingLocationsOptions ShippingLocationsOptions { get; set; }
         [Display(Name = "Gönderi Bölgeleri")]
         public virtual ICollection<SettingRegion> ShippingRegions { get; set; }
         [Display(Name = "Satış Konumları")]
@@ -72,6 +73,10 @@ namespace CmsCoreV2.Models
         public Region MainLocation { get; set; }
         [Display(Name = "Vergilendirmeyi ve vergi hesaplamalarını etkinleştir")]
         public bool EnableTaxes { get; set; }
+        [Display(Name = "Sepet sayfasında gönderim bedeli hesaplayıcısını etkinleştirr")]
+        public bool EnableShippingCal { get; set; }
+        [Display(Name = "Bir adres girilene kadar gönderim ücretini gizler")]
+        public bool ShippingCostRequires { get; set; }
         [Display(Name = "Site genelinde mağaza duyuru metnini etkinleştir")]
         public bool EnableStoreAnnouncement { get; set; }
         [Display(Name = "Para Birimi")]

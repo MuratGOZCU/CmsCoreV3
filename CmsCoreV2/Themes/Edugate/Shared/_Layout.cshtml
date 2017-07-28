@@ -27,13 +27,13 @@
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">
+        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
 
         <!-- STYLE CSS    -->
         <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
         <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
-        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
-        <script src="~/edugate/libs/js-cookie/js.cookie.js"></script>
+        
+        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
     </environment>
     <environment names="Staging,Production">
 
@@ -51,13 +51,13 @@
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">
+        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
 
         <!-- STYLE CSS    -->
         <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
         <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
         <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
-        <script src="~/edugate/libs/js-cookie/js.cookie.js"></script>
+        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
         
     </environment>
     <link href="~/edugate/css/Custom.css" type="text/css" rel="stylesheet" />
@@ -192,7 +192,7 @@
                         </div>
                         <div class="col-2">
                             <div class="col-md-3 col-sm-6 col-xs-6 sd380">
-                                @await Component.InvokeAsync("Gallery", new { Name = "Anasayfa Galeri", Count = 8, Template = "MiniGallery" })
+                                @await Component.InvokeAsync("Gallery", new { Name = "Footer Galeri", Count = 8, Template = "MiniGallery" })
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-6 sd380">
 
@@ -246,18 +246,19 @@
     </footer>
     <!-- LOADING-->
     <div class="body-2 loading">
-        <div class="dots-loader"></div>
+        <div class="dots-loader" style="background-image:url('/uploads/Loading.gif'); background-size:cover;">Yükleniyor...</div>
     </div><environment names="Development">
 
 
-
+        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
         <!-- Temp Scripts-->
         <script src="~/edugate/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+
         <script src="~/edugate/libs/owl-carousel-2.0/owl.carousel.min.js"></script>
-        <script src="~/edugate/libs/appear/jquery.appear.js"></script>
-        <script src="~/edugate/libs/count-to/jquery.countTo.js"></script>
-        <script src="~/edugate/libs/wow-js/wow.min.js"></script>
-        <script src="~/edugate/libs/selectbox/js/jquery.selectbox-0.2.min.js"></script>
+        @*<script src="~/edugate/libs/appear/jquery.appear.js"></script>*@
+        @*<script src="~/edugate/libs/count-to/jquery.countTo.js"></script>*@
+        @*<script src="~/edugate/libs/wow-js/wow.min.js"></script>*@
+
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox.js"></script>
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox-buttons.js"></script>
         <!-- MAIN JS-->
@@ -268,14 +269,15 @@
         <script src="~/edugate/js/pages/homepage.js"></script>
     </environment>
     <environment names="Staging,Production">
-
+        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
         <!-- Temp Scripts-->
         <script src="~/edugate/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+
         <script src="~/edugate/libs/owl-carousel-2.0/owl.carousel.min.js"></script>
-        <script src="~/edugate/libs/appear/jquery.appear.js"></script>
-        <script src="~/edugate/libs/count-to/jquery.countTo.js"></script>
-        <script src="~/edugate/libs/wow-js/wow.min.js"></script>
-        <script src="~/edugate/libs/selectbox/js/jquery.selectbox-0.2.min.js"></script>
+        @*<script src="~/edugate/libs/appear/jquery.appear.js"></script>*@
+        @*<script src="~/edugate/libs/count-to/jquery.countTo.js"></script>*@
+        @*<script src="~/edugate/libs/wow-js/wow.min.js"></script>*@
+
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox.js"></script>
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox-buttons.js"></script>
         <!-- MAIN JS-->
@@ -285,8 +287,8 @@
         <script src="~/edugate/libs/isotope/fit-columns.js"></script>
         <script src="~/edugate/js/pages/homepage.js"></script>
     </environment>
-
+    
     @RenderSection("scripts", required: false)
-
+   
 </body>
 </html>

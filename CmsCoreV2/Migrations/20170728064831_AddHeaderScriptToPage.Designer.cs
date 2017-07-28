@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170728064831_AddHeaderScriptToPage")]
+    partial class AddHeaderScriptToPage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -1757,8 +1758,6 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<bool>("EnableRestApi");
 
-                    b.Property<bool>("EnableShippingCal");
-
                     b.Property<bool>("EnableStarRatingInReviews");
 
                     b.Property<bool>("EnableStockManagement");
@@ -1833,8 +1832,6 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<bool>("ReviewsCanOnlyBeReleasedByVerifiedUsers");
 
-                    b.Property<int>("SalesLocationOptions");
-
                     b.Property<string>("SenderEmail")
                         .HasMaxLength(200);
 
@@ -1844,11 +1841,9 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("SetDefaultPaymentMethodSlug")
                         .HasMaxLength(200);
 
-                    b.Property<bool>("ShippingCostRequires");
+                    b.Property<int>("ShippingCalculation");
 
                     b.Property<int>("ShippingDestination");
-
-                    b.Property<int>("ShippingLocationsOptions");
 
                     b.Property<int>("ShippingMethod");
 
