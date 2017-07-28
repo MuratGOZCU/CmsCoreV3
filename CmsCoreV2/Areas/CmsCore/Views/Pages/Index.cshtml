@@ -33,7 +33,9 @@
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.LayoutTemplate)
             </th>
-
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.HeaderScript)
+            </th>
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.SeoTitle)
             </th>
@@ -97,6 +99,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LayoutTemplate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeaderScript)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SeoTitle)
