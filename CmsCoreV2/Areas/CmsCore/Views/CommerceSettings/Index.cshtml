@@ -13,898 +13,891 @@
     </div>
 
 }
-<form asp-action="Edit">
+<form asp-action="Index">
     <div class="form-horizontal">
-        <ul class="nav nav-pills nav-justified steps">
-            <li>
-                <a href="#tab1" data-toggle="tab" class="step">
-                    <span class="desc">Genel</span>
-                </a>
-            </li>
-            <li>
-                <a href="#tab2" data-toggle="tab" class="step">
-                    <span class="desc">Ürünler</span>
-                </a>
-            </li>
-            <li>
-                <a href="#tab3" data-toggle="tab" class="step active">
-                    <span class="desc">Vergi</span>
-                </a>
-            </li>
-            <li>
-                <a href="#tab4" data-toggle="tab" class="step">
-                    <span class="desc">Gönderim</span>
-                </a>
-            </li>
-            <li>
-                <a href="#tab5" data-toggle="tab" class="step">
-                    <span class="desc">Ödeme</span>
-                </a>
-            </li>
-            <li>
-                <a href="#tab6" data-toggle="tab" class="step">
-                    <span class="desc">Hesaplar</span>
-                </a>
-            </li>
-            <li>
-                <a href="#tab7" data-toggle="tab" class="step active">
-                    <span class="desc">E-Postalar</span>
-                </a>
-            </li>
-            <li>
-                <a href="#tab8" data-toggle="tab" class="step">
-                    <span class="desc">API</span>
-                </a>
-            </li>
-        </ul>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="tab-pane active" id="tab1">
-            <div class="form-group">
-                <label asp-for="MainLocationId" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <select asp-for="MainLocationId" class="form-control" asp-items="ViewBag.MainLocationId">
-                        <option value="">Seçiniz...</option>
-                    </select>
-                    <span asp-validation-for="MainLocationId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="SalesLocations" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="SalesLocations" class="form-control" asp-items="ViewBag.Region">
-                        <option value="">Seçiniz...</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShippingLocations" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShippingLocations" class="form-control" asp-items="ViewBag.Region">
-                        <option value="">Seçiniz...</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerLocation" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="CustomerLocation" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Varsayılan Konum Yok</option>
-                        <option value="2">Mağaza Adresi</option>
-                        <option value="3">Coğrafi Konum</option>
-                        <option value="4">Coğrafi Konum (sayfa önbellek desteğiyle birlikte)</option>
-                    </select>
-                    <span asp-validation-for="CustomerLocation" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="SalesLocationOptions" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="SalesLocationOptions" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Tüm Ülkelere Sat</option>
-                        <option value="2">Şunlar Dışında Tüm Ülkelere Sat</option>
-                        <option value="3">Belirli Ülkelere Sat</option>
-                    </select>
-                    <span asp-validation-for="SalesLocationOptions" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShippingLocationsOptions" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShippingLocationsOptions" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Satış Yaptığınız Tüm Ülkelere Gönder</option>
-                        <option value="2">Tüm Ülkelere Gönder</option>
-                        <option value="3">Sadece Belirli Ülkelere Gönder</option>
-                        <option value="4">Gönderimi & Gönderi Hesaplamalarını Devre Dışı Bırak</option>
-                    </select>
-                    <span asp-validation-for="ShippingLocationsOptions" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableTaxes" />
-                        <label asp-for="EnableTaxes"></label>
+        <div class="portlet-body">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a href="#tab_1_1" data-toggle="tab" class="active">
+                        <span class="desc">Genel</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_2" data-toggle="tab" class="active">
+                        <span class="desc">Ürünler</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_3" data-toggle="tab" class="active">
+                        <span class="desc">Vergi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_4" data-toggle="tab" class="active">
+                        <span class="desc">Gönderim</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_5" data-toggle="tab" class="active">
+                        <span class="desc">Ödeme</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_6" data-toggle="tab" class="active">
+                        <span class="desc">Hesaplar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_7" data-toggle="tab" class="active">
+                        <span class="desc">E-Postalar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tab_1_8" data-toggle="tab" class="active">
+                        <span class="desc">API</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="tab_1_1">
+                    <div class="form-group">
+                        <label asp-for="MainLocationId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <select asp-for="MainLocationId" class="form-control" asp-items="ViewBag.MainLocationId">
+                                <option value="">Seçiniz...</option>
+                            </select>
+                            <span asp-validation-for="MainLocationId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SalesLocations" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="SalesLocations" class="form-control" asp-items="ViewBag.Region">
+                                <option value="">Seçiniz...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShippingLocations" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShippingLocations" class="form-control" asp-items="ViewBag.Region">
+                                <option value="">Seçiniz...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerLocation" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="CustomerLocation" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Varsayılan Konum Yok</option>
+                                <option value="2">Mağaza Adresi</option>
+                                <option value="3">Coğrafi Konum</option>
+                                <option value="4">Coğrafi Konum (sayfa önbellek desteğiyle birlikte)</option>
+                            </select>
+                            <span asp-validation-for="CustomerLocation" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SalesLocationOptions" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="SalesLocationOptions" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Tüm Ülkelere Sat</option>
+                                <option value="2">Şunlar Dışında Tüm Ülkelere Sat</option>
+                                <option value="3">Belirli Ülkelere Sat</option>
+                            </select>
+                            <span asp-validation-for="SalesLocationOptions" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShippingLocationsOptions" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShippingLocationsOptions" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Satış Yaptığınız Tüm Ülkelere Gönder</option>
+                                <option value="2">Tüm Ülkelere Gönder</option>
+                                <option value="3">Sadece Belirli Ülkelere Gönder</option>
+                                <option value="4">Gönderimi & Gönderi Hesaplamalarını Devre Dışı Bırak</option>
+                            </select>
+                            <span asp-validation-for="ShippingLocationsOptions" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableTaxes" />
+                                <label asp-for="EnableTaxes"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableStoreAnnouncement" />
+                                <label asp-for="EnableStoreAnnouncement"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CurrencyId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <select asp-for="CurrencyId" class="form-control" asp-items="ViewBag.CurrencyId"></select>
+                            <span asp-validation-for="CurrencyId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CurrencyPosition" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="CurrencyPosition" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Sağda</option>
+                                <option value="2">Solda</option>
+                                <option value="3">Solda Boşlukla</option>
+                                <option value="4">Sağda Boşlukla</option>
+                            </select>
+                            <span asp-validation-for="CurrencyPosition" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableStoreAnnouncement" />
-                        <label asp-for="EnableStoreAnnouncement"></label>
+                <div class="tab-pane fade" id="tab_1_2">
+                    <div class="form-group">
+                        <label asp-for="WeightUnit" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="WeightUnit" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Kg</option>
+                                <option value="2">g</option>
+                                <option value="3">Lbs</option>
+                                <option value="4">Oz</option>
+                            </select>
+                            <span asp-validation-for="WeightUnit" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrencyId" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <select asp-for="CurrencyId" class="form-control" asp-items="ViewBag.CurrencyId"></select>
-                    <span asp-validation-for="CurrencyId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CurrencyPosition" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="CurrencyPosition" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Sağda</option>
-                        <option value="2">Solda</option>
-                        <option value="3">Solda Boşlukla</option>
-                        <option value="4">Sağda Boşlukla</option>
-                    </select>
-                    <span asp-validation-for="CurrencyPosition" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane active" id="tab2">
-            <div class="form-group">
-                <label asp-for="WeightUnit" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="WeightUnit" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Kg</option>
-                        <option value="2">g</option>
-                        <option value="3">Lbs</option>
-                        <option value="4">Oz</option>
-                    </select>
-                    <span asp-validation-for="WeightUnit" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="DimensionUnit" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="DimensionUnit" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">m</option>
-                        <option value="2">cm</option>
-                        <option value="3">mm</option>
-                        <option value="4">in</option>
-                        <option value="5">yd</option>
-                    </select>
-                    <span asp-validation-for="DimensionUnit" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableProductReviews" />
-                        <label asp-for="EnableProductReviews"></label>
+                    <div class="form-group">
+                        <label asp-for="DimensionUnit" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="DimensionUnit" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">m</option>
+                                <option value="2">cm</option>
+                                <option value="3">mm</option>
+                                <option value="4">in</option>
+                                <option value="5">yd</option>
+                            </select>
+                            <span asp-validation-for="DimensionUnit" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="ShowVerifiedUserLabelInCustomerReviews" />
-                        <label asp-for="ShowVerifiedUserLabelInCustomerReviews"></label>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableProductReviews" />
+                                <label asp-for="EnableProductReviews"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="ReviewsCanOnlyBeReleasedByVerifiedUsers" />
-                        <label asp-for="ReviewsCanOnlyBeReleasedByVerifiedUsers"></label>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="ShowVerifiedUserLabelInCustomerReviews" />
+                                <label asp-for="ShowVerifiedUserLabelInCustomerReviews"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableStarRatingInReviews" />
-                        <label asp-for="EnableStarRatingInReviews"></label>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="ReviewsCanOnlyBeReleasedByVerifiedUsers" />
+                                <label asp-for="ReviewsCanOnlyBeReleasedByVerifiedUsers"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="StarRatingsAreRequired" />
-                        <label asp-for="StarRatingsAreRequired"></label>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableStarRatingInReviews" />
+                                <label asp-for="EnableStarRatingInReviews"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="StorePageView" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="StorePageView" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Ürünleri Göster</option>
-                        <option value="2">Kategorileri Göster</option>
-                        <option value="3">Kategorileri & Ürünleri Göster</option>
-                    </select>
-                    <span asp-validation-for="StorePageView" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="StorePageId" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <select asp-for="StorePageId" class="form-control" asp-items="ViewBag.StorePageId"></select>
-                    <span asp-validation-for="StorePageId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="RedirectAfterAddingBasket" />
-                        <label asp-for="RedirectAfterAddingBasket"></label>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="StarRatingsAreRequired" />
+                                <label asp-for="StarRatingsAreRequired"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="CropImage" />
-                        <label asp-for="CropImage"></label>
+                    <div class="form-group">
+                        <label asp-for="StorePageView" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="StorePageView" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Ürünleri Göster</option>
+                                <option value="2">Kategorileri Göster</option>
+                                <option value="3">Kategorileri & Ürünleri Göster</option>
+                            </select>
+                            <span asp-validation-for="StorePageView" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageHeight" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="ImageHeight" class="form-control" />
-                    <span asp-validation-for="ImageHeight" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageWidth" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="ImageWidth" class="form-control" />
-                    <span asp-validation-for="ImageWidth" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CatalogOrderBy" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="CatalogOrderBy" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Varsayılan Sıralama</option>
-                        <option value="2">Popüler</option>
-                        <option value="3">Ortalama Oy</option>
-                        <option value="4">En Güncele Göre Sırala</option>
-                        <option value="5">Artan Fiyata Göre Sırala</option>
-                        <option value="6">Azalan Fiyata Göre Sırala</option>
-                    </select>
-                    <span asp-validation-for="CatalogOrderBy" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryView" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="CategoryView" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Ürünleri Göster</option>
-                        <option value="2">Alt Kategorileri Göster</option>
-                        <option value="3">Alt Kategorileri & Ürünleri Göster</option>
-                    </select>
-                    <span asp-validation-for="CategoryView" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="StockDisplayFormat" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="StockDisplayFormat" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Stokta Kalan Miktarı Her Zaman Göster</option>
-                        <option value="2">Stokta Kalan Miktarı Sadece Düşük Olduğunda Göster</option>
-                        <option value="3">Stokta Kalan Miktarı Asla Gösterme</option>
-                    </select>
-                    <span asp-validation-for="StockDisplayFormat" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableStockManagement" />
-                        <label asp-for="EnableStockManagement"></label>
+                    <div class="form-group">
+                        <label asp-for="StorePageId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <select asp-for="StorePageId" class="form-control" asp-items="ViewBag.StorePageId"></select>
+                            <span asp-validation-for="StorePageId" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="WaitStock" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="WaitStock" class="form-control" />
-                    <span asp-validation-for="WaitStock" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableLowStockNotifications" />
-                        <label asp-for="EnableLowStockNotifications"></label>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="RedirectAfterAddingBasket" />
+                                <label asp-for="RedirectAfterAddingBasket"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableOutOfStockNotifications" />
-                        <label asp-for="EnableOutOfStockNotifications"></label>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="CropImage" />
+                                <label asp-for="CropImage"></label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="NotificationReceivers" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="NotificationReceivers" class="form-control" />
-                    <span asp-validation-for="NotificationReceivers" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="LowStockThreshold" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="LowStockThreshold" class="form-control" />
-                    <span asp-validation-for="LowStockThreshold" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="StockExhaustThreshold" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="StockExhaustThreshold" class="form-control" />
-                    <span asp-validation-for="StockExhaustThreshold" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="HideOutOfStockProducts" />
-                        <label asp-for="HideOutOfStockProducts"></label>
+                    <div class="form-group">
+                        <label asp-for="ImageHeight" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="ImageHeight" class="form-control" />
+                            <span asp-validation-for="ImageHeight" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="FileDownloadMethod" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="FileDownloadMethod" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">İndirmeleri Zorla</option>
-                        <option value="2">X-Accel-Redirect/X-Sendfile</option>
-                        <option value="3">Sadece Yönlendirme</option>
-                    </select>
-                    <span asp-validation-for="FileDownloadMethod" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="LoginRequiredForDownloads" />
-                        <label asp-for="LoginRequiredForDownloads"></label>
+                    <div class="form-group">
+                        <label asp-for="ImageWidth" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="ImageWidth" class="form-control" />
+                            <span asp-validation-for="ImageWidth" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="AllowAccessToDownloadableProductsAfterPaymentIsGranted" />
-                        <label asp-for="AllowAccessToDownloadableProductsAfterPaymentIsGranted"></label>
+                    <div class="form-group">
+                        <label asp-for="CatalogOrderBy" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="CatalogOrderBy" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Varsayılan Sıralama</option>
+                                <option value="2">Popüler</option>
+                                <option value="3">Ortalama Oy</option>
+                                <option value="4">En Güncele Göre Sırala</option>
+                                <option value="5">Artan Fiyata Göre Sırala</option>
+                                <option value="6">Azalan Fiyata Göre Sırala</option>
+                            </select>
+                            <span asp-validation-for="CatalogOrderBy" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="CategoryView" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="CategoryView" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Ürünleri Göster</option>
+                                <option value="2">Alt Kategorileri Göster</option>
+                                <option value="3">Alt Kategorileri & Ürünleri Göster</option>
+                            </select>
+                            <span asp-validation-for="CategoryView" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StockDisplayFormat" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="StockDisplayFormat" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Stokta Kalan Miktarı Her Zaman Göster</option>
+                                <option value="2">Stokta Kalan Miktarı Sadece Düşük Olduğunda Göster</option>
+                                <option value="3">Stokta Kalan Miktarı Asla Gösterme</option>
+                            </select>
+                            <span asp-validation-for="StockDisplayFormat" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableStockManagement" />
+                                <label asp-for="EnableStockManagement"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WaitStock" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="WaitStock" class="form-control" />
+                            <span asp-validation-for="WaitStock" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableLowStockNotifications" />
+                                <label asp-for="EnableLowStockNotifications"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableOutOfStockNotifications" />
+                                <label asp-for="EnableOutOfStockNotifications"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NotificationReceivers" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="NotificationReceivers" class="form-control" />
+                            <span asp-validation-for="NotificationReceivers" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LowStockThreshold" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="LowStockThreshold" class="form-control" />
+                            <span asp-validation-for="LowStockThreshold" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StockExhaustThreshold" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="StockExhaustThreshold" class="form-control" />
+                            <span asp-validation-for="StockExhaustThreshold" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="HideOutOfStockProducts" />
+                                <label asp-for="HideOutOfStockProducts"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FileDownloadMethod" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="FileDownloadMethod" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">İndirmeleri Zorla</option>
+                                <option value="2">X-Accel-Redirect/X-Sendfile</option>
+                                <option value="3">Sadece Yönlendirme</option>
+                            </select>
+                            <span asp-validation-for="FileDownloadMethod" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="LoginRequiredForDownloads" />
+                                <label asp-for="LoginRequiredForDownloads"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="AllowAccessToDownloadableProductsAfterPaymentIsGranted" />
+                                <label asp-for="AllowAccessToDownloadableProductsAfterPaymentIsGranted"></label>
+                            </div>
+                        </div>
+                    </div>
 
-        </div>
-        <div class="tab-pane active" id="tab3">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="PricesIncludeTax" />
-                        <label asp-for="PricesIncludeTax"></label>
+                </div>
+                <div class="tab-pane fade" id="tab_1_3">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="PricesIncludeTax" />
+                                <label asp-for="PricesIncludeTax"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="TaxRoundAtSubTotal" />
+                                <label asp-for="TaxRoundAtSubTotal"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AdditionalTaxClasses" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="AdditionalTaxClasses" class="form-control" />
+                            <span asp-validation-for="AdditionalTaxClasses" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PriceDisplayFrontPart" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="PriceDisplayFrontPart" class="form-control" />
+                            <span asp-validation-for="PriceDisplayFrontPart" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShippingTaxClass" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShippingTaxClass" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Sepet Öğelerine Dayalı Gönderim Vergi Sınıfı</option>
+                                <option value="2">Standart</option>
+                                <option value="3">Reduced Rate</option>
+                                <option value="4">Zero Rate</option>
+                            </select>
+                            <span asp-validation-for="ShippingTaxClass" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CalculateTaxAccordingTo" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="CalculateTaxAccordingTo" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Müşteri Gönderim Adresi</option>
+                                <option value="2">Müşteri Fatura Adresi</option>
+                                <option value="3">Mağaza Adresi</option>
+                            </select>
+                            <span asp-validation-for="CalculateTaxAccordingTo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShowPricesInStore" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShowPricesInStore" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Vergi Dahil</option>
+                                <option value="2">Vergi Hariç</option>
+                            </select>
+                            <span asp-validation-for="ShowPricesInStore" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShowPricesOnCartAndPay" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShowPricesOnCartAndPay" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Vergi Dahil</option>
+                                <option value="2">Vergi Hariç</option>
+                            </select>
+                            <span asp-validation-for="ShowPricesOnCartAndPay" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShowTaxTotal" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShowTaxTotal" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Tek Bir Toplam Olarak</option>
+                                <option value="2">Ayrıntılı</option>
+                            </select>
+                            <span asp-validation-for="ShowTaxTotal" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="TaxRoundAtSubTotal" />
-                        <label asp-for="TaxRoundAtSubTotal"></label>
+                <div class="tab-pane fade" id="tab_1_4">
+                    <div class="form-group">
+                        <label asp-for="ShippingRegion" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="ShippingRegion" class="form-control" />
+                            <span asp-validation-for="ShippingRegion" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShippingMethod" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShippingMethod" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Sabit Fiyat</option>
+                                <option value="2">Ücretsiz Gönderim</option>
+                                <option value="3">Mağazadan Teslim</option>
+                            </select>
+                            <span asp-validation-for="ShippingMethod" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShippingRegions" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShippingRegions" class="form-control" asp-items="ViewBag.Region">
+                                <option value="">Seçiniz...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShippingDestination" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ShippingDestination" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Müşterinin Gönderim Adresini Varsayılan Olarak Ayarla</option>
+                                <option value="2">Müşterinin Fatura Adresini Varsayılan Alarak Ayarla</option>
+                                <option value="3">Müşterinin Fatura Adresine Gönderimi Zorla</option>
+                            </select>
+                            <span asp-validation-for="ShippingDestination" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableShippingCal" />
+                                <label asp-for="EnableShippingCal"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="ShippingCostRequires" />
+                                <label asp-for="ShippingCostRequires"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableDebugMode" />
+                                <label asp-for="EnableDebugMode"></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="AdditionalTaxClasses" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="AdditionalTaxClasses" class="form-control" />
-                    <span asp-validation-for="AdditionalTaxClasses" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PriceDisplayFrontPart" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="PriceDisplayFrontPart" class="form-control" />
-                    <span asp-validation-for="PriceDisplayFrontPart" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShippingTaxClass" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShippingTaxClass" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Sepet Öğelerine Dayalı Gönderim Vergi Sınıfı</option>
-                        <option value="2">Standart</option>
-                        <option value="3">Reduced Rate</option>
-                        <option value="4">Zero Rate</option>
-                    </select>
-                    <span asp-validation-for="ShippingTaxClass" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="CalculateTaxAccordingTo" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="CalculateTaxAccordingTo" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Müşteri Gönderim Adresi</option>
-                        <option value="2">Müşteri Fatura Adresi</option>
-                        <option value="3">Mağaza Adresi</option>
-                    </select>
-                    <span asp-validation-for="CalculateTaxAccordingTo" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShowPricesInStore" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShowPricesInStore" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Vergi Dahil</option>
-                        <option value="2">Vergi Hariç</option>
-                    </select>
-                    <span asp-validation-for="ShowPricesInStore" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShowPricesOnCartAndPay" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShowPricesOnCartAndPay" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Vergi Dahil</option>
-                        <option value="2">Vergi Hariç</option>
-                    </select>
-                    <span asp-validation-for="ShowPricesOnCartAndPay" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShowTaxTotal" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShowTaxTotal" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Tek Bir Toplam Olarak</option>
-                        <option value="2">Ayrıntılı</option>
-                    </select>
-                    <span asp-validation-for="ShowTaxTotal" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane active" id="tab4">
-            <div class="form-group">
-                <label asp-for="ShippingRegion" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="ShippingRegion" class="form-control" />
-                    <span asp-validation-for="ShippingRegion" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShippingMethod" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShippingMethod" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Sabit Fiyat</option>
-                        <option value="2">Ücretsiz Gönderim</option>
-                        <option value="3">Mağazadan Teslim</option>
-                    </select>
-                    <span asp-validation-for="ShippingMethod" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShippingRegions" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShippingRegions" class="form-control" asp-items="ViewBag.Region">
-                        <option value="">Seçiniz...</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ShippingDestination" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <select asp-for="ShippingDestination" class="form-control">
-                        <option value="">Seçiniz...</option>
-                        <option value="1">Müşterinin Gönderim Adresini Varsayılan Olarak Ayarla</option>
-                        <option value="2">Müşterinin Fatura Adresini Varsayılan Alarak Ayarla</option>
-                        <option value="3">Müşterinin Fatura Adresine Gönderimi Zorla</option>
-                    </select>
-                    <span asp-validation-for="ShippingDestination" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableShippingCal" />
-                        <label asp-for="EnableShippingCal"></label>
+                <div class="tab-pane fade" id="tab_1_5">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableCoupons" />
+                                <label asp-for="EnableCoupons"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="CalculateCouponDiscountInOrder" />
+                                <label asp-for="CalculateCouponDiscountInOrder"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableGuestPayment" />
+                                <label asp-for="EnableGuestPayment"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="ForceSecurePayment" />
+                                <label asp-for="ForceSecurePayment"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="ForceHttpAfterPayment" />
+                                <label asp-for="ForceHttpAfterPayment"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BasketPageId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <select asp-for="BasketPageId" class="form-control" asp-items="ViewBag.BasketPageId"></select>
+                            <span asp-validation-for="BasketPageId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PaymentPageId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <select asp-for="PaymentPageId" class="form-control" asp-items="ViewBag.PaymentPageId"></select>
+                            <span asp-validation-for="PaymentPageId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TermsAndConditionsPageId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <select asp-for="TermsAndConditionsPageId" class="form-control" asp-items="ViewBag.TermsAndConditionsPageId"></select>
+                            <span asp-validation-for="TermsAndConditionsPageId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PaymentSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="PaymentSlug" class="form-control" />
+                            <span asp-validation-for="PaymentSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrderReceivedSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="OrderReceivedSlug" class="form-control" />
+                            <span asp-validation-for="OrderReceivedSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AddPaymentMethodSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="AddPaymentMethodSlug" class="form-control" />
+                            <span asp-validation-for="AddPaymentMethodSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DeletePaymentMethodSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="DeletePaymentMethodSlug" class="form-control" />
+                            <span asp-validation-for="DeletePaymentMethodSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SetDefaultPaymentMethodSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="SetDefaultPaymentMethodSlug" class="form-control" />
+                            <span asp-validation-for="SetDefaultPaymentMethodSlug" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="ShippingCostRequires" />
-                        <label asp-for="ShippingCostRequires"></label>
+                <div class="tab-pane fade" id="tab_1_6">
+                    <div class="form-group">
+                        <label asp-for="MyAccountPageId" class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <select asp-for="MyAccountPageId" class="form-control" asp-items="ViewBag.MyAccountPageId"></select>
+                            <span asp-validation-for="MyAccountPageId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableMemberRegistrationOnThePaymentPage" />
+                                <label asp-for="EnableMemberRegistrationOnThePaymentPage"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableMemberRegistrationOnTheMyAccountPage" />
+                                <label asp-for="EnableMemberRegistrationOnTheMyAccountPage"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="ShowRememberMeOnPaymentLogin" />
+                                <label asp-for="ShowRememberMeOnPaymentLogin"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="AutomaticallyCreateAUsernameFromTheCustomerEmail" />
+                                <label asp-for="AutomaticallyCreateAUsernameFromTheCustomerEmail"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="CreateAutomaticCustomerPassword" />
+                                <label asp-for="CreateAutomaticCustomerPassword"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrderSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="OrderSlug" class="form-control" />
+                            <span asp-validation-for="OrderSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ViewOrderSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="ViewOrderSlug" class="form-control" />
+                            <span asp-validation-for="ViewOrderSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DownloadSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="DownloadSlug" class="form-control" />
+                            <span asp-validation-for="DownloadSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EditAccountSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="EditAccountSlug" class="form-control" />
+                            <span asp-validation-for="EditAccountSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AddressSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="AddressSlug" class="form-control" />
+                            <span asp-validation-for="AddressSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PaymentMethodsSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="PaymentMethodsSlug" class="form-control" />
+                            <span asp-validation-for="PaymentMethodsSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ForgotPasswordSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="ForgotPasswordSlug" class="form-control" />
+                            <span asp-validation-for="ForgotPasswordSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LogoutSlug" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="LogoutSlug" class="form-control" />
+                            <span asp-validation-for="LogoutSlug" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ApiPermission" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="ApiPermission" class="form-control">
+                                <option value="">Seçiniz...</option>
+                                <option value="1">Oku</option>
+                                <option value="2">Yaz</option>
+                                <option value="3">Oku/Yaz</option>
+                            </select>
+                            <span asp-validation-for="ApiPermission" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <div class="form-group">
+                        <label asp-for="SenderName" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="SenderName" class="form-control" />
+                            <span asp-validation-for="SenderName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SenderEmail" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="SenderEmail" class="form-control" />
+                            <span asp-validation-for="SenderEmail" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UpperVisual" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="UpperVisual" class="form-control" />
+                            <span asp-validation-for="UpperVisual" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BottomText" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="BottomText" class="form-control" />
+                            <span asp-validation-for="BottomText" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BaseColor" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="BaseColor" class="form-control" />
+                            <span asp-validation-for="BaseColor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BackgroundColor" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="BackgroundColor" class="form-control" />
+                            <span asp-validation-for="BackgroundColor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BodyBackgroundColor" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="BodyBackgroundColor" class="form-control" />
+                            <span asp-validation-for="BodyBackgroundColor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BodyTextColor" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="BodyTextColor" class="form-control" />
+                            <span asp-validation-for="BodyTextColor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                <input asp-for="EnableRestApi" />
+                                <label asp-for="EnableRestApi"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApiUser" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="ApiUser" class="form-control" />
+                            <span asp-validation-for="ApiUser" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="CreateDate" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="CreateDate" class="form-control" readonly />
+                            <span asp-validation-for="CreateDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="CreatedBy" class="form-control" readonly />
+                            <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="UpdateDate" class="form-control" readonly />
+                            <span asp-validation-for="UpdateDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="UpdatedBy" class="form-control" readonly />
+                            <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableDebugMode" />
-                        <label asp-for="EnableDebugMode"></label>
-                    </div>
                 </div>
             </div>
-        </div>
-        <div class="tab-pane active" id="tab5">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableCoupons" />
-                        <label asp-for="EnableCoupons"></label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="CalculateCouponDiscountInOrder" />
-                        <label asp-for="CalculateCouponDiscountInOrder"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableGuestPayment" />
-                        <label asp-for="EnableGuestPayment"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="ForceSecurePayment" />
-                        <label asp-for="ForceSecurePayment"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="ForceHttpAfterPayment" />
-                        <label asp-for="ForceHttpAfterPayment"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="BasketPageId" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <select asp-for="BasketPageId" class="form-control" asp-items="ViewBag.BasketPageId"></select>
-                    <span asp-validation-for="BasketPageId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentPageId" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <select asp-for="PaymentPageId" class="form-control" asp-items="ViewBag.PaymentPageId"></select>
-                    <span asp-validation-for="PaymentPageId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="TermsAndConditionsPageId" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <select asp-for="TermsAndConditionsPageId" class="form-control" asp-items="ViewBag.TermsAndConditionsPageId"></select>
-                    <span asp-validation-for="TermsAndConditionsPageId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="PaymentSlug" class="form-control" />
-                    <span asp-validation-for="PaymentSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderReceivedSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="OrderReceivedSlug" class="form-control" />
-                    <span asp-validation-for="OrderReceivedSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddPaymentMethodSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="AddPaymentMethodSlug" class="form-control" />
-                    <span asp-validation-for="AddPaymentMethodSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeletePaymentMethodSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="DeletePaymentMethodSlug" class="form-control" />
-                    <span asp-validation-for="DeletePaymentMethodSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="SetDefaultPaymentMethodSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="SetDefaultPaymentMethodSlug" class="form-control" />
-                    <span asp-validation-for="SetDefaultPaymentMethodSlug" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane active" id="tab5">
-            <div class="form-group">
-                <label asp-for="MyAccountPageId" class="control-label col-md-2"></label>
-                <div class="col-md-10">
-                    <select asp-for="MyAccountPageId" class="form-control" asp-items="ViewBag.MyAccountPageId"></select>
-                    <span asp-validation-for="MyAccountPageId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableMemberRegistrationOnThePaymentPage" />
-                        <label asp-for="EnableMemberRegistrationOnThePaymentPage"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="EnableMemberRegistrationOnTheMyAccountPage" />
-                        <label asp-for="EnableMemberRegistrationOnTheMyAccountPage"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="ShowRememberMeOnPaymentLogin" />
-                        <label asp-for="ShowRememberMeOnPaymentLogin"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="AutomaticallyCreateAUsernameFromTheCustomerEmail" />
-                        <label asp-for="AutomaticallyCreateAUsernameFromTheCustomerEmail"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <input asp-for="CreateAutomaticCustomerPassword" />
-                        <label asp-for="CreateAutomaticCustomerPassword"></label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="OrderSlug" class="form-control" />
-                    <span asp-validation-for="OrderSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ViewOrderSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="ViewOrderSlug" class="form-control" />
-                    <span asp-validation-for="ViewOrderSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="DownloadSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="DownloadSlug" class="form-control" />
-                    <span asp-validation-for="DownloadSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="EditAccountSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="EditAccountSlug" class="form-control" />
-                    <span asp-validation-for="EditAccountSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddressSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="AddressSlug" class="form-control" />
-                    <span asp-validation-for="AddressSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentMethodsSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="PaymentMethodsSlug" class="form-control" />
-                    <span asp-validation-for="PaymentMethodsSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="ForgotPasswordSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="ForgotPasswordSlug" class="form-control" />
-                    <span asp-validation-for="ForgotPasswordSlug" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="LogoutSlug" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="LogoutSlug" class="form-control" />
-                    <span asp-validation-for="LogoutSlug" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-        <div class="form-group">
-            <label asp-for="ApiPermission" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <select asp-for="ApiPermission" class="form-control">
-                    <option value="">Seçiniz...</option>
-                    <option value="1">Oku</option>
-                    <option value="2">Yaz</option>
-                    <option value="3">Oku/Yaz</option>
-                </select>
-                <span asp-validation-for="ApiPermission" class="text-danger"></span>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-        <div class="form-group">
-            <label asp-for="SenderName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="SenderName" class="form-control" />
-                <span asp-validation-for="SenderName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="SenderEmail" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="SenderEmail" class="form-control" />
-                <span asp-validation-for="SenderEmail" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="UpperVisual" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="UpperVisual" class="form-control" />
-                <span asp-validation-for="UpperVisual" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="BottomText" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="BottomText" class="form-control" />
-                <span asp-validation-for="BottomText" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="BaseColor" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="BaseColor" class="form-control" />
-                <span asp-validation-for="BaseColor" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="BackgroundColor" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="BackgroundColor" class="form-control" />
-                <span asp-validation-for="BackgroundColor" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="BodyBackgroundColor" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="BodyBackgroundColor" class="form-control" />
-                <span asp-validation-for="BodyBackgroundColor" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="BodyTextColor" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="BodyTextColor" class="form-control" />
-                <span asp-validation-for="BodyTextColor" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    <input asp-for="EnableRestApi" />
-                    <label asp-for="EnableRestApi"></label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Description" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ApiUser" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ApiUser" class="form-control" />
-                <span asp-validation-for="ApiUser" class="text-danger"></span>
-            </div>
-        </div>
-        <input type="hidden" asp-for="Id" />
-        <div class="form-group">
-            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CreateDate" class="form-control" readonly/>
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CreatedBy" class="form-control" readonly/>
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="UpdateDate" class="form-control" readonly/>
-                <span asp-validation-for="UpdateDate" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="UpdatedBy" class="form-control" readonly/>
-                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -916,6 +909,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script src="/metronic/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
