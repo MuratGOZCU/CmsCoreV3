@@ -431,19 +431,16 @@
     color: #49575f
 }
 
-.group-title-index .top-title {
-    text-transform: uppercase;
-    margin: 0 0 15px 0;
-    font-weight: 400;
-    font-size: 16px
-}
+
 
 .group-title-index .center-title {
+    text-align :center;
     font-size: 30px;
     font-weight: 900;
     margin: 0 0 15px 0;
     text-transform: uppercase;
     line-height: 30px
+
 }
 
 .group-title-index .bottom-title {

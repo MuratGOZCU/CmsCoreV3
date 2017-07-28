@@ -27,13 +27,13 @@
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">
+        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
 
         <!-- STYLE CSS    -->
         <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
         <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
-        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
-        <script src="~/edugate/libs/js-cookie/js.cookie.js"></script>
+        
+        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
     </environment>
     <environment names="Staging,Production">
 
@@ -51,13 +51,13 @@
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
         <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">
+        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
 
         <!-- STYLE CSS    -->
         <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
         <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
         <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
-        <script src="~/edugate/libs/js-cookie/js.cookie.js"></script>
+        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
         
     </environment>
     <link href="~/edugate/css/Custom.css" type="text/css" rel="stylesheet" />
@@ -74,8 +74,8 @@
                 </div>
                 <div class="topbar-right pull-right">
                     <div class="socials"><a target="_blank" href="https://www.facebook.com/bilgikolejiistanbul" rel=”nofollow” class="facebook"><i class="fa fa-facebook"></i></a><a target="_blank" href="https://twitter.com/bilgikoleji_" rel=”nofollow” class="twitter"><i class="fa fa-twitter"></i></a><a target="_blank" href="https://www.linkedin.com/organization/18094554" rel=”nofollow” class="linkedin"><i class="fa fa-linkedin"></i></a><a target="_blank" href="https://www.instagram.com/bilgikolejiistanbul" rel=”nofollow” class="instagram"><i class="fa fa-instagram"></i></a><a target="_blank" href="https://www.youtube.com/channel/UCX35ngOGyFgxtlNNCRWHedw" rel=”nofollow” class="youtube"><i class="fa fa-youtube"></i></a></div>
-                    <a href="/tr/blog"><img src="~/edugate/images/icon-blog.png" alt="Blog" style="margin:0 30px;border:0px;" /></a>
-                    <a href="/tr">TR</a> | <a href="/en">EN</a>
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["Culture"]/blog"><img src="~/edugate/images/icon-blog.png" alt="Blog" style="margin:0 30px;border:0px;" /></a>
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/tr">TR</a> | <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/en">EN</a>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
                         <div class="embededForm" id="floatingForm" style="display:none">
                             @await Component.InvokeAsync("EmbedForm", new { name = "Sizi Arayalım", template = "Default" })
                         </div><a href="javascript:void(0);" onclick="$('#floatingForm').slideToggle('slow')" class="show">
-                            <img src="~/edugate/images/telephone.png" alt="telephone" style="float:left;" /><span style="display:inline-block;padding-top:1px;font-size:large">SİZİ ARAYALIM</span>
+                            <img src="~/edugate/images/telephone.png" alt="telephone" style="float:left; border-radius:20px 0px 0px 20px;" /><span style="display:inline-block;padding-top:1px;font-size:large">SİZİ ARAYALIM</span>
                         </a>
                     </div>
                     <!-- BUTTON BACK TO TOP-->
@@ -166,20 +166,20 @@
                                             <div class="row">
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <ul class="list-unstyled">
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/akademik-takvim">@Localizer["Akademik Takvim"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/etkinlikler">@Localizer["Etkinlikler"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/basin">@Localizer["Basın"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/insan-kaynaklari">@Localizer["İnsan Kaynakları"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/kendini-degerlendir">@Localizer["Kendini Değerlendir"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["akademik-takvim"]">@Localizer["Akademik Takvim"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["etkinlikler"]">@Localizer["Etkinlikler"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["basin"]">@Localizer["Basın"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["insan-kaynaklari"]">@Localizer["İnsan Kaynakları"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["kendini-degerlendir"]">@Localizer["Kendini Değerlendir"]</a></li>
                                                         @*<li><i class="fa fa-angle-right"></i><a href="/site-haritasi">Site Haritasi</a></li>*@
                                                     </ul>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <ul class="list-unstyled">
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/bilgistore" rel=”nofollow” >@Localizer["Bilgi Store"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/veli-iletisim">@Localizer["Veli İletişim"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ek-alanlar">@Localizer["Ek Alanlar"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/site-haritasi">@Localizer["Site Haritası"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["bilgi-store"]" rel=”nofollow” >@Localizer["Bilgi Store"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["veli-iletisim"]">@Localizer["Veli İletişim"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["ek-alanlar"]">@Localizer["Ek Alanlar"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["site-haritasi"]">@Localizer["Site Haritası"]</a></li>
                                                         @*<li><i class="fa fa-angle-right"></i><a href="#">Help Topic</a></li>
                                                             <li><i class="fa fa-angle-right"></i><a href="#">Policies</a></li>*@
                                                     </ul>
@@ -192,7 +192,7 @@
                         </div>
                         <div class="col-2">
                             <div class="col-md-3 col-sm-6 col-xs-6 sd380">
-                                @await Component.InvokeAsync("Gallery", new { Name = "Anasayfa Galeri", Count = 8, Template = "MiniGallery" })
+                                @await Component.InvokeAsync("Gallery", new { Name = "Footer Galeri", Count = 8, Template = "MiniGallery" })
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-6 sd380">
 
@@ -232,12 +232,11 @@
                 <div class="hyperlink">
                     <div class="pull-left hyper-left">
                         <ul class="list-inline">
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/hakkimizda">@Localizer["Hakkımızda"]</a></li>
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/farkimiz">@Localizer["Farkımız"]</a></li>
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/egitim-modeli">@Localizer["Eğitim Modeli"]</a></li>
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/okul-konsepti">@Localizer["Okul Konsepti"]</a></li>
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/kampus">@Localizer["Kampüs"]</a></li>
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/iletisim">@Localizer["İletişim"]</a></li>
+                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["hakkimizda"]">@Localizer["Hakkımızda"]</a></li>
+                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["Farkımız"]">@Localizer["Farkımız"]</a></li>
+                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["Eğitim Modeli"]">@Localizer["Eğitim Modeli"]</a></li>
+                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["Kampüs"]">@Localizer["Kampüs"]</a></li>
+                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["İletişim"]">@Localizer["İletişim"]</a></li>
                         </ul>
                     </div>
                     <div class="pull-right hyper-right"></div>
@@ -247,19 +246,19 @@
     </footer>
     <!-- LOADING-->
     <div class="body-2 loading">
-        <div class="dots-loader"></div>
+        <div class="dots-loader" style="background-image:url('/uploads/Loading.gif'); background-size:cover;">Yükleniyor...</div>
     </div><environment names="Development">
 
 
-
+        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
         <!-- Temp Scripts-->
         <script src="~/edugate/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-        <script src="~/edugate/libs/smooth-scroll/jquery-smoothscroll.js"></script>
+
         <script src="~/edugate/libs/owl-carousel-2.0/owl.carousel.min.js"></script>
-        <script src="~/edugate/libs/appear/jquery.appear.js"></script>
-        <script src="~/edugate/libs/count-to/jquery.countTo.js"></script>
-        <script src="~/edugate/libs/wow-js/wow.min.js"></script>
-        <script src="~/edugate/libs/selectbox/js/jquery.selectbox-0.2.min.js"></script>
+        @*<script src="~/edugate/libs/appear/jquery.appear.js"></script>*@
+        @*<script src="~/edugate/libs/count-to/jquery.countTo.js"></script>*@
+        @*<script src="~/edugate/libs/wow-js/wow.min.js"></script>*@
+
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox.js"></script>
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox-buttons.js"></script>
         <!-- MAIN JS-->
@@ -270,15 +269,15 @@
         <script src="~/edugate/js/pages/homepage.js"></script>
     </environment>
     <environment names="Staging,Production">
-
+        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
         <!-- Temp Scripts-->
         <script src="~/edugate/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-        <script src="~/edugate/libs/smooth-scroll/jquery-smoothscroll.js"></script>
+
         <script src="~/edugate/libs/owl-carousel-2.0/owl.carousel.min.js"></script>
-        <script src="~/edugate/libs/appear/jquery.appear.js"></script>
-        <script src="~/edugate/libs/count-to/jquery.countTo.js"></script>
-        <script src="~/edugate/libs/wow-js/wow.min.js"></script>
-        <script src="~/edugate/libs/selectbox/js/jquery.selectbox-0.2.min.js"></script>
+        @*<script src="~/edugate/libs/appear/jquery.appear.js"></script>*@
+        @*<script src="~/edugate/libs/count-to/jquery.countTo.js"></script>*@
+        @*<script src="~/edugate/libs/wow-js/wow.min.js"></script>*@
+
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox.js"></script>
         <script src="~/edugate/libs/fancybox/js/jquery.fancybox-buttons.js"></script>
         <!-- MAIN JS-->
@@ -288,8 +287,8 @@
         <script src="~/edugate/libs/isotope/fit-columns.js"></script>
         <script src="~/edugate/js/pages/homepage.js"></script>
     </environment>
-
+    
     @RenderSection("scripts", required: false)
-
+   
 </body>
 </html>

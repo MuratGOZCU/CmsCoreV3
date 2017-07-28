@@ -85,6 +85,8 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(200);
 
+                    b.Property<bool>("IsVisible");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200);
@@ -96,6 +98,8 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(200);
+
+                    b.Property<bool>("Variations");
 
                     b.HasKey("Id");
 
@@ -1063,6 +1067,8 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(200);
 
+                    b.Property<string>("HeaderScript");
+
                     b.Property<bool>("IsPublished");
 
                     b.Property<long?>("LanguageId");
@@ -1751,6 +1757,8 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<bool>("EnableRestApi");
 
+                    b.Property<bool>("EnableShippingCal");
+
                     b.Property<bool>("EnableStarRatingInReviews");
 
                     b.Property<bool>("EnableStockManagement");
@@ -1825,6 +1833,8 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<bool>("ReviewsCanOnlyBeReleasedByVerifiedUsers");
 
+                    b.Property<int>("SalesLocationOptions");
+
                     b.Property<string>("SenderEmail")
                         .HasMaxLength(200);
 
@@ -1834,9 +1844,11 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("SetDefaultPaymentMethodSlug")
                         .HasMaxLength(200);
 
-                    b.Property<int>("ShippingCalculation");
+                    b.Property<bool>("ShippingCostRequires");
 
                     b.Property<int>("ShippingDestination");
+
+                    b.Property<int>("ShippingLocationsOptions");
 
                     b.Property<int>("ShippingMethod");
 
