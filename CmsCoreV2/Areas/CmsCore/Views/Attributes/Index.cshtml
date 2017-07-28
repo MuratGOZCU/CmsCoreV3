@@ -1,0 +1,95 @@
+﻿@model IEnumerable<CmsCoreV2.Models.Attribute>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Yeni Nitelik Oluştur</a>
+</p>
+<table id="tblRecords" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slug)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsVisible)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Variations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttributeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttributePosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppTenantId)
+            </th>
+            <th data-orderable="false" class="all">Eylemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slug)
+                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsVisible)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Variations)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AttributeType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AttributePosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppTenantId)
+                </td>
+                <td class="text-nowrap">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-default" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

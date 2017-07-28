@@ -431,19 +431,16 @@
     color: #49575f
 }
 
-.group-title-index .top-title {
-    text-transform: uppercase;
-    margin: 0 0 15px 0;
-    font-weight: 400;
-    font-size: 16px
-}
+
 
 .group-title-index .center-title {
+    text-align :center;
     font-size: 30px;
     font-weight: 900;
     margin: 0 0 15px 0;
     text-transform: uppercase;
     line-height: 30px
+
 }
 
 .group-title-index .bottom-title {
@@ -1303,7 +1300,8 @@ header .header-main .navigation .nav-links li .main-menu {
     color: #242c42;
     position: relative;
     background-color: transparent;
-    transition: all .3s ease-in-out
+    transition: all .3s ease-in-out;
+    font-weight:bold;
 }
 
 header .header-main .navigation .nav-links li .main-menu:after {
@@ -1372,7 +1370,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     text-transform: capitalize;
     color: #242c42;
     border: none;
-    font-weight: normal
+    font-weight: bold;
 }
 
 header .header-main .edugate-dropdown-menu-1 li:hover, header .header-main .edugate-dropdown-menu-2 li:hover {

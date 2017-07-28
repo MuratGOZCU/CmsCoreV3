@@ -23,10 +23,10 @@ namespace CmsCoreV2.Models
         public string Slug { get; set; }
 
         [Display(Name = "Görünsün mü?")]
-        bool IsVisible { get; set; }
+        public bool IsVisible { get; set; }
 
         [Display(Name = "Varyasyonlar")]
-        bool Variations { get; set; }
+        public bool Variations { get; set; }
 
         [Display(Name = "Nitelik Türü")]
         [EnumDataType(typeof(AttributeType))]

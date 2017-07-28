@@ -31,9 +31,7 @@ namespace CmsCoreV2.Models
        
         [Display(Name = "Küçük Resim")]
         public string SmallImage { get; set; }
-        [StringLength(200)]
-        [Display(Name = "Renk")]
-        public string Color { get; set; }
+       
 
         public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
     }
