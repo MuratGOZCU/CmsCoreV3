@@ -32,6 +32,7 @@ namespace CmsCoreV2.Models
         public string Meta1 { get; set; }
         public string Meta2 { get; set; }
         public string LayoutTemplate { get; set; }
+        public string HeaderScript { get; set; }
         public long LanguageId { get; set; }
         public virtual Language Language { get; set; }
     }

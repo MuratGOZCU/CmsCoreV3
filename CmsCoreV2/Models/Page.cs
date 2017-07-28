@@ -84,6 +84,8 @@ namespace CmsCoreV2.Models
         [Display(Name = "Tasarım Şablonu")]
         public string LayoutTemplate { get; set; }
 
+        [Display(Name = "CSS Şablonu")]
+        public string HeaderScript { get; set; }
 
         [ForeignKey("LanguageId")]
         [Display(Name = "Dil")]

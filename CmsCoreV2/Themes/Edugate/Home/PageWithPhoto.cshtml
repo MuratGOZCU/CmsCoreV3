@@ -3,12 +3,16 @@
 @{
     ViewData["Title"] = Model.Title;
 }
+
+@Html.Raw(Model.HeaderScript)
+
 <style>
     #PageWithPhoto.background-opacity:before {
         background-image: url(@(String.IsNullOrEmpty(Model.Photo)? "/edugate/images/kindergarten.png":Model.Photo)) !important;
         background-size: cover;
             }
 </style>
+
 <!-- WRAPPER-->
 <div id="wrapper-content">
     <!-- PAGE WRAPPER-->
@@ -34,6 +38,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="section section-padding courses">
                     <div class="container">
                         <div class="group-title-index">
