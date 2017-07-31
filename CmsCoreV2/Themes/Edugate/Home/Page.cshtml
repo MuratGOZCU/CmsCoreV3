@@ -4,8 +4,7 @@
 @{
     ViewData["Title"] = Model.SeoTitle;
 }
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<link href="~/edugate/css/Custom.css" rel="stylesheet" />
+@*@Html.Raw(Model.HeaderScript)*@
 <!-- WRAPPER-->
 <div id="wrapper-content">
     <!-- PAGE WRAPPER-->
@@ -29,7 +28,7 @@
 
                                     <div class="event-detail-des">
                                         <div class="event-detail-des-content">
-                                            @*@Html.Raw(Model.HeaderScript)*@
+                                            
                                         </div>
                                     </div>
 
@@ -82,6 +81,7 @@
 
     });
     $(document).ready(function () {
+        if ($('.more').html().indexOf('<!-- more -->') > 0) {
         var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
         var ellipsestext = "...";
         var moretext = "Devamını göster";
@@ -112,6 +112,7 @@
             $(this).parent().prev().toggle();
             return false;
         });
+        }
     });
 
 

@@ -126,10 +126,10 @@ namespace CmsCoreV2.Data
             builder.Entity<GalleryItemGalleryItemCategory>().HasKey(pc => new { pc.GalleryItemId, pc.GalleryItemCategoryId });
             builder.Entity<GalleryItemGalleryItemCategory>().HasOne(bc => bc.GalleryItem)
                 .WithMany(b => b.GalleryItemGalleryItemCategories)
-                .HasForeignKey(bc => bc.GalleryItemId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
+                .HasForeignKey(bc => bc.GalleryItemId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
             builder.Entity<GalleryItemGalleryItemCategory>().HasOne(bc => bc.GalleryItemCategory)
                 .WithMany(c => c.GalleryItemGalleryItemCategories)
-                .HasForeignKey(bc => bc.GalleryItemCategoryId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
+                .HasForeignKey(bc => bc.GalleryItemCategoryId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Cascade);
 
             builder.Entity<CouponProduct>().HasKey(pc => new { pc.CouponId, pc.ProductId });
             builder.Entity<CouponProduct>().HasOne(bc => bc.Coupon)
