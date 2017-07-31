@@ -1585,11 +1585,7 @@ footer {
     overflow-x: hidden
 }
 
-.footer-main .footer-main-wrapper {
-    padding-top: 100px;
-    padding-bottom: 40px;
-    color: #fff
-}
+
 
 .footer-main .title-widget {
     color: #2aacff;
@@ -4978,13 +4974,7 @@ html, body {
     overflow-x: hidden
 }
 
-body {
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #737373;
-    background-color: #ffffff
-}
+
 
 p, a, label, span {
     font-size: 14px
@@ -6126,7 +6116,7 @@ h5 {
     }
 
     .footer-top .footer-top-wrapper .footer-top-left .footer-top-focus {
-        line-height: 1;
+        line-height: 15;
         margin-bottom: 5px
     }
 
