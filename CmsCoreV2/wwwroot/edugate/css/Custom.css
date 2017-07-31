@@ -738,6 +738,17 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     background-color: #092f87;
 }
 
+.footer-main .footer-main-wrapper {
+    padding-top: 25px;
+    padding-bottom: 0px;
+    color: #fff
+}
+
+.footer-main .title-widget {
+    padding-bottom: 15px;
+}
+}
+
 .morecontent span {
     display: none;
 }
@@ -758,4 +769,10 @@ a.morelink {
 
 .owl-carousel .owl-item img {
     max-height: 280px !important;
+}
+#home-search {
+    width: 100%;
+    height: 40px;
+    border-radius: 25px;
+    padding-left: 10px;
 }
