@@ -67,7 +67,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Url,Target,Position,IsPublished,ParentMenuItemId,MenuId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] MenuItem menuItem)
+        public async Task<IActionResult> Create([Bind("CssClass,Name,Url,Target,Position,IsPublished,ParentMenuItemId,MenuId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] MenuItem menuItem)
         {
             menuItem.CreatedBy = User.Identity.Name ?? "username";
             menuItem.CreateDate = DateTime.Now;
@@ -79,9 +79,6 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 _context.Add(menuItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
-
-
-
             }
 
             var parentMenuItem = _context.MenuItems.ToList();
@@ -141,7 +138,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Name,Url,Target,Position,IsPublished,ParentMenuItemId,MenuId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] MenuItem menuItem)
+        public async Task<IActionResult> Edit(long id, [Bind("CssClass,Name,Url,Target,Position,IsPublished,ParentMenuItemId,MenuId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] MenuItem menuItem)
         {
             if (id != menuItem.Id)
             {

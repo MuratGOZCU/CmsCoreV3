@@ -225,6 +225,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <span class="title">Ürün Kategorileri</span>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a asp-controller="ProductTags" asp-action="Index" class="nav-link">
+                                        <span class="title">Ürün Etiketleri</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="links"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="linkcategories"?"active":string.Empty) ">
@@ -295,6 +301,49 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="nav-item">
                                     <a asp-controller="Medias" asp-action="Create" class="nav-link">
                                         <span class="title">Medya Ekle</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="WooCommerce"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="Orders"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="Coupons"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Reports"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Settings"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Customers"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Regions"?"active":string.Empty)">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="fa fa-cubes"></i>
+                            <span class="title">E-Ticaret</span>
+                            <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a asp-controller="Orders" asp-action="Index" class="nav-link">
+                                        <span class="title">Siparişler</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Cupons" asp-action="Index" class="nav-link">
+                                        <span class="title">Kuponlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Reports" asp-action="Index" class="nav-link">
+                                        <span class="title">Raporlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="CommerceSettings" asp-action="Index" class="nav-link">
+                                        <span class="title">Ayarlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Customers" asp-action="Index" class="nav-link">
+                                        <span class="title">Müşteriler</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Regions" asp-action="Index" class="nav-link">
+                                        <span class="title">Bölgeler</span>
                                     </a>
                                 </li>
                             </ul>
@@ -390,6 +439,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="Subscriptions"?"active":string.Empty)">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="socicon-mail"></i>
+                                <span class="title">Aboneler</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a asp-controller="Subscriptions" asp-action="Index" class="nav-link">
+                                        <span class="title">E-Posta Aboneleri</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="pages"?"users":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="accounts"?"active":string.Empty) ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-users"></i>
@@ -466,6 +529,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 {
                                     case "customizations":
                                         @Html.Raw("Özelleştirmeler");
+                                        break;
+                                    case "subscriptions":
+                                        @Html.Raw("Aboneler");
                                         break;
                                     case "feedbacks":
                                         @Html.Raw("Geri Bildirimler");

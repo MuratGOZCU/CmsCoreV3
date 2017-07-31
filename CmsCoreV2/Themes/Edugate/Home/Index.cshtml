@@ -1,4 +1,5 @@
 ﻿@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
 @{
     ViewData["Title"] = "";
 }
@@ -18,13 +19,13 @@
                         <div class="icon-background"></div>
                         <div class="info">
                             <div class="info-back">
-                                <a href="/anaokulu">
+                                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/anaokulu">
                                     <img src="~/edugate/images/anaokulu-kiz.png" alt="anaokulu" border="0" style="width: 93%;margin-left: 4.5px;margin-bottom: 2px;" />
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="name-course"><a href="/anaokulu">@Localizer["Anaokulu"]</a></div>
+                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/anaokulu">@Localizer["Anaokulu"]</a></div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -32,11 +33,11 @@
                     <div class="icon-circle">
                         <div class="icon-background"></div>
                         <div class="info">
-                            <div class="info-back"><a href="/ilkokul"><img src="~/edugate/images/ilkokul-kiz.png" alt="ilkokul" border="0" style="width:100%" /></a></div>
+                            <div class="info-back"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ilkokul"><img src="~/edugate/images/ilkokul-kiz.png" alt="ilkokul" border="0" style="width:100%" /></a></div>
                         </div>
 
                     </div>
-                    <div class="name-course"><a href="/ilkokul">@Localizer["İlkokul"]</a></div>
+                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ilkokul">@Localizer["İlkokul"]</a></div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -44,10 +45,10 @@
                     <div class="icon-circle">
                         <div class="icon-background"></div>
                         <div class="info">
-                            <div class="info-back"><a href="/ortaokul"><img src="~/edugate/images/ortaokul-kiz.png" alt="ortaokul" border="0" style="width:100%" /></a></div>
+                            <div class="info-back"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ortaokul"><img src="~/edugate/images/ortaokul-kiz.png" alt="ortaokul" border="0" style="width:100%" /></a></div>
                         </div>
                     </div>
-                    <div class="name-course"><a href="/ortaokul">@Localizer["Ortaokul"]</a></div>
+                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/ortaokul">@Localizer["Ortaokul"]</a></div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -55,10 +56,10 @@
                     <div class="icon-circle">
                         <div class="icon-background"></div>
                         <div class="info">
-                            <div class="info-back"><a href="/lise"><img src="~/edugate/images/lise-kiz.png" alt="lise" border="0" style="width:100%" /></a></div>
+                            <div class="info-back"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/lise"><img src="~/edugate/images/lise-kiz.png" alt="lise" border="0" style="width:100%" /></a></div>
                         </div>
-                    </div><
-                    <div class="name-course"><a href="/lise">@Localizer["Lise"]</a></div>
+                    </div>
+                    <div class="name-course"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/lise">@Localizer["Lise"]</a></div>
                 </div>
             </div>
         </div>

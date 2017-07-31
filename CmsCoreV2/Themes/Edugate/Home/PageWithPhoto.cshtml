@@ -1,0 +1,142 @@
+﻿@inject CustomLocalizer Localizer
+@model PageViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+@*@Html.Raw(Model.HeaderScript)*@
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/edugate/css/Custom.css" rel="stylesheet" />
+<style>
+
+    #PageWithPhoto.background-opacity:before {
+        background-image: url(@(String.IsNullOrEmpty(Model.Photo)? "/edugate/images/kindergarten.png":Model.Photo)) !important;
+        background-size: cover;
+            }
+</style>
+
+<!-- WRAPPER-->
+<div id="wrapper-content">
+    <!-- PAGE WRAPPER-->
+    <div id="page-wrapper">
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <!-- CONTENT-->
+            <div class="content">
+                <div id="PageWithPhoto" class="section background-opacity page-title set-height-top">
+                    <div class="container">
+                        <div class="page-title-wrapper">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="search-input">
+                        <div class="container">
+                            <div class="search-input-wrapper">
+                                @await Component.InvokeAsync("EmbedForm", new { name = Localizer[Model.Meta1].ToString(), template = "kindergartenform" })
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="section section-padding courses">
+                    <div class="container">
+                        <div class="group-title-index">
+                            <div class="col-md-9 layout-left">
+                                <h1 class="center-title">@Localizer[Model.Title.ToUpper()]</h1>
+                                <div class="event-detail-des">
+                                    <div class="event-detail-des-content" style="text-align:justify;">
+                                        <div class="more">@Html.Raw(Model.Body)</div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="col-md-3 sidebar layout-right">
+                                    <div class="row">
+                                        <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
+                                            <div class="title-widget">@Localizer["İlgili Sayfalar"]</div>
+                                            <div class="content-widget">
+                                                <ul class="category-widget list-unstyled">
+                                                    @* BURAYA GELECEK *@
+                                                    @await Component.InvokeAsync("RelatedPages", new { Id = (Model.Id) })
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            <div class="clearfix"></div>
+                                <br />
+                                @await Component.InvokeAsync("LatestPosts", new { categoryNames = Localizer[Model.Meta2].ToString(), count = 6 })
+
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BUTTON BACK TO TOP-->
+        <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+    </div>
+</div>
+<!-- more -->
+<script type="text/javascript" charset="utf-8">
+    $(window).load(function () {
+        var fSlider = $('#carousel').flexslider({
+            directionNav: false,
+        });
+
+        $(".homeForm div input").on("focus", function () {
+            $('#carousel').flexslider('pause');
+        });
+
+        $(".homeForm div input").on("blur", function () {
+            $('#carousel').flexslider('play');
+        });
+
+
+
+    });
+    $(document).ready(function () {
+        if ($('.more').html().indexOf('<!-- more -->') > 0) {
+            var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
+            var ellipsestext = "...";
+            var moretext = "Devamını göster";
+            var lesstext = "Devamını gizle";
+
+            var content = $('.more').html();
+
+            if (content.length > showChar) {
+
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar - 1, content.length - showChar);
+
+                var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                $('.more').html(html);
+            }
+
+
+            $(".morelink").click(function () {
+                if ($(this).hasClass("less")) {
+                    $(this).removeClass("less");
+                    $(this).html(moretext);
+                } else {
+                    $(this).addClass("less");
+                    $(this).html(lesstext);
+                }
+                $(this).prev().toggle();
+                $(this).parent().prev().toggle();
+                return false;
+            });
+        }
+    });
+
+
+</script>

@@ -8,18 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using Microsoft.AspNetCore.Authorization;
+using SaasKit.Multitenancy;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
     [Authorize]
     [Area("CmsCore")]
-    public class SubscriptionsController : Controller
+    public class SubscriptionsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
 
-        public SubscriptionsController(ApplicationDbContext context)
+
+        public SubscriptionsController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
         {
-            _context = context;    
+
         }
 
         // GET: CmsCore/Subscriptions
@@ -59,6 +60,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Email,FullName,IsSubscribed,SubscriptionDate,UnsubscriptionDate,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Subscription subscription)
         {
+            subscription.CreatedBy = User.Identity.Name ?? "username";
+            subscription.CreateDate = DateTime.Now;
+            subscription.UpdatedBy = User.Identity.Name ?? "username";
+            subscription.UpdateDate = subscription.CreateDate;
+            subscription.AppTenantId = tenant.AppTenantId;
+            subscription.SubscriptionDate = subscription.CreateDate;
+            
             if (ModelState.IsValid)
             {
                 _context.Add(subscription);
@@ -77,6 +85,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
 
             var subscription = await _context.Subscriptions.SingleOrDefaultAsync(m => m.Id == id);
+            subscription.UpdatedBy = User.Identity.Name ?? "username";
+            subscription.UpdateDate = DateTime.Now;
+            subscription.AppTenantId = tenant.AppTenantId;
+            await _context.SaveChangesAsync();
             if (subscription == null)
             {
                 return NotFound();
@@ -95,7 +107,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 return NotFound();
             }
-
+            subscription.UpdatedBy = User.Identity.Name ?? "username";
+            subscription.UpdateDate = DateTime.Now;
+            subscription.AppTenantId = tenant.AppTenantId;
             if (ModelState.IsValid)
             {
                 try

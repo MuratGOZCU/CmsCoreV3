@@ -8,6 +8,15 @@ namespace CmsCoreV2.Models
 {
     public class ProductCategory : BaseEntity
     {
+        public ProductCategory()
+        {
+            CouponProductCategories = new HashSet<CouponProductCategory>();
+            ExcludeCouponProductCategories = new HashSet<ExcludeCouponProductCategory>();
+        }
+        [Display(Name = "Ürün Kategorileri")]
+        public virtual ICollection<CouponProductCategory> CouponProductCategories { get; set; }
+        [Display(Name = "Kategorileri Hariç Tut")]
+        public virtual ICollection<ExcludeCouponProductCategory> ExcludeCouponProductCategories { get; set; }
         [StringLength(200)]
         [Required]
         [Display(Name = "Ad")]
@@ -22,8 +31,8 @@ namespace CmsCoreV2.Models
        
         [Display(Name = "Küçük Resim")]
         public string SmallImage { get; set; }
-        [StringLength(200)]
-        [Display(Name = "Renk")]
-        public string Color { get; set; }
+       
+
+        public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
     }
 }

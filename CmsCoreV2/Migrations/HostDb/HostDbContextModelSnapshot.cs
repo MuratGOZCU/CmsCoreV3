@@ -30,6 +30,8 @@ namespace CmsCoreV2.Migrations.HostDb
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("RequireSSL");
+
                     b.Property<long>("ThemeId");
 
                     b.Property<string>("ThemeName");

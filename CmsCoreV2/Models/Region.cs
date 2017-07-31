@@ -9,6 +9,19 @@ namespace CmsCoreV2.Models
 {
     public class Region:BaseEntity
     {
+        public Region()
+        {
+            ShippingRegions = new HashSet<SettingRegion>();
+            SalesLocations = new HashSet<SaleRegion>();
+            ShippingLocations = new HashSet<ShippingRegion>();
+            ChildRegions = new HashSet<Region>();
+        }
+        [Display(Name = "Gönderi Bölgeleri")]
+        public virtual ICollection<SettingRegion> ShippingRegions { get; set; }
+        [Display(Name = "Satış Konumları")]
+        public virtual ICollection<SaleRegion> SalesLocations { get; set; }
+        [Display(Name = "Gönderi Konumları")]
+        public virtual ICollection<ShippingRegion> ShippingLocations { get; set; }
         [StringLength(200)]
         [Required]
         [Display(Name = "Bölge Adı")]

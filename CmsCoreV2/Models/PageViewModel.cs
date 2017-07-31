@@ -23,15 +23,16 @@ namespace CmsCoreV2.Models
         public long? ParentPageId { get; set; }
         public PageViewModel ParentPage { get; set; }
         public virtual ICollection<PageViewModel> ChildPages { get; set; }
-
         public string SeoTitle { get; set; }
         public string SeoDescription { get; set; }
         public string SeoKeywords { get; set; }
-
         public bool IsPublished { get; set; }
-
         public string Template { get; set; }
-
+        public string Photo { get; set; }
+        public string Meta1 { get; set; }
+        public string Meta2 { get; set; }
+        public string LayoutTemplate { get; set; }
+        public string HeaderScript { get; set; }
         public long LanguageId { get; set; }
         public virtual Language Language { get; set; }
     }

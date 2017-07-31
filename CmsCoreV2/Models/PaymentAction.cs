@@ -9,8 +9,8 @@ namespace CmsCoreV2.Models
     public enum PaymentAction
     {
         [Display(Name = "Aktarım")]
-        Aktarim = 1,
+        Transfer = 1,
         [Display(Name = "Yetkilendirme")]
-        Yetkilendirme = 2
+        Authorize = 2
     }
 }

@@ -25,6 +25,10 @@ namespace CmsCoreV2.ViewComponents
             {
                 form = new Form();
             }
+            if (String.IsNullOrEmpty(template))
+            {
+                template = form.Template;
+            }
             return View(template, form);
 
         }
@@ -51,7 +55,7 @@ namespace CmsCoreV2.ViewComponents
             var form = GetById(id, "FormFields");
             return form;
         }
-        public Form GetForm(string name, string slug)
+        public Form GetForm(string name="", string slug="")
         {
             Form form; 
             if (slug == "")

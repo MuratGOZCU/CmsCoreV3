@@ -1,4 +1,4 @@
-﻿@inject IViewLocalizer Localizer
+﻿@inject CustomLocalizer Localizer
 
 @{
     ViewData["Title"] = "Lise";
@@ -18,11 +18,10 @@
                     </div>
                 </div>
                 <div class="section">
-                    <div id="highschool" class="search-input">
+                    <div class="search-input">
                         <div class="container">
                             <div class="search-input-wrapper">
-                                <h2>@Localizer["Buraya form gelicek"]</h2>
-                                @*@await Component.InvokeAsync("EmbedForm", new { name = "Anaokulu iletişim", template = "kindergartenform" })*@
+                                @await Component.InvokeAsync("EmbedForm", new { name = "Lise iletişim", template = "highschoolform" })
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -32,6 +31,11 @@
                     <div class="container">
                         <div class="group-title-index">
                             <h1 class="center-title">@Localizer["LİSE"]</h1>
+                            <div class="event-detail-des">
+                                <div class="event-detail-des-content">
+                                    @Html.Raw(Model.Body)
+                                </div>
+                            </div>
                             <br />
                             @await Component.InvokeAsync("LatestPosts", new { categoryNames = "lise", count = 6 })
                         </div>

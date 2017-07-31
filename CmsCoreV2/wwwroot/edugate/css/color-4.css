@@ -431,19 +431,16 @@
     color: #49575f
 }
 
-.group-title-index .top-title {
-    text-transform: uppercase;
-    margin: 0 0 15px 0;
-    font-weight: 400;
-    font-size: 16px
-}
+
 
 .group-title-index .center-title {
+    text-align :center;
     font-size: 30px;
     font-weight: 900;
     margin: 0 0 15px 0;
     text-transform: uppercase;
     line-height: 30px
+
 }
 
 .group-title-index .bottom-title {
@@ -1303,7 +1300,8 @@ header .header-main .navigation .nav-links li .main-menu {
     color: #242c42;
     position: relative;
     background-color: transparent;
-    transition: all .3s ease-in-out
+    transition: all .3s ease-in-out;
+    font-weight:bold;
 }
 
 header .header-main .navigation .nav-links li .main-menu:after {
@@ -1372,7 +1370,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     text-transform: capitalize;
     color: #242c42;
     border: none;
-    font-weight: normal
+    font-weight: bold;
 }
 
 header .header-main .edugate-dropdown-menu-1 li:hover, header .header-main .edugate-dropdown-menu-2 li:hover {
@@ -1587,11 +1585,7 @@ footer {
     overflow-x: hidden
 }
 
-.footer-main .footer-main-wrapper {
-    padding-top: 100px;
-    padding-bottom: 40px;
-    color: #fff
-}
+
 
 .footer-main .title-widget {
     color: #2aacff;
@@ -2331,16 +2325,18 @@ footer {
 .why-choose-us .why-choose-us-wrapper {
     text-align: left;
     width: 100%
+
 }
 
 .why-choose-us .why-choose-us-wrapper-top {
     position: relative
 }
 
-.why-choose-us .why-choose-us-wrapper-top .why-choose-us-wrapper {
-    padding: 60px 0;
-    padding-right: 25%
-}
+    .why-choose-us .why-choose-us-wrapper-top .why-choose-us-wrapper {
+        padding: 60px 0;
+        padding-right: 25%;
+      
+    }
 
 .why-choose-us .why-choose-us-wrapper-top .why-choose-us-wrapper p {
     color: #d1d8eb;
@@ -4978,13 +4974,7 @@ html, body {
     overflow-x: hidden
 }
 
-body {
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #737373;
-    background-color: #ffffff
-}
+
 
 p, a, label, span {
     font-size: 14px
@@ -6081,12 +6071,13 @@ h5 {
     }
 
     .slider-banner .slider-item .slider-2 {
-        background-position: -210px
+        background-position: -210px;
     }
 
-    .slider-banner .slider-item .slider-3 {
-        background-position: -130px
-    }
+        .slider-banner .slider-item .slider-3 {
+            background-position: -130px;
+        
+        }
 
     .news-page .news-masonry .gird-item {
         width: 50%
@@ -6125,7 +6116,7 @@ h5 {
     }
 
     .footer-top .footer-top-wrapper .footer-top-left .footer-top-focus {
-        line-height: 1;
+        line-height: 15;
         margin-bottom: 5px
     }
 

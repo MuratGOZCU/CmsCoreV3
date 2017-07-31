@@ -32,6 +32,9 @@ namespace CmsCoreV2.Models
         [Display(Name = "İçerik")]
         public string Body { get; set; }
 
+        [Display(Name = "Pozisyon")]
+        public int Position { get; set; }
+
         [Display(Name = "Görüntülenme Sayısı")]
         public long ViewCount { get; set; }
 
@@ -78,9 +81,15 @@ namespace CmsCoreV2.Models
         public string Meta2 { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Meta3")]
+        public string Meta3 { get; set; }
+
+        [StringLength(200)]
         [Display(Name = "Tasarım Şablonu")]
         public string LayoutTemplate { get; set; }
 
+        [Display(Name = "CSS Şablonu")]
+        public string HeaderScript { get; set; }
 
         [ForeignKey("LanguageId")]
         [Display(Name = "Dil")]

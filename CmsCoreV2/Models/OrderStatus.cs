@@ -9,18 +9,18 @@ namespace CmsCoreV2.Models
     public enum OrderStatus
     {
         [Display(Name = "Ödeme Bekleniyor")]
-        OdemeBekleniyor = 1,
+        PaymentWaiting = 1,
         [Display(Name = "İşleniyor")]
-        Isleniyor = 2,
+        BeingProcessed = 2,
         [Display(Name = "Beklemede")]
-        Beklemede = 3,
+        OnStandBy = 3,
         [Display(Name = "Tamamlandı")]
-        Tamamlandı = 4,
+        Completed = 4,
         [Display(Name = "Iptal Edildi")]
-        IptalEdildi = 5,
+        Cancelled = 5,
         [Display(Name = "Iade Edildi")]
-        IadeEdildi = 6,
+        Refunded = 6,
         [Display(Name = "Başarısız")]
-        Basarısız = 7
+        Unsuccessful = 7
     }
 }

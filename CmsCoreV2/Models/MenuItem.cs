@@ -38,7 +38,11 @@ namespace CmsCoreV2.Models
         [Display(Name = "Menü")]
         public long? MenuId { get; set; }
         [ForeignKey("MenuId")]
-        
+
+        [Display(Name = "CssClass")]
+        [StringLength(200)]
+        public string CssClass { get; set; }
+
         [Display(Name = "Menü")]
         public Menu Menu { get; set; }
     }

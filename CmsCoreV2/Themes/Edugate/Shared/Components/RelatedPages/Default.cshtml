@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<Page>
+@inject AppTenant Tenant
 @foreach (var item in Model)
 {
-    <li>
-        <div><a href="/@ViewData["Culture"]/@Html.Raw(item.Slug)" class="link title">@(item.Title)</a></div>
-    </li>
+    
+        <li class="relatedPage @(item.Meta3)" @Html.Raw(ViewBag.CurrentPageId==item.Id?"style=\"background-color: #1b81c4 !important;\"":"")>
+            <div><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Html.Raw(item.Slug)" class="link title " style="color:#ffffff !important;">@(item.Title)</a></div>
+        </li>
+
 }

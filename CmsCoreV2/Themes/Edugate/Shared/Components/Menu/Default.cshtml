@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<MenuItem>
 @inject CustomLocalizer Localizer
+@inject AppTenant Tenant
 
 <ul class="nav-links nav navbar-nav">
     @foreach (var item in Model.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
@@ -17,11 +18,11 @@
                     {
                         if (childItem.MenuId == 1)
                         {
-                            <li><a href="/tr/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
+                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
                         }
                         else if (childItem.MenuId == 2)
                         {
-                            <li><a href="/en/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
+                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
                         }
 
                     }
@@ -31,11 +32,21 @@
 
         </li>
     }
-    <li class="button-search"><p class="main-menu"><i class="fa fa-search"></i></p></li>
+    <li class="button-search" onclick="getfocus()"><p class="main-menu"><i class="fa fa-search"></i></p></li>
     <div class="nav-search hide">
-        <form action="/tr/arama">
-            <input type="text" name="query" placeholder=@Localizer["Ara"] class="searchbox" />
+        <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama">
+            <input type="text" id="Search" name="query" placeholder=@Localizer["Ara"] class="searchbox" />
             <button type="submit" class="searchbutton fa fa-search"></button>
         </form>
     </div>
 </ul>
+
+
+<script>
+    function getfocus() {
+        window.setTimeout(function () {
+            document.getElementById("Search").focus();
+        }, 0); 
+        
+    }
+</script>

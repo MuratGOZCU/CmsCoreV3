@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Post>
 @inject CustomLocalizer Localizer
 
+@inject AppTenant Tenant
 <div class="section section-padding positionRelative best-staff">
     <div class="container">
         <div class="group-title-index">
@@ -12,14 +13,14 @@
         </div>
         <div class="best-staff-wrapper">
             <div class="best-staff-content">
-                @foreach (var item in Model) { 
+                @foreach (var item in Model.OrderBy(m=>m.Position).ToList()) { 
                 <div class="staff-item">
                     <div class="staff-item-wrapper">
                         <div class="staff-info">
-                            <a href="/@item.Slug" class="staff-avatar"><img src="@item.Photo" alt="" class="img-responsive" /></a><a href="/@item.Slug" class="staff-name">@item.Title</a>
+                            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="staff-avatar"><img src="@item.Photo" alt="" class="img-responsive" /></a><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="staff-name">@item.Title</a>
 
                             <div class="staff-job">@item.Meta1</div>
-                            <div class="staff-desctiption">@Html.Raw(item.Description)</div>
+                            <div style="text-align:center" class="staff-desctiption">@Html.Raw(item.Description)</div>
                         </div>
                     </div>
                     <div class="staff-socials"><a href="mailto:@item.Meta2" class="email"><i class="fa fa-envelope-o"></i></a></div>

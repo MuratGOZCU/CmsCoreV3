@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace CmsCoreV2.Helpers
 {
@@ -637,6 +638,147 @@ namespace CmsCoreV2.Helpers
                 var writer2 = new System.IO.StringWriter();
                 time.WriteTo(writer2, HtmlEncoder.Default);
                 output.PostContent.SetHtmlContent((showLabel ? writer.ToString() + "<br/>" : "") + writer2.ToString());
+            }
+            else if (formField.FieldType == FieldType.RadioButtonWithDropdown)
+            {
+                TagBuilder text = new TagBuilder("text");
+                text.InnerHtml.SetContent(formField.Name);
+                string element = "";
+                var items = JsonConvert.DeserializeObject<RadioButtonsWithDropdown>(formField.Value);
+                // json
+                bool firstItem = true;
+                foreach (var item in items.Items)
+                {
+                    TagBuilder singlechoice = new TagBuilder("input");
+                    singlechoice.Attributes.Add("type", "radio");
+
+                    singlechoice.Attributes.Add("name", formField.Name);
+                    singlechoice.Attributes.Add("onclick", "formFieldClicked(this)");
+                    if (!firstItem)
+                    {
+                        singlechoice.Attributes.Add("style", "margin-left:5px;");
+                    }
+                    else
+                    {
+                        firstItem = false;
+                    }
+                    if (item.ToString().Length > 3)
+                    {
+                        if (item.ToString().Remove(3, item.ToString().Length - 3) == "(+)")
+                        {
+                            singlechoice.Attributes.Add("value", item.ToString().Remove(0, 3));
+                            singlechoice.Attributes.Add("checked", "checked");
+                            singlechoice.InnerHtml.SetHtmlContent(item.ToString().Remove(0, 3));
+                        }
+                        else
+                        {
+                            singlechoice.Attributes.Add("value", item.Name.ToString());
+                            singlechoice.InnerHtml.SetHtmlContent(item.Name.ToString());
+                        }
+                    }
+                    else
+                    {
+                        singlechoice.Attributes.Add("value", item.Name.ToString());
+                        singlechoice.InnerHtml.SetHtmlContent(item.Name.ToString());
+                    }
+                    if (read_only == true)
+                    {
+                        singlechoice.Attributes.Add("disabled", "disabled");
+                    }
+
+                    var writer2 = new System.IO.StringWriter();
+                    singlechoice.WriteTo(writer2, HtmlEncoder.Default);
+
+                    element += writer2.ToString();
+                }
+                var writer = new System.IO.StringWriter();
+                text.WriteTo(writer, HtmlEncoder.Default);
+                string htmlContent = element.ToString();
+              
+                //Dropdown
+                TagBuilder list = new TagBuilder("select");
+                list.Attributes.Add("name", formField.Name);
+                list.Attributes.Add("id", "radioButtonsWithDropDownSelect");
+                //var items2 = formField.Value.Split(',');
+                //foreach (var item in items2)
+                //{
+                //    if (item.ToString().Length > 3)
+                //    {
+                //        if (item.ToString().Remove(3, item.ToString().Length - 3) == "(+)")
+                //        {
+                //            TagBuilder singlechoice = new TagBuilder("option");
+                //            singlechoice.Attributes.Add("value", item.ToString().Remove(0, 3));
+                //            singlechoice.Attributes.Add("selected", "selected");
+                //            singlechoice.InnerHtml.SetHtmlContent(item.ToString().Remove(0, 3));
+                //            var single = new System.IO.StringWriter();
+                //            singlechoice.WriteTo(single, HtmlEncoder.Default);
+                //            element += single.ToString() + "<br/>";
+                //        }
+                //        else
+                //        {
+                //            TagBuilder singlechoice = new TagBuilder("option");
+                //            singlechoice.Attributes.Add("value", item);
+                //            singlechoice.InnerHtml.SetHtmlContent(item);
+                //            var single = new System.IO.StringWriter();
+                //            singlechoice.WriteTo(single, HtmlEncoder.Default);
+                //            element += single.ToString() + "<br/>";
+                //        }
+                //    }
+                //    else
+                //    {
+                //        TagBuilder singlechoice = new TagBuilder("option");
+                //        singlechoice.Attributes.Add("value", item);
+                //        singlechoice.InnerHtml.SetHtmlContent(item);
+                //        var single = new System.IO.StringWriter();
+                //        singlechoice.WriteTo(single, HtmlEncoder.Default);
+                //        element += single.ToString() + "<br/>";
+                //    }
+                //}
+                //list.InnerHtml.SetHtmlContent(element);
+                if (required == true)
+                {
+                    list.Attributes.Add("required", "required");
+                    list.Attributes.Add("data-val", "true");
+                    list.Attributes.Add("data-val-required", "Lütfen bu alanı boş bırakmayınız.");
+                }
+                if (read_only == true)
+                {
+                    list.Attributes.Add("disabled", "disabled");
+                }
+                list.Attributes.Add("class", "form-control " + this.cssClass);
+
+                var writer3 = new System.IO.StringWriter();
+                list.WriteTo(writer3, HtmlEncoder.Default);
+
+                var writer4 = new System.IO.StringWriter();
+                text.WriteTo(writer4, HtmlEncoder.Default);
+
+                htmlContent += "<br/>" + "<br/>" + (writer4.ToString() + "<br/>" + writer3.ToString());
+                htmlContent += "<script>" +
+               " var radioButtonsWithDropdown = JSON.parse('{\"items\":[{\"Name\":\"Anaokulu\",\"Value\":\"1\", \"SubItems\":[{\"Name\":\" \",\"Value\":\" \"}]},{\"Name\":\"İlkokul\",\"Value\":\"2\",\"SubItems\":[{\"Name\":\"1\",\"Value\":\"1\"},{\"Name\":\"2\",\"Value\":\"2\"},{ \"Name\":\"3\",\"Value\":\"3\"},{\"Name\":\"4\",\"Value\":\"4\"}]},{\"Name\":\"Ortaokul\",\"Value\":\"3\",\"SubItems\":[{\"Name\":\"5\",\"Value\":\"5\"},{\"Name\":\"6\",\"Value\":\"6\"},{\"Name\":\"7\",\"Value\":\"7\"},{\"Name\":\"8\",\"Value\":\"8\"}]},{\"Name\":\"Lise\",\"Value\":\"4\",\"SubItems\":[{\"Name\":\"9\",\"Value\":\"9\"},{\"Name\":\"10\",\"Value\":\"10\"},{\"Name\":\"11\",\"Value\":\"11\"},{\"Name\":\"12\",\"Value\":\"12\"}]}]}');" +
+               " function formFieldClicked(elm)" +
+               " {" +
+
+                   " $.each(radioButtonsWithDropdown.items, function(i, item) {" +
+
+                       " if (item.Name == $(elm).val()) {" +
+                   " $('#radioButtonsWithDropDownSelect').empty();" +
+                  "  $.each(item.SubItems, function(x, subitem) {" +
+                        "$('#radioButtonsWithDropDownSelect').append($('<option>', {" +
+                           " value: subitem.Value," +
+                            "text: subitem.Name" +
+                       " }));" +
+                   " });" +
+               " }" +
+            "});" +
+       " }" +
+   " </script>";
+   
+
+               output.PostContent.SetHtmlContent(htmlContent);
+        
+               
+
             }
             else
             {

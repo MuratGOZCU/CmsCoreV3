@@ -200,6 +200,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
+            foreach (var item in _context.GalleryItemGalleryItemCategories.Where(m => m.GalleryItemId == id))
+            {
+                _context.GalleryItemGalleryItemCategories.Remove(item);
+            }
+            await _context.SaveChangesAsync();
             var galleryItem = await _context.GalleryItems.SingleOrDefaultAsync(m => m.Id == id);
             _context.GalleryItems.Remove(galleryItem);
             await _context.SaveChangesAsync();

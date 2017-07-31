@@ -11,7 +11,7 @@ namespace CmsCoreV2.Models
         public long ProductId { get; set; }
         public Product Product { get; set; }
         public long ProductTagId { get; set; }
-        //public ProductTag ProductTag { get; set; }
+        public ProductTag ProductTag { get; set; }
 
     }
 }

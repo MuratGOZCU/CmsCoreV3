@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject AppTenant Tenant
+@{
     ViewData["Title"] = "Bilgi Koleji Ara";
 }
 @inject CustomLocalizer Localizer
@@ -13,10 +14,18 @@
                     <div class="search-input">
                         <div class="container">
                             <div class="search-input-wrapper">
-                                <form action="/ara" method="get">
-                                    <div class="form-group form-inline">
-                                        <input type="text" placeholder=@Localizer["Arayınız..."] name="query" class="form-input" />
-                                        <button type="submit" class="form-submit btn btn-blue"><span>@Localizer["Hızlı Ara"]<i class="fa fa-search"></i></span></button>
+                                <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama" method="get">
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-10 col-sm-10">
+                                                <input id="home-search" type="text" placeholder=@Localizer["Arayınız..."] name="query" class=""  value="@ViewData["Search"]" />
+                                            </div>
+                                            <div class="col-md-2 col-sm-2">
+                                                <button type="submit" class="btn btn-blue"><span>@Localizer["Hızlı Ara"]<i class="fa fa-search"></i></span></button>
+                                            </div>
+                                        </div>
+                                        
+                                        
                                         <div class="clearfix"></div>
                                     </div>
                                 </form>
