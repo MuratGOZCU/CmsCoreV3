@@ -628,7 +628,6 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     padding-bottom:15px !important;
 }
 
-
 .widget .title-widget {
     border-radius: 25px !important;
 }
@@ -752,4 +751,20 @@ a.morelink {
     height: 40px;
     border-radius: 25px;
     padding-left: 10px;
+}
+
+li.anaokulu {
+    background-color:rgb(233,29,177) !important;
+}
+li.ilkokul {
+    background-color:rgb(248,156,36) !important;
+}
+li.ortaokul {
+    background-color:#0082cb !important;
+}
+li.lise {
+    background-color:rgb(63,174,72) !important;
+}
+li.a5begitim {
+    background-color: #2aacff !important;
 }

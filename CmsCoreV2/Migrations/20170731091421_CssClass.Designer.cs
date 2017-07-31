@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170731091421_CssClass")]
+    partial class CssClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -1083,9 +1084,6 @@ namespace CmsCoreV2.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("Meta2")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Meta3")
                         .HasMaxLength(200);
 
                     b.Property<long?>("ParentPageId");
