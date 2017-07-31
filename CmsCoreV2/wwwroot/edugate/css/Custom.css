@@ -239,9 +239,9 @@ video {
     
 }
 
-#homeSlider2 .slider-item > div {
-    padding-top: 120px;
+#homeSlider2 .slider-item > div {  
     height:500px !important;
+    padding-top:100px;
 }
 
 .staff-item {
@@ -746,4 +746,16 @@ a.morelink {
     text-decoration: none;
     outline: none;
     font-weight:bold;
+}
+
+
+
+.why-choose-us .why-choose-us-wrapper-top .background-girl-1 {
+    width: initial !important;
+    right: 0 !important;
+    left: 70% !important;
+}
+
+.owl-carousel .owl-item img {
+    max-height: 280px !important;
 }
