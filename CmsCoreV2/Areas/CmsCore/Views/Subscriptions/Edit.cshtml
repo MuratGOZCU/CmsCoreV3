@@ -1,14 +1,13 @@
-@model CmsCoreV2.Models.Subscription
+﻿@model CmsCoreV2.Models.Subscription
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Düzenle";
 }
 
-<h2>Edit</h2>
+<h2>E-Posta Aboneleri Düzenle</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Subscription</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -36,14 +35,14 @@
         <div class="form-group">
             <label asp-for="SubscriptionDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="SubscriptionDate" class="form-control" />
+                <input asp-for="SubscriptionDate" class="form-control"readonly />
                 <span asp-validation-for="SubscriptionDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="UnsubscriptionDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="UnsubscriptionDate" class="form-control" />
+                <input asp-for="UnsubscriptionDate" class="form-control" readonly />
                 <span asp-validation-for="UnsubscriptionDate" class="text-danger"></span>
             </div>
         </div>
@@ -51,47 +50,40 @@
         <div class="form-group">
             <label asp-for="CreateDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CreateDate" class="form-control" />
+                <input asp-for="CreateDate" class="form-control"readonly />
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="CreatedBy" class="form-control" />
+                <input asp-for="CreatedBy" class="form-control"readonly />
                 <span asp-validation-for="CreatedBy" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="UpdateDate" class="form-control" />
+                <input asp-for="UpdateDate" class="form-control" readonly />
                 <span asp-validation-for="UpdateDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="UpdatedBy" class="form-control" />
+                <input asp-for="UpdatedBy" class="form-control" readonly />
                 <span asp-validation-for="UpdatedBy" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="AppTenantId" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="AppTenantId" class="form-control" />
-                <span asp-validation-for="AppTenantId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-default" asp-action="Index">Listeye Geri DÖn</a>
 </div>
 
