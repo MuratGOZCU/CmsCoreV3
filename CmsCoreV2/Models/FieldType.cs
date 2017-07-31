@@ -33,7 +33,10 @@ namespace CmsCoreV2.Models
         [Display(Name = @"Sayı Değer")]
         numberValue = 12,
         [Display(Name = @"Zaman Değer")]
-        timeValue = 13
+        timeValue = 13,
+        [Display(Name = @"Açılır Menü ile Radyo Düğmeler")]
+        RadioButtonWithDropdown = 14,
+
 
 
     }
