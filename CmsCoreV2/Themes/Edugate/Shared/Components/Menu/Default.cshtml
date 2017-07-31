@@ -32,7 +32,7 @@
 
         </li>
     }
-    <li class="button-search"><p class="main-menu"><i class="fa fa-search" onclick="getfocus()"></i></p></li>
+    <li class="button-search" onclick="getfocus()"><p class="main-menu"><i class="fa fa-search"></i></p></li>
     <div class="nav-search hide">
         <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama">
             <input type="text" id="Search" name="query" placeholder=@Localizer["Ara"] class="searchbox" />
