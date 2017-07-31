@@ -239,9 +239,9 @@ video {
     
 }
 
-#homeSlider2 .slider-item > div {
-    padding-top: 120px;
+#homeSlider2 .slider-item > div {  
     height:500px !important;
+    padding-top:100px;
 }
 
 .staff-item {
@@ -738,6 +738,17 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     background-color: #092f87;
 }
 
+.footer-main .footer-main-wrapper {
+    padding-top: 25px;
+    padding-bottom: 0px;
+    color: #fff
+}
+
+.footer-main .title-widget {
+    padding-bottom: 15px;
+}
+}
+
 .morecontent span {
     display: none;
 }
@@ -746,6 +757,18 @@ a.morelink {
     text-decoration: none;
     outline: none;
     font-weight:bold;
+}
+
+
+
+.why-choose-us .why-choose-us-wrapper-top .background-girl-1 {
+    width: initial !important;
+    right: 0 !important;
+    left: 70% !important;
+}
+
+.owl-carousel .owl-item img {
+    max-height: 280px !important;
 }
 #home-search {
     width: 100%;

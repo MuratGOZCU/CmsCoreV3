@@ -34,9 +34,9 @@
         <div class="form-group">
             <label asp-for="ParentCategoryId" class="control-label col-md-2"></label>
             <div class="col-md-10">
-                <select asp-for="ParentCategoryId" class="form-control">
+                <select asp-for="ParentCategoryId" class="form-control" asp-items="ViewBag.ParentCategoryId">>
                     <option>Lütfen Kategori Üst Öğesi Seçiniz!</option>
-                    @Html.Raw(ViewBag.ParentCategory)
+                    @Html.Raw(ViewBag.parentCategory)
 
                 </select>
                 <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
