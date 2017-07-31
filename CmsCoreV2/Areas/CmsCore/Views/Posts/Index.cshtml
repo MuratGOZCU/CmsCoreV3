@@ -18,9 +18,12 @@
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Slug)
             </th>
-            
+
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.Position)
             </th>
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Photo)
@@ -77,9 +80,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Slug)
                 </td>
-                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Photo)

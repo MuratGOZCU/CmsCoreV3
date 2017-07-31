@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CmsCoreV2.Data;
 using CmsCoreV2.Models;
+using Microsoft.AspNetCore.Authorization;
 using SaasKit.Multitenancy;
 using Z.EntityFramework.Plus;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
@@ -59,20 +59,19 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             post.UpdateDate = DateTime.Now;
             post.AppTenantId = tenant.AppTenantId;
 
-            
+
 
             ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName");
             ViewBag.CategoryList = GetPostCategories();
 
             return View(post);
         }
-
         // POST: CmsCore/Posts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Slug,Body,Description,Photo,Meta1,Meta2,ViewCount,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
+        public async Task<IActionResult> Create([Bind("Title,Slug,Body,Description,Position,Photo,Meta1,Meta2,ViewCount,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
         {
             if (ModelState.IsValid)
             {
@@ -90,6 +89,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName", post.LanguageId);
             return View(post);
         }
+
         public void UpdatePostPostCategories(long postId, string SelectedCategories)
         {
             string tenantId = tenant.AppTenantId;
@@ -103,7 +103,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 _context.SaveChanges();
                 var cateArray = SelectedCategories.Split(',');
-                
+
                 foreach (var item in cateArray)
                 {
                     post.PostPostCategories.Add(new PostPostCategory { PostId = post.Id, PostCategoryId = Convert.ToInt64(item), AppTenantId = tenantId });
@@ -142,7 +142,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Title,Slug,Body,Description,Photo,Meta1,Meta2,ViewCount,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
+        public async Task<IActionResult> Edit(long id, [Bind("Title,Slug,Body,Description,Position,Photo,Meta1,Meta2,ViewCount,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
         {
             if (id != post.Id)
             {
@@ -174,7 +174,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 return RedirectToAction("Index");
             }
             ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName", post.LanguageId);
-            
+
 
             return View(post);
         }
@@ -203,7 +203,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var post = await _context.Posts.Include(p=>p.PostPostCategories).SingleOrDefaultAsync(m => m.Id == id);
+            var post = await _context.Posts.Include(p => p.PostPostCategories).SingleOrDefaultAsync(m => m.Id == id);
             post.PostPostCategories.Clear();
             _context.SaveChanges();
             _context.Posts.Remove(post);
@@ -221,7 +221,5 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             return postCategories;
 
         }
-
-   
     }
 }

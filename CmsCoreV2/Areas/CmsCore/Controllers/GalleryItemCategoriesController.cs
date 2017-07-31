@@ -114,12 +114,14 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 return NotFound();
             }
 
-            var galleryItemCategory = await _context.GalleryItemCategories.SingleOrDefaultAsync(m => m.Id == id);
+            var galleryItemCategory = await _context.GalleryItemCategories.Include(g=>g.ParentCategory).SingleOrDefaultAsync(m => m.Id == id);
             if (galleryItemCategory == null)
             {
                 return NotFound();
             }
             var parentCategory = _context.GalleryItemCategories.ToList();
+
+            ViewData["ParentCategoryId"] = new SelectList(_context.GalleryItemCategories.ToList(), "Id", "Name", galleryItemCategory.ParentCategoryId);
             var result = "";
             recurseGalleryItem(ref parentCategory, null, 0, ref result);
             ViewBag.ParentCategory = result;
@@ -161,7 +163,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["ParentCategoryId"] = new SelectList(_context.GalleryItemCategories.ToList(), "Id", "Id", galleryItemCategory.ParentCategoryId);
+            ViewData["ParentCategoryId"] = new SelectList(_context.GalleryItemCategories.ToList(), "Id", "Name", galleryItemCategory.ParentCategoryId);
             return View(galleryItemCategory);
         }
 
@@ -189,7 +191,12 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var galleryItemCategory = await _context.GalleryItemCategories.SingleOrDefaultAsync(m => m.Id == id);
+            var galleryItemCategory = await _context.GalleryItemCategories.Include(g => g.GalleryItemGalleryItemCategories).SingleOrDefaultAsync(m => m.Id == id);
+            foreach(var entity in galleryItemCategory.GalleryItemGalleryItemCategories.ToList())
+            {
+                galleryItemCategory.GalleryItemGalleryItemCategories.Remove(entity);
+                
+            }
             _context.GalleryItemCategories.Remove(galleryItemCategory);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
