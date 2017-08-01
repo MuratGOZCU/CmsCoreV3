@@ -561,13 +561,11 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 }
 
 .search-input {
-  
-    background-color: #c13e82 !important;
-
+    background-color: #093085;
 }
 
 
-#primaryschool.search-input {
+/*#primaryschool.search-input {
     background-color: #ff791a !important;
 }
 
@@ -577,7 +575,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 
 #highschool.search-input {
     background-color: #ed2867 !important;
-}
+}*/
 
 
 .background-opacity:before {
@@ -790,4 +788,8 @@ li.lise {
 }
 li.a5begitim {
     background-color: #2aacff !important;
+}
+.footer-main {
+    background-color: #093085;
+    overflow-x: hidden
 }
