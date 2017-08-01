@@ -2,6 +2,7 @@
 using CmsCoreV2.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,17 @@ namespace CmsCoreV2.Services
     {
         public readonly IList<Language> Languages;
         public readonly IList<Resource> Resources;
-        public LanguageService(ApplicationDbContext context)
+        private readonly AppTenant Tenant;
+        public LanguageService(ApplicationDbContext context, ITenant<AppTenant> tenant)
         {
             Languages = context.Languages.ToList();
             Resources = context.Resources.ToList();
+            Tenant = tenant.Value;
         }
         public LocalizedString GetResource(string name, string currentCulture, params object[] arguments)
         {
-            var langId = Languages.SingleOrDefault(l => l.Culture == currentCulture).Id;            
-            var resource = Resources.SingleOrDefault(r => r.Name == name && r.LanguageId == langId);
+            var langId = Languages.SingleOrDefault(l => l.Culture == currentCulture && l.AppTenantId == Tenant.AppTenantId).Id;            
+            var resource = Resources.SingleOrDefault(r => r.Name == name && r.LanguageId == langId && r.AppTenantId == Tenant.AppTenantId);
             var value = name;
             if (resource != null)
             {
@@ -31,8 +34,8 @@ namespace CmsCoreV2.Services
         }
         public LocalizedString GetResource(string name, string currentCulture)
         {
-            var langId = Languages.SingleOrDefault(l => l.Culture == currentCulture).Id;
-            var resource = Resources.SingleOrDefault(r => r.Name == name && r.LanguageId == langId);
+            var langId = Languages.SingleOrDefault(l => l.Culture == currentCulture && l.AppTenantId == Tenant.AppTenantId).Id;
+            var resource = Resources.SingleOrDefault(r => r.Name == name && r.LanguageId == langId && r.AppTenantId == Tenant.AppTenantId);
             var value = name;
             if (resource != null)
             {
