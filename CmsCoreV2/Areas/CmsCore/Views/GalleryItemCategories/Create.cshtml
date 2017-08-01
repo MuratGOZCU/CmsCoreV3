@@ -37,7 +37,7 @@
             <label asp-for="ParentCategoryId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <select asp-for="ParentCategoryId" class ="form-control">
-                    <option>Lütfen Kategori Üst Öğesi Seçiniz!</option>
+                    <option value="">Lütfen Kategori Üst Öğesi Seçiniz!</option>
                     @Html.Raw(ViewBag.ParentCategory)
 
                 </select>
