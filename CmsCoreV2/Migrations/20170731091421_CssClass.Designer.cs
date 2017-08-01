@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170731091421_CssClass")]
+    partial class CssClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -1085,9 +1086,6 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("Meta2")
                         .HasMaxLength(200);
 
-                    b.Property<string>("Meta3")
-                        .HasMaxLength(200);
-
                     b.Property<long?>("ParentPageId");
 
                     b.Property<string>("Photo")
@@ -1234,8 +1232,6 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("Photo")
                         .HasMaxLength(200);
-
-                    b.Property<int>("Position");
 
                     b.Property<string>("SeoDescription");
 
@@ -2359,13 +2355,11 @@ namespace CmsCoreV2.Migrations
                 {
                     b.HasOne("CmsCoreV2.Models.GalleryItemCategory", "GalleryItemCategory")
                         .WithMany("GalleryItemGalleryItemCategories")
-                        .HasForeignKey("GalleryItemCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GalleryItemCategoryId");
 
                     b.HasOne("CmsCoreV2.Models.GalleryItem", "GalleryItem")
                         .WithMany("GalleryItemGalleryItemCategories")
-                        .HasForeignKey("GalleryItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GalleryItemId");
                 });
 
             modelBuilder.Entity("CmsCoreV2.Models.Menu", b =>

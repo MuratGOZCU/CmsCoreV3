@@ -9,9 +9,10 @@ using CmsCoreV2.Models;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170731084538_AddPosition")]
+    partial class AddPosition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -848,9 +849,6 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(200);
 
-                    b.Property<string>("CssClass")
-                        .HasMaxLength(200);
-
                     b.Property<bool>("IsPublished");
 
                     b.Property<long?>("MenuId")
@@ -1083,9 +1081,6 @@ namespace CmsCoreV2.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("Meta2")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Meta3")
                         .HasMaxLength(200);
 
                     b.Property<long?>("ParentPageId");

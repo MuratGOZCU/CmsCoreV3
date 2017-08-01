@@ -4,7 +4,7 @@
     ViewData["Title"] = Model.Title;
 }
 
-@Html.Raw(Model.HeaderScript)
+@*@Html.Raw(Model.HeaderScript)*@
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <link href="~/edugate/css/Custom.css" rel="stylesheet" />
@@ -105,36 +105,38 @@
 
     });
     $(document).ready(function () {
-        var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
-        var ellipsestext = "...";
-        var moretext = "Devamını göster";
-        var lesstext = "Devamını gizle";
+        if ($('.more').html().indexOf('<!-- more -->') > 0) {
+            var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
+            var ellipsestext = "...";
+            var moretext = "Devamını göster";
+            var lesstext = "Devamını gizle";
 
-        var content = $('.more').html();
+            var content = $('.more').html();
 
-        if (content.length > showChar) {
+            if (content.length > showChar) {
 
-            var c = content.substr(0, showChar);
-            var h = content.substr(showChar - 1, content.length - showChar);
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar - 1, content.length - showChar);
 
-            var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+                var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
 
-            $('.more').html(html);
-        }
-
-
-        $(".morelink").click(function () {
-            if ($(this).hasClass("less")) {
-                $(this).removeClass("less");
-                $(this).html(moretext);
-            } else {
-                $(this).addClass("less");
-                $(this).html(lesstext);
+                $('.more').html(html);
             }
-            $(this).prev().toggle();
-            $(this).parent().prev().toggle();            
-            return false;
-        });
+
+
+            $(".morelink").click(function () {
+                if ($(this).hasClass("less")) {
+                    $(this).removeClass("less");
+                    $(this).html(moretext);
+                } else {
+                    $(this).addClass("less");
+                    $(this).html(lesstext);
+                }
+                $(this).prev().toggle();
+                $(this).parent().prev().toggle();
+                return false;
+            });
+        }
     });
 
 

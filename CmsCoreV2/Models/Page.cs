@@ -81,6 +81,10 @@ namespace CmsCoreV2.Models
         public string Meta2 { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Meta3")]
+        public string Meta3 { get; set; }
+
+        [StringLength(200)]
         [Display(Name = "Tasarım Şablonu")]
         public string LayoutTemplate { get; set; }
 

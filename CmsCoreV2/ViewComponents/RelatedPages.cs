@@ -45,6 +45,7 @@ namespace CmsCoreV2.ViewComponents
                 childs = context.Pages.Include(p=>p.ParentPage).Where(w => w.ParentPageId == page.ParentPageId && w.IsPublished == isPublished).ToList();
                 childs = childs.OrderBy(p => p.Position);
             }
+            ViewBag.CurrentPageId = id;
             return childs;
         }
     }

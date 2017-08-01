@@ -155,6 +155,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     galleryItem.UpdateDate = DateTime.Now;
                     galleryItem.AppTenantId = tenant.AppTenantId;
                     _context.Update(galleryItem);
+                    _context.SaveChanges();
                     UpdateGalleryItemGalleryItemCategories(galleryItem.Id, categoriesHidden);
                     await _context.SaveChangesAsync();
                 }
