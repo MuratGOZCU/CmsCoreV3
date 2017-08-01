@@ -800,3 +800,10 @@ li.a5begitim {
 li.relatedPage a {
     color: #202a68 ;
 }
+
+.more p img {
+    max-width: 850px;
+    width: 100%;
+    max-height: 500px;
+    height: 100%;
+}
