@@ -2,10 +2,11 @@
     -webkit-animation: none !important;
     animation: none !important;
     box-shadow: none !important;
-    width: 225px !important;
-    height: 163px !important;
+    width: 200px !important;
+    height: 65px !important;
     margin-left: -116px !important;
     margin-top: -86px !important;
+    border-radius:0px !important;
 }
 nav, .category-widget, header .header-main .edugate-dropdown-menu-1 li .link-page {
     font-weight: bold !important;
@@ -795,8 +796,8 @@ li.a5begitim {
     background-color: #2aacff !important;
     color: white !important;
 }
-li.relatedPage a {
-    color: #202a68 ;
+li.relatedPage .link {
+    color: #242c42 ;
 }
 
 .more p img {
