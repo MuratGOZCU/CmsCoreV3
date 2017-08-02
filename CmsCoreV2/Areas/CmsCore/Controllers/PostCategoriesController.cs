@@ -61,20 +61,20 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["ParentCategoryId"] = new SelectList(_context.PostCategories, "Id", "Name");
             var parentPost = _context.PostCategories.ToList();
             var result = "";
-            recursePost(ref parentPost, null, 0, ref result);
+            recursePost(ref parentPost, null, 0,null, ref result);
             ViewBag.ParentPostOptions = result;
 
            
             return View(postCategory);
         }
-        static void recursePost(ref List<PostCategory> cl, PostCategory start, int level, ref string result)
+        static void recursePost(ref List<PostCategory> cl, PostCategory start, int level, long? selected, ref string result)
         {
             foreach (PostCategory child in cl)
             {
                 if (child.ParentCategory == start)
                 {
-                    result += "<option value='" + child.Id.ToString() + "'>" + (new String(' ', level * 2)).Replace(" ", "&nbsp&nbsp;") + child.Name + "</option>";
-                    recursePost(ref cl, child, level + 1, ref result);
+                    result += "<option " + (selected.HasValue && child.Id == selected.Value ? "selected" : "") + " value='" + child.Id.ToString() + "'>" + (new String(' ', level * 2)).Replace(" ", "&nbsp&nbsp;") + child.Name + "</option>";
+                    recursePost(ref cl, child, level + 1,selected, ref result);
                 }
             }
 
@@ -102,7 +102,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             var parentPost = _context.PostCategories.ToList();
             var result = "";
-            recursePost(ref parentPost, null, 0, ref result);
+            recursePost(ref parentPost, null, 0, postCategory.ParentCategoryId, ref result);
             ViewBag.ParentPostOptions = result;
 
             return View(postCategory);
@@ -126,7 +126,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["ParentCategoryId"] = new SelectList(_context.PostCategories, "Id", "Name", postCategory.ParentCategoryId);
             var parentPost = _context.PostCategories.ToList();
             var result = "";
-            recursePost(ref parentPost, null, 0, ref result);
+            recursePost(ref parentPost, null, 0, postCategory.ParentCategoryId, ref result);
             ViewBag.ParentPostOptions = result;
 
             postCategory.UpdatedBy = User.Identity.Name ?? "username";
@@ -177,7 +177,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["ParentCategoryId"] = new SelectList(_context.PostCategories, "Id", "Name", postCategory.ParentCategoryId);
             var parentPost = _context.PostCategories.ToList();
             var result = "";
-            recursePost(ref parentPost, null, 0, ref result);
+            recursePost(ref parentPost, null, 0, postCategory.ParentCategoryId, ref result);
             ViewBag.ParentPostOptions = result;
             return View(postCategory);
         }
