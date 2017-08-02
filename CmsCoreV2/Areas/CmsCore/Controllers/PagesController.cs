@@ -63,20 +63,20 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             page.AppTenantId = tenant.AppTenantId;
             var parentPages = _context.Pages.ToList();
             var result = "";
-            recursePages(ref parentPages, null, 0, ref result);
+            recursePages(ref parentPages, null, 0, null, ref result);
             ViewBag.ParentPagesOptions = result;
 
             return View(page);
         }
 
-        static void recursePages(ref List<Page> cl, Page start, int level, ref string result)
+        static void recursePages(ref List<Page> cl, Page start, int level, long? selected, ref string result)
         {
             foreach (Page child in cl)
             {
                 if (child.ParentPage == start)
                 {
-                    result += "<option value='" + child.Id.ToString() + "'>" + (new String(' ', level*2)).Replace(" ", "&nbsp;") + child.Title + "</option>";
-                    recursePages(ref cl, child, level + 1, ref result);
+                    result += "<option " + (selected.HasValue && child.Id == selected.Value?"selected":"") + " value='" + child.Id.ToString() + "'>" + (new String(' ', level*2)).Replace(" ", "&nbsp;") + child.Title + "</option>";
+                    recursePages(ref cl, child, level + 1, selected, ref result);
                 }
             }
           
@@ -107,7 +107,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName", page.LanguageId);
             var parentPages = _context.Pages.ToList();
             var result = "";
-            recursePages(ref parentPages, null, 0, ref result);
+            recursePages(ref parentPages, null, 0, page.ParentPageId, ref result);
             ViewBag.ParentPagesOptions = result;
             return View(page);
         }
@@ -130,10 +130,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             page.UpdatedBy = User.Identity.Name ?? "username";
             page.UpdateDate = DateTime.Now;
             page.AppTenantId = tenant.AppTenantId;
-
+            
             var parentPages = _context.Pages.ToList();
             var result = "";
-            recursePages(ref parentPages, null, 0, ref result);
+            recursePages(ref parentPages, null, 0, page.ParentPageId, ref result);
             ViewBag.ParentPagesOptions = result;
             return View(page);
         }
@@ -176,7 +176,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName", page.LanguageId);
             var parentPages = _context.Pages.ToList();
             var result = "";
-            recursePages(ref parentPages, null, 0, ref result);
+            recursePages(ref parentPages, null, 0, page.ParentPageId, ref result);
             ViewBag.ParentPagesOptions = result;
             return View(page);
         }
