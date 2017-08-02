@@ -60,7 +60,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             var regionParent = new MenuItem();
             var parentRegion = _context.Regions.ToList();
             var result = "";
-            recurseRegion(ref parentRegion, null, 0, ref result);
+            recurseRegion(ref parentRegion, null, 0,null, ref result);
             ViewBag.ParentRegion = result;
             return View(region);
         }
@@ -85,19 +85,19 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             var parentRegion = _context.Regions.ToList();
             var result = "";
-            recurseRegion(ref parentRegion, null, 0, ref result);
+            recurseRegion(ref parentRegion, null, 0, region.ParentRegionId, ref result);
             ViewBag.ParentRegion = result;
             ViewData["ParentRegionId"] = new SelectList(_context.Regions, "Id", "Name", region.ParentRegionId);
             return View(region);
         }
-        static void recurseRegion(ref List<Region> rg, Region start, int lavel, ref string result)
+        static void recurseRegion(ref List<Region> rg, Region start, int lavel, long? selected, ref string result)
         {
             foreach(Region child in rg)
             {
                 if (child.ParentRegion == start)
                 {
-                    result +="<option value='"+child.Id.ToString()+"'>" + (new String(' ',lavel * 2)).Replace(" ", "&nbsp") + child.Name + "</option>";
-                    recurseRegion(ref rg, child, lavel +1, ref result);
+                    result +="<option "+ (selected.HasValue && child.Id == selected.Value ? "selected" : "") + " value='" +child.Id.ToString()+"'>" + (new String(' ',lavel * 2)).Replace(" ", "&nbsp") + child.Name + "</option>";
+                    recurseRegion(ref rg, child, lavel +1,selected, ref result);
                 }
             }
         }
@@ -117,7 +117,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             var parentRegion = _context.Regions.ToList();
             var result = "";
-            recurseRegion(ref parentRegion, null, 0, ref result);
+            recurseRegion(ref parentRegion, null, 0, region.ParentRegionId, ref result);
             ViewBag.ParentRegion = result;
 
             ViewData["ParentRegionId"] = new SelectList(_context.Regions, "Id", "Name", region.ParentRegionId);
@@ -162,7 +162,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["ParentRegionId"] = new SelectList(_context.Regions, "Id", "Name", region.ParentRegionId);
             var parentRegion = _context.Regions.ToList();
             var result = "";
-            recurseRegion(ref parentRegion, null, 0, ref result);
+            recurseRegion(ref parentRegion, null, 0, region.ParentRegionId, ref result);
             ViewBag.ParentRegion = result;
 
             return View(region);
