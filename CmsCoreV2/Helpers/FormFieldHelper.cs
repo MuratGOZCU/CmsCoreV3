@@ -213,6 +213,7 @@ namespace CmsCoreV2.Helpers
                     {
                         multiplechoice.Attributes.Add("required", "required");
                         multiplechoice.Attributes.Add("data-val", "true");
+                        multiplechoice.Attributes.Add("checked", "checked");
                         multiplechoice.Attributes.Add("data-val-required", "Lütfen bu alanı boş bırakmayınız.");
                     }
                     if (item.ToString().Length > 3)
@@ -226,18 +227,21 @@ namespace CmsCoreV2.Helpers
                         }
                         else
                         {
+                          
                             multiplechoice.Attributes.Add("value", item);
                             multiplechoice.InnerHtml.SetHtmlContent(item);
                         }
                     }
                     else
                     {
+                  
                         multiplechoice.Attributes.Add("value", item);
                         multiplechoice.Attributes.Add("style", "margin-right:5px;");
                         multiplechoice.InnerHtml.SetHtmlContent(item);
                     }
                     if (read_only == true)
                     {
+      
                         multiplechoice.Attributes.Add("disabled", "disabled");
                     }
 
