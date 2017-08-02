@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = Model.Title;
 }
+@Html.Raw(Model.HeaderScript)
 
-@*@Html.Raw(Model.HeaderScript)*@
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <link href="~/edugate/css/Custom.css" rel="stylesheet" />
