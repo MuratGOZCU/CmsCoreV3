@@ -18,7 +18,9 @@
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Slug)
             </th>
-
+            <th class="text-nowrap">
+                @Html.DisplayNameFor(model => model.HeaderScript)
+            </th>
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -80,7 +82,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Slug)
                 </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeaderScript)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
