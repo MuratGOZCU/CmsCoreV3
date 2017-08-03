@@ -817,3 +817,10 @@ li.relatedPage .link {
 .useful-link-list ul li {
     line-height: 16px !important;
 }
+
+.mailing-widget .btn-email {
+    
+    width: 75px !important;
+    margin-left: 10px !important;
+
+}
