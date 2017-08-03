@@ -746,7 +746,9 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 .footer-main .title-widget {
     padding-bottom: 15px;
 }
-
+.footer-main {
+    background-color: #093085;
+}
 
 .morecontent span {
     display: none;
@@ -806,8 +808,4 @@ li.relatedPage .link {
     max-height: 500px;
     height: 100%;
 }
-}
-.footer-main {
-    background-color: #093085;
-    overflow-x: hidden
-}
+
