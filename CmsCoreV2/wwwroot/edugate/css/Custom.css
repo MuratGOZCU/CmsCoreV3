@@ -811,3 +811,16 @@ li.relatedPage .link {
     background-color: #093085;
     overflow-x: hidden
 }
+.widget p{
+    line-height:18px !important;
+}
+.useful-link-list ul li {
+    line-height: 16px !important;
+}
+
+.mailing-widget .btn-email {
+    
+    width: 75px !important;
+    margin-left: 10px !important;
+
+}
