@@ -810,3 +810,6 @@ li.relatedPage a {
     background-color: #093085;
     overflow-x: hidden
 }
+.widget p{
+    line-height:18px !important;
+}
