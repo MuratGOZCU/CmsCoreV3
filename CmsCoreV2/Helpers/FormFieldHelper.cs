@@ -759,7 +759,7 @@ namespace CmsCoreV2.Helpers
 
                 htmlContent += "<br/>" + "<br/>" + (writer4.ToString() + "<br/>" + writer3.ToString());
                 htmlContent += "<script>" +
-               " var radioButtonsWithDropdown = JSON.parse('{\"items\":[{\"Name\":\"Anaokulu\",\"Value\":\"1\", \"SubItems\":[{\"Name\":\" \",\"Value\":\" \"}]},{\"Name\":\"İlkokul\",\"Value\":\"2\",\"SubItems\":[{\"Name\":\"1\",\"Value\":\"1\"},{\"Name\":\"2\",\"Value\":\"2\"},{ \"Name\":\"3\",\"Value\":\"3\"},{\"Name\":\"4\",\"Value\":\"4\"}]},{\"Name\":\"Ortaokul\",\"Value\":\"3\",\"SubItems\":[{\"Name\":\"5\",\"Value\":\"5\"},{\"Name\":\"6\",\"Value\":\"6\"},{\"Name\":\"7\",\"Value\":\"7\"},{\"Name\":\"8\",\"Value\":\"8\"}]},{\"Name\":\"Lise\",\"Value\":\"4\",\"SubItems\":[{\"Name\":\"9\",\"Value\":\"9\"},{\"Name\":\"10\",\"Value\":\"10\"},{\"Name\":\"11\",\"Value\":\"11\"},{\"Name\":\"12\",\"Value\":\"12\"}]}]}');" +
+               " var radioButtonsWithDropdown = JSON.parse('{\"items\":[{\"Name\":\"Anaokulu\",\"Value\":\"1\", \"SubItems\":[{\"Name\":\"Anaokulu\",\"Value\":\"Anaokulu\"}]},{\"Name\":\"İlkokul\",\"Value\":\"2\",\"SubItems\":[{\"Name\":\"1\",\"Value\":\"1\"},{\"Name\":\"2\",\"Value\":\"2\"},{ \"Name\":\"3\",\"Value\":\"3\"},{\"Name\":\"4\",\"Value\":\"4\"}]},{\"Name\":\"Ortaokul\",\"Value\":\"3\",\"SubItems\":[{\"Name\":\"5\",\"Value\":\"5\"},{\"Name\":\"6\",\"Value\":\"6\"},{\"Name\":\"7\",\"Value\":\"7\"},{\"Name\":\"8\",\"Value\":\"8\"}]},{\"Name\":\"Lise\",\"Value\":\"4\",\"SubItems\":[{\"Name\":\"9\",\"Value\":\"9\"},{\"Name\":\"10\",\"Value\":\"10\"},{\"Name\":\"11\",\"Value\":\"11\"},{\"Name\":\"12\",\"Value\":\"12\"}]}]}');" +
                " function formFieldClicked(elm)" +
                " {" +
 
