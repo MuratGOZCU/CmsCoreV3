@@ -2,10 +2,11 @@
     -webkit-animation: none !important;
     animation: none !important;
     box-shadow: none !important;
-    width: 225px !important;
-    height: 163px !important;
+    width: 200px !important;
+    height: 65px !important;
     margin-left: -116px !important;
     margin-top: -86px !important;
+    border-radius:0px !important;
 }
 nav, .category-widget, header .header-main .edugate-dropdown-menu-1 li .link-page {
     font-weight: bold !important;
@@ -776,27 +777,27 @@ a.morelink {
 }
 
 li.anaokulu {
-    background-color: rgb(233,29,177) !important;
+    background-color: #e8548f !important;
     color: white !important;
 }
 li.ilkokul {
-    background-color: rgb(248,156,36) !important;
+    background-color: #f7b05e !important;
     color: white !important;
 }
 li.ortaokul {
-    background-color: #0082cb !important;
+    background-color: #429dc7 !important;
     color: white !important;
 }
 li.lise {
-    background-color: rgb(63,174,72) !important;
+    background-color: #6abd71 !important;
     color: white !important;
 }
 li.a5begitim {
-    background-color: #2aacff !important;
+    background-color: #1384bd !important;
     color: white !important;
 }
-li.relatedPage a {
-    color: #202a68 ;
+li.relatedPage .link {
+    color: #242c42 ;
 }
 
 .more p img {

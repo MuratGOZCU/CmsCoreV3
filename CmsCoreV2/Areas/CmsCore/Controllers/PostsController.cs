@@ -66,12 +66,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(post);
         }
+        
         // POST: CmsCore/Posts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Slug,Body,Description,Position,Photo,Meta1,Meta2,ViewCount,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
+        public async Task<IActionResult> Create([Bind("Title,Slug,Body,Description,Position,Photo,Meta1,Meta2,ViewCount,HeaderScript,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +143,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Title,Slug,Body,Description,Position,Photo,Meta1,Meta2,ViewCount,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
+        public async Task<IActionResult> Edit(long id, [Bind("Title,Slug,Body,Description,Position,Photo,Meta1,Meta2,ViewCount,HeaderScript,SeoTitle,SeoDescription,SeoKeywords,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Post post, string categoriesHidden)
         {
             if (id != post.Id)
             {

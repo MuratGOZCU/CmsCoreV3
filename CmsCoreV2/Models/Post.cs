@@ -41,6 +41,8 @@ namespace CmsCoreV2.Models
         public string Meta2 { get; set; }
         [Display(Name = "Görüntülenme Sayısı")]
         public long ViewCount { get; set; }
+        [Display(Name = "CSS Şablonu")]
+        public string HeaderScript { get; set; }
         [Display(Name = "SEO Başlığı")]
         [StringLength(200)]
         public string SeoTitle { get; set; }

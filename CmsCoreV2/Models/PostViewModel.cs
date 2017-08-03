@@ -23,6 +23,8 @@ namespace CmsCoreV2.Models
         public string SeoTitle { get; set; }
         public string SeoDescription { get; set; }
         public string SeoKeywords { get; set; }
+        public string HeaderScript { get; set; }
+
 
         public bool IsPublished { get; set; }
 
