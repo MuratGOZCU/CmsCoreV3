@@ -10,6 +10,8 @@ using CmsCoreV2.Models;
 using SaasKit.Multitenancy;
 using Z.EntityFramework.Plus;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
@@ -56,6 +58,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
             var page = new Page();
             ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName");
+           
+            string[] TemplateNames = _context.Customizations.FirstOrDefault().PageTemplates.Split(',');
+
+            ViewData["Templates"] = TemplateNames;
             page.CreatedBy = User.Identity.Name ?? "username";
             page.CreateDate = DateTime.Now;
             page.UpdatedBy = User.Identity.Name ?? "username";
@@ -90,8 +96,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,Slug,Body,Position,ViewCount,ParentPageId,Photo,Meta1,Meta2,Meta3,LayoutTemplate,HeaderScript,SeoTitle,SeoDescription,SeoKeywords,IsPublished,Template,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Page page)
         {
-
-
+    ;
             if (ModelState.IsValid)
             {
                 page.CreatedBy = User.Identity.Name ?? "username";
@@ -114,7 +119,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
         // GET: CmsCore/Pages/Edit/5
         public async Task<IActionResult> Edit(long? id)
-        {
+        {         
+            string[] TemplateNames = _context.Customizations.FirstOrDefault().PageTemplates.Split(',');
+
+            ViewData["Templates"] = TemplateNames;
             if (id == null)
             {
                 return NotFound();
@@ -145,6 +153,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Title,Slug,Body,Position,ViewCount,ParentPageId,Photo,Meta1,Meta2,Meta3,LayoutTemplate,HeaderScript,SeoTitle,SeoDescription,SeoKeywords,IsPublished,Template,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Page page)
         {
+
             if (id != page.Id)
             {
                 return NotFound();
