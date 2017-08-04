@@ -824,3 +824,49 @@ li.relatedPage .link {
     margin-left: 10px !important;
 
 }
+.contact-method{
+    border-radius:10px;
+    border:2px solid #d4d3d3;
+    padding:30px;
+}
+
+.form-control {
+    display: block;
+    width: 75%;
+    height: 34px;
+    padding: 30px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    background-color: rgba(197, 233, 255, 0.42);
+}
+.bg-w-form {
+    padding-top: 50px;
+}
+/*.event-detail-title {
+    padding-bottom:20px;
+    border-bottom: 3px solid #d4d3d3;
+    margin:0px -30px 0px -30px;
+}*/
+
+::-webkit-file-upload-button {
+    background: #2aacff !important;
+    color: white;
+    padding: 0px 25px;
+    line-height: 40px;
+    border: 0;
+    border-radius: 20px !important;
+}
+
+#formhr{
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #ccc;
+    margin: 0px -30px 0px -30px;
+    padding: 0;
+}
