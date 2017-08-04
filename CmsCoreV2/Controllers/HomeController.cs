@@ -83,6 +83,8 @@ namespace CmsCoreV2.Controllers
                     postVM.SeoDescription = post.SeoDescription;
                     postVM.SeoKeywords = post.SeoKeywords;
                     postVM.Photo = post.Photo;
+                    postVM.HeaderScript = post.HeaderScript;
+
                     ViewData["Title"] = post.SeoTitle;
                     ViewData["Description"] = post.SeoDescription;
                     ViewData["Keywords"] = post.SeoKeywords;

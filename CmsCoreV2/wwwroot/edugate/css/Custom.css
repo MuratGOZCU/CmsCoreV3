@@ -746,7 +746,9 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 .footer-main .title-widget {
     padding-bottom: 15px;
 }
-
+.footer-main {
+    background-color: #093085;
+}
 
 .morecontent span {
     display: none;
@@ -777,15 +779,15 @@ a.morelink {
 }
 
 li.anaokulu {
-    background-color: #e8548f !important;
+    background-color: #eb5292 !important;
     color: white !important;
 }
 li.ilkokul {
-    background-color: #f7b05e !important;
+    background-color: #f8af5e !important;
     color: white !important;
 }
 li.ortaokul {
-    background-color: #429dc7 !important;
+    background-color: #429cc9 !important;
     color: white !important;
 }
 li.lise {
@@ -793,7 +795,7 @@ li.lise {
     color: white !important;
 }
 li.a5begitim {
-    background-color: #1384bd !important;
+    background-color: #1383bb !important;
     color: white !important;
 }
 li.relatedPage .link {
@@ -806,8 +808,67 @@ li.relatedPage .link {
     max-height: 500px;
     height: 100%;
 }
-}
+
 .footer-main {
     background-color: #093085;
     overflow-x: hidden
+}
+.widget p{
+    line-height:18px !important;
+}
+.useful-link-list ul li {
+    line-height: 16px !important;
+}
+
+.mailing-widget .btn-email {
+    
+    width: 75px !important;
+    margin-left: 10px !important;
+
+}
+.contact-method{
+    border-radius:10px;
+    border:2px solid #d4d3d3;
+    padding:30px;
+}
+
+.form-control {
+    display: block;
+    width: 75%;
+    height: 34px;
+    padding: 30px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    background-color: rgba(197, 233, 255, 0.42);
+}
+.bg-w-form {
+    padding-top: 50px;
+}
+/*.event-detail-title {
+    padding-bottom:20px;
+    border-bottom: 3px solid #d4d3d3;
+    margin:0px -30px 0px -30px;
+}*/
+
+::-webkit-file-upload-button {
+    background: #2aacff !important;
+    color: white;
+    padding: 0px 25px;
+    line-height: 40px;
+    border: 0;
+    border-radius: 20px !important;
+}
+
+#formhr{
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #ccc;
+    margin: 0px -30px 0px -30px;
+    padding: 0;
 }

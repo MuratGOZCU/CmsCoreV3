@@ -57,7 +57,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             var menuItem = new MenuItem();
             var parentMenuItem = _context.MenuItems.ToList();
             var result = "";
-            recurseMenuItem(ref parentMenuItem, null, 0, ref result);
+            recurseMenuItem(ref parentMenuItem, null, 0, null, ref result);
             ViewBag.ParentMenuItem = result;
             return View(menuItem);
         }
@@ -83,7 +83,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             var parentMenuItem = _context.MenuItems.ToList();
             var result = "";
-            recurseMenuItem(ref parentMenuItem, null, 0, ref result);
+            recurseMenuItem(ref parentMenuItem, null, 0, menuItem.ParentMenuItemId, ref result);
             ViewBag.ParentMenuItem = result;
 
             ViewData["MenuId"] = new SelectList(_context.Menus.ToList(), "Id", "Name", menuItem.MenuId);
@@ -92,14 +92,14 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         }
 
 
-        static void recurseMenuItem(ref List<MenuItem> cl, MenuItem start, int level, ref string result)
+        static void recurseMenuItem(ref List<MenuItem> cl, MenuItem start, int level, long? selected, ref string result)
         {
             foreach (MenuItem child in cl)
             {
                 if (child.ParentMenuItem == start)
                 {
-                    result += "<option value='" + child.Id.ToString() + "'>" + (new String(' ', level*2 )).Replace(" ", "&nbsp") + child.Name + "</option>";
-                    recurseMenuItem(ref cl, child, level + 1, ref result);
+                    result += "<option"+ (selected.HasValue && child.Id == selected.Value ? "selected" : "") +" value='" + child.Id.ToString() + "'>" + (new String(' ', level*2 )).Replace(" ", "&nbsp") + child.Name + "</option>";
+                    recurseMenuItem(ref cl, child, level + 1,selected, ref result);
                 }
             }
 
@@ -125,7 +125,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             var parentMenuItem = _context.MenuItems.ToList();
             var result = "";
-            recurseMenuItem(ref parentMenuItem, null, 0, ref result);
+            recurseMenuItem(ref parentMenuItem, null, 0, menuItem.ParentMenuItemId, ref result);
             ViewBag.ParentMenuItem = result;
 
             ViewData["ParentMenuItemId"] = new SelectList(_context.MenuItems.Where(mi => mi.Id != id && mi.ParentMenuItem != menuItem).ToList(), "Id", "Name", menuItem.ParentMenuItemId);
@@ -172,7 +172,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             
             var parentMenuItem = _context.MenuItems.ToList();
             var result = "";
-            recurseMenuItem(ref parentMenuItem, null, 0, ref result);
+            recurseMenuItem(ref parentMenuItem, null, 0, menuItem.ParentMenuItemId, ref result);
             ViewBag.ParentMenuItem = result;
             
             return View(menuItem);
