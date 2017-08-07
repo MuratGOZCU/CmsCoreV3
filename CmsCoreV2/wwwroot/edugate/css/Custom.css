@@ -832,11 +832,11 @@ li.relatedPage .link {
     padding:30px;
 }
 
-.form-control {
+.form-job {
     display: block;
-    width: 75%;
+    width: 65%;
     height: 34px;
-    padding: 30px;
+    padding: 20px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;

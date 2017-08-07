@@ -15,9 +15,18 @@
                     <div class="container">
                         <div class="contact-main-wrapper">
                             <div class="row contact-method">
+                                <ul style="list-style-type: none;margin: 0; padding: 0; overflow: hidden;">
+                                    <li style="float: left;">
+                                        <h1 class="event-detail-title">@Model.Title</h1>
+                                    </li>
+                                    <li>
+                                        <img class="img-responsive"
+                                        src="~/uploads/Loading.gif"  style="float:right; height:50px; margin-top:5px; padding-bottom:5px; " />
+                                    </li>
+                                  </ul>
 
-                                <h1 class="event-detail-title">@Model.Title</h1>
-                                <hr id="formhr">            
+                                <hr id="formhr">
+                                             
                                 @Html.Raw(Model.Body)
                                     @await Component.InvokeAsync("EmbedForm", new { name=Localizer["İş Başvuru Formu"].ToString(), template="JobApplicationForm" })
                             </div>
