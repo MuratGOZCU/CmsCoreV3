@@ -891,3 +891,8 @@ li.relatedPage .link {
     border-style: solid;
     height: initial !important;
 }
+
+.bg-w-form .contact-submit .btn-contact {
+    margin-left: -10%;
+    margin-top: 30px;
+}
