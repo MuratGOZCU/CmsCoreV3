@@ -875,13 +875,16 @@ li.relatedPage .link {
 
 .footer-main .hyperlink {
     border-top: 1px solid whitesmoke !important;
+    opacity : 0.7;
 }
 
 .edugate-widget .info-list ul li {
     border-top: 1px solid whitesmoke !important;
+    opacity: 0.7 ;
 }
 .socials {
     border-top: 1px solid whitesmoke !important;
+    opacity: 0.7; 
 }
 #back-top a {
     bottom: 25px;
@@ -896,3 +899,4 @@ li.relatedPage .link {
     margin-left: -10%;
     margin-top: 30px;
 }
+
