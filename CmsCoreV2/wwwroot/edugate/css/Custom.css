@@ -900,7 +900,11 @@ li.relatedPage .link {
     margin-top: 30px;
 }
 
+
+.socials a, .socials .link{
+width: 28px !important;
 }
-.socials a {
-    width: 28px !important;
+
+.mailing-widget input.form-control{
+    border-radius:30px !important;
 }
