@@ -125,9 +125,9 @@
             <div class="container">
                 <div class="footer-top-wrapper">
                     <div class="footer-top-left">
+                        <p class="footer-top-text">@Localizer["(Akademi ve İdari Personel Başvuruları)"]</p>
                         <p class="footer-top-focus">@Localizer["MUTLULUK VEREN BİLGİ'Yİ BİRLİKTE ÇOĞALTALIM"]</p>
 
-                        <p class="footer-top-text">@Localizer["(Akademi ve İdari Personel Başvuruları)"]</p>
                     </div>
                     <div class="footer-top-right">
                         <button onclick="window.location.href='@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["Culture"]/is-basvuru-formu'" class="btn btn-blue btn-bold"><span>@Localizer["Başvur"]</span></button>
@@ -142,17 +142,14 @@
                         <div class="col-2">
                             <div class="col-md-3 col-sm-6 col-xs-6 sd380">
                                 <div class="edugate-widget widget">
-                                    <div class="title-widget">@Localizer["HAKKINDA"]</div>
+                                    <div class="title-widget">@Localizer["İLETİŞİM"]</div>
                                     <div class="content-widget">
-                                        <p>@Localizer["FooterAboutText"]</p>
 
                                         <div class="info-list">
                                             <ul class="list-unstyled">
-                                                <li><i class="fa fa-envelope-o"></i>@Localizer["Mail"]</li>
-                                                <li><i class="fa fa-phone"></i>@Localizer["Telefon"]</li>
-                                                <li>
-                                                    <i class="fa fa-map-marker"></i>@Localizer["Adres"]
-                                                </li>
+                                                <li><i class="fa fa-envelope-o"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["bize-ulasin"]">@Localizer["Mail"]</a></li>
+                                                <li><i class="fa fa-phone"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["bize-ulasin"]">@Localizer["Telefon"]</a></li>
+                                                <li><i class="fa fa-map-marker"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["bize-ulasin"]">@Localizer["Adres"]</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -178,7 +175,6 @@
                                                     <ul class="list-unstyled">
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["bilgi-store"]" rel=”nofollow” >@Localizer["Bilgi Store"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["veli-iletisim"]">@Localizer["Veli İletişim"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["ek-alanlar"]">@Localizer["Ek Alanlar"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["site-haritasi"]">@Localizer["Site Haritası"]</a></li>
                                                         @*<li><i class="fa fa-angle-right"></i><a href="#">Help Topic</a></li>
                                                             <li><i class="fa fa-angle-right"></i><a href="#">Policies</a></li>*@
