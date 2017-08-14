@@ -24,6 +24,7 @@ namespace CmsCoreV2.ViewComponents
             if (form == null)
             {
                 form = new Form();
+                form.FormName = name;
             }
             if (String.IsNullOrEmpty(template))
             {
