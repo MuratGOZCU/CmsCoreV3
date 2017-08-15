@@ -37,6 +37,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             setting.UpdatedBy = User.Identity.Name;
             setting.AppTenantId = tenant.AppTenantId;
             _context.Update(setting);
+            _context.SaveChanges();
             ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
             return View(setting);
         }
@@ -52,6 +53,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             setting.UpdatedBy = User.Identity.Name;
             setting.AppTenantId = tenant.AppTenantId;
             _context.Update(setting);
+            _context.SaveChanges();
             ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
             return View(setting);
         }
