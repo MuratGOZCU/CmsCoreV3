@@ -7,62 +7,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Tenant.Title</title>
     <meta name="description" content="@ViewData["Description"]">
-    @if (ViewData["Keywords"] != null && ViewData["Keywords"].ToString() != "") { 
+    @if (ViewData["Keywords"] != null && ViewData["Keywords"].ToString() != "")
+    {
         <meta name="keywords" content="@ViewData["Keywords"]">
     }
-
-    <environment names="Development">
-
-
-        <!-- Temps Files-->
-        <script src="https://use.typekit.net/orp0qua.js"></script>
-        <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
-        @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
-        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
-        <!-- LIBRARY CSS-->
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
-
-        <!-- STYLE CSS    -->
-        <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
-        <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
-        
-        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
-    </environment>
-    <environment names="Staging,Production">
+        <environment names="Development">
 
 
-        <!-- Temps Files-->
-        <script src="https://use.typekit.net/orp0qua.js"></script>
-        <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
-        @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
-        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
-        <!-- LIBRARY CSS-->
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
-        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
+            <!-- Temps Files-->
+            <script src="https://use.typekit.net/orp0qua.js"></script>
+            <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+            @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
+            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
+            <!-- LIBRARY CSS-->
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
+            @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
 
-        <!-- STYLE CSS    -->
-        <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
-        <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
-        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
-        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
-        
-    </environment>
-    <link href="~/edugate/css/Custom.css" type="text/css" rel="stylesheet" />
-    <link href="~/home/customcss" type="text/css" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="~/edugate/images/favicon.png" alt="favicon"/>
+            <!-- STYLE CSS    -->
+            <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
+            <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
+            @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
+        </environment>
+        <environment names="Staging,Production">
+
+
+            <!-- Temps Files-->
+            <script src="https://use.typekit.net/orp0qua.js"></script>
+            <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+            @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
+            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
+            <!-- LIBRARY CSS-->
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
+            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
+            @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
+
+            <!-- STYLE CSS    -->
+            <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
+            <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
+            <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
+            @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
+
+        </environment>
+        <link href="~/edugate/css/Custom.css" type="text/css" rel="stylesheet" />
+        <link href="~/home/customcss" type="text/css" rel="stylesheet" />
+        <link rel="icon" type="image/png" href="~/edugate/images/favicon.png" alt="favicon" />
+          
+       
 </head>
 <body style="margin:0px; padding:0px;">
     <header>

@@ -899,7 +899,6 @@ li.relatedPage .link {
     opacity: 0.7; 
 }
 #back-top a {
-    bottom: 25px;
     border: 3px solid white !important;
 }
 #floatingButton a {
@@ -919,4 +918,7 @@ width: 28px !important;
 
 .mailing-widget input.form-control{
     border-radius:30px !important;
+}
+#floatingButton img {
+    width: 34px;
 }
