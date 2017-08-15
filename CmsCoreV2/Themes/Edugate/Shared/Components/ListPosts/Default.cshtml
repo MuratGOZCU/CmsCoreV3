@@ -13,7 +13,7 @@
         </div>
         <div class="best-staff-wrapper">
             <div class="best-staff-content">
-                @foreach (var item in Model.OrderBy(m=>m.Position).ToList()) { 
+                @foreach (var item in Model.ToList().Take(10).OrderBy(p=>p.Position)) { 
                 <div class="staff-item">
                     <div class="staff-item-wrapper">
                         <div class="staff-info">
