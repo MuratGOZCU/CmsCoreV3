@@ -20,8 +20,8 @@
                                     <div class="news-detail">
                                         <img src="@Html.Raw(Model.Photo)" alt="" class="news-image" />
                                         <h1 class="title-news">@(Model.Title)</h1>
-                                        <div style="text-align:left" class="staff-desctiption">@Html.Raw(Model.Description)</div>
-                                        <div class="news-content">
+                                        <div style="text-align:left; display:none;" class="staff-desctiption">@Html.Raw(Model.Description)</div>
+                                        <div style="margin-top:35px !important" class="news-content">
                                             @Html.Raw(Model.Body)
                                         </div>
                                     </div>
