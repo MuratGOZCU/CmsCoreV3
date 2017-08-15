@@ -750,6 +750,18 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     background-color: #093085;
 }
 
+.footer-top-wrapper .footer-top-left .footer-top-focus {
+    font-weight: 900;
+    font-size: 16px;
+    /*text-transform: uppercase;*/
+    margin-bottom: 0
+}
+
+.footer-top-wrapper .footer-top-left .footer-top-title, .footer-top-wrapper .footer-top-left .footer-top-text {
+    font-weight: 300;
+    font-size: 30px;
+    margin-bottom: 0
+}
 .morecontent span {
     display: none;
 }
