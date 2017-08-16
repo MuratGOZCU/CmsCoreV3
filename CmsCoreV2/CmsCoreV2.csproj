@@ -18,6 +18,7 @@
     <Content Include="wwwroot\edugate\font\Interstate-RegularTR.TTF" />
     <Content Include="wwwroot\edugate\images\anaokulu-kiz.png" />
     <Content Include="wwwroot\edugate\images\bg-404.jpg" />
+    <Content Include="wwwroot\edugate\images\favicon.png" />
     <Content Include="wwwroot\edugate\images\highschool.png" />
     <Content Include="wwwroot\edugate\images\ilkokul-kiz.png" />
     <Content Include="wwwroot\edugate\images\kindergarten.png" />
