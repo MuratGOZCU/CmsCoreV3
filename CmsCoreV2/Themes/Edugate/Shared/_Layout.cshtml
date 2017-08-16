@@ -211,6 +211,11 @@
                                                         </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                                         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ff2379d2b81580329cc53dd6d_a26ce4d708" tabindex="-1" value=""></div>
                                                     </div>
+                                                    @if (!String.IsNullOrEmpty(ViewBag.SubscribeMessage))
+                                                    {
+                                                        <div class="alert alert-success">@ViewBag.SubscribeMessage</div>
+
+                                                    }
                                                     <p>@Localizer["Gizliliğinize saygı duyuyoruz."]</p>
                                                 </div>
                                             </form>

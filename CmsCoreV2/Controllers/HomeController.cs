@@ -41,8 +41,8 @@ namespace CmsCoreV2.Controllers
         {
             return Redirect(HttpContext.Items["NewUrl"].ToString());
         }
-        public IActionResult Index(string slug, string culture)
-        {
+        public IActionResult Index(string slug, string culture,string message="")
+        { 
             if (culture == "no")
             {
                 return Redirect("/tr");
@@ -50,6 +50,14 @@ namespace CmsCoreV2.Controllers
             ViewData["Culture"] = culture;
             HttpContext.Items["Culture"] = culture;
             slug = slug.ToLower();
+            if (message == "subscriptionSuccessful")
+            {
+                ViewBag.SubscribeMessage = "E-bülten kaydınız yapılmıştır, teşekkür ederiz.";
+            }
+            else if (message == "subscriptionUnsuccessful")
+            {
+                ViewBag.SubscribeMessage = "E-bülten kaydınız mevcuttur.Mail adresinizi kontrol ediniz";
+            }
             var page = _context.SetFiltered<Page>().Include(i=> i.Language).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
             if (page == null || page.IsPublished == false)
             {
@@ -252,9 +260,10 @@ namespace CmsCoreV2.Controllers
                 subscription.SubscriptionDate = DateTime.Now;
                 _context.Add(subscription);
                 _context.SaveChanges();
+                return Redirect(Request.Headers["Referer"].ToString() + "?message=subscriptionSuccessful");
             }
+            return Redirect(Request.Headers["Referer"].ToString() + "?message=subscriptionUnsuccessful");
            
-            return RedirectToAction("Index");
            
         }
 
