@@ -59,5 +59,8 @@ namespace CmsCoreV2.Models
         [ForeignKey("LanguageId")]
         [Display(Name = "Dil")]
         public Language Language { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Yayınlanma Tarihi")]
+        public DateTime? PublishDate { get; set; }
     }
 }
