@@ -165,7 +165,7 @@
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <ul class="list-unstyled">
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["akademik-takvim"]">@Localizer["Akademik Takvim"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["etkinlikler"]">@Localizer["Etkinlikler"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="#GoToActivity">Etkinlikler</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["basinda-biz"]">@Localizer["Basında Biz"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["insan-kaynaklari"]">@Localizer["İnsan Kaynakları"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["kendini-degerlendir"]">@Localizer["Kendini Değerlendir"]</a></li>
@@ -211,6 +211,11 @@
                                                         </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                                         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ff2379d2b81580329cc53dd6d_a26ce4d708" tabindex="-1" value=""></div>
                                                     </div>
+                                                    @if (!String.IsNullOrEmpty(ViewBag.SubscribeMessage))
+                                                    {
+                                                        <div class="alert alert-success">@ViewBag.SubscribeMessage</div>
+
+                                                    }
                                                     <p>@Localizer["Gizliliğinize saygı duyuyoruz."]</p>
                                                 </div>
                                             </form>
