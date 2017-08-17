@@ -12,10 +12,10 @@
 
                 <div class="section section-padding gallery-page gallery-mansonry">
                     <div class="container">
-                        @await Component.InvokeAsync("Gallery", new { Name = "Galeri Sayfası"})
-                        <div class="load-more">
+                        @await Component.InvokeAsync("Gallery", new { Name = "Galeri Sayfası", Template="Gallery", count=1000})
+                        @*<div class="load-more">
                             <button class="btn btn-green"><span>@Localizer["Diğer"]</span></button>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
