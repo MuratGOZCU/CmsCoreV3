@@ -26,7 +26,8 @@ namespace CmsCoreV2.ViewComponents
 
         private async Task<List<Page>> GetItems(long? parentPageId)
         {
-            List<Page> pages = context.Pages.Include("Language").Where(p => p.ParentPageId == parentPageId).ToList<Page>();
+            var culture = (string)HttpContext.Items["Culture"];
+            List<Page> pages = context.Pages.Include("Language").Include("ChildPages").Include("ChildPages.ChildPages").Where(p => p.ParentPageId == parentPageId && p.Language.Culture == culture).ToList<Page>();
             return await Task.FromResult(pages);
         }
     }
