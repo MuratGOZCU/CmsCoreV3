@@ -27,7 +27,6 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         public async Task<IActionResult> Index()
         {
             var setting = await _context.SetFiltered<Setting>().Where(x => x.AppTenantId == tenant.AppTenantId).FirstOrDefaultAsync();
-
             return View(setting);
         }
         [HttpPost]
@@ -49,10 +48,20 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [HttpPost]
         public IActionResult Mail(Setting setting)
         {
-            setting.UpdateDate = DateTime.Now;
-            setting.UpdatedBy = User.Identity.Name;
-            setting.AppTenantId = tenant.AppTenantId;
-            _context.Update(setting);
+            Setting allSettings = _context.Settings.FirstOrDefault();
+
+            allSettings.UpdateDate = DateTime.Now;
+            allSettings.UpdatedBy = User.Identity.Name;
+            allSettings.AppTenantId = tenant.AppTenantId;
+            allSettings.SmtpHost = setting.SmtpHost;
+            allSettings.SmtpPassword = setting.SmtpPassword;
+            allSettings.SmtpPort = setting.SmtpPort;
+            allSettings.SmtpUseSSL = setting.SmtpUseSSL;
+            allSettings.SmtpUserName = setting.SmtpUserName;
+
+            allSettings.UpdateDate = DateTime.Now;
+            allSettings.UpdatedBy = User.Identity.Name ?? "username";
+            allSettings.AppTenantId = tenant.AppTenantId;
             _context.SaveChanges();
             ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
             return View(setting);
@@ -74,12 +83,23 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 try
                 {
-                    setting.UpdatedBy = User.Identity.Name ?? "username";
-                    setting.UpdateDate = DateTime.Now;
-                    setting.AppTenantId = tenant.AppTenantId;
-                    _context.Update(setting);
+                    //setting.UpdatedBy = User.Identity.Name ?? "username";
+                    //setting.UpdateDate = DateTime.Now;
+                    //setting.AppTenantId = tenant.AppTenantId;
+                    Setting allSetting = _context.Settings.FirstOrDefault();
+
+                    allSetting.HeaderString = setting.HeaderString;
+                    allSetting.GoogleAnalytics = setting.GoogleAnalytics;
+                    allSetting.FooterScript = setting.FooterScript;
+                    allSetting.MapTitle = setting.MapTitle;
+                    allSetting.MapLat = setting.MapLat;
+                    allSetting.UpdateDate = DateTime.Now;
+                    allSetting.UpdatedBy = User.Identity.Name ?? "username";
+                    allSetting.AppTenantId = tenant.AppTenantId;
+                    
                     await _context.SaveChangesAsync();
                     ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -91,8 +111,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     {
                         throw;
                     }
+                   
                 }
                 return RedirectToAction("Index");
+                
             }
             return View(setting);
         }

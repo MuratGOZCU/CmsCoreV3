@@ -28,8 +28,9 @@
                                 <hr id="formhr">
                                              
                                 @Html.Raw(Model.Body)
-                                    @await Component.InvokeAsync("EmbedForm", new { name=Localizer["Veli İletişim"].ToString(), template="JobApplicationForm" })
-                            </div>
+                                @if (!String.IsNullOrEmpty(Model.Meta1)) { 
+                                    @await Component.InvokeAsync("EmbedForm", new { name=Localizer[Model.Meta1].ToString(), template="JobApplicationForm" })
+                                }</div>
                         </div>
                     </div>
                 </div>

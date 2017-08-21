@@ -91,25 +91,24 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         public void UpdateGalleryItemGalleryItemCategories(long galItemId, string SelectedCategories)
         {
             string tenantId = tenant.AppTenantId;
-            var ggc = _context.SetFiltered<GalleryItemGalleryItemCategory>().Where(x => x.AppTenantId == tenantId).Where(f => f.GalleryItemCategoryId== galItemId).ToList();
+            var ggc = _context.SetFiltered<GalleryItemGalleryItemCategory>().Where(x => x.AppTenantId == tenantId).Where(f => f.GalleryItemId== galItemId).ToList();
             var galitem = _context.SetFiltered<GalleryItem>().Where(x => x.AppTenantId == tenantId).Include("GalleryItemGalleryItemCategories").Where(f => f.Id == galItemId).FirstOrDefault();
-
+            foreach (var c in ggc)
+            {
+                _context.GalleryItemGalleryItemCategories.Remove(c);
+            }
+            _context.SaveChanges();
             if (SelectedCategories != null)
             {
-                foreach (var c in ggc)
-                {
-                    _context.GalleryItemGalleryItemCategories.Remove(c);
-                }
-                _context.SaveChanges();
+               
                 var cateArray = SelectedCategories.Split(',');
 
                 foreach (var item in cateArray)
                 {
-                    galitem.GalleryItemGalleryItemCategories.Add(new GalleryItemGalleryItemCategory { GalleryItemId = galitem.Id, GalleryItemCategoryId = Convert.ToInt64(item), AppTenantId = tenantId });
+                    _context.GalleryItemGalleryItemCategories.Add(new GalleryItemGalleryItemCategory { GalleryItemId = galitem.Id, GalleryItemCategoryId = Convert.ToInt64(item), AppTenantId = tenantId });
                 }
                
             }
-            _context.Update(galitem);
             _context.SaveChanges();
         }
         // GET: CmsCore/GalleryItems/Edit/5
@@ -157,7 +156,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     _context.Update(galleryItem);
                     _context.SaveChanges();
                     UpdateGalleryItemGalleryItemCategories(galleryItem.Id, categoriesHidden);
-                    await _context.SaveChangesAsync();
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
