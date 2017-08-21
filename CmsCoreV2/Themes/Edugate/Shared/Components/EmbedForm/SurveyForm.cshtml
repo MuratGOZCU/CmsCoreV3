@@ -37,11 +37,13 @@
     </div>
     <script>
         function onSurveyFormSubmit() {
-            document.getElementById("surveyForm").submit();
-        }
+             document.getElementById("submit_handle").click();
+         }
     </script>
     <div class="contact-submit">
-        <button type="submit" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onSurveyFormSubmit' data-badge="inline"><span>Gönder</span></button>
+        <input id="submit_handle" type="submit" style="display: none">
+        <input type="submit" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onSurveyFormSubmit' data-badge="inline" onclick="onSurveyFormSubmit()" value=@Localizer["Gönder"]>
     </div>
+   
 </form>
 @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
