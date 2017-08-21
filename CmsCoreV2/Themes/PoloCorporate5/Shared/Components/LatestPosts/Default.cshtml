@@ -1,0 +1,65 @@
+﻿@inject CustomLocalizer Localizer
+@model IEnumerable<Post>
+@inject AppTenant Tenant
+
+@if (Model.Count() > 0)
+{
+    <div class="section section-padding top-courses">
+        <div class="container">
+            <div class="group-title-index">
+                <h4 class="top-title">@Localizer["GÜNCEL DUYURULAR"]</h4>
+
+                <h2 class="center-title">@Localizer["BİLGİ KOLEJİ'NDEN EN SON HABERLER"]</h2>
+                <div class="bottom-title"><i class="bottom-icon icon-icon-04"></i></div>
+            </div>
+            <div class="top-courses-wrapper">
+                <div class="top-courses-slider">
+                    @{ int index = 0;
+                        foreach (var item in Model)
+                        {
+                            <div class="top-courses-item">
+                                <div class="edugate-layout-2">
+                                    <div class="edugate-layout-2-wrapper">
+                                        <div class="edugate-content">
+                                            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
+                                            <div class="info">
+                                                @if (item.PublishDate != null)
+                                                {            
+                                                <div class="date-time item">@item.PublishDate.Value.ToString("dd MMM yyyy")</div>
+                                                }
+                                            </div>
+                                            @*<div class="info-more">
+                                                    <div class="view item">
+                                                        <i class="fa fa-user"></i>
+                                                        <p> @item.ViewCount</p>
+                                                    </div>
+                                                    <div class="comment item">
+                                                        <i class="fa fa-comment"></i>
+                                                        <p> 0</p>
+                                                    </div>
+                                                </div>*@
+                                            <div class="description" style="text-overflow: ellipsis;">@Html.Raw(item.Description)</div>
+                                            <button onclick="window.location.href='/@ViewData["Culture"]/@item.Slug'" class="btn btn-green"><span>@Localizer["Detaylı Bilgi"]</span></button>
+                                        </div>
+                                        <div class="edugate-image"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link"><img src="@Html.Raw(item.Photo)" alt="" class="img-responsive" /></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            index++;
+                            if (index % 2 == 0 && Model.Count() > index)
+                            {
+                                <text>@Html.Raw("</div><div class='top-courses-slider'>")
+                                </text>
+                            }
+                        }
+                    }
+
+                </div>
+                <div class="group-btn-top-courses-slider">
+                    <div class="btn-prev">&lsaquo;</div>
+                    <div class="btn-next">&rsaquo;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+                        }

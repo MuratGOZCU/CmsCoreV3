@@ -23,10 +23,60 @@ namespace CmsCoreV2.Data
             // Perform seed operations
             
             var theme = AddTheme(context);
+            var newTheme = AddTheme2(context);
             AddAppTenants(context, theme);
+            AddAppTenants2(context, newTheme);
 
         }
+        public static Theme AddTheme(HostDbContext context)
+        {
+            var defaultTheme = new Theme();
+            defaultTheme.Name = "edugate";
+            defaultTheme.Logo = "/edugate/images/logo.png";
+            defaultTheme.ImageUrl = "";
+            defaultTheme.MetaDescription = "";
+            defaultTheme.MetaTitle = "";
+            defaultTheme.MetaKeywords = "";
+            defaultTheme.CreateDate = DateTime.Now;
+            defaultTheme.UpdateDate = DateTime.Now;
+            defaultTheme.CreatedBy = "UserName";
+            defaultTheme.UpdatedBy = "UserName";
+            defaultTheme.CustomCSS = "";
 
+            defaultTheme.MenuLocations = "Primary";
+            defaultTheme.ComponentTemplates = "Default,Gallery,MiniGallery,ContactForm,JobApplicationForm,PreRegistrationForm,SurveyForm,LogoSlider,Secondary";
+            defaultTheme.PageTemplates = "Page,Blog,Contact,Gallery,Index,JobApplication,Post,Posts,PreRegistration,Search,SiteMap,Survey";
+            context.Themes.Add(defaultTheme);
+
+            
+
+            context.SaveChanges();
+            return defaultTheme;
+        }
+        public static Theme AddTheme2(HostDbContext context)
+        {
+            var newTheme = new Theme();
+            newTheme.Name = "PoloCorporate5";
+            newTheme.Logo = "";
+            newTheme.ImageUrl = "";
+            newTheme.MetaDescription = "";
+            newTheme.MetaTitle = "";
+            newTheme.MetaKeywords = "";
+            newTheme.CreateDate = DateTime.Now;
+            newTheme.UpdateDate = DateTime.Now;
+            newTheme.CreatedBy = "UserName";
+            newTheme.UpdatedBy = "UserName";
+            newTheme.CustomCSS = "";
+
+            newTheme.MenuLocations = "Primary";
+            newTheme.ComponentTemplates = "Default,Gallery,MiniGallery,ContactForm,JobApplicationForm,PreRegistrationForm,SurveyForm,LogoSlider,Secondary";
+            newTheme.PageTemplates = "Page,Blog,Contact,Gallery,Index,JobApplication,Post,Posts,PreRegistration,Search,SiteMap,Survey";
+            context.Themes.Add(newTheme);
+
+            context.SaveChanges();
+            return newTheme;
+
+        }
         public static void AddAppTenants(HostDbContext context, Theme theme)
         {
             var appTenant = new AppTenant();
@@ -72,29 +122,23 @@ namespace CmsCoreV2.Data
             appTenant4.Theme = theme;
             appTenant4.ThemeId = theme.Id;
             context.AppTenants.Add(appTenant4);
+
             context.SaveChanges();
         }
-        public static Theme AddTheme(HostDbContext context)
+        public static void AddAppTenants2(HostDbContext context, Theme newTheme)
         {
-            var defaultTheme = new Theme();
-            defaultTheme.Name = "edugate";
-            defaultTheme.Logo = "/edugate/images/logo.png";
-            defaultTheme.ImageUrl = "";
-            defaultTheme.MetaDescription = "";
-            defaultTheme.MetaTitle = "";
-            defaultTheme.MetaKeywords = "";
-            defaultTheme.CreateDate = DateTime.Now;
-            defaultTheme.UpdateDate = DateTime.Now;
-            defaultTheme.CreatedBy = "UserName";
-            defaultTheme.UpdatedBy = "UserName";
-            defaultTheme.CustomCSS = "";
+            var appTenant5 = new AppTenant();
+            appTenant5.Name = "Bir İnsan";
+            appTenant5.Title = "Bir İnsan Belge";
+            appTenant5.Hostname = "localhost:60005";
+            appTenant5.ThemeName = newTheme.Name;
+            appTenant5.ConnectionString = $"Server=.;Database={appTenant5.Name};Trusted_Connection=True;MultipleActiveResultSets=true";
+            appTenant5.Folder = "birinsan";
+            appTenant5.Theme = newTheme;
+            appTenant5.ThemeId = newTheme.Id;
+            context.AppTenants.Add(appTenant5);
 
-            defaultTheme.MenuLocations = "Primary";
-            defaultTheme.ComponentTemplates = "Default,Gallery,MiniGallery,ContactForm,JobApplicationForm,PreRegistrationForm,SurveyForm,LogoSlider,Secondary";
-            defaultTheme.PageTemplates = "Page,Blog,Contact,Gallery,Index,JobApplication,Post,Posts,PreRegistration,Search,SiteMap,Survey";
-            context.Themes.Add(defaultTheme);
             context.SaveChanges();
-            return defaultTheme;
         }
 
 
