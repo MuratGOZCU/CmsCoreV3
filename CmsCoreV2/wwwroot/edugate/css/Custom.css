@@ -586,7 +586,7 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(10, 15, 28, 1) !important;
+    background-color: rgb(9, 48, 133) !important;
 }
 
 .search-input .search-input-wrapper {
@@ -596,6 +596,11 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
 
 .page-title {
     padding-top: 18.78% !important;
+}
+
+#formsuccess.page-title {
+    padding-top: 9.78% !important;
+    padding-bottom:100px;
 }
 
 
