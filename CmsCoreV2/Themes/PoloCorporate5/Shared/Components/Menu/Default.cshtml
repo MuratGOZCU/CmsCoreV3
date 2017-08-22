@@ -2,51 +2,56 @@
 @inject CustomLocalizer Localizer
 @inject AppTenant Tenant
 
-<ul class="nav-links nav navbar-nav">
-    @foreach (var item in Model.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
-    {
-
+<nav>
+    <ul>
+@foreach (var item in Model.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
+{
         <li @(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "class=dropdown" : "")>
-            <a href="#" class="main-menu" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
-                @Localizer[item.Name]
-                @Html.Raw(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "<span class='fa fa-angle-down icons-dropdown'></span>" : "")
+            <a href="#" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
+            
+            @Localizer[item.Name]
+            @Html.Raw(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "<span class='fa fa-angle-down icons-dropdown'></span>" : "")
+            
             </a>
-            @if (item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0)
-            {
-                <ul class="dropdown-menu edugate-dropdown-menu-1">
-                    @foreach (var childItem in item.ChildMenuItems.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
+@if (item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0)
+{
+            <ul class="dropdown-menu">
+                @foreach (var childItem in item.ChildMenuItems.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
                     {
                         if (childItem.MenuId == 1)
                         {
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
-                        }
-                        else if (childItem.MenuId == 2)
-                        {
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
-                        }
-
+                        <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
+                    }
+                    else if (childItem.MenuId == 2)
+                    {
+                        <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
                     }
 
-                </ul>
-            }
 
+                }
+
+
+
+
+
+               @*<li class="dropdown-submenu">
+                    <a href="#"><i class="fa fa-heart"></i>Headers</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu">
+                            <a href="#">Semi Transparent</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="header-light-transparent.html">Light</a></li>
+                                <li><a href="header-dark-transparent.html">Dark</a></li>
+                                <li><a href="header-colored-transparent.html">Colored</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>*@
+                
+            </ul>
+}
         </li>
-    }
-    <li class="button-search" onclick="getfocus()"><p class="main-menu"><i class="fa fa-search"></i></p></li>
-    <div class="nav-search hide">
-        <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama">
-            <input type="text" id="Search" name="query" placeholder=@Localizer["Ara"] class="searchbox" />
-            <button type="submit" class="searchbutton fa fa-search"></button>
-        </form>
-    </div>
-</ul>
-
-
-<script>
-    function getfocus() {
-        window.setTimeout(function () {
-            document.getElementById("Search").focus();
-        }, 0); 
-        
-    }
-</script>
+}
+    </ul>
+</nav>
