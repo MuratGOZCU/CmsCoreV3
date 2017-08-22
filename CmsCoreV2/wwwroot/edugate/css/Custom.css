@@ -163,7 +163,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
-    margin-bottom:40px;
+    margin-bottom:-40px;
 
 }
 
@@ -172,7 +172,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
-    margin-bottom: 40px;
+    margin-bottom: -40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(3) {
@@ -180,7 +180,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
-    margin-bottom: 40px;
+    margin-bottom: -40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(4) {
@@ -188,7 +188,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
-    margin-bottom: 40px;
+    margin-bottom: -40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(5) {
@@ -196,7 +196,7 @@ header .header-main .navigation .nav-links li .main-menu {
     width: 20px;
     height: 20px;
     border: 0px;
-    margin-bottom: 40px;
+    margin-bottom: -40px;
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot.active {
@@ -257,7 +257,13 @@ video {
     background-color: rgb(62,160,227);
     background: url('/edugate/images/blue-background.png') no-repeat;
     color: #fff;
+    height:350px !important;
 }
+
+
+
+
+
 
 .btn.btn-green:after {
 
@@ -783,10 +789,13 @@ a.morelink {
     width: initial !important;
     right: 0 !important;
     left: 70% !important;
+    top:0 !important;
+
 }
 
 .owl-carousel .owl-item img {
-    max-height: 280px !important;
+    max-height: 350px !important;
+
 }
 #home-search {
     width: 100%;
