@@ -1,0 +1,53 @@
+﻿@inject AppTenant Tenant
+@{
+    ViewData["Title"] = "Bilgi Koleji Ara";
+}
+@inject CustomLocalizer Localizer
+<div id="wrapper-content">
+    <!-- PAGE WRAPPER-->
+    <div id="page-wrapper">
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <!-- CONTENT-->
+            <div class="content">
+                <div class="section">
+                    <div class="search-input">
+                        <div class="container">
+                            <div class="search-input-wrapper">
+                                <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama" method="get">
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-10 col-sm-10">
+                                                <input id="home-search" type="text" placeholder=@Localizer["Arayınız..."] name="query" class=""  value="@ViewData["Search"]" />
+                                            </div>
+                                            <div class="col-md-2 col-sm-2">
+                                                <button type="submit" class="btn btn-blue"><span>@Localizer["Hızlı Ara"]<i class="fa fa-search"></i></span></button>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section section-padding list-categories">
+                    <div class="container">
+                        <div class="list-categories-wrapper">
+                            <div class="list-categories-content row">
+                                <div class="customs-row">
+                                    @await Component.InvokeAsync("Search")
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BUTTON BACK TO TOP-->
+    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+</div>

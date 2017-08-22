@@ -18,6 +18,7 @@ namespace CmsCoreV2.Data
             // migration'ları veritabanına uygula
             context.Database.Migrate();
             AppTenant tenant = context.tenant;
+
             if (tenant != null) { 
             string tenantId = tenant.AppTenantId;
             // Look for any pages record.
