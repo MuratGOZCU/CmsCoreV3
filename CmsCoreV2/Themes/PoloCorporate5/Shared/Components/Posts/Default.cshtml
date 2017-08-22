@@ -3,32 +3,48 @@
 @inject CustomLocalizer Localizer
 @inject AppTenant Tenant
 
-@foreach (var item in Model)
-{
-    <div class="edugate-layout-1">
-        <div class="edugate-image"><img src="@Html.Raw(item.Photo)" alt="" class="img-responsive" /></div>
-        <div class="edugate-content">
-            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
+<div id="blog" class="grid-layout post-3-columns m-b-30" data-item="post-item">
+    @foreach (var item in Model)
+    {
 
-            <div class="info">
-                <div class="date-time item"><a href="#">@item.CreateDate.ToString().Substring(0, 10)</a></div>
+
+     <!-- Post item-->
+        <div class="post-item border">
+            <div class="post-item-wrap">
+                <div class="post-image">
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">
+                        <img alt="" src="@Html.Raw(item.Photo)">
+                    </a>
+                    <span class="post-meta-category"><a href="">@item.PostPostCategories.FirstOrDefault()?.PostCategory</a></span>
+                </div>
+                <div class="post-item-description">
+                    @if (item.PublishDate != null)
+                    {
+                        <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@item.PublishDate</span>
+                    }
+                    else
+                    {
+
+                    }
+                    <h2>
+                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
+                    </h2>
+                    <p>@Html.Raw(item.Description.PadLeft(120))</p>
+
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="item-link">Devamını Oku.. <i class="fa fa-arrow-right"></i></a>
+
+                </div>
             </div>
-            <div class="description">
-                @Html.Raw(item.Description.PadLeft(120))
-            </div>
-            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="btn btn-green"><span>Devamını oku...</span></a>
         </div>
-    </div>
-
-
-
-}
-</div>
-
+        <!-- end: Post item-->
+    }
+    </div> 
 <div class="row">
-    <nav class="pagination col-md-12">
-        <ul class="pagination__list">
+    <div class="pagination pagination-simple " >
+        <ul >
             <pager resource='Post' />
         </ul>
-    </nav>
+    </div>
 </div>
+
+

@@ -19,10 +19,10 @@ namespace CmsCoreV2.ViewComponents
             this._context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string categoryNames)
+        public async Task<IViewComponentResult> InvokeAsync(string categoryNames, int pageSize = 4)
         {
             int pageNumber = 1;
-            var pageSize = 4;
+            
 
             if (!String.IsNullOrEmpty(Request.Query["page"]))
             {
