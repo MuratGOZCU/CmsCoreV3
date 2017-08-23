@@ -10,7 +10,7 @@
             <a href="#" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
             
             @Localizer[item.Name]
-            @Html.Raw(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "<span class='fa fa-angle-down icons-dropdown'></span>" : "")
+            
             
             </a>
 @if (item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0)
@@ -34,7 +34,7 @@
 
 
 
-               @*<li class="dropdown-submenu">
+               <li class="dropdown-submenu">
                     <a href="#"><i class="fa fa-heart"></i>Headers</a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-submenu">
@@ -47,7 +47,7 @@
                         </li>
 
                     </ul>
-                </li>*@
+                </li>
                 
             </ul>
 }
