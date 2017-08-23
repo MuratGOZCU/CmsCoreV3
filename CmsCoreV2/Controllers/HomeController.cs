@@ -221,6 +221,30 @@ namespace CmsCoreV2.Controllers
             return Redirect(Request.Headers["Referer"].ToString()+"?message=Gönderdiğiniz formda geçersiz alanlar var");
         }
 
+        [HttpPost]
+        public IActionResult PostFormAjax(IFormCollection formCollection, IFormFile[] upload)
+        {
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.Length > 0)
+                {
+                    foreach (var file in upload)
+                    {
+                        if (!(Path.GetExtension(file.FileName) == ".jpg" || Path.GetExtension(file.FileName) == ".jpeg" || Path.GetExtension(file.FileName) == ".png" || Path.GetExtension(file.FileName) == ".doc"
+                           || Path.GetExtension(file.FileName) == ".pdf"
+                           || Path.GetExtension(file.FileName) == ".rtf"
+                           || Path.GetExtension(file.FileName) == ".docx"))
+                        {
+                            return Json(new { response = "danger", message = "Dosya uzantısı geçersiz" });
+                        }
+                    }
+                }
+                feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
+                return Json(new { response = "success", message = "Girdiğiniz bilgiler başarıyla gönderildi" });
+            }
+            return Json(new { response = "danger", message = "Gönderdiğiniz formda geçersiz alanlar var" });
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
