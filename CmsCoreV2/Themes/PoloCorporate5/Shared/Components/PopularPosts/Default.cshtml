@@ -3,13 +3,30 @@
 @foreach (var item in Model)
 
 {
-    <div class="media">
-        <div class="media-left"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link"><img src="@Html.Raw(item.Photo)" alt="" class="media-image" /></a></div>
-        <div class="media-right">
-            <div class="info">
-                <div class="date-created item"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><span>@item.CreateDate.Day.@item.CreateDate.Month.@item.CreateDate.Year</span></a></div>
-            </div>
-            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link title">@(item.Title)</a>
+    <div class="post-thumbnail-entry">
+        <img alt="" src="@Html.Raw(item.Photo)">
+        <div class="post-thumbnail-content">
+            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@(item.Title)</a>
+            
+            @if (item.PublishDate != null)
+            {
+            <span class="post-date"><i class="fa fa-clock-o"></i> @item.PublishDate</span>
+            }
+            else
+            {
+
+                <br />
+            }
+
+            @if (item.PostPostCategories.FirstOrDefault() != null)
+            {
+                <span class="post-category"><i class="fa fa-tag"></i> @item.PostPostCategories.FirstOrDefault().PostCategory</span>
+            }
+            else
+            {
+            
+            }
+
         </div>
     </div>
 }
