@@ -1,4 +1,4 @@
-//----------------------------------------------------/
+﻿//----------------------------------------------------/
 //
 //      POLO
 //      Author: INSPIRO
@@ -2042,7 +2042,7 @@ var INSPIRO = {},
                             var button = $(form).find('button#form-submit'),
                                 buttonText = button.html();
 
-                            button.html('<i class="fa fa-refresh fa-spin"></i> Sending...');
+                            button.html('<i class="fa fa-refresh fa-spin"></i> Gönderiliyor...');
 
                             jQuery(form).ajaxSubmit({
                                 success: function (text) {

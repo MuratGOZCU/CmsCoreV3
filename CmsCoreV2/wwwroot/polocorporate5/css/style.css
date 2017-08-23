@@ -11726,12 +11726,10 @@ body.device-xxs .text-medium-light {
   animation-delay: 0; }
 
 .spinner {
-  height: 56px;
-  margin: auto 0;
-  position: relative;
-  width: 56px;
-  -webkit-animation: material-rotate-all 1s linear infinite;
-  animation: material-rotate-all 1s linear infinite; }
+    margin: auto 0;
+    position: relative;
+}
+
 
 .spinner .bar {
   width: 100%;
