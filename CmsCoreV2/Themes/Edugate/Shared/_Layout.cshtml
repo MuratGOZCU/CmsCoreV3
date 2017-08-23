@@ -15,8 +15,6 @@
 
 
             <!-- Temps Files-->
-            <script src="https://use.typekit.net/orp0qua.js"></script>
-            <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
             @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
             <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
             <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
@@ -38,8 +36,7 @@
 
 
             <!-- Temps Files-->
-            <script src="https://use.typekit.net/orp0qua.js"></script>
-            <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+           
             @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
             <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
             <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
@@ -86,7 +83,7 @@
                     <div class="navbar-header">
                         <div class="logo pull-left">
                             <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["Culture"]" class="header-logo">
-                                <img src="~/edugate/images/logo.png" alt="@Tenant.Title" />
+                                <img src="~/edugate/images/logo.png" alt="@Tenant.Title" width="220" />
                             </a>
                         </div>
                         <button type="button" data-toggle="collapse" data-target=".navigation" class="navbar-toggle edugate-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
@@ -165,7 +162,7 @@
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <ul class="list-unstyled">
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["akademik-takvim"]">@Localizer["Akademik Takvim"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="#GoToActivity">Etkinlikler</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/#GoToActivity">Etkinlikler</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["basinda-biz"]">@Localizer["Basında Biz"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["insan-kaynaklari"]">@Localizer["İnsan Kaynakları"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["kendini-degerlendir"]">@Localizer["Kendini Değerlendir"]</a></li>
