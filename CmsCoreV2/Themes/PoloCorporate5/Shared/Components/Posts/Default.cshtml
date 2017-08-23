@@ -15,7 +15,14 @@
                     <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">
                         <img alt="" src="@Html.Raw(item.Photo)">
                     </a>
-                    <span class="post-meta-category"><a href="">@item.PostPostCategories.FirstOrDefault()?.PostCategory</a></span>
+                    @if (item.PostPostCategories.FirstOrDefault() != null)
+                    {
+                        <span class="post-meta-category"><a href="">@item.PostPostCategories.FirstOrDefault()?.PostCategory</a></span>
+                    } else
+                    {
+
+
+                    }
                 </div>
                 <div class="post-item-description">
                     @if (item.PublishDate != null)
@@ -39,12 +46,13 @@
         <!-- end: Post item-->
     }
     </div> 
-<div class="row">
-    <div class="pagination pagination-simple " >
-        <ul >
-            <pager resource='Post' />
-        </ul>
+ 
+    <div class="row">
+        <div class="pagination pagination-simple ">
+            <ul>
+                <pager resource='Post' />
+            </ul>
+        </div>
     </div>
-</div>
-
+ 
 
