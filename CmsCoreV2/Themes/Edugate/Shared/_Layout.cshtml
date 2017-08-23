@@ -108,7 +108,7 @@
                         <div class="embededForm" id="floatingForm" style="display:none">
                             @await Component.InvokeAsync("EmbedForm", new { name = "Sizi Arayalım", template = "Default" })
                         </div><a href="javascript:void(0);" onclick="$('#floatingForm').slideToggle('slow')" class="show">
-                            <img src="~/edugate/images/telephone.png" alt="telephone" style="float:left; border-radius:20px 0px 0px 20px;" /><span style="display:inline-block;padding-top:1px;font-size:large">SİZİ ARAYALIM</span>
+                            <img src="~/edugate/images/telephone.png" alt="telephone" id="telephone" style="float:left; background-color:rgb(235, 28, 116); border-radius:20px 0px 0px 20px; border-right:2px solid #ffffff; width:34px; height:34px;" /><span style="display:inline-block;padding-top:1px;font-size:large">SİZİ ARAYALIM</span>
                         </a>
                     </div>
                     <!-- BUTTON BACK TO TOP-->
@@ -286,7 +286,24 @@
         <script src="~/edugate/libs/isotope/fit-columns.js"></script>
         <script src="~/edugate/js/pages/homepage.js"></script>
     </environment>
-    
+    <script src="https://cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
+    <script>
+        $(document).ready(function () {
+            window.setInterval(changeTelephoneBackgroundColor, 5000);
+        });
+        function changeTelephoneBackgroundColor() {
+          
+            if ($("#telephone").css("background-color") == "rgb(235, 28, 116)") {
+                $("#telephone").stop().animate({ backgroundColor: "rgb(255, 158, 25)" });
+            } else if ($("#telephone").css("background-color") == "rgb(255, 158, 25)") {
+                $("#telephone").stop().animate({ backgroundColor: "rgb(59, 175, 41)" });
+            } else if ($("#telephone").css("background-color") == "rgb(59, 175, 41)") {
+                $("#telephone").stop().animate({ backgroundColor: "rgb(0, 130, 203)" });
+            } else if ($("#telephone").css("background-color") == "rgb(0, 130, 203)") {
+                $("#telephone").stop().animate({ backgroundColor: "rgb(235, 28, 116)" });
+            }
+        }
+    </script>
     @RenderSection("scripts", required: false)
    
 </body>
