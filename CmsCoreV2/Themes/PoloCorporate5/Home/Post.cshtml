@@ -4,65 +4,111 @@
 }
 @Html.Raw(Model.HeaderScript)
 
-<!-- WRAPPER-->
-<div id="wrapper-content">
-    <!-- PAGE WRAPPER-->
-    <div id="page-wrapper">
-        <!-- MAIN CONTENT-->
-        <div class="main-content">
-            <!-- CONTENT-->
-            <div class="content">
-                <div class="section section-padding news-detail">
-                    <div class="container">
-                        <div class="news-detail-wrapper">
-                            <div class="row">
-                                <div class="col-md-9 col-sm-12">
-                                    <div class="news-detail">
-                                        <img src="@Html.Raw(Model.Photo)" alt="" class="news-image" />
-                                        <h1 class="title-news">@(Model.Title)</h1>
-                                        <div style="text-align:left; display:none" class="staff-desctiption">@Html.Raw(Model.Description)</div>
-                                        <div style="margin-top:20px !important" class="news-content">
-                                            @Html.Raw(Model.Body)
-                                        </div>
+
+<!-- Page Content -->
+<section id="page-content" class="sidebar-right">
+    <div class="container">
+        <div class="row">
+            <!-- content -->
+            <div class="content col-md-9">
+                <!-- Blog -->
+                <div id="blog" class="single-post">
+                    <!-- Post single item-->
+                    <div class="post-item">
+                        <div class="post-item-wrap">
+                            <div class="post-image">
+                                <a href="#">
+                                    <img  class="img-responsive" src="@Html.Raw(Model.Photo)">
+                                </a>
+                            </div>
+                            <div class="post-item-description">
+                                <h2>@(Model.Title)</h2>
+                                <div class="post-meta">
+
+                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.CreateDate</span>
+                                    @if (Model.PostPostCategories.FirstOrDefault()!= null)
+                                    {
+                                        <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>Lifestyle, Magazine</a></span>
+
+                                    } else
+                                    {
+
+                                    }
+                                    <div class="post-meta-share">
+                                        <a class="btn btn-xs btn-slide btn-facebook" href="#">
+                                            <i class="fa fa-facebook"></i>
+                                            <span>Facebook</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-twitter" href="#" data-width="100">
+                                            <i class="fa fa-twitter"></i>
+                                            <span>Twitter</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-instagram" href="#" data-width="118">
+                                            <i class="fa fa-instagram"></i>
+                                            <span>Instagram</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-googleplus" href="mailto:#" data-width="80">
+                                            <i class="fa fa-envelope"></i>
+                                            <span>Mail</span>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-12 sidebar layout-right">
-                                    <div class="row">
-                                        <div class="recent-post-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
-                                            <div class="title-widget">Bu Kategorideki Son Yazılar</div>
-                                            <div class="content-widget">
-                                                @await Component.InvokeAsync("LatestsPostsWidget", new { categoryNames = Model.CategoryName, count = 4, id = Model.Id })
-                                            </div>
-                                        </div>
-                                        <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
-                                            <div class="title-widget">Çok Okunanlar</div>
-                                            <div class="content-widget">
-                                                @await Component.InvokeAsync("PopularPosts", new { total = 4, id = Model.Id })
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        @*<div class="category-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
-                                                <div class="title-widget">categories</div>
-                                                <div class="content-widget">
-                                                    <ul class="category-widget list-unstyled">
-                                                        <li><a href="categories.html" class="link cat-item"><span class="pull-left">Web Design</span><span class="pull-right">125</span></a></li>
-                                                        <li><a href="categories.html" class="link cat-item"><span class="pull-left">Wordpress Themes</span><span class="pull-right">97</span></a></li>
-                                                        <li><a href="categories.html" class="link cat-item"><span class="pull-left">Photography</span><span class="pull-right">56</span></a></li>
-                                                        <li><a href="categories.html" class="link cat-item"><span class="pull-left">Video</span><span class="pull-right">24</span></a></li>
-                                                        <li><a href="categories.html" class="link cat-item"><span class="pull-left">Miscellaneous</span><span class="pull-right">13</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>*@
-                                        <div class="clearfix"></div>
+                                <p style="text-align:justify">@Html.Raw(Model.Description)</p>                             
+                            </div>                       
+                                                              
+                        </div>
+                    </div>
+                    <!-- end: Post single item-->
+                </div>
+            </div>
+            <!-- end: content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-md-3">
+                <div class="pinOnScroll">
+                    <!--widget newsletter-->
+                    <div class="widget  widget-newsletter">
+
+                        <form id="widget-search-form-sidebar" action="search-results-page.html" method="get" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" aria-required="true" name="q" class="form-control widget-search-form" placeholder="Arama">
+                                <span class="input-group-btn">
+                                    <button type="submit" id="widget-widget-search-form-button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end: widget newsletter-->
+                    <!--Tabs with Posts-->
+                    <div class="widget">
+                        <div id="tabs-01" class="tabs simple">
+                            <ul class="tabs-navigation">
+                                <li class="active"><a href="#tab1">Popüler Yazılar  </a> </li>
+                                <li class=""><a href="#tab2">Son Yazılar </a> </li>                       
+                            </ul>
+                            <div class="tabs-content">
+                                <div class="tab-pane active" id="tab1">
+                                    <div class="post-thumbnail-list">    
+                                        
+                                        @await Component.InvokeAsync("PopularPosts", new { total = 4, id = Model.Id })
+
                                     </div>
                                 </div>
+                                <div class="tab-pane" id="tab2">
+                                    <div class="post-thumbnail-list">
+                                     
+                                        @await Component.InvokeAsync("LatestsPostsWidget", new { count = 4, id = Model.Id })
+                                        
+                                    </div>
+                                </div>
+                        
                             </div>
                         </div>
                     </div>
+                    <!--End: Tabs with Posts-->                           
                 </div>
             </div>
+            <!-- end: sidebar-->
         </div>
     </div>
-    <!-- BUTTON BACK TO TOP-->
-    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
-</div>
+</section>
+<!-- end: Page Content -->

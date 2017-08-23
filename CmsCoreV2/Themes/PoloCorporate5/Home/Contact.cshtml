@@ -3,158 +3,65 @@
 @{
     ViewData["Title"] = Model.SeoTitle;
 }
-<div id="wrapper-content">
-    <!-- PAGE WRAPPER-->
-    <div id="page-wrapper">
-        <!-- MAIN CONTENT-->
-        <div class="main-content">
-            <!-- CONTENT-->
-            <div class="content">
-                <div class="section section-padding contact-main">
-                    <div class="container">
-                        <div class="contact-main-wrapper">
-                            <div class="row contact-method">
-                                @Html.Raw(Model.Body)
-                                @await Component.InvokeAsync("EmbedForm", new { name = "İletişim", template = "ContactForm" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="map_canvas" class="section contact-map">
+
+<!-- Page title -->
+<section id="page-title" data-parallax-image="@Model.Photo">
+    <div class="container">
+        <div class="page-title">
+            <h1>@Model.Title</h1>
+            <span>@Model.Meta1</span>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="#">Home</a> </li>
+                <li><a href="#">Pages</a> </li>
+                <li class="active"><a href="#">Contact Us</a> </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- end: Page title -->
+<!-- CONTENT -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="text-uppercase">@Model.Title</h3>
+                <p>@Model.Meta1</p>
+                <div class="m-t-30">
+                    @await Component.InvokeAsync("EmbedForm", new { name = "İletişim", template = "ContactForm" })
+
                 </div>
             </div>
+            <div class="col-md-6">
+                <h3 class="text-uppercase">Adres & Harita</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <address>
+                            <strong>Bilişim Eğitim Merkezi</strong><br>
+                            Bahariye Cad.SüleymanPaşa Sok. No:2<br>
+                            Kadıköy, İstanbul<br>
+                            <abbr title="Phone">Tel:</abbr> 216-346-26-06
+                        </address>
+                    </div>
+                    <div class="col-md-6">
+                        <address>
+                            <strong>Bir İnsan Akademisi</strong><br>
+                            Bahariye Cad.SüleymanPaşa Sok. No:2<br>
+                            Kadıköy, İstanbul<br>
+                            <abbr title="Phone">Tel:</abbr> 216-346-26-06
+                        </address>
+                    </div>
+                </div>
+
+                <!-- Google map sensor -->
+                <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.exp"></script>
+                <div class="map m-t-30" data-map-address="Melburne, Australia" data-map-zoom="10" data-map-icon="images/markers/marker2.png" data-map-type="ROADMAP"></div>
+                <!-- Google map sensor -->
+
+            </div>
         </div>
-        <!-- BUTTON BACK TO TOP-->
-        <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
     </div>
-</div>
-@section scripts{
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAJyYNp6gK3IrXp_Xi3wPdmJNNvATrklpo"></script>
-    <script type="text/javascript">
-    function initialize() {
-        var canvas = $("#map_canvas");
-        var lng = @Html.Raw(ViewBag.MapLon);
-        var lat = @Html.Raw(ViewBag.MapLat);
-        var mapTitle = "@Html.Raw(ViewBag.MapTitle)";
-        var latlng = new google.maps.LatLng(lat, lng);
-        var options = {
-            scrollwheel: false,
-            zoom: 16,
-            center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+</section>
+<!-- end: CONTENT -->
 
-
-        infowindow = new google.maps.InfoWindow({ content: mapTitle });
-
-        var map = new google.maps.Map(canvas[0], options);
-
-
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat, lng),
-            map: map
-        });
-        marker.addListener('click', function () {
-            infowindow.open(map, marker);
-
-        });
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-                    //: icon
-                });
-
-                var infowindow = new google.maps.InfoWindow();
-
-                map.setCenter(pos);
-
-                var content = "Konum bulundu"
-
-                //konumumuzu harita üzerinde isaretler
-                google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
-                    return function () {
-                        infowindow.setContent(content);
-                        infowindow.open(map, marker);
-                    };
-                })(marker, content, infowindow));
-
-                var data = [
-                    { "enlem": position.coords.latitude, "boylam": position.coords.longitude },
-                    { "enlem": lat, "boylam": lng },
-
-                ];
-
-                //rotayi çizen metodu çagiriyoruz ve baslangiç bitis noktalarini gönderiyoruz.
-                RotaCiz(data);
-
-
-            }, function () {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            // enlem ve boylam alinamazsa
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-
-
-
-   
-        infowindow.open(map, marker);
-
-      
-    }
-    $(function () {
-        initialize();
-        });
-
-
-        var gm = google.maps;
-
-        function RotaCiz(data) {
-            var directionsService = new google.maps.DirectionsService;
-            var directionsDisplay = new google.maps.DirectionsRenderer;
-
-            var map = new google.maps.Map(document.getElementById('map_canvas'), {
-                zoom: 10
-            });
-            directionsDisplay.setMap(map);
-
-            calculateAndDisplayRoute(directionsService, directionsDisplay, data); //Rota hesaplama
-
-        }
-
-        function calculateAndDisplayRoute(directionsService, directionsDisplay, data) {
-
-
-
-            directionsService.route({
-                //Baslangiç noktasi
-                origin: { lat: data[0].enlem, lng: data[0].boylam },
-                //Bitis noktasi
-                destination: { lat: data[1].enlem, lng: data[1].boylam },
-                optimizeWaypoints: true,
-                //Rota üzerindeki hesaplamalarin neye göre yapilacagi (yürüyüs,araç,bisiklet)
-                travelMode: google.maps.TravelMode.WALKING
-            }, function (response, status) {
-                if (status === google.maps.DirectionsStatus.OK) {
-                    directionsDisplay.setDirections(response);
-                    var route = response.routes[0];
-
-                } else {
-                    window.alert('Rota çizilemedi ' + status);
-                }
-            });
-        }
-    </script>
-}
-
-
- 
