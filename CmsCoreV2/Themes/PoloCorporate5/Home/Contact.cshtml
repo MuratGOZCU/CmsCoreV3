@@ -34,34 +34,94 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h3 class="text-uppercase">Adres & Harita</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <address>
-                            <strong>Bilişim Eğitim Merkezi</strong><br>
-                            Bahariye Cad.SüleymanPaşa Sok. No:2<br>
-                            Kadıköy, İstanbul<br>
-                            <abbr title="Phone">Tel:</abbr> 216-346-26-06
-                        </address>
-                    </div>
-                    <div class="col-md-6">
-                        <address>
-                            <strong>Bir İnsan Akademisi</strong><br>
-                            Bahariye Cad.SüleymanPaşa Sok. No:2<br>
-                            Kadıköy, İstanbul<br>
-                            <abbr title="Phone">Tel:</abbr> 216-346-26-06
-                        </address>
-                    </div>
-                </div>
+                @Html.Raw(Model.Body)
 
                 <!-- Google map sensor -->
-                <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.exp"></script>
-                <div class="map m-t-30" data-map-address="Melburne, Australia" data-map-zoom="10" data-map-icon="images/markers/marker2.png" data-map-type="ROADMAP"></div>
-                <!-- Google map sensor -->
+                @*<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.exp"></script>
+                <div class="map m-t-30" data-map-address="Melburne, Australia" data-map-zoom="10" data-map-icon="images/markers/marker2.png" data-map-type="ROADMAP"></div>*@
+                
+                <style>
+                    #map {
+                        height: 400px;
+                        width: 100%;
+                    }
+                </style>
 
+                <div id="map"></div>
+                <button class="btn btn-blue col-md-12" onclick="goMap()">Yol Tarifi Al</button>
+                <!-- Google map sensor -->
+                              
             </div>
         </div>
     </div>
 </section>
 <!-- end: CONTENT -->
+
+<script>
+
+        var mapLat = @ViewBag.MapLat;
+        var mapLng = @ViewBag.MapLon;
+        var mapTitle = "@Html.Raw(ViewBag.MapTitle)";
+
+        function initMap() {
+
+            var uluru = { lat: mapLat, lng: mapLng };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+
+
+
+            });
+
+            infowindow = new google.maps.InfoWindow({ content: mapTitle });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+            infowindow.open(map, marker);
+
+
+
+        }
+
+        function goMap() {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+
+
+            function showPosition(position) {
+
+                alert("Yol Tarifi İçin Google Haritalara Yönlendiriliyorsunuz");
+
+
+
+                window.open('https://www.google.com.tr/maps/dir/' + position.coords.latitude + ',' + position.coords.longitude + '/' + mapLat + ',' + mapLng + '/@@' + mapLat + ',' + mapLng + ',10z');
+
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaPeFjLrFwwLc1CFAuvjdv0ljWbtuJ760&callback=initMap">
+</script>
+
 
