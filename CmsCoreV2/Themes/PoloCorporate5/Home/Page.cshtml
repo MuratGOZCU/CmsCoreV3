@@ -4,79 +4,47 @@
 @{
     ViewData["Title"] = Model.SeoTitle;
 }
+<script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
 @Html.Raw(Model.HeaderScript)
-
-@*<style>
-    #primaryschool.search-input {
-        background-color: #ff791a !important;
-    }
-
-    #middleschool.search-input {
-        background-color: #34b44a !important;
-    }
-
-    #highschool.search-input {
-        background-color: #ed2867 !important;
-    }
-</style>*@
-<!-- WRAPPER-->
-<div id="wrapper-content">
-    <!-- PAGE WRAPPER-->
-    <div id="page-wrapper">
-        <!-- MAIN CONTENT-->
-        <div class="main-content">
-            <!-- CONTENT-->
-            <div class="content">
-                <div class="section section-padding courses-detail event-detail-section">
-                    <div class="container">
-                        <div class="courses-detail-wrapper">
-                            <div class="row">
-                                <div class="col-md-9 layout-left">
-                                    <h1 class="event-detail-title">@Html.Raw(Model.Title)</h1>
-
-                                    <div class="event-detail-des">
-                                        <div class="event-detail-des-content">
-                                            <div class="more">@Html.Raw(Model.Body)</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="event-detail-des">
-                                        <div class="event-detail-des-content">
-                                            
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 sidebar layout-right">
-                                    <div class="row">
-                                        <div class="popular-course-widget widget col-sm-6 col-md-12 col-xs-6 sd380">
-                                            <div class="title-widget" style="margin-left:50px">@Localizer["İlgili Sayfalar"]</div>
-                                            <div class="content-widget">
-                                                <ul class="category-widget list-unstyled" style="margin-left:50px">
-                                                    @* BURAYA GELECEK *@
-                                                    @await Component.InvokeAsync("RelatedPages", new { Id = (Model.Id) })
-                                                    @*<div class="cur">35</div>
-                                                        <a href="courses-detail.html" class="link title">Adobe Lightroom CC for Photographers</a>
-
-                                                        <div class="info">
-                                                            <div class="author item"><a href="#"><span>By Sandara</span></a></div>
-                                                        </div>*@
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="col-md-1"></div>
+<div class="col-md-6">
+    <div class="post-item-description" style="margin-left:-23px; margin-top:10px;">
+        <h2>@Html.Raw(Model.Title)</h2>
+        <div class="post-meta">
+            <div class="event-detail-des">
+                <div class="event-detail-des-content">
+                    <div class="more">@Html.Raw(Model.Body)</div>
                 </div>
+            </div>
+
+            <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.UpdateDate &nbsp;</span>
+            <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>@Model.ViewCount görüntüleme</a></span>
+            <br /><br/>
+            <div class="post-meta-share" style="margin-bottom:20px;">
+                <a class="btn btn-xs btn-slide btn-facebook" href="#">
+                    <i class="fa fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a class="btn btn-xs btn-slide btn-twitter" href="#" data-width="100">
+                    <i class="fa fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a class="btn btn-xs btn-slide btn-instagram" href="#" data-width="118">
+                    <i class="fa fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a class="btn btn-xs btn-slide btn-googleplus" href="mailto:#" data-width="80">
+                    <i class="fa fa-envelope"></i>
+                    <span>Mail</span>
+                </a>
             </div>
         </div>
     </div>
+   
 </div>
+
 <!-- BUTTON BACK TO TOP-->
-<div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+
 <script type="text/javascript" charset="utf-8">
     $(window).load(function () {
         var fSlider = $('#carousel').flexslider({

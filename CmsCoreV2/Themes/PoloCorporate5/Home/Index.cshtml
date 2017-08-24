@@ -1,89 +1,70 @@
 ﻿@inject CustomLocalizer Localizer
 @inject AppTenant Tenant
 
+
+
+<a href="javascript:;" class="openbtn">
+    <img src="~/polocorporate5/images/form_kapali.png" />
+</a>
+<div class="call">
+    <div class="callform">
+        <a href="javascript:;" class="closebtn">
+            <img src="~/polocorporate5/images/closeform.png" alt="..." />
+        </a>
+        <div class="form-bg">
+            <h3 class="text-center form-title">Sizi Arayalım</h3>
+            @await Component.InvokeAsync("EmbedForm", new { name = "İletişim", template = "FixForm" })
+        </div>
+    </div>
+</div>
+
+
+
 @await Component.InvokeAsync("Slider", new { Name = "Anasayfa Slider" })
 
+<!-- " https://codepen.io/vzajcic/pen/awLGwO?editors=0010#0 "-->
+
 <!-- SERVICES -->
-<section class="p-t-100">
+<section class="p-t-100" >
     <div class="container">
-        <div class="row">
+        <div class="row" style="text-align:center;">
             <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
+                <div class="center">
                     <div class="icon">
-                        <a href="#"><i class="fa fa-plug"></i></a>
+                       <img src="~/polocorporate5/images/services/online_basvuru_v1.png">
                     </div>
-                    <h3>Powerful template</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                    <a href="#"><h4>Online Başvuru</h4></a>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
+                <div class=" center">
                     <div class="icon">
-                        <a href="#"><i class="fa fa-desktop"></i></a>
+                        <img src="~/polocorporate5/images/services/kurumsal_basvuru_v1.png">
                     </div>
-                    <h3>Flexible Layouts</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                    <a href="#"><h4>Kurumsal Başvuru</h4></a>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
+                <div class="center">
                     <div class="icon">
-                        <a href="#"><i class="fa fa-cloud"></i></a>
+                        <img src="~/polocorporate5/images/services/belge_sorgulama.png">
                     </div>
-                    <h3>Retina Ready</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
-                    <div class="icon">
-                        <a href="#"><i class="fa fa-lightbulb-o"></i></a>
-                    </div>
-                    <h3>Fast processing</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                    <a href="#"><h4>Belge Sorgulama</h4></a>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
+                <div class=" center">
                     <div class="icon">
-                        <a href="#"><i class="fa fa-trophy"></i></a>
+                        <img src="~/polocorporate5/images/services/sınav_sonuclari_v1.png">
                     </div>
-                    <h3>Unlimited Colors</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                    <a href="#"><h4>Sınav Sonuçları</h4></a>
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
-                    <div class="icon">
-                        <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
-                    </div>
-                    <h3>Premium Sliders</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
-                    <div class="icon">
-                        <a href="#"><i class="fa fa-cloud"></i></a>
-                    </div>
-                    <h3>Retina Ready</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="icon-box effect medium color border center">
-                    <div class="icon">
-                        <a href="#"><i class="fa fa-lightbulb-o"></i></a>
-                    </div>
-                    <h3>Fast processing</h3>
-                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
-                </div>
-            </div>
+   
         </div>
     </div>
 </section>
