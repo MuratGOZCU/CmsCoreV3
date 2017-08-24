@@ -1,4 +1,16 @@
-﻿.dots-loader:not(:required) {
+﻿@font-face {
+    font-family: Interstate;
+    src: url('../font/interstateregulartr.ttf') format('truetype');
+}
+@font-face {
+    font-family: Interstate;
+    src: url('../font/interstate bold-tr.ttf') format('truetype');
+    font-weight: bold;
+}
+body {
+    font-family: Interstate, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.dots-loader:not(:required) {
     -webkit-animation: none !important;
     animation: none !important;
     box-shadow: none !important;
@@ -935,4 +947,13 @@ width: 28px !important;
 }
 #floatingButton img {
     width: 34px;
+}
+@media print {
+    header .header-main .logo .header-logo img {
+        width: 150px;
+    }
+}
+
+.edugate-layout-2 .edugate-content .title {
+    text-transform: none !important;
 }

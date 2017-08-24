@@ -17,12 +17,12 @@
                             <label class="control-label form-label">@item.Name<span class="highlight">*</span></label>
                             @if (item.Required)
                             {
-                                <formField form-field="item" required="true" css-class="form-input" read_only="false" show-placeholder="true" />
+                                <formField form-field="item" required="true" css-class="form-input form-job" read_only="false" show-placeholder="true" />
                                 @Html.ValidationMessage(item.Name, "", new { @class = "text-danger" })
                             }
                             else
                             {
-                                <formField form-field="item" read_only="false" show-placeholder="true" />
+                                <formField form-field="item" read_only="false" css-class="form-input form-job" show-placeholder="true" />
                             }
 
                         </div>
