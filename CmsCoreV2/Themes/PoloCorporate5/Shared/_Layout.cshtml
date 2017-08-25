@@ -16,7 +16,7 @@
     <link href="/polocorporate5/css/plugins.css" rel="stylesheet">
     <link href="/polocorporate5/css/style.css" rel="stylesheet">
     <link href="/polocorporate5/css/responsive.css" rel="stylesheet">
-
+    <link href="~/polocorporate5/css/custom.css" rel="stylesheet">
     <!-- Template color -->
     <link href="/polocorporate5/css/color-variations/green.css" rel="stylesheet" type="text/css" media="screen">
 </head>
@@ -62,14 +62,14 @@
                 <div class="container">
                     <!--Logo-->
                     <div id="logo">
-                        <a href="index.html" class="logo" data-dark-logo="/polocorporate5/images/logo-dark.png">
+                        <a href="/" class="logo" data-dark-logo="/polocorporate5/images/logo-dark.png">
                             <img src="/polocorporate5/images/logo.png" alt="Polo Logo">
                         </a>
                     </div>
                     <!--End: Logo-->
                     <!--Top Search Form-->
                     <div id="top-search">
-                        <form action="search-results-page.html" method="get">
+                        <form action="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama">
                             <input type="text" name="q" class="form-control" value="" placeholder="Start typing & press  &quot;Enter&quot;">
                         </form>
                     </div>
@@ -85,17 +85,7 @@
                                 </a>
                                 <!--end: top search-->
                             </li>
-                            <li class="hidden-xs">
-                                <!--shopping cart-->
-                                <div id="shopping-cart">
-                                    <a href="shop-cart.html">
-                                        <span class="shopping-cart-items">8</span>
-
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </a>
-                                </div>
-                                <!--end: shopping cart-->
-                            </li>
+                            
                             <li>
                                 <div class="topbar-dropdown">
                                     <a class="title"><i class="fa fa-globe"></i></a>
@@ -246,6 +236,8 @@
     <!--Plugins-->
     <script src="/polocorporate5/js/jquery.js"></script>
     <script src="/polocorporate5/js/plugins.js"></script>
+    <!--Fix Form -->
+    <script src="~/polocorporate5/js/Global.js"></script>
 
     <!--Template functions-->
     <script src="/polocorporate5/js/functions.js"></script>

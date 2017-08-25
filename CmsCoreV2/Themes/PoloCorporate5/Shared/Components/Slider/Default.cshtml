@@ -9,33 +9,34 @@
         <!-- Slide 1 -->
         @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).ToList().Take(5).OrderBy(f => f.Position))
         {
-            <div class="slide background-image img-responsive" style="background-image:url('@slide.Photo');">
-                <div class="container">
-                    <div class="slide-captions">
-                        @if (slide.DisplayTexts != false)
-                        {
+                <div class="slide background-image img-responsive" style="background-image:url('@slide.Photo')">
+                    <div class="container">
+                        <div class="slide-captions">
+                            @if (slide.DisplayTexts != false)
+                            {
                            <!-- Captions -->
-                            <h6>@slide.SubTitle</h6>
-                            <h2 class="text-uppercase text-medium">@slide.Title</h2>
-                            <p class="lead">
-                                @slide.Description
-                            </p>
-                            <a class="btn" href="@slide.CallToActionUrl">@slide.CallToActionText</a>
+                                <a href="@slide.CallToActionUrl"><h4 class="text-uppercase inline-block title-background" style="background-color:green;padding:5px;">@slide.Title</h4></a>
+
+                                @if (slide.CallToActionText != null)
+                                {
+                                    <a class="btn" href="@slide.CallToActionUrl">@slide.CallToActionText</a>
+                                }
+
                         <!-- end: Captions -->
-                        }
-                        else
-                        {
+                            }
+                            else
+                            {
 
 
-                        }
-                     
+                            }
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        }
+                }
 
-        <!-- end: Slide 1 -->
-    </div>
+                <!-- end: Slide 1 -->
+</div>
     <!--end: Inspiro Slider -->
 }
