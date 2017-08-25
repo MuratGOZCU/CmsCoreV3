@@ -108,7 +108,7 @@
                         <div class="embededForm" id="floatingForm" style="display:none">
                             @await Component.InvokeAsync("EmbedForm", new { name = "Sizi Arayalım", template = "Default" })
                         </div><a href="javascript:void(0);" onclick="$('#floatingForm').slideToggle('slow')" class="show">
-                            <img src="~/edugate/images/telephone.png" alt="telephone" id="telephone" style="float:left; background-color:rgb(235, 28, 116); border-radius:20px 0px 0px 20px; border-right:2px solid #ffffff; width:34px; height:34px;" /><span style="display:inline-block;padding-top:1px;font-size:large">SİZİ ARAYALIM</span>
+                            <img src="~/edugate/images/telephone.png" alt="telephone" id="telephone" style="float:left; background-color:rgba(235, 28, 116, 1); border-radius:20px 0px 0px 20px; border-right:2px solid #ffffff; width:34px; height:34px;" /><span style="display:inline-block;padding-top:1px;font-size:large">SİZİ ARAYALIM</span>
                         </a>
                     </div>
                     <!-- BUTTON BACK TO TOP-->
@@ -293,15 +293,22 @@
         });
         function changeTelephoneBackgroundColor() {
           
-            if ($("#telephone").css("background-color") == "rgb(235, 28, 116)") {
-                $("#telephone").stop().animate({ backgroundColor: "rgb(255, 158, 25)" });
-            } else if ($("#telephone").css("background-color") == "rgb(255, 158, 25)") {
-                $("#telephone").stop().animate({ backgroundColor: "rgb(59, 175, 41)" });
-            } else if ($("#telephone").css("background-color") == "rgb(59, 175, 41)") {
-                $("#telephone").stop().animate({ backgroundColor: "rgb(0, 130, 203)" });
-            } else if ($("#telephone").css("background-color") == "rgb(0, 130, 203)") {
-                $("#telephone").stop().animate({ backgroundColor: "rgb(235, 28, 116)" });
+            if (rgb2hex($("#telephone").css("backgroundColor")) == rgb2hex("rgba(235, 28, 116, 1)")) {
+                $("#telephone").stop().animate({ backgroundColor: "rgba(255, 158, 25, 1)" });
+            } else if (rgb2hex($("#telephone").css("backgroundColor")) == rgb2hex("rgba(255, 158, 25, 1)")) {
+                $("#telephone").stop().animate({ backgroundColor: "rgba(59, 175, 41, 1)" });
+            } else if (rgb2hex($("#telephone").css("backgroundColor")) == rgb2hex("rgba(59, 175, 41, 1)")) {
+                $("#telephone").stop().animate({ backgroundColor: "rgba(0, 130, 203, 1)" });
+            } else if (rgb2hex($("#telephone").css("backgroundColor")) == rgb2hex("rgba(0, 130, 203, 1)")) {
+                $("#telephone").stop().animate({ backgroundColor: "rgba(235, 28, 116, 1)" });
             }
+        }
+        function rgb2hex(orig) {
+            var rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+            return (rgb && rgb.length === 4) ? "#" +
+                ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
         }
     </script>
     @RenderSection("scripts", required: false)

@@ -10,7 +10,11 @@
 body {
     font-family: Interstate, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
-.dots-loader:not(:required) {
+header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main .edugate-dropdown-menu-2 li .link-page {
+    text-transform: none !important;
+}
+
+    .dots-loader:not(:required) {
     -webkit-animation: none !important;
     animation: none !important;
     box-shadow: none !important;
@@ -483,7 +487,7 @@ video {
         margin-top: 0px;
     }
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-li.accordion.active, li.accordion:hover {
+    li .accordion.active, li.accordion:hover {
     background-color: #ddd;
 }
 
