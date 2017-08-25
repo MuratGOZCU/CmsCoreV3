@@ -128,12 +128,12 @@ namespace CmsCoreV2.Data
         public static void AddAppTenants2(HostDbContext context, Theme newTheme)
         {
             var appTenant5 = new AppTenant();
-            appTenant5.Name = "Bir İnsan";
-            appTenant5.Title = "Bir İnsan Belge";
+            appTenant5.Name = "BirInsanBelge";
+            appTenant5.Title = "Bir İnsan Belgelendirme";
             appTenant5.Hostname = "localhost:60005";
             appTenant5.ThemeName = newTheme.Name;
             appTenant5.ConnectionString = $"Server=.;Database={appTenant5.Name};Trusted_Connection=True;MultipleActiveResultSets=true";
-            appTenant5.Folder = "birinsan";
+            appTenant5.Folder = "birinsanbelge";
             appTenant5.Theme = newTheme;
             appTenant5.ThemeId = newTheme.Id;
             context.AppTenants.Add(appTenant5);

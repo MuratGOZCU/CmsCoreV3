@@ -1,6 +1,6 @@
 ﻿@inject AppTenant Tenant
 @{
-    ViewData["Title"] = "Bilgi Koleji Ara";
+    ViewData["Title"] = "Bir İnsan Belge";
 }
 @inject CustomLocalizer Localizer
 <div id="wrapper-content">
@@ -9,45 +9,90 @@
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <!-- CONTENT-->
-            <div class="content">
-                <div class="section">
-                    <div class="search-input">
-                        <div class="container">
-                            <div class="search-input-wrapper">
-                                <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama" method="get">
-                                    <div class="form-group col-md-12 col-sm-12">
-                                        <div class="row">
-                                            <div class="col-md-10 col-sm-10">
-                                                <input id="home-search" type="text" placeholder=@Localizer["Arayınız..."] name="query" class=""  value="@ViewData["Search"]" />
-                                            </div>
-                                            <div class="col-md-2 col-sm-2">
-                                                <button type="submit" class="btn btn-blue"><span>@Localizer["Hızlı Ara"]<i class="fa fa-search"></i></span></button>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+            <section id="page-title" class="page-title-center" data-parallax-image="images/parallax/5.jpg">
+                <div class="container">
+                    <div class="page-title">
+                        <h1>Arama Sonucu Sayfası</h1>
+                    </div>
+                    <div class="breadcrumb">
+                        <ul>
+                            <li>
+                                <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">Arama Sonucu Sayfası</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="section section-padding list-categories">
-                    <div class="container">
-                        <div class="list-categories-wrapper">
-                            <div class="list-categories-content row">
-                                <div class="customs-row">
-                                    @await Component.InvokeAsync("Search")
+            </section>
+
+            <section id="page-content" class="sidebar-right">
+                <div class="container">
+                    <div class="row">
+                        <!-- content -->
+                        <div class="content col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                            <div class="col-md-9 col-sm-9 col-lg-9 col-xs-12">
+
+
+                                <div class="section section-padding list-categories " >
+                                    <div class="container col-md-12">
+                                        <div class="list-categories-wrapper">
+                                            <div class="list-categories-content row">
+                                                <div class="customs-row">
+                                                    @await Component.InvokeAsync("Search")
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
+
+                            </div>
+                            <div class="sidebar col-md-3 col-sm-3 col-lg-3 col-xs-12" style="padding-left:0px; padding-right:0px;">
+                                <!--widget newsletter-->
+                                <div class="widget  widget-newsletter">
+                                    <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama">
+                                        <div class="input-group">
+                                            <input type="text" id="Search" aria-required="true" name="query" class="form-control widget-search-form" placeholder="Search for pages...">
+                                            <span class="input-group-btn">
+                                                <button type="submit" id="widget-widget-search-form-button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                            </span>
+                                        </div>
+                                    </form>
+
+                                    <div class="widget">
+                                        <div id="tabs-01" class="tabs simple">
+                                            <ul class="tabs-navigation">
+                                                <li class="active" style="font-size:11px;"><a href="#tab1">Popüler Yazılar  </a> </li>
+                                                <li class="" style="font-size:11px;"><a href="#tab2">Son Yazılar </a> </li>
+                                            </ul>
+                                            <div class="tabs-content">
+                                                <div class="tab-pane active" id="tab1">
+                                                    <div class="post-thumbnail-list">
+                                                        @await Component.InvokeAsync("PopularPosts", new { total = 4 })
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane" id="tab2">
+                                                    <div class="post-thumbnail-list">
+                                                        @await Component.InvokeAsync("LatestsPostsWidget", new { count = 4 })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
 
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            
         </div>
     </div>
-    <!-- BUTTON BACK TO TOP-->
-    <div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+
 </div>
