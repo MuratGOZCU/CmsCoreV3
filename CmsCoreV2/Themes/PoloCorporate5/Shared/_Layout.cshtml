@@ -232,6 +232,54 @@
 
     <!--Template functions-->
     <script src="/polocorporate5/js/functions.js"></script>
+
+    <!-- Temp Scripts-->
+  
+    <!-- LOADING SCRIPTS FOR PAGE-->
+    <script src="~/polocorporate5/js/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.carousel-logos').owlCarousel({
+                margin: 115,
+                loop: true,
+                //lazyLoad: true,
+                nav: false,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                smartSpeed: 1500,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 2,
+                        margin: 30,
+                    },
+                    320: {
+                        items: 3,
+                        margin: 40,
+                    },
+                    480: {
+                        items: 3,
+                        margin: 50,
+                    },
+                    600: {
+                        items: 4,
+                        margin: 90,
+                    },
+                    768: {
+                        items: 5,
+                        margin: 60,
+                    },
+                    1024: {
+                        items: 5,
+                        margin: 90,
+                    },
+                    1025: {
+                        items: 6
+                    }
+                }
+            });
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 

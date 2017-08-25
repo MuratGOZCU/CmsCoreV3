@@ -7359,16 +7359,19 @@ Carousels
       font-size: 18px; } }
 /* Carousel dots */
 .owl-carousel {
-  /* dots inside */
-  /* dots top */
-  /* dots dark */
-  /* dots dark */ }
+    margin-bottom: 30px;
+    margin-top: -40px;
+    /* dots inside */
+    /* dots top */
+    /* dots dark */
+    /* dots dark */
+}
   .owl-carousel .owl-controls .owl-dots {
     margin-bottom: 20px;
     margin-top: 20px;
     position: relative; }
     .owl-carousel .owl-controls .owl-dots .owl-dot {
-      display: inline-block;
+      display: none;
       zoom: 1;
       *display: inline; }
       .owl-carousel .owl-controls .owl-dots .owl-dot span {
