@@ -288,6 +288,15 @@
                 }
             });
         });
+        function rssSetDuration() {
+            rssDuration = $(".marqueeCrawl a").length * 8 + "s";
+            $(".marqueeCrawl").css("animationDuration", rssDuration);
+            $(".marqueeCrawl").show(); // IE recalculate fix
+        }
+
+        $(window).on("load", function () {
+            rssSetDuration();
+        });
     </script>
     @RenderSection("scripts", required: false)
 </body>
