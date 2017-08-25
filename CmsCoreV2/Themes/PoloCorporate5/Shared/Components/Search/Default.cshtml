@@ -10,22 +10,21 @@
         <div class="edugate-layout-1">
 
             <div class="edugate-content">
-                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
+                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title"><span style="font-weight:bold; color:black;">@item.Title</span></a>
                 <div class="description">
                     @Html.Raw(item.Description)
                 </div>
                 <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="btn btn-green"><span>@Localizer["Devamını oku..."]</span></a>
             </div>
+            <br />
         </div>
-
-
-
     }
-    <div class="row">
-        <nav class="pagination col-md-12">
-            <ul class="pagination__list">
+
+    <div class="row" >
+        <div class="pagination pagination-simple ">
+            <ul>
                 <pager resource='SearchDto' />
             </ul>
-        </nav>
+        </div>
     </div>
 }
