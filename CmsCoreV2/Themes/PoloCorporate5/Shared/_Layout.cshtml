@@ -7,10 +7,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="INSPIRO" />
-    <meta name="description" content="Themeforest Template Polo">
-    <!-- Document title -->
-    <title>POLO | The Multi-Purpose HTML5 Template</title>
+    <title>@ViewData["Title"] - @Tenant.Title</title>
+    <meta name="description" content="@ViewData["Description"]">
+    @if (ViewData["Keywords"] != null && ViewData["Keywords"].ToString() != "")
+    {
+        <meta name="keywords" content="@ViewData["Keywords"]">
+    }
     <!-- Stylesheets & Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,800,700,600|Montserrat:400,500,600,700|Raleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
     <link href="/polocorporate5/css/plugins.css" rel="stylesheet">
@@ -34,7 +36,7 @@
                     <div class="col-sm-6">
                         <ul class="top-menu">
                             <li><a href="#">Phone: +1 (234) 567-890</a></li>
-                            <li><a href="#">Email: contact@inspiro-media.com</a></li>
+                            <li><a href="mailto:birinsanbelge.com.tr">Email: belge@birinsan.com.tr</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-6 hidden-xs">
@@ -62,8 +64,8 @@
                 <div class="container">
                     <!--Logo-->
                     <div id="logo">
-                        <a href="/" class="logo" data-dark-logo="/polocorporate5/images/logo-dark.png">
-                            <img src="/polocorporate5/images/logo.png" alt="Polo Logo">
+                        <a href="/" class="logo">
+                            <img src="/polocorporate5/images/logo.png" alt="Bir İnsan Gelişim Akademisi Belgelendirme">
                         </a>
                     </div>
                     <!--End: Logo-->
@@ -119,23 +121,18 @@
             <div class="footer-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <!-- Footer widget area 1 -->
                             <div class="widget clearfix widget-contact-us">
-                                <img src="/polocorporate5/images/logo.png" alt="Polo Logo" style="width:250px;">
+                                <img src="/polocorporate5/images/logo.png" alt="Bir İnsan Gelişim Akademisi Belgelendirme">
                                 
                             </div>
                             <!-- end: Footer widget area 1 -->
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="widget" style="margin-top:30px;">
-                                <ul class="list-icon">
-                                    <li><a href="#"><h3 >Belgelendirme</h3></a></li>
-                                </ul>
-                        </div>
+                       
 
-                        </div>
+                        
 
                         <div class="col-md-2">
                             <!-- Footer widget area 2 -->

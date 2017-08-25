@@ -1,7 +1,3 @@
-#header #header-wrap #logo a > img {
-    height: 70px !important; 
-}
-
 .inspiro-slider .slide {
     background-position: 50% 0% !important;
   
@@ -12,11 +8,11 @@
     color: #a21a5b;
 }
 
+#mainMenu nav > ul > li > a {
+    padding: 11px 8px;
+}
 
-
-@media (max-width: 767px) {}
-
-#duy.col-md-2 {
+    #duy.col-md-2 {
   
     text-align: center !important;
 }
