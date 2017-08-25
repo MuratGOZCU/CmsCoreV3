@@ -22,6 +22,10 @@ namespace CmsCoreV2.Data
             if (tenant != null) { 
             string tenantId = tenant.AppTenantId;
             // Look for any pages record.
+            if (tenant.Name == "BilgiKoleji" || tenant.Name == "Atasehir" || tenant.Name == "Maltepe" || tenant.Name == "Mersin")
+                {
+
+                
             if (context.SetFiltered<Language>().Where(l => l.AppTenantId == tenantId).Any())
             {
                 return;   // DB has been seeded
@@ -57,6 +61,18 @@ namespace CmsCoreV2.Data
 
 
                 context.SaveChanges();
+                }
+            else if (tenant.Name == "BirInsanBelge") {
+                    if (context.SetFiltered<Language>().Where(l => l.AppTenantId == tenantId).Any())
+                    {
+                        return;   // DB has been seeded
+                    }
+                    context.SaveChanges();
+                    // Perform seed operations
+                    var languageId = AddLanguages(context, tenant);
+
+                    // bir insan belgenin seed kodları buraya yazılacak
+                }
             }
 
         }
