@@ -57,7 +57,7 @@
                                 <div class="widget  widget-newsletter">
                                     <form action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama">
                                         <div class="input-group">
-                                            <input type="text" id="Search" aria-required="true" name="q" class="form-control widget-search-form" placeholder="Search for pages...">
+                                            <input type="text" id="Search" aria-required="true" name="query" class="form-control widget-search-form" placeholder="Search for pages...">
                                             <span class="input-group-btn">
                                                 <button type="submit" id="widget-widget-search-form-button" class="btn btn-default"><i class="fa fa-search"></i></button>
                                             </span>
