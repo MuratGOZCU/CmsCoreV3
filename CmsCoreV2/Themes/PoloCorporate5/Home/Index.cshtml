@@ -1,7 +1,7 @@
 ﻿@inject CustomLocalizer Localizer
 @inject AppTenant Tenant
 
-
+ 
 
 <a href="javascript:;" class="openbtn">
     <img src="~/polocorporate5/images/form_kapali.png" />
@@ -21,125 +21,134 @@
 
 
 @await Component.InvokeAsync("Slider", new { Name = "Anasayfa Slider" })
+<div class="container">
+    <div class="col-md-2" id="duy">
+        <a class="btn btn-green">Duyurularımız</a>
+    </div>
+    <div class="col-md-10">
+        <div class="marqueeContainer">
+            
 
-<!-- " https://codepen.io/vzajcic/pen/awLGwO?editors=0010#0 "-->
+            @await Component.InvokeAsync("Announcement")
 
-<!-- SERVICES -->
-<section class="p-t-100" >
-    <div class="container">
-        <div class="row" style="text-align:center;">
-            <div class="col-md-3">
-                <div class="center">
-                    <div class="icon">
-                       <img src="~/polocorporate5/images/services/online_basvuru_v1.png">
-                    </div>
-                    <a href="#"><h4>Online Başvuru</h4></a>
-                </div>
-            </div>
 
-            <div class="col-md-3">
-                <div class=" center">
-                    <div class="icon">
-                        <img src="~/polocorporate5/images/services/kurumsal_basvuru_v1.png">
-                    </div>
-                    <a href="#"><h4>Kurumsal Başvuru</h4></a>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="center">
-                    <div class="icon">
-                        <img src="~/polocorporate5/images/services/belge_sorgulama.png">
-                    </div>
-                    <a href="#"><h4>Belge Sorgulama</h4></a>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class=" center">
-                    <div class="icon">
-                        <img src="~/polocorporate5/images/services/sınav_sonuclari_v1.png">
-                    </div>
-                    <a href="#"><h4>Sınav Sonuçları</h4></a>
-                </div>
-            </div>
-
-   
         </div>
     </div>
-</section>
-<!-- end: SERVICES -->
-<!-- CALL TO ACTION -->
-<section class="row background-grey text-center">
-    <div class="container">
-        <h3>DO YOU LIKE WHAT YOU SEE</h3> <a href="#" class="btn"><span>Buy POLO</span></a>
-    </div>
-</section>
-<!-- CALL TO ACTION -->
-<!-- PORTFOLIO -->
-@await Component.InvokeAsync("Gallery", new { Name = @Localizer["Anasayfa Galeri"].ToString() })
-<!-- end: PORTFOLIO -->
-<!-- CLIENTS -->
-<section>
-    <div class="container">
-        <div class="heading heading-center">
-            <h2>OUR CLIENTS</h2>
-            <span class="lead">Our awesome clients we've had the pleasure to work with! </span>
+</div>
+    <!-- SERVICES -->
+    <section class="p-t-100">
+        <div class="container">
+            <div class="row" style="text-align:center;">
+                <div class="col-md-3">
+                    <div class="center">
+                        <div class="icon">
+                            <img src="~/polocorporate5/images/services/online_basvuru_v1.png">
+                        </div>
+                        <a href="#"><h4>Online Başvuru</h4></a>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class=" center">
+                        <div class="icon">
+                            <img src="~/polocorporate5/images/services/kurumsal_basvuru_v1.png">
+                        </div>
+                        <a href="#"><h4>Kurumsal Başvuru</h4></a>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="center">
+                        <div class="icon">
+                            <img src="~/polocorporate5/images/services/belge_sorgulama.png">
+                        </div>
+                        <a href="#"><h4>Belge Sorgulama</h4></a>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class=" center">
+                        <div class="icon">
+                            <img src="~/polocorporate5/images/services/sınav_sonuclari_v1.png">
+                        </div>
+                        <a href="#"><h4>Sınav Sonuçları</h4></a>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
+    </section>
+    <!-- end: SERVICES -->
+    <!-- CALL TO ACTION -->
+    <section class="row background-grey text-center">
+        <div class="container">
+            <img src="/polocorporate5/images/logo.png" alt=" Logo" style="width:200px;text-align:center;">
+            <p><a href="#" class="btn"><span>Biz Kimiz?</span></a></p>
+        </div>
+    </section>
+    <!-- CALL TO ACTION -->
+    <!-- PORTFOLIO -->
+    <section class="p-b-0">
+        <div class="container">
+            <div id="portfolio" class="grid-layout portfolio-3-columns" data-margin="40">
 
-        <ul class="grid grid-5-columns">
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/1.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/2.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/3.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/4.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/5.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/6.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/7.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/8.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/9.png" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="/polocorporate5/images/clients/10.png" alt="">
-                </a>
-            </li>
-        </ul>
 
-    </div>
-</section>
-<!-- CLIENTS -->
+                <!-- portfolio item -->
+                <div class="portfolio-item img-zoom pf-illustrations pf-media pf-icons pf-uielements pf-graphics">
+                    <div class="portfolio-item-wrap">
+                        <div class="portfolio-image">
+                            <a href="#"><img src="~/polocorporate5/images/services/tanıtım-_videomuz_1.png" alt=""></a>
+                        </div>
+                        <div class="portfolio-description"> <a title="Tanıtım Videosu" data-lightbox="iframe" href="https://www.youtube.com/watch?v=k6Kly58LYzY"><i class="fa fa-play"></i></a> </div>
+                    </div>
+                </div>
+                <!-- end: portfolio item -->
+                <!-- portfolio item -->
+                <div class="portfolio-item img-zoom pf-illustrations pf-media pf-icons pf-Media">
+                    <div class="portfolio-item-wrap">
+                        <div class="portfolio-image">
+                            <a href="#"><img src="~/polocorporate5/images/services/fotograf_galerisi_2.png" alt=""></a>
+                        </div>
+                        <div class="portfolio-description">
+                            <a href="#">
+                                <h3>Galeri</h3>
+                                <span>Forograf Galerisi</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end: portfolio item -->
+                <!-- portfolio item -->
+                <div class="portfolio-item img-zoom pf-uielements pf-media pf-icons pf-uielements pf-graphics">
+                    <div class="portfolio-item-wrap">
+                        <div class="portfolio-image">
+                            <a href="#"><img src="~/polocorporate5/images/services/Haberler_3.png" alt=""></a>
+                        </div>
+                        <div class="portfolio-description">
+                            <a href="#">
+                                <h3>Haberler</h3>
+                                <span>Haberler</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end: portfolio item -->
+            </div>
+        </div>
+    </section>
+    <!-- end: PORTFOLIO --><!-- CLIENTS -->
+    <section>
+        <div class="container">
+            <div class="heading heading-center">
+                <h2>REFERANSLARIMIZ</h2>
+            </div>
+            @await Component.InvokeAsync("Slider", new { Name = "Logo Slider" })
+        </div>
+    </section>
+    <!-- CLIENTS -->
+
+
+
+
+
