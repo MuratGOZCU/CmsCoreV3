@@ -991,8 +991,7 @@ namespace CmsCoreV2.Data
             context.AddRange(
                 new Page { Title = "Anasayfa", Slug = "anasayfa", Template = "Index", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "Mesleki Yeterlilik Hakkında Yazılar", Slug = "mesleki-yeterlilik-hakkinda-yazilar", Template = "blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new Page { Title = "İletişim Bilgileri", Slug = "iletisim-bilgileri", Template = "Contact", Photo = "", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId, Body = "<h3 class=\"text-uppercase\">Adres & Harita</h3><div class=\"row\"><div class=\"col-md-6\"><address><strong>Bilişim Eğitim Merkezi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div><div class=\"col-md-6\"><address><strong>Bir İnsan Akademisi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div></div>" }
-
+                new Page { Title = "İletişim Bilgileri", Slug = "iletisim-bilgileri", Template = "Contact", Photo = "/uploads/birinsan/8-2017/biz_kimiz.png", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId, Body = "<h3 class=\"text-uppercase\">Adres & Harita</h3><div class=\"row\"><div class=\"col-md-6\"><address><strong>Bilişim Eğitim Merkezi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div><div class=\"col-md-6\"><address><strong>Bir İnsan Akademisi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div></div>" }
 
                 );
 
@@ -1075,46 +1074,9 @@ namespace CmsCoreV2.Data
                 new FormField { Name = "Mesajınız", FormId = 2, FieldType = FieldType.largeText, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
                 );
             context.SaveChanges();
-            context.AddRange(
-               new FormField { Name = "Ad Soyad", FormId = 3, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-               new FormField { Name = "Yaş Grubu", FormId = 3, FieldType = FieldType.smallText, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-               new FormField { Name = "Telefon Numarası", FormId = 3, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-               new FormField { Name = "Veli Adı Soyadı", FormId = 3, FieldType = FieldType.fullName, Position = 4, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-               );
-            context.SaveChanges();
-            context.AddRange(
-                new FormField { Name = "Ad Soyad", FormId = 4, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new FormField { Name = "E-posta", FormId = 4, FieldType = FieldType.email, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new FormField { Name = "Telefon", FormId = 4, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                  new FormField { Name = "CV", FormId = 4, FieldType = FieldType.file, Position = 4, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                    new FormField { Name = "Ön Yazı", FormId = 4, FieldType = FieldType.largeText, Position = 5, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-
-
-                );
-            context.SaveChanges();
-
-            context.AddRange(
-                new FormField { Name = "Ad Soyad", FormId = 5, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new FormField { Name = "Yaş Grubu", FormId = 5, FieldType = FieldType.numberValue, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new FormField { Name = "Telefon Numarası", FormId = 5, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                  new FormField { Name = "Veli Adı Soyadı", FormId = 5, FieldType = FieldType.fullName, Position = 4, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-
-                );
-            context.SaveChanges();
-            context.AddRange(
-              new FormField { Name = "Ad Soyad", FormId = 6, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-              new FormField { Name = "Yaş Grubu", FormId = 6, FieldType = FieldType.smallText, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-              new FormField { Name = "Telefon Numarası", FormId = 6, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-              new FormField { Name = "Veli Adı Soyadı", FormId = 6, FieldType = FieldType.fullName, Position = 4, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-              );
-            context.SaveChanges();
-            context.AddRange(
-           new FormField { Name = "Ad Soyad", FormId = 7, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-           new FormField { Name = "Yaş Grubu", FormId = 7, FieldType = FieldType.smallText, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-           new FormField { Name = "Telefon Numarası", FormId = 7, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-           new FormField { Name = "Veli Adı Soyadı", FormId = 7, FieldType = FieldType.fullName, Position = 4, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-           );
-            context.SaveChanges();
+           
+           
+          
         }
 
         private static void BirInsanBelgeAddMenus(ApplicationDbContext context, AppTenant tenant)
@@ -1342,7 +1304,7 @@ namespace CmsCoreV2.Data
             s1.SubTitle = "Alt Başlık6";
             s1.Description = "Açıklama6";
             s1.Position = 3;
-            s1.Photo = "/uploads/5-2017/9a2ef92e2e0ca0fb061171e27596dfeb.jpg";
+            s1.Photo = "/uploads/birinsan/8-2017/1.png";
             s1.CallToActionText = "Buton6";
             s1.CallToActionUrl = "#";
             s1.DisplayTexts = false;
@@ -1353,25 +1315,6 @@ namespace CmsCoreV2.Data
             s1.UpdateDate = DateTime.Now;
             s1.UpdatedBy = "username";
             context.Slides.Add(s1);
-
-            var s2 = new Slide();
-            s2.AppTenantId = tenant.AppTenantId;
-
-            s2.Title = "Başlık7";
-            s2.SubTitle = "Alt Başlık7";
-            s2.Description = "Açıklama7";
-            s2.Position = 3;
-            s2.Photo = "/uploads/5-2017/9a2ef92e2e0ca0fb061171e27596dfeb.jpg";
-            s2.CallToActionText = "Buton7";
-            s2.CallToActionUrl = "#";
-            s2.DisplayTexts = false;
-            s2.IsPublished = true;
-            s2.SliderId = 3;
-            s2.CreateDate = DateTime.Now;
-            s2.CreatedBy = "username";
-            s2.UpdateDate = DateTime.Now;
-            s2.UpdatedBy = "username";
-            context.Slides.Add(s2);
             context.SaveChanges();
 
 
