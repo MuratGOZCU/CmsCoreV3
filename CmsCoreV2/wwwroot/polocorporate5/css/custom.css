@@ -7,6 +7,17 @@
   
 }
 
+.slider-logo .slider-logo-wrapper .logo-iteam {
+    opacity: 0.5;
+    transition: all 0.3s linear;
+}
+
+.slider-logo .slider-logo-wrapper .logo-iteam:hover {
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+
+
 .inspiro-slider .slide-captions {
     margin-top:375px;
 }
