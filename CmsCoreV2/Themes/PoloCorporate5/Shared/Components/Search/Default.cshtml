@@ -10,13 +10,17 @@
         <div class="edugate-layout-1">
 
             <div class="edugate-content">
+
                 <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title"><span style="font-weight:bold; color:black;">@item.Title</span></a>
-                <div class="description">
+                <div class="description" style="padding-bottom:10px;">
                     @Html.Raw(item.Description)
                 </div>
+
                 <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="btn btn-green"><span>@Localizer["Devamını oku..."]</span></a>
+                <br />
             </div>
             <br />
+
         </div>
     }
 
@@ -27,4 +31,5 @@
             </ul>
         </div>
     </div>
+
 }
