@@ -237,10 +237,10 @@
 
         if ($(window).width() > 767) {
             // slider banner 1
-            $('.slider-banner').height($(window).height() - $('header').height() + 1);
+           /* $('.slider-banner').height($(window).height() - $('header').height() + 1);
             $('.slider-banner .slider-item').height($(window).height() - $('header').height() + 1);
             // slider banner 3
-            $('.slider-banner-03').height($(window).height() - $('header').height() + 1);
+            $('.slider-banner-03').height($(window).height() - $('header').height() + 1);*/
         }
 
         // set height for page 03
@@ -260,16 +260,17 @@
             animateIn: 'fadeIn',
             nav: false,
             responsiveClass: true,
-            autoHeight: true,
             autoplay:true,
             autoplayTimeout: 7000,
             smartSpeed: 800,
             responsive: {
                 0: {
                     items: 1
+
                 },
                 1024: {
                     items: 1
+                    
                 }
             }
         });

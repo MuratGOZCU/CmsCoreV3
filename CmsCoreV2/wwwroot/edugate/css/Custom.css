@@ -273,7 +273,6 @@ video {
     background-color: rgb(62,160,227);
     background: url('/edugate/images/blue-background.png') no-repeat;
     color: #fff;
-    height:350px !important;
 }
 
 
@@ -361,7 +360,6 @@ video {
     padding-top: 80px;
     text-align: left;
 }
-
 
     .item-course.item-2 > .icon-circle {
         
@@ -804,9 +802,9 @@ a.morelink {
 .why-choose-us .why-choose-us-wrapper-top .background-girl-1 {
     width: initial !important;
     right: 0 !important;
-    left: 70% !important;
-    top:0 !important;
-
+    left: initial;
+    top: 0 !important;
+    position: static;
 }
 
 .owl-carousel .owl-item img {
@@ -960,4 +958,34 @@ width: 28px !important;
 
 .edugate-layout-2 .edugate-content .title {
     text-transform: none !important;
+}
+
+@media screen and (max-width:600px) {
+    .why-choose-us-wrapper-top {
+        height: 700px !important;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .why-choose-us-wrapper-top {
+        height: 350px !important;
+    }
+    .secondarySliderImage {
+        top: 0px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .slider-banner {
+        min-height: 818px;
+    }
+    .why-choose-us-wrapper, .slider-banner .container {
+        height: 700px;
+    }
+        .slider-banner .slider-item {
+            height: 818px
+        }
+
+}
+.why-choose-us .why-choose-us-wrapper-top .why-choose-us-wrapper {
+    padding: 0px;
 }

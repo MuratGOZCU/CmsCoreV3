@@ -26,6 +26,7 @@ namespace CmsCoreV2.Models
         public string SeoTitle { get; set; }
         public string SeoDescription { get; set; }
         public string SeoKeywords { get; set; }
+        public DateTime? PublishDate { get; set; }
         public bool IsPublished { get; set; }
         public string Template { get; set; }
         public string Photo { get; set; }

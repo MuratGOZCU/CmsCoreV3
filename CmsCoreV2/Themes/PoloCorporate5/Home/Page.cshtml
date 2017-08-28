@@ -6,97 +6,103 @@
 }
 <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
 @Html.Raw(Model.HeaderScript)
-<div class="col-md-1"></div>
-<div class="col-md-6">
-    <div class="post-item-description" style="margin-left:-23px; margin-top:10px;">
-        <h2>@Html.Raw(Model.Title)</h2>
-        <div class="post-meta">
-            <div class="event-detail-des">
-                <div class="event-detail-des-content">
-                    <div class="more">@Html.Raw(Model.Body)</div>
-                </div>
-            </div>
+<section class="p-b-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-item-description">
+                    <h2>@Html.Raw(Model.Title)</h2>
+                    <div class="post-meta">
+                        <div class="event-detail-des">
+                            <div class="event-detail-des-content">
+                                <div class="more">@Html.Raw(Model.Body)</div>
+                            </div>
+                        </div>
 
-            <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.UpdateDate &nbsp;</span>
-            <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>@Model.ViewCount görüntüleme</a></span>
-            <br /><br/>
-            <div class="post-meta-share" style="margin-bottom:20px;">
-                <a class="btn btn-xs btn-slide btn-facebook" href="#">
-                    <i class="fa fa-facebook"></i>
-                    <span>Facebook</span>
-                </a>
-                <a class="btn btn-xs btn-slide btn-twitter" href="#" data-width="100">
-                    <i class="fa fa-twitter"></i>
-                    <span>Twitter</span>
-                </a>
-                <a class="btn btn-xs btn-slide btn-instagram" href="#" data-width="118">
-                    <i class="fa fa-instagram"></i>
-                    <span>Instagram</span>
-                </a>
-                <a class="btn btn-xs btn-slide btn-googleplus" href="mailto:#" data-width="80">
-                    <i class="fa fa-envelope"></i>
-                    <span>Mail</span>
-                </a>
+                      
+                            <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.UpdateDate &nbsp;</span>
+                        
+
+                        <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>@Model.ViewCount görüntüleme</a></span>
+                        <br /><br />
+                        <div class="post-meta-share" style="margin-bottom:20px;">
+                            <a class="btn btn-xs btn-slide btn-facebook" href="#">
+                                <i class="fa fa-facebook"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a class="btn btn-xs btn-slide btn-twitter" href="#" data-width="100">
+                                <i class="fa fa-twitter"></i>
+                                <span>Twitter</span>
+                            </a>
+                            <a class="btn btn-xs btn-slide btn-instagram" href="#" data-width="118">
+                                <i class="fa fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a class="btn btn-xs btn-slide btn-googleplus" href="mailto:#" data-width="80">
+                                <i class="fa fa-envelope"></i>
+                                <span>Mail</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-   
-</div>
+</section>
+    <!-- BUTTON BACK TO TOP-->
 
-<!-- BUTTON BACK TO TOP-->
+    <script type="text/javascript" charset="utf-8">
+        $(window).load(function () {
+            var fSlider = $('#carousel').flexslider({
+                directionNav: false,
+            });
 
-<script type="text/javascript" charset="utf-8">
-    $(window).load(function () {
-        var fSlider = $('#carousel').flexslider({
-            directionNav: false,
+            $(".homeForm div input").on("focus", function () {
+                $('#carousel').flexslider('pause');
+            });
+
+            $(".homeForm div input").on("blur", function () {
+                $('#carousel').flexslider('play');
+            });
+
+
+
         });
+        $(document).ready(function () {
+            if ($('.more').html().indexOf('<!-- more -->') > 0) {
+                var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
+                var ellipsestext = "...";
+                var moretext = "Devamını göster";
+                var lesstext = "Devamını gizle";
 
-        $(".homeForm div input").on("focus", function () {
-            $('#carousel').flexslider('pause');
-        });
+                var content = $('.more').html();
 
-        $(".homeForm div input").on("blur", function () {
-            $('#carousel').flexslider('play');
-        });
+                if (content.length > showChar) {
 
+                    var c = content.substr(0, showChar);
+                    var h = content.substr(showChar - 1, content.length - showChar);
 
+                    var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
 
-    });
-    $(document).ready(function () {
-        if ($('.more').html().indexOf('<!-- more -->') > 0) {
-        var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
-        var ellipsestext = "...";
-        var moretext = "Devamını göster";
-        var lesstext = "Devamını gizle";
-
-        var content = $('.more').html();
-
-        if (content.length > showChar) {
-
-            var c = content.substr(0, showChar);
-            var h = content.substr(showChar - 1, content.length - showChar);
-
-            var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-
-            $('.more').html(html);
-        }
+                    $('.more').html(html);
+                }
 
 
-        $(".morelink").click(function () {
-            if ($(this).hasClass("less")) {
-                $(this).removeClass("less");
-                $(this).html(moretext);
-            } else {
-                $(this).addClass("less");
-                $(this).html(lesstext);
+                $(".morelink").click(function () {
+                    if ($(this).hasClass("less")) {
+                        $(this).removeClass("less");
+                        $(this).html(moretext);
+                    } else {
+                        $(this).addClass("less");
+                        $(this).html(lesstext);
+                    }
+                    $(this).prev().toggle();
+                    $(this).parent().prev().toggle();
+                    return false;
+                });
             }
-            $(this).prev().toggle();
-            $(this).parent().prev().toggle();
-            return false;
         });
-        }
-    });
 
 
-</script>
-
+    </script>
