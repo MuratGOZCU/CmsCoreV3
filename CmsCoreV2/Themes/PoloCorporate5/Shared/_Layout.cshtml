@@ -1,8 +1,8 @@
 ﻿@inject AppTenant Tenant;
 @inject CustomLocalizer Localizer
-
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,9 +18,11 @@
     <link href="/polocorporate5/css/plugins.css" rel="stylesheet">
     <link href="/polocorporate5/css/style.css" rel="stylesheet">
     <link href="/polocorporate5/css/responsive.css" rel="stylesheet">
-    <link href="~/polocorporate5/css/custom.css" rel="stylesheet">
+    <link href="/polocorporate5/css/custom.css" rel="stylesheet">
     <!-- Template color -->
     <link href="/polocorporate5/css/color-variations/green.css" rel="stylesheet" type="text/css" media="screen">
+    <link rel="icon" type="image/png" href="/polocorporate5/images/favicon.png" alt="favicon" />
+
 </head>
 
 <body>
@@ -35,22 +37,22 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <ul class="top-menu">
-                            <li><a href="#">Phone: +1 (234) 567-890</a></li>
-                            <li><a href="mailto:birinsanbelge.com.tr">Email: belge@birinsan.com.tr</a></li>
+                            <li><a href="#">Telefon: 216-346-26-06</a></li>
+                            <li><a href="mailto:belge@birinsanbelge.com.tr">E-posta: belge@birinsan.com.tr</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-6 hidden-xs">
                         <div class="social-icons social-icons-colored-hover">
                             <ul>
-                                <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="social-google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="social-pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="social-vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-                                <li class="social-linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li class="social-dribbble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li class="social-youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                                <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                                
+                                <li class="social-facebook"><a href="https://www.facebook.com/Bir-%C4%B0nsan-Belgelendirme-278542332631265/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li class="social-twitter"><a href="https://twitter.com/birinsanbelge" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li class="social-google"><a href="https://plus.google.com/u/3/103049096763076187517" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                <li class="social-pinterest"><a href="https://tr.pinterest.com/birnsanbelgelendirme/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                                <li class="social-linkedin"><a href="https://www.linkedin.com/company/25038178/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                <li class="icon-social-tumblr"><a href="https://www.tumblr.com/blog/birinsanbelgelendirmeposts" target="_blank"><i class="fa fa-tumblr"></i></a></li>
+                                <li class="social-youtube"><a href="https://www.youtube.com/channel/UC8Nlec50Gsuv_PPt0OSpTrA" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                                <li class="social-instagram"><a href="https://www.instagram.com/birinsanbelgelendirme/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -138,11 +140,11 @@
                             <!-- Footer widget area 2 -->
                             <div class="widget">
                                 <ul class="list-icon list-icon-arrow">
-                                    <li><a href="#">Kategoriler</a></li>
-                                    <li><a href="#">Kurumsal</a></li>
-                                    <li><a href="#">Sınav ve Belgelendirme</a></li>
-                                    <li><a href="#">Mesleki Gruplar</a></li>
-                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/kategoriler">Kategoriler</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/kurumsal">Kurumsal</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/sinav-ve-belgelendirme">Sınav ve Belgelendirme</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/mesleki-gruplar">Mesleki Gruplar</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/blog">Blog</a></li>
                                 </ul>
                             </div>
                             <!-- end: Footer widget area 2 -->
@@ -151,11 +153,11 @@
                             <!-- Footer widget area 3 -->
                             <div class="widget">
                                 <ul class="list-icon list-icon-arrow">
-                                    <li><a href="#">Duyurular</a></li>
-                                    <li><a href="#">Haberler</a></li>
-                                    <li><a href="#">Galeri</a></li>
-                                    <li><a href="#">Referanslar</a></li>
-                                    <li><a href="#">Faydalı Linkler</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/duyurular">Duyurular</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/haberler">Haberler</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri">Galeri</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/referanslar">Referanslar</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/faydali-linkler">Faydalı Linkler</a></li>
                                 </ul>
                             </div>
                             <!-- end: Footer widget area 3 -->
@@ -163,9 +165,9 @@
                         <div class="col-md-2">
                             <div class="widget">
                                 <ul class="list-icon list-icon-arrow">
-                                    <li><a href="#">Kullanım Koşulları</a></li>
-                                    <li><a href="#">Gizlilik Politikası</a></li>
-                                    <li><a href="#">Bize Ulaşın</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/kullanim-kosullari">Kullanım Koşulları</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/gizlilik-politikasi">Gizlilik Politikası</a></li>
+                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/iletisim">Bize Ulaşın</a></li>
                                 </ul>
                             </div>
                             <!-- end: Footer widget area 4 -->
@@ -173,13 +175,14 @@
                     </div>
                     <div class="social-icons social-icons-border">
                         <ul class="center">
-                            <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
-                            <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li class="social-vimeo"><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                            <li class="social-youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
-                            <li class="social-pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li class="social-gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="social-facebook"><a href="https://www.facebook.com/Bir-%C4%B0nsan-Belgelendirme-278542332631265/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li class="social-twitter"><a href="https://twitter.com/birinsanbelge" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li class="social-google"><a href="https://plus.google.com/u/3/103049096763076187517" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="social-pinterest"><a href="https://tr.pinterest.com/birnsanbelgelendirme/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+                            <li class="social-linkedin"><a href="https://www.linkedin.com/company/25038178/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="icon-social-tumblr"><a href="https://www.tumblr.com/blog/birinsanbelgelendirmeposts" target="_blank"><i class="fa fa-tumblr"></i></a></li>
+                            <li class="social-youtube"><a href="https://www.youtube.com/channel/UC8Nlec50Gsuv_PPt0OSpTrA" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                            <li class="social-instagram"><a href="https://www.instagram.com/birinsanbelgelendirme/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -213,7 +216,11 @@
     <!-- Temp Scripts-->
   
     <!-- LOADING SCRIPTS FOR PAGE-->
-    <script src="~/polocorporate5/js/owl.carousel.min.js"></script>
+   
+    <script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
             $('.carousel-logos').owlCarousel({
@@ -266,6 +273,10 @@
             rssSetDuration();
         });
     </script>
+    @if (HttpContextAccessor.HttpContext.Items["scripts"] != null)
+    {
+        @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
+    }
     @RenderSection("scripts", required: false)
 </body>
 

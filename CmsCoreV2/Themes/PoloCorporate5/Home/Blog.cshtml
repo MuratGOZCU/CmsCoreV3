@@ -10,7 +10,7 @@
         <!-- Page title -->
         <div class="page-title">
             <h1>@Model.Title</h1>
-            <div class="breadcrumb float-left">
+            @*<div class="breadcrumb float-left">
                 <ul>
                     <li>
                         <a href="#">Home</a>
@@ -22,12 +22,12 @@
                         <a href="#">Three Columns</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
         </div>
         <!-- end: Page title -->
         <!-- Blog -->
      
-            @await Component.InvokeAsync("Posts", new { pageSize = 3 })
+            @await Component.InvokeAsync("Posts", new { pageSize = 6 })
       
         </div>     
 </section>

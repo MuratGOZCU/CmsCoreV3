@@ -86,13 +86,14 @@ namespace CmsCoreV2.Controllers
                     postVM.CategoryName = GetCategoryName(post.Id);
                     postVM.Description = post.Description;
                     postVM.IsPublished = post.IsPublished;
+                    postVM.PublishDate = post.PublishDate;
                     postVM.CreateDate = post.CreateDate;
                     postVM.SeoTitle = post.SeoTitle;
                     postVM.SeoDescription = post.SeoDescription;
                     postVM.SeoKeywords = post.SeoKeywords;
                     postVM.Photo = post.Photo;
                     postVM.HeaderScript = post.HeaderScript;
-
+                    
                     ViewData["Title"] = post.SeoTitle;
                     ViewData["Description"] = post.SeoDescription;
                     ViewData["Keywords"] = post.SeoKeywords;
@@ -211,11 +212,12 @@ namespace CmsCoreV2.Controllers
                            || Path.GetExtension(file.FileName) == ".rtf"
                            || Path.GetExtension(file.FileName) == ".docx"))
                         {
-                            return Redirect(Request.Headers["Referer"].ToString()+ "?message=Dosya uzantısı izin verilen uzantılardan olmalıdır." );
+                            return Redirect(Request.Headers["Referer"].ToString() + "?message=Dosya uzantısı izin verilen uzantılardan olmalıdır.");
                         }
                     }
                 }
                 feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
+                TempData["Referer"] = Request.Headers["Referer"].ToString();
                 return RedirectToAction("Successful", new { id = formCollection["FormId"]});
             }
             return Redirect(Request.Headers["Referer"].ToString()+"?message=Gönderdiğiniz formda geçersiz alanlar var");

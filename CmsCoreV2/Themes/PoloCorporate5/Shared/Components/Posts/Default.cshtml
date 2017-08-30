@@ -13,11 +13,11 @@
             <div class="post-item-wrap">
                 <div class="post-image">
                     <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">
-                        <img alt="" src="@Html.Raw(item.Photo)">
+                        <img alt="@item.Title" src="@Html.Raw(item.Photo)">
                     </a>
                     @if (item.PostPostCategories.FirstOrDefault() != null)
                     {
-                        <span class="post-meta-category"><a href="">@item.PostPostCategories.FirstOrDefault()?.PostCategory</a></span>
+                        <span class="post-meta-category"><a href="">@item.PostPostCategories.FirstOrDefault().PostCategory.Name</a></span>
                     } else
                     {
 
@@ -36,9 +36,11 @@
                     <h2>
                         <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
                     </h2>
+                    @if (!String.IsNullOrEmpty(item.Description)) { 
                     <p>@Html.Raw(item.Description.PadLeft(120))</p>
+                    }
 
-                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="item-link">Devamını Oku.. <i class="fa fa-arrow-right"></i></a>
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="item-link">Devamını Oku <i class="fa fa-arrow-right"></i></a>
 
                 </div>
             </div>

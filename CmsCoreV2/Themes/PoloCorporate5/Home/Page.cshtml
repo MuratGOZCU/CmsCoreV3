@@ -4,14 +4,13 @@
 @{
     ViewData["Title"] = Model.SeoTitle;
 }
-<script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
 @Html.Raw(Model.HeaderScript)
 <section class="p-b-10">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="post-item-description">
-                    <h2>@Html.Raw(Model.Title)</h2>
+                    <h2>@Model.Title</h2>
                     <div class="post-meta">
                         <div class="event-detail-des">
                             <div class="event-detail-des-content">
@@ -20,10 +19,10 @@
                         </div>
 
                       
-                            <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.UpdateDate &nbsp;</span>
+                            @*<span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.UpdateDate &nbsp;</span>*@
                         
 
-                        <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>@Model.ViewCount görüntüleme</a></span>
+                        <span class="post-meta-category"><a href=""><i class="fa fa-eye"></i>@Model.ViewCount görüntüleme</a></span>
                         <br /><br />
                         <div class="post-meta-share" style="margin-bottom:20px;">
                             <a class="btn btn-xs btn-slide btn-facebook" href="#">
@@ -53,22 +52,22 @@
     <!-- BUTTON BACK TO TOP-->
 
     <script type="text/javascript" charset="utf-8">
-        $(window).load(function () {
-            var fSlider = $('#carousel').flexslider({
-                directionNav: false,
-            });
+        //$(window).load(function () {
+        //    var fSlider = $('#carousel').flexslider({
+        //        directionNav: false,
+        //    });
 
-            $(".homeForm div input").on("focus", function () {
-                $('#carousel').flexslider('pause');
-            });
+        //    $(".homeForm div input").on("focus", function () {
+        //        $('#carousel').flexslider('pause');
+        //    });
 
-            $(".homeForm div input").on("blur", function () {
-                $('#carousel').flexslider('play');
-            });
+        //    $(".homeForm div input").on("blur", function () {
+        //        $('#carousel').flexslider('play');
+        //    });
 
 
 
-        });
+        //});
         $(document).ready(function () {
             if ($('.more').html().indexOf('<!-- more -->') > 0) {
                 var showChar = $('.more').html().indexOf('<!-- more -->') + 14;

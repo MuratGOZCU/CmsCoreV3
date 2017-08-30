@@ -19,7 +19,7 @@
 
 
 #footer .social-icons {
-    width: 252px !important;
+    width: 292px !important;
     margin: 0 auto !important;
 }
 
@@ -169,7 +169,7 @@
             transform: translateX(110%);
         }
 
-            .call .callform.open {
+            .call.open, .call .callform.open {
                 -moz-transform: translateX(0px);
                 -webkit-transform: translateX(0px);
                 -o-transform: translateX(0px);
@@ -313,3 +313,6 @@
             width: 250px;
         }
     }
+.copyright-text {
+    text-transform: capitalize;
+}

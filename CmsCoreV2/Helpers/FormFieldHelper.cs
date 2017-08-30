@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace CmsCoreV2.Helpers
 {
@@ -20,6 +21,11 @@ namespace CmsCoreV2.Helpers
         public bool showPlaceholder { get; set; }
         public bool showLabel { get; set; }
         public string cssClass { get; set; }
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public FormFieldHelper(IHttpContextAccessor accessor)
+        {
+            _httpContextAccessor = accessor;
+        }
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
 
@@ -312,9 +318,10 @@ namespace CmsCoreV2.Helpers
                 TagBuilder email = new TagBuilder("input");
                 email.Attributes.Add("type", "tel");
                 email.Attributes.Add("class", "form-control spinner " + this.cssClass);
+                email.Attributes.Add("id", formField.Name);
                 if (showPlaceholder)
                 {
-                    email.Attributes.Add("placeholder", formField.Name);
+                    email.Attributes.Add("placeholder", "05__ _______");
                 }
                 if (required == true)
                 {
@@ -352,6 +359,7 @@ namespace CmsCoreV2.Helpers
                 var writer2 = new System.IO.StringWriter();
                 text.WriteTo(writer2, HtmlEncoder.Default);
                 output.PostContent.SetHtmlContent((showLabel ? writer2.ToString() + "<br/>" : "") + writer.ToString());
+                _httpContextAccessor.HttpContext.Items["scripts"] = "<script>$(function() {$('#" + formField.Name + "').mask('0599 9999999');});</script>";
 
             }
             else if (formField.FieldType == FieldType.file)

@@ -21,7 +21,7 @@
     }
 </style>*@
 
-<section id="page-title" class="background-overlay" data-parallax-image="images/parallax/14.jpg">
+<section id="page-title" class="background-overlay" data-parallax-image="@(String.IsNullOrEmpty(Model.Photo)?"/polocorporate5/images/parallax/14.jpg":Model.Photo)">
     <div class="container">
         <div class="page-title">
             <h1 class="text-uppercase text-medium">@Model.Title</h1>
@@ -166,22 +166,22 @@
 
 
 <script type="text/javascript" charset="utf-8">
-    $(window).load(function () {
-        var fSlider = $('#carousel').flexslider({
-            directionNav: false,
-        });
+    //$(window).load(function () {
+    //    var fSlider = $('#carousel').flexslider({
+    //        directionNav: false,
+    //    });
 
-        $(".homeForm div input").on("focus", function () {
-            $('#carousel').flexslider('pause');
-        });
+    //    $(".homeForm div input").on("focus", function () {
+    //        $('#carousel').flexslider('pause');
+    //    });
 
-        $(".homeForm div input").on("blur", function () {
-            $('#carousel').flexslider('play');
-        });
+    //    $(".homeForm div input").on("blur", function () {
+    //        $('#carousel').flexslider('play');
+    //    });
 
 
 
-    });
+    //});
     $(document).ready(function () {
         if ($('.more').html().indexOf('<!-- more -->') > 0) {
             var showChar = $('.more').html().indexOf('<!-- more -->') + 14;

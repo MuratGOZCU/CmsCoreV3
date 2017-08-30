@@ -70,6 +70,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             IFormFile file = Request.Form.Files[0];
             if (ModelState.IsValid)
             {
+                var extension = "";
+                if (uploadFile != null)
+                {
+                    extension = Path.GetExtension(uploadFile.FileName.ToLowerInvariant());
+                }
                 if (uploadFile != null)
                 {
                     Media media = new Media();
@@ -83,11 +88,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     media.UpdateDate = DateTime.Now;
                     media.AppTenantId = tenant.AppTenantId;
 
-                    if (Path.GetExtension(uploadFile.FileName) == ".jpg" || Path.GetExtension(uploadFile.FileName) == ".jpeg" || Path.GetExtension(uploadFile.FileName) == ".png")
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
                     {
                         media.FileType = "Image";
                     }
-                    else if (Path.GetExtension(uploadFile.FileName) == ".mp4" || Path.GetExtension(uploadFile.FileName) == ".gif")
+                    else if (extension == ".mp4" || extension == ".gif")
                     {
                         media.FileType = "Video";
                     }
@@ -96,15 +101,15 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                         media.FileType = "Document";
                     }
 
-                    if (Path.GetExtension(uploadFile.FileName) == ".doc"
-                    || Path.GetExtension(uploadFile.FileName) == ".pdf"
-                    || Path.GetExtension(uploadFile.FileName) == ".rtf"
-                    || Path.GetExtension(uploadFile.FileName) == ".docx"
-                    || Path.GetExtension(uploadFile.FileName) == ".jpg"
-                    || Path.GetExtension(uploadFile.FileName) == ".gif"
-                    || Path.GetExtension(uploadFile.FileName) == ".png"
-                    || Path.GetExtension(uploadFile.FileName) == ".mp4"
-                    || Path.GetExtension(uploadFile.FileName) == ".mp4"
+                    if (extension == ".doc"
+                    || extension == ".pdf"
+                    || extension == ".rtf"
+                    || extension == ".docx"
+                    || extension == ".jpg"
+                    || extension == ".gif"
+                    || extension == ".png"
+                    || extension == ".mp4"
+                    || extension == ".mp4"
                      )
                     {
                         string category = DateTime.Now.Month + "-" + DateTime.Now.Year;
@@ -165,7 +170,12 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,FileName,Description,Size,FilePath,FileType,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Media media , IFormFile uploadFile)
         {
-            if (uploadFile != null  && ".mp4,.gif,.jpg,.jpeg,.png,.pdf,.doc,.docx".Contains(Path.GetExtension(uploadFile.FileName)) == false)
+            var extension = "";
+            if (uploadFile != null)
+            {
+                extension = Path.GetExtension(uploadFile.FileName.ToLowerInvariant());
+            }
+            if (uploadFile != null  && ".mp4,.gif,.jpg,.jpeg,.png,.pdf,.doc,.docx".Contains(extension) == false)
             {
                 ModelState.AddModelError("ImageUpload", "Dosyanýn uzantýsý .doc, .docx, .pdf, .rtf, .jpg, .gif, .mp4 ya da .png olmalýdýr.");
             }
@@ -182,11 +192,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     media.UpdateDate = DateTime.Now;
                     media.AppTenantId = tenant.AppTenantId;
 
-                    if (Path.GetExtension(uploadFile.FileName) == ".jpg" || Path.GetExtension(uploadFile.FileName) == ".jpeg" || Path.GetExtension(uploadFile.FileName) == ".png")
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
                     {
                         media.FileType = "Image";
                     }
-                    else if (Path.GetExtension(uploadFile.FileName) == ".mp4" || Path.GetExtension(uploadFile.FileName) == ".gif")
+                    else if (extension == ".mp4" || extension == ".gif")
                     {
                         media.FileType = "Video";
                     }
@@ -195,15 +205,15 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                         media.FileType = "Document";
                     }
 
-                    if (Path.GetExtension(uploadFile.FileName) == ".doc"
-                    || Path.GetExtension(uploadFile.FileName) == ".pdf"
-                    || Path.GetExtension(uploadFile.FileName) == ".rtf"
-                    || Path.GetExtension(uploadFile.FileName) == ".docx"
-                    || Path.GetExtension(uploadFile.FileName) == ".jpg"
-                    || Path.GetExtension(uploadFile.FileName) == ".gif"
-                    || Path.GetExtension(uploadFile.FileName) == ".png"
-                    || Path.GetExtension(uploadFile.FileName) == ".mp4"
-                    || Path.GetExtension(uploadFile.FileName) == ".mp4"
+                    if (extension == ".doc"
+                    || extension == ".pdf"
+                    || extension == ".rtf"
+                    || extension == ".docx"
+                    || extension == ".jpg"
+                    || extension == ".gif"
+                    || extension == ".png"
+                    || extension == ".mp4"
+                    || extension == ".mp4"
                      )
                     {
                         string category = DateTime.Now.Month + "-" + DateTime.Now.Year;
@@ -265,17 +275,22 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
             if (ModelState.IsValid)
             {
+                var extension = "";
+                if (uploadFile != null)
+                {
+                    extension = Path.GetExtension(uploadFile.FileName.ToLowerInvariant());
+                }
                 if (uploadFile != null)
                 {
                     media.Id = id;
                     media.UpdatedBy = User.Identity.Name ?? "username";
                     media.UpdateDate = DateTime.Now;
                     media.AppTenantId = tenant.AppTenantId;
-                    if (Path.GetExtension(uploadFile.FileName) == ".jpg" || Path.GetExtension(uploadFile.FileName) == ".jpeg" || Path.GetExtension(uploadFile.FileName) == ".png")
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png")
                     {
                         media.FileType = "Image";
                     }
-                    else if (Path.GetExtension(uploadFile.FileName) == ".mp4" || Path.GetExtension(uploadFile.FileName) == ".gif")
+                    else if (extension == ".mp4" || extension == ".gif")
                     {
                         media.FileType = "Video";
                     }
@@ -283,15 +298,15 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     {
                         media.FileType = "Document";
                     }
-                    if (Path.GetExtension(uploadFile.FileName) == ".doc"
-                    || Path.GetExtension(uploadFile.FileName) == ".pdf"
-                    || Path.GetExtension(uploadFile.FileName) == ".rtf"
-                    || Path.GetExtension(uploadFile.FileName) == ".docx"
-                    || Path.GetExtension(uploadFile.FileName) == ".jpg"
-                    || Path.GetExtension(uploadFile.FileName) == ".gif"
-                    || Path.GetExtension(uploadFile.FileName) == ".png"
-                    || Path.GetExtension(uploadFile.FileName) == ".jpeg"
-                    || Path.GetExtension(uploadFile.FileName) == ".mp4"
+                    if (extension == ".doc"
+                    || extension == ".pdf"
+                    || extension == ".rtf"
+                    || extension == ".docx"
+                    || extension == ".jpg"
+                    || extension == ".gif"
+                    || extension == ".png"
+                    || extension == ".jpeg"
+                    || extension == ".mp4"
                      )
                     {
                         string category = DateTime.Now.Month + "-" + DateTime.Now.Year;

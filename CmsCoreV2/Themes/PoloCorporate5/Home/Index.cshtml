@@ -3,11 +3,11 @@
 
  
 
-<a href="javascript:;" class="openbtn">
+<a href="javascript:;" class="openbtn open">
     <img src="~/polocorporate5/images/form_kapali.png" />
 </a>
 <div class="call">
-    <div class="callform">
+    <div class="callform open">
         <a href="javascript:;" class="closebtn">
             <img src="~/polocorporate5/images/closeform.png" alt="..." />
         </a>
@@ -29,7 +29,7 @@
         <div class="marqueeContainer">
             
 
-            @await Component.InvokeAsync("Announcement")
+            @await Component.InvokeAsync("Announcement", new { categoryNames = "Duyurular" })
 
 
         </div>
@@ -44,7 +44,7 @@
                         <div class="icon">
                             <img src="~/polocorporate5/images/services/online_basvuru_v1.png">
                         </div>
-                        <a href="#"><h4>Online Başvuru</h4></a>
+                        <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/online-basvuru"><h4>Online Başvuru</h4></a>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                         <div class="icon">
                             <img src="~/polocorporate5/images/services/kurumsal_basvuru_v1.png">
                         </div>
-                        <a href="#"><h4>Kurumsal Başvuru</h4></a>
+                        <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/kurumsal-basvuru"><h4>Kurumsal Başvuru</h4></a>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                         <div class="icon">
                             <img src="~/polocorporate5/images/services/belge_sorgulama.png">
                         </div>
-                        <a href="#"><h4>Belge Sorgulama</h4></a>
+                        <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/belge-sorgulama"><h4>Belge Sorgulama</h4></a>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                         <div class="icon">
                             <img src="~/polocorporate5/images/services/sınav_sonuclari_v1.png">
                         </div>
-                        <a href="#"><h4>Sınav Sonuçları</h4></a>
+                        <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/sinav-sonuclari"><h4>Sınav Sonuçları</h4></a>
                     </div>
                 </div>
 
@@ -83,8 +83,8 @@
     <!-- CALL TO ACTION -->
     <section class="row background-grey text-center">
         <div class="container">
-            <img src="/polocorporate5/images/logo.png" alt=" Logo" style="width:200px;text-align:center;">
-            <p><a href="#" class="btn"><span>Biz Kimiz?</span></a></p>
+            <img src="/polocorporate5/images/logo.png" alt="Bir İnsan Belgelendirme" style="width:200px;text-align:center;">
+            <p><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/biz-kimiz" class="btn"><span>Biz Kimiz?</span></a></p>
         </div>
     </section>
     <!-- CALL TO ACTION -->
@@ -108,10 +108,10 @@
                 <div class="portfolio-item img-zoom pf-illustrations pf-media pf-icons pf-Media">
                     <div class="portfolio-item-wrap">
                         <div class="portfolio-image">
-                            <a href="#"><img src="~/polocorporate5/images/services/fotograf_galerisi_2.png" alt=""></a>
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri"><img src="~/polocorporate5/images/services/fotograf_galerisi_2.png" alt="Galeri"></a>
                         </div>
                         <div class="portfolio-description">
-                            <a href="#">
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri">
                                 <h3>Galeri</h3>
                                 <span>Forograf Galerisi</span>
                             </a>
@@ -123,10 +123,10 @@
                 <div class="portfolio-item img-zoom pf-uielements pf-media pf-icons pf-uielements pf-graphics">
                     <div class="portfolio-item-wrap">
                         <div class="portfolio-image">
-                            <a href="#"><img src="~/polocorporate5/images/services/Haberler_3.png" alt=""></a>
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/haberler"><img src="~/polocorporate5/images/services/Haberler_3.png" alt=""></a>
                         </div>
                         <div class="portfolio-description">
-                            <a href="#">
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/haberler">
                                 <h3>Haberler</h3>
                                 <span>Haberler</span>
                             </a>

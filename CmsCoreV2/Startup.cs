@@ -21,6 +21,7 @@ using Sakura.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
 using SaasKit.Multitenancy;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace CmsCoreV2
 {
@@ -105,6 +106,15 @@ namespace CmsCoreV2
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IFeedbackService, FeedbackService>();
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            // Adds a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.CookieHttpOnly = true;
+            });
         }
 
 
@@ -138,10 +148,10 @@ namespace CmsCoreV2
             app.UseStaticFiles();
             // üyelik sistemi devreye alınır
             app.UseIdentity();
-            
 
 
-          
+
+            app.UseSession();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 

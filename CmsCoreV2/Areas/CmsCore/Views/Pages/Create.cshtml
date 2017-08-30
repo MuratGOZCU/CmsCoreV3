@@ -51,7 +51,8 @@
                         <textarea asp-for="Body" tabindex="3" class="form-control"></textarea>
                         <span class="text-danger" asp-validation-for="Body"></span>
                         <script type="text/javascript">
-                            CKEDITOR.replace('Body');
+                            CKEDITOR.dtd.$removeEmpty['i'] = false;
+                            CKEDITOR.replace('Body').config.allowedContent = true;
                         </script>
 
                         <div id="content2" style="display: none" data-sample="2">

@@ -19,17 +19,18 @@
                         <div class="post-item-wrap">
                             <div class="post-image">
                                 <a href="#">
-                                    <img  class="img-responsive" src="@Html.Raw(Model.Photo)">
+                                    <img  class="img-responsive" src="@Model.Photo">
                                 </a>
                             </div>
                             <div class="post-item-description">
                                 <h2>@(Model.Title)</h2>
                                 <div class="post-meta">
-
-                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.CreateDate</span>
+                                    @if (Model.PublishDate.HasValue) { 
+                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.PublishDate.Value.ToString("dd.MM.yyyy")</span>
+                                    }
                                     @if (Model.PostPostCategories.FirstOrDefault()!= null)
                                     {
-                                        <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>Lifestyle, Magazine</a></span>
+                                        <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>@Model.PostPostCategories.FirstOrDefault().PostCategory.Name</a></span>
 
                                     } else
                                     {
@@ -54,7 +55,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <p style="text-align:justify">@Html.Raw(Model.Description)</p>                             
+                                <p style="text-align:justify">@Html.Raw(Model.Body)</p>                             
                             </div>                       
                                                               
                         </div>

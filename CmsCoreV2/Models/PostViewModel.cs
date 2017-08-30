@@ -27,7 +27,7 @@ namespace CmsCoreV2.Models
 
 
         public bool IsPublished { get; set; }
-
+        public DateTime? PublishDate { get; set; }
         public virtual ICollection<PostPostCategory> PostPostCategories { get; set; }
         public long[] PostCategoryId { get; set; }
     }

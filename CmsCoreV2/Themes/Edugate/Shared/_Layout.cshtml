@@ -1,5 +1,6 @@
 ﻿@inject AppTenant Tenant;
 @inject CustomLocalizer Localizer
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -286,10 +287,16 @@
         <script src="~/edugate/libs/isotope/fit-columns.js"></script>
         <script src="~/edugate/js/pages/homepage.js"></script>
     </environment>
+    <script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
     <script>
         $(document).ready(function () {
             window.setInterval(changeTelephoneBackgroundColor, 5000);
+            $('.collapse').on('shown.bs.collapse', function () {
+                $("[data-target='#" + $(this).attr('id') + "']").find(".fa-plus-square-o").removeClass("fa-plus-square-o").addClass("fa-minus-square-o");
+            }).on('hidden.bs.collapse', function () {
+                $("[data-target='#" + $(this).attr('id') + "']").find(".fa-minus-square-o").removeClass("fa-minus-square-o").addClass("fa-plus-square-o");
+            });
         });
         function changeTelephoneBackgroundColor() {
           
@@ -310,7 +317,13 @@
                 ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
                 ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
         }
+
+       
     </script>
+    @if (HttpContextAccessor.HttpContext.Items["scripts"] != null)
+    {
+        @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
+    }
     @RenderSection("scripts", required: false)
    
 </body>
