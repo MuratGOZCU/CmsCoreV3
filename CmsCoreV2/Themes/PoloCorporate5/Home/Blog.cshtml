@@ -9,7 +9,7 @@
         <!-- post content -->
         <!-- Page title -->
         <div class="page-title">
-            <h1>@Model.Title</h1>
+            <h2 class="h2" style="margin-bottom:10px;">@Model.Title</h2>
             @*<div class="breadcrumb float-left">
                 <ul>
                     <li>
@@ -27,7 +27,7 @@
         <!-- end: Page title -->
         <!-- Blog -->
      
-            @await Component.InvokeAsync("Posts", new { pageSize = 6 })
+            @await Component.InvokeAsync("Posts", new {categoryNames = Model.Meta1, pageSize = 6 })
       
         </div>     
 </section>

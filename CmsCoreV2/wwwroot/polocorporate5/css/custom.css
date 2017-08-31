@@ -316,3 +316,34 @@
 .copyright-text {
     text-transform: capitalize;
 }
+a {
+    color: #111111;
+}
+#topbar .top-menu > li > a {
+    font-weight: 600;
+}
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.1);
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #525252;
+}
+
+.btn {
+    border-radius: 29px;
+    background-color: #429894;
+    border-color: #429894;
+}
+.h2 {
+    background-color: #888888;
+    color: white;
+    border-radius: 29px;
+    padding: 4px 30px;
+    display: inline-block;
+    font-size: 1.8em;
+}

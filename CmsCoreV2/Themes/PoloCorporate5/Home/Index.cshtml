@@ -23,7 +23,7 @@
 @await Component.InvokeAsync("Slider", new { Name = "Anasayfa Slider" })
 <div class="container">
     <div class="col-md-2" id="duy">
-        <a class="btn btn-green">Duyurularımız</a>
+        <a class="btn btn-green" href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/duyurular">Duyurularımız</a>
     </div>
     <div class="col-md-10">
         <div class="marqueeContainer">
@@ -42,8 +42,8 @@
                 <div class="col-md-3">
                     <div class="center">
                         <div class="icon">
-                            <img src="~/polocorporate5/images/services/online_basvuru_v1.png">
-                        </div>
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/online-basvuru"><img src="~/polocorporate5/images/services/online_basvuru_v1.png" class="grow"></a>
+</div>
                         <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/online-basvuru"><h4>Online Başvuru</h4></a>
                     </div>
                 </div>
@@ -51,8 +51,8 @@
                 <div class="col-md-3">
                     <div class=" center">
                         <div class="icon">
-                            <img src="~/polocorporate5/images/services/kurumsal_basvuru_v1.png">
-                        </div>
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/kurumsal-basvuru"><img src="~/polocorporate5/images/services/kurumsal_basvuru_v1.png" class="grow"></a>
+</div>
                         <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/kurumsal-basvuru"><h4>Kurumsal Başvuru</h4></a>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
                 <div class="col-md-3">
                     <div class="center">
                         <div class="icon">
-                            <img src="~/polocorporate5/images/services/belge_sorgulama.png">
-                        </div>
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/belge-sorgulama"><img src="~/polocorporate5/images/services/belge_sorgulama.png" class="grow"></a>
+</div>
                         <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/belge-sorgulama"><h4>Belge Sorgulama</h4></a>
                     </div>
                 </div>
@@ -69,8 +69,8 @@
                 <div class="col-md-3">
                     <div class=" center">
                         <div class="icon">
-                            <img src="~/polocorporate5/images/services/sınav_sonuclari_v1.png">
-                        </div>
+                            <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/sinav-sonuclari"><img src="~/polocorporate5/images/services/sınav_sonuclari_v1.png" class="grow"></a>
+</div>
                         <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/sinav-sonuclari"><h4>Sınav Sonuçları</h4></a>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                         <div class="portfolio-image">
                             <a href="#"><img src="~/polocorporate5/images/services/tanıtım-_videomuz_1.png" alt=""></a>
                         </div>
-                        <div class="portfolio-description"> <a title="Tanıtım Videosu" data-lightbox="iframe" href="https://www.youtube.com/watch?v=k6Kly58LYzY"><i class="fa fa-play"></i></a> </div>
+                        <div class="portfolio-description"> <a title="Tanıtım Videosu" data-lightbox="iframe" href="https://www.youtube.com/watch?v=YZGWsZkNnkE"><i class="fa fa-play"></i><br /><br /><h3>Tanıtım Videomuz</h3></a> </div>
                     </div>
                 </div>
                 <!-- end: portfolio item -->

@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="text-uppercase">@Model.Title</h3>
+                <h2 class="h2">@Model.Title</h2>
                 <p>@Model.Meta1</p>
                 <div class="m-t-30">
                     @await Component.InvokeAsync("EmbedForm", new { name = "İletişim", template = "ContactForm" })

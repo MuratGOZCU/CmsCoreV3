@@ -5,12 +5,12 @@
     ViewData["Title"] = Model.SeoTitle;
 }
 @Html.Raw(Model.HeaderScript)
-<section class="p-b-10">
+<section class="p-b-10" style="padding-top:30px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="post-item-description">
-                    <h2>@Model.Title</h2>
+                    <h2 class="h2">@Model.Title</h2>
                     <div class="post-meta">
                         <div class="event-detail-des">
                             <div class="event-detail-des-content">
@@ -50,7 +50,7 @@
     </div>
 </section>
     <!-- BUTTON BACK TO TOP-->
-
+@section scripts {
     <script type="text/javascript" charset="utf-8">
         //$(window).load(function () {
         //    var fSlider = $('#carousel').flexslider({
@@ -105,3 +105,4 @@
 
 
     </script>
+}
