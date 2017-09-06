@@ -990,7 +990,7 @@ namespace CmsCoreV2.Data
 
             context.AddRange(
                 new Page { Title = "Anasayfa", Slug = "anasayfa", Template = "Index", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new Page { Title = "Mesleki Yeterlilik Hakkında Yazılar", Slug = "mesleki-yeterlilik-hakkinda-yazilar", Template = "blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "Blog", Slug = "blog", Template = "blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new Page { Title = "İletişim Bilgileri", Slug = "iletisim-bilgileri", Template = "Contact", Photo = "/uploads/birinsan/8-2017/biz_kimiz.png", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId, Body = "<h3 class=\"text-uppercase\">Adres & Harita</h3><div class=\"row\"><div class=\"col-md-6\"><address><strong>Bilişim Eğitim Merkezi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div><div class=\"col-md-6\"><address><strong>Bir İnsan Akademisi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div></div>" },
                 new Page { Title = "Arama", Slug = "arama", Template = "Search", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
 
@@ -1153,11 +1153,8 @@ namespace CmsCoreV2.Data
                 new MenuItem { Name = "Doküman İndir", Url = "dokuman-indir", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 5, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new MenuItem { Name = "İletişim Bilgileri", Url = "iletisim-bilgileri", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 6, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new MenuItem { Name = "Merkez Ofis", Url = "merkez-ofis", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 6, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new MenuItem { Name = "Uygulamalı Sınav Yeri", Url = "uygulamali-sinav-yeri", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 6, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new MenuItem { Name = "Mesleki Yeterlilik Hakkında Yazılar", Url = "mesleki-yeterlilik-hakkinda-yazilar", MenuId = 1, IsPublished = true, Position = 1, ParentMenuItemId = 4, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
-
-
-
+                new MenuItem { Name = "Uygulamalı Sınav Yeri", Url = "uygulamali-sinav-yeri", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 6, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                
 
                 );
                 
