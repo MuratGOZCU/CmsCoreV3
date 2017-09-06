@@ -357,3 +357,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 a:hover {
     color: #1abc9c !important;
 }
+
+@media (max-width: 410px) {
+
+#header #logo > a > img {
+        width: 240px !important;
+        height: 60px !important;
+    }
+
+}
