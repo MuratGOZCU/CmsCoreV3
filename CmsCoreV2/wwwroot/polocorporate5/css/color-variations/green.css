@@ -112,7 +112,7 @@ pre {
 /*Typography*/
 
 a:hover {
-	color: #81B441;
+    color: #1abc9c !important;
 }
 /*dropcat & highlight*/
 .dropcap.dropcap-colored, .dropcap.dropcap-colored a, .highlight.highlight-colored, .highlight.highlight-colored a {
