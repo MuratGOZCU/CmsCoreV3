@@ -7,7 +7,7 @@
         @foreach (var item in Model.OrderBy(o => o.Position).ThenBy(o => o.Id).ToList())
         {
             <li @(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "class=dropdown" : "")>
-                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Url" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
+                <a href="@(item.Url != "#"?(Tenant.RequireSSL?"https":"http") + "://" + Tenant.Hostname + "/" + ViewData["culture"] + "/" + item.Url:item.Url)" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
 
                     @Localizer[item.Name]
 
