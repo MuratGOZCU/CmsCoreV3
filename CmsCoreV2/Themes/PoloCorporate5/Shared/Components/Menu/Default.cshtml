@@ -20,7 +20,9 @@
                         {
 
                             <li @(childItem.ChildMenuItems != null && childItem.ChildMenuItems.Count() > 0?"class=dropdown-submenu":"")>
-                                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(childItem.Target) ? "target='" + childItem.Target + "'" : "")>@childItem.Name</a>
+                                <a href="@(item.Url != "#"?(Tenant.RequireSSL?"https":"http")+"://"+@Tenant.Hostname+"/"+ViewData["culture"]+"/"+ item.Url:childItem.Url)" class="link-page" @(!String.IsNullOrEmpty(childItem.Target) ? "target='" + childItem.Target + "'" : "")>
+                                    @childItem.Name
+                                </a>
                                 @if (childItem.ChildMenuItems != null && childItem.ChildMenuItems.Count() > 0)
                                 {
                                     <ul class="dropdown-menu">
