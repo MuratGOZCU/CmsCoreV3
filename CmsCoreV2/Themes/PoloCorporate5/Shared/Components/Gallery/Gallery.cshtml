@@ -30,11 +30,12 @@
             @foreach (var cat in giCategories)
             {
                 <div id="@cat.Name.ToLower()" role="tabpanel" class="tab-pane fade in @(isFirst?"active":string.Empty)">
-                    <div class="grid">
+                    <div class="grid-layout grid-3-columns" data-margin="20" data-item="grid-item" data-lightbox="gallery">
+                      
 
                         @foreach (var item in Model.Where(m => m.GalleryItemGalleryItemCategories.Any(a => a.GalleryItemCategoryId == cat.Id)).ToList())
                         {
-                            <div class="grid-item @item.Meta1"><a href="@item.Photo" rel="group@(cat.Id)" class="content fancybox-button"><img src="@item.Photo" alt="@item.Title" class="img-responsive" /></a></div>
+                            <div class="grid-item @item.Meta1"><a href="@item.Photo" rel="group@(cat.Id)" class="image-hover-zoom" data-lightbox="gallery-item"><img src="@item.Photo" alt="@item.Title" class="img-responsive" /></a></div>
                         }
 
 
