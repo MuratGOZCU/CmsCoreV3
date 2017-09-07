@@ -353,6 +353,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 .background-grey {
     background-image: url('../images/backgroundimg.png');
+    background-repeat:no-repeat;
 }
 a:hover {
     color: #1abc9c !important;

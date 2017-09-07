@@ -83,7 +83,7 @@
     <!-- CALL TO ACTION -->
     <section class="row background-grey text-center">
         <div class="container">
-            <img src="/polocorporate5/images/logo.png" alt="Bir İnsan Belgelendirme" style="width:200px;text-align:center;">
+            <img src="/polocorporate5/images/logo.png"  alt="Bir İnsan Belgelendirme" style="max-width:350px;width:100%;text-align:center;">
             <p><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/biz-kimiz" class="btn"><span>Biz Kimiz?</span></a></p>
         </div>
     </section>
@@ -112,8 +112,8 @@
                         </div>
                         <div class="portfolio-description">
                             <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri">
-                                <h3>Galeri</h3>
-                                <span>Forograf Galerisi</span>
+                                <h3>FOTOĞRAF GALERİSİ</h3>
+                                <span></span>
                             </a>
                         </div>
                     </div>
@@ -127,8 +127,8 @@
                         </div>
                         <div class="portfolio-description">
                             <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/haberler">
-                                <h3>Haberler</h3>
-                                <span>Haberler</span>
+                                <h3>HABERLER</h3>
+                                <span></span>
                             </a>
                         </div>
                     </div>
@@ -149,8 +149,8 @@
                         </div>
                         <div class="portfolio-description">
                             <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri">
-                                <h3>Galeri</h3>
-                                <span>Forograf Galerisi</span>
+                                <h3>FOTOĞRAF GALERİSİ</h3>
+                                <span></span>
                             </a>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                         <div class="portfolio-description">
                             <a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/haberler">
                                 <h3>Haberler</h3>
-                                <span>Haberler</span>
+                                <span></span>
                             </a>
                         </div>
                     </div>
@@ -173,14 +173,14 @@
         </div>
     </section>
     <!-- end: PORTFOLIO --><!-- CLIENTS -->
-    <section>
+    @*<section>
         <div class="container">
             <div class="heading heading-center">
                 <h2>REFERANSLARIMIZ</h2>
             </div>
             @await Component.InvokeAsync("Slider", new { Name = "Logo Slider" })
         </div>
-    </section>
+    </section>*@
     <!-- CLIENTS -->
 
 
