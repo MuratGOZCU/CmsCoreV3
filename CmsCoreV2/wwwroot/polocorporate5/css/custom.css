@@ -366,4 +366,22 @@ a:hover {
         height: 60px !important;
     }
 
+    #footer-logo {
+        width: 280px !important;
+        height: 70px !important;
+    }
+
+
+
+}
+
+@media (max-width: 991px) and (min-width: 480px){
+
+    .footer-content .col-md-1, .footer-content .col-md-2, .footer-content .col-md-3, .footer-content .col-md-4 {
+        clear: right !important;
+        float: left;
+        margin-right: 0;
+        width: auto;
+    }
+
 }
