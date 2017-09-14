@@ -144,6 +144,13 @@ namespace CmsCoreV2.Helpers
                 list.Attributes.Add("name", formField.Name);
                 var items = formField.Value.Split(',');
                 string element = "";
+                TagBuilder singlechoiceDefault = new TagBuilder("option");
+                singlechoiceDefault.Attributes.Add("value", "");
+                //singlechoiceDefault.Attributes.Add("selected", "selected");
+                singlechoiceDefault.InnerHtml.SetHtmlContent(formField.Name);
+                var singleDefault = new System.IO.StringWriter();
+                singlechoiceDefault.WriteTo(singleDefault, HtmlEncoder.Default);
+                element += singleDefault.ToString() + "<br/>";
                 foreach (var item in items)
                 {
                     if (item.ToString().Length > 3)
@@ -152,7 +159,7 @@ namespace CmsCoreV2.Helpers
                         {
                             TagBuilder singlechoice = new TagBuilder("option");
                             singlechoice.Attributes.Add("value", item.ToString().Remove(0, 3));
-                            singlechoice.Attributes.Add("selected", "selected");
+                            //singlechoice.Attributes.Add("selected", "selected");
                             singlechoice.InnerHtml.SetHtmlContent(item.ToString().Remove(0, 3));
                             var single = new System.IO.StringWriter();
                             singlechoice.WriteTo(single, HtmlEncoder.Default);
