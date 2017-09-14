@@ -797,7 +797,19 @@ a.morelink {
     font-weight:bold;
 }
 
+.group-title-index .center-title {
 
+    text-transform:uppercase !important;
+
+}
+    .group-title-index .center-title span {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 900;
+        margin: 0 0 15px 0;
+        text-transform: uppercase;
+        line-height: 30px;
+    }
 
 .why-choose-us .why-choose-us-wrapper-top .background-girl-1 {
     width: initial !important;
