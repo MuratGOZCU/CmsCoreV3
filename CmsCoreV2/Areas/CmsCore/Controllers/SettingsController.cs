@@ -93,6 +93,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     allSetting.FooterScript = setting.FooterScript;
                     allSetting.MapTitle = setting.MapTitle;
                     allSetting.MapLat = setting.MapLat;
+                    allSetting.MapLon = setting.MapLon;
                     allSetting.UpdateDate = DateTime.Now;
                     allSetting.UpdatedBy = User.Identity.Name ?? "username";
                     allSetting.AppTenantId = tenant.AppTenantId;
