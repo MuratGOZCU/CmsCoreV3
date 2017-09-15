@@ -366,7 +366,11 @@ namespace CmsCoreV2.Helpers
                 var writer2 = new System.IO.StringWriter();
                 text.WriteTo(writer2, HtmlEncoder.Default);
                 output.PostContent.SetHtmlContent((showLabel ? writer2.ToString() + "<br/>" : "") + writer.ToString());
-                _httpContextAccessor.HttpContext.Items["scripts"] = "<script>$(function() {$('#" + formField.Name + "').mask('0599 9999999');});</script>";
+                if (_httpContextAccessor.HttpContext.Items["scripts"] == null)
+                {
+                    _httpContextAccessor.HttpContext.Items["scripts"] = "";
+                }
+                _httpContextAccessor.HttpContext.Items["scripts"] += "<script>$(function() {$('#" + formField.Name + "').mask('0599 9999999');});</script>";
 
             }
             else if (formField.FieldType == FieldType.file)
