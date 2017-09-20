@@ -1,13 +1,10 @@
 ﻿@inject CustomLocalizer Localizer
 @model PageViewModel
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model.SeoTitle;
 }
 @Html.Raw(Model.HeaderScript)
 
-
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<link href="~/edugate/css/Custom.css" rel="stylesheet" />
 <style>
 
     #PageWithPhoto.background-opacity:before {
