@@ -1,13 +1,10 @@
 ﻿@inject CustomLocalizer Localizer
 @model PageViewModel
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model.SeoTitle;
 }
 @Html.Raw(Model.HeaderScript)
 
-
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<link href="~/edugate/css/Custom.css" rel="stylesheet" />
 <style>
 
     #PageWithPhoto.background-opacity:before {
@@ -91,24 +88,8 @@
     </div>
 </div>
 <!-- more -->
-
+@section scripts {
 <script type="text/javascript" charset="utf-8">
-    //$(window).load(function () {
-    //    var fSlider = $('#carousel').flexslider({
-    //        directionNav: false,
-    //    });
-
-    //    $(".homeForm div input").on("focus", function () {
-    //        $('#carousel').flexslider('pause');
-    //    });
-
-    //    $(".homeForm div input").on("blur", function () {
-    //        $('#carousel').flexslider('play');
-    //    });
-
-
-
-    //});
     $(document).ready(function () {
         if ($('.more').html().indexOf('<!-- more -->') > 0) {
             var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
@@ -146,3 +127,4 @@
 
 
 </script>
+}

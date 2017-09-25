@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<GalleryItem>
 @inject CustomLocalizer Localizer
-<div class="section section-padding picture-gallery">
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<div class="section section-padding picture-gallery" style="display:none" id="homeGallery">
     <div class="group-title-index">
         <h4 class="top-title">@Localizer["Görün ve Hissedin"]</h4>
 
@@ -55,3 +56,12 @@
         </div>
     </div>
 </div>
+@if (HttpContextAccessor.HttpContext.Items["scripts"] == null)
+{
+    HttpContextAccessor.HttpContext.Items["scripts"] = "";
+
+}
+@if (HttpContextAccessor.HttpContext.Items["scripts"] != null)
+{
+    HttpContextAccessor.HttpContext.Items["scripts"] += "<script>$(function(){$('#homeGallery').show();});</script>";
+}
