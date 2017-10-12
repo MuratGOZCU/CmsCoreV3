@@ -107,9 +107,9 @@
                     @RenderBody()
                     <div id="floatingButton">
                         <div class="embededForm" id="floatingForm" style="display:none">
-                            @await Component.InvokeAsync("EmbedForm", new { name = "Sizi Arayalım", template = "Default" })
+                            @await Component.InvokeAsync("EmbedForm", new { name = Localizer["Sizi Arayalım"].ToString(), template = "Default" })
                         </div><a href="javascript:void(0);" onclick="$('#floatingForm').slideToggle('slow')" class="show">
-                            <img src="~/edugate/images/telephone.png" alt="telephone" id="telephone" style="float:left; background-color:rgba(235, 28, 116, 1); border-radius:20px 0px 0px 20px; border-right:2px solid #ffffff; width:34px; height:34px;" /><span style="display:inline-block;padding-top:1px;font-size:large">SİZİ ARAYALIM</span>
+                            <img src="~/edugate/images/telephone.png" alt="telephone" id="telephone" style="float:left; background-color:rgba(235, 28, 116, 1); border-radius:20px 0px 0px 20px; border-right:2px solid #ffffff; width:34px; height:34px;" /><span style="display:inline-block;padding-top:1px;font-size:large">@Localizer["SİZİ ARAYALIM"]</span>
                         </a>
                     </div>
                     <!-- BUTTON BACK TO TOP-->
@@ -163,10 +163,10 @@
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <ul class="list-unstyled">
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["akademik-takvim"]">@Localizer["Akademik Takvim"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/#GoToActivity">Etkinlikler</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["basinda-biz"]">@Localizer["Basında Biz"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["insan-kaynaklari"]">@Localizer["İnsan Kaynakları"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["kendini-degerlendir"]">@Localizer["Kendini Değerlendir"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/#GoToActivity">@Localizer["Etkinlikler"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href = "@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["basinda-biz"]">@Localizer["Basında Biz"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href = "@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["insan-kaynaklari"]">@Localizer["İnsan Kaynakları"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href = "@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["kendini-degerlendir"]">@Localizer["Kendini Değerlendir"]</a></li>
                                                         @*<li><i class="fa fa-angle-right"></i><a href="/site-haritasi">Site Haritasi</a></li>*@
                                                     </ul>
                                                 </div>
@@ -201,7 +201,7 @@
                                                     <p>@Localizer["En son yeniliklerden ve tekliflerden haberdar olmak için e-posta listemize katılın."]</p>
                                                     <div class="input-group">
                                                         <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="@Localizer["E-posta adresi"]" class="form-control form-email-widget" /><span class="input-group-btn">
-                                                            <input areas="" asp-controller="Home" asp-action="Subscribe" type="submit" value="Gönder" name="subscribe" id="mc-embedded-subscribe" class="btn btn-email" />
+                                                            <input areas="" asp-controller="Home" asp-action="Subscribe" type="submit" value="@Localizer["Gönder"]" name="subscribe" id="mc-embedded-subscribe" class="btn btn-email" />
                                                         </span>
                                                         <div id="mce-responses" class="clear">
                                                             <div class="response" id="mce-error-response" style="display:none"></div>
