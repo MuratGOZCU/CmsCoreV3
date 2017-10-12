@@ -887,8 +887,8 @@ li.relatedPage .link {
 .form-job {
     display: block;
     width: 65%;
-    height: 34px;
-    padding: 20px;
+    height: 44px;
+    padding: 5px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
@@ -1010,4 +1010,7 @@ width: 28px !important;
 
 .courses .group-title-index {
     margin-bottom:0px;
+}
+.staff-item .staff-info .staff-name {
+    text-transform:none;
 }

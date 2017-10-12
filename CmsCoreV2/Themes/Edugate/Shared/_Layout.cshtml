@@ -74,7 +74,7 @@
                 <div class="topbar-right pull-right">
                     <div class="socials"><a target="_blank" href="https://www.facebook.com/bilgikolejiistanbul" rel=”nofollow” class="facebook"><i class="fa fa-facebook"></i></a><a target="_blank" href="https://twitter.com/bilgikoleji_" rel=”nofollow” class="twitter"><i class="fa fa-twitter"></i></a><a target="_blank" href="https://www.linkedin.com/organization/18094554" rel=”nofollow” class="linkedin"><i class="fa fa-linkedin"></i></a><a target="_blank" href="https://www.instagram.com/bilgikolejiistanbul" rel=”nofollow” class="instagram"><i class="fa fa-instagram"></i></a><a target="_blank" href="https://www.youtube.com/channel/UCX35ngOGyFgxtlNNCRWHedw" rel=”nofollow” class="youtube"><i class="fa fa-youtube"></i></a><a target="_blank" href=" https://tr.pinterest.com/bilgikoleji/" rel=”nofollow” class="pinterest"><i class="fa fa-pinterest"></i></a><a target="_blank" href="https://bilgikoleji.tumblr.com/" rel=”nofollow” class="tumblr"><i class="fa fa-tumblr"></i></a></div>
                     <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["Culture"]/blog"><img src="~/edugate/images/icon-blog.png" alt="Blog" style="margin:0 30px;border:0px;" /></a>
-                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/tr">TR</a> | <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/en">EN</a>
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/tr">TR</a> | <a href="javascript:;">EN</a>
                 </div>
             </div>
         </div>
@@ -166,7 +166,7 @@
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/#GoToActivity">@Localizer["Etkinlikler"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href = "@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["basinda-biz"]">@Localizer["Basında Biz"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href = "@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["insan-kaynaklari"]">@Localizer["İnsan Kaynakları"]</a></li>
-                                                        <li><i class="fa fa-angle-right"></i><a href = "@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["kendini-degerlendir"]">@Localizer["Kendini Değerlendir"]</a></li>
+                                                        
                                                         @*<li><i class="fa fa-angle-right"></i><a href="/site-haritasi">Site Haritasi</a></li>*@
                                                     </ul>
                                                 </div>
@@ -175,6 +175,7 @@
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["bilgi-store"]" rel=”nofollow” >@Localizer["Bilgi Store"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["veli-iletisim"]">@Localizer["Veli İletişim"]</a></li>
                                                         <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["site-haritasi"]">@Localizer["Site Haritası"]</a></li>
+                                                        <li><i class="fa fa-angle-right"></i><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["kendini-degerlendir"]">@Localizer["Kendini Değerlendir"]</a></li>
                                                         @*<li><i class="fa fa-angle-right"></i><a href="#">Help Topic</a></li>
                                                             <li><i class="fa fa-angle-right"></i><a href="#">Policies</a></li>*@
                                                     </ul>
@@ -229,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="hyperlink">
+                @*<div class="hyperlink">
                     <div class="pull-left hyper-left">
                         <ul class="list-inline">
                             <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@Localizer["hakkimizda"]">@Localizer["Hakkımızda"]</a></li>
@@ -240,7 +241,7 @@
                         </ul>
                     </div>
                     <div class="pull-right hyper-right"></div>
-                </div>
+                </div>*@
             </div>
         </div>
     </footer>
@@ -325,6 +326,6 @@
         @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
     }
     @RenderSection("scripts", required: false)
-   
+    <script>$(function () { $('input[type=tel]').mask('0599 9999999'); });</script>
 </body>
 </html>
