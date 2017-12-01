@@ -10,7 +10,7 @@
                         @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).ToList())
                         {
                             index++;
-                            <div class="logo-iteam item"><a href="@(String.IsNullOrEmpty(slide.CallToActionUrl)?"javascript:void(0)":slide.CallToActionUrl)"><img src="@(slide.Photo)" alt="@slide.Title" class="img-responsive" /></a></div>
+                            <div class="logo-iteam item"><a href="@(String.IsNullOrEmpty(slide.CallToActionUrl)?"javascript:void(0)":slide.CallToActionUrl)" target="_blank"><img src="@(slide.Photo)" alt="@slide.Title" class="img-responsive" /></a></div>
                         }
                     </div>
                 </div>

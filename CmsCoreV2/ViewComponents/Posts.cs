@@ -22,16 +22,30 @@ namespace CmsCoreV2.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string categoryNames, int pageSize = 4)
         {
             int pageNumber = 1;
-            
+
 
             if (!String.IsNullOrEmpty(Request.Query["page"]))
             {
                 pageNumber = Convert.ToInt32(Request.Query["page"]);
             }
-            var items = await GetItems(categoryNames);
-            var pagedData = items.ToPagedList(pageSize, pageNumber);
 
-            return View(pagedData);
+            var items = await GetItems(categoryNames);
+            var maxPageNumber = (items.Count() / pageSize) + 1;
+            ViewBag.is404 = false;
+            if (pageNumber > maxPageNumber)
+            {
+                pageNumber = maxPageNumber;
+                ViewBag.is404 = true;
+            }
+            if (pageNumber < 1)
+            {
+                pageNumber = 1;
+                ViewBag.is404 = true;
+            }
+            
+                var pagedData = items.ToPagedList(pageSize, pageNumber);
+                return View(pagedData);
+          
         }
         public async Task<List<Post>> GetItems(string categoryNames)
         {

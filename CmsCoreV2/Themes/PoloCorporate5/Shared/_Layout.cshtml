@@ -22,7 +22,8 @@
     <!-- Template color -->
     <link href="/polocorporate5/css/color-variations/green.css" rel="stylesheet" type="text/css" media="screen">
     <link rel="icon" type="image/png" href="/polocorporate5/images/favicon.png" alt="favicon" />
-
+    @Html.Raw(ViewBag.HeaderScript)
+    @Html.Raw(ViewBag.GoogleAnalytics)
 </head>
 
 <body>
@@ -270,6 +271,7 @@
         @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
     }
     @RenderSection("scripts", required: false)
+    @Html.Raw(ViewBag.FooterScript)
 </body>
 
 </html>

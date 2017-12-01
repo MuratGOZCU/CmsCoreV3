@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - @Tenant.Title</title>
+    <title>@ViewData["Title"] @(!string.IsNullOrEmpty(Context.Request.Query["page"])?"- Sayfa " + Context.Request.Query["page"].ToString() + " ":"")- @Tenant.Title</title>
     <meta name="description" content="@ViewData["Description"]">
     @if (ViewData["Keywords"] != null && ViewData["Keywords"].ToString() != "")
     {
@@ -61,7 +61,8 @@
         <link href="~/home/customcss" type="text/css" rel="stylesheet" />
         <link rel="icon" type="image/png" href="~/edugate/images/favicon.png" alt="favicon" />
           
-       
+       @Html.Raw(ViewBag.HeaderScript)
+       @Html.Raw(ViewBag.GoogleAnalytics)
 </head>
 <body style="margin:0px; padding:0px;">
     <header>
@@ -327,5 +328,6 @@
     }
     @RenderSection("scripts", required: false)
     <script>$(function () { $('input[type=tel]').mask('0599 9999999'); });</script>
+    @Html.Raw(ViewBag.FooterScript)
 </body>
 </html>

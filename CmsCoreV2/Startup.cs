@@ -71,7 +71,7 @@ namespace CmsCoreV2
                 // Use default pager options.
                 options.ConfigureDefault();
             });
-            services.Configure<PagerOptions>(Configuration.GetSection("Pager"));
+            //services.Configure<PagerOptions>(Configuration.GetSection("Pager"));
             services.AddMvc()
                 .AddViewLocalization(
                     Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.SubFolder,

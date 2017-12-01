@@ -58,6 +58,13 @@ namespace CmsCoreV2.Controllers
             {
                 ViewBag.SubscribeMessage = "E-bülten kaydınız mevcuttur.Mail adresinizi kontrol ediniz";
             }
+            var setting = _context.SetFiltered<Setting>().FirstOrDefault();
+            ViewBag.MapLat = setting.MapLat;
+            ViewBag.MapLon = setting.MapLon;
+            ViewBag.MapTitle = setting.MapTitle;
+            ViewBag.GoogleAnalytics = setting.GoogleAnalytics;
+            ViewBag.HeaderScript = setting.HeaderString;
+            ViewBag.FooterScript = setting.FooterScript;
             var page = _context.SetFiltered<Page>().Include(i=> i.Language).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
             if (page == null || page.IsPublished == false)
             {
@@ -114,10 +121,7 @@ namespace CmsCoreV2.Controllers
                     ViewData["Keywords"] = "404";
                     return View("Page404");
                 }
-                var setting = _context.SetFiltered<Setting>().FirstOrDefault();
-                ViewBag.MapLat = setting.MapLat;
-                ViewBag.MapLon = setting.MapLon;
-                ViewBag.MapTitle = setting.MapTitle;
+                
                 PageViewModel pageVM = new PageViewModel();
                 pageVM.Id = page.Id;
                 pageVM.Title = page.Title;
