@@ -9,8 +9,6 @@ using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using SaasKit.Multitenancy;
 using Microsoft.AspNetCore.Http;
-using MimeKit;
-using MailKit.Net.Smtp;
 using System.Linq.Expressions;
 using CmsCoreV2.Services;
 using Z.EntityFramework.Plus;

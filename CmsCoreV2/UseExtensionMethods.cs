@@ -16,7 +16,7 @@ namespace CmsCoreV2
         {
             var routeBuilder = new RouteBuilder(app);
             var routeTemplate = pathPrefix + "/{*filePath}";
-            routeBuilder.MapRoute(routeTemplate, (IApplicationBuilder fork) =>
+            routeBuilder.MapMiddlewareRoute(routeTemplate, (IApplicationBuilder fork) =>
             {
                 fork.UseMiddleware<TenantSpecificPathRewriteMiddleware<ITenant>>(pathPrefix, tenantFolderResolver);
                 fork.UseStaticFiles();

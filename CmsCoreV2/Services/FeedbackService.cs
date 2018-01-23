@@ -1,15 +1,14 @@
 ﻿using CmsCoreV2.Data;
 using CmsCoreV2.Models;
-using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using MimeKit;
 using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace CmsCoreV2.Services
@@ -119,13 +118,13 @@ namespace CmsCoreV2.Services
             var form = GetForm(id);
             if (form.EmailBcc != null || form.EmailCc != null || form.EmailTo != null)
             {
-                var message = new MimeMessage();
+                var message = new MailMessage();
                 if (form.EmailCc != null)
                 {
                     var email_cc_list = form.EmailCc.Split(',');
                     foreach (var item2 in email_cc_list)
                     {
-                        message.Cc.Add(new MailboxAddress(item2.Trim(), item2.Trim()));
+                        message.CC.Add(new MailAddress(item2.Trim(), item2.Trim()));
                     }
                 }
                 if (form.EmailBcc != null)
@@ -133,7 +132,7 @@ namespace CmsCoreV2.Services
                     var email_bcc_list = form.EmailBcc.Split(',');
                     foreach (var item2 in email_bcc_list)
                     {
-                        message.Bcc.Add(new MailboxAddress(item2.Trim(), item2.Trim()));
+                        message.Bcc.Add(new MailAddress(item2.Trim(), item2.Trim()));
                     }
                 }
                 if (form.EmailTo != null)
@@ -141,17 +140,19 @@ namespace CmsCoreV2.Services
                     var email_to_list = form.EmailTo.Split(',');
                     foreach (var item2 in email_to_list)
                     {
-                        message.To.Add(new MailboxAddress(item2.Trim(), item2.Trim()));
+                        message.To.Add(new MailAddress(item2.Trim(), item2.Trim()));
                     }
                 }
                 var setting = DbContext.Settings.FirstOrDefault();
-                message.From.Add(new MailboxAddress(tenant.Name, setting.SmtpUserName));
-                var bodyBuilder = new BodyBuilder();
+                message.From = new MailAddress(tenant.Name, setting.SmtpUserName);
+                
+                
                 message.Subject = tenant.Name + " " + form.FormName;
                 // foreach (var item in feed_back.FeedbackValues)
                 //{
                 //message.Body += EmailString(item).ToString() + "<br/>";
-                bodyBuilder.HtmlBody += body;
+                message.Body += body;
+                message.IsBodyHtml = true;
                 //}
                 //foreach (var file in upload)
                 //{
@@ -167,22 +168,17 @@ namespace CmsCoreV2.Services
                           //  }
                         foreach (var attachment in upload)
                         {
-                          
-                            bodyBuilder.Attachments.Add(attachment.FileName,attachment.OpenReadStream(), ContentType.Parse(attachment.ContentType));
+                            message.Attachments.Add(new Attachment(attachment.OpenReadStream(),attachment.FileName, attachment.ContentType));
                         }
                 //    }
                 //}
-                message.Body = bodyBuilder.ToMessageBody();
+               
                 try
                 {
-                    using (var client = new SmtpClient())
+                    using (var client = new SmtpClient("smtp.gmail.com", 587))
                     {
-                        client.Connect("smtp.gmail.com", 587, false);
-                        client.AuthenticationMechanisms.Remove("XOAUTH2");
-                        // Note: since we don't have an OAuth2 token, disable 	// the XOAUTH2 authentication mechanism.
-                        client.Authenticate(setting.SmtpUserName, setting.SmtpPassword);
+                        client.Credentials = new System.Net.NetworkCredential(setting.SmtpUserName, setting.SmtpPassword);
                         client.Send(message);
-                        client.Disconnect(true);
                     }
                 }
                 catch (Exception ex)

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models.ManageViewModels
 {
-    public class AddPhoneNumberViewModel
+    public class TwoFactorAuthenticationViewModel
     {
-        [Required]
-        [Phone]
-        [Display(Name = "Telefon numarası")]
-        public string PhoneNumber { get; set; }
+        public bool HasAuthenticator { get; set; }
+
+        public int RecoveryCodesLeft { get; set; }
+
+        public bool Is2faEnabled { get; set; }
     }
 }

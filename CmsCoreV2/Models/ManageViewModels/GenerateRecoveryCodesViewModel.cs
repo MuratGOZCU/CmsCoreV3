@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models.ManageViewModels
 {
-    public class AddPhoneNumberViewModel
+    public class GenerateRecoveryCodesViewModel
     {
-        [Required]
-        [Phone]
-        [Display(Name = "Telefon numarası")]
-        public string PhoneNumber { get; set; }
+        public string[] RecoveryCodes { get; set; }
     }
 }

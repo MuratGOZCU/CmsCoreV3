@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Http;
 using SaasKit.Multitenancy;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Identity;
 
 namespace CmsCoreV2
 {
@@ -60,7 +61,7 @@ namespace CmsCoreV2
             services.AddEntityFrameworkSqlServer().AddDbContext<ApplicationDbContext>();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddIdentity<ApplicationUser, Role>()
-               .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
+               .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddDefaultTokenProviders();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 

@@ -30,7 +30,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         }
 
         // GET: CmsCore/ApplicationUsers/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -65,7 +65,6 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             if (ModelState.IsValid)
             {
                 applicationUser.AppTenantId = tenant.AppTenantId;
-                applicationUser.Id = Guid.NewGuid();
                 _context.Add(applicationUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -75,7 +74,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         }
 
         // GET: CmsCore/ApplicationUsers/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -97,7 +96,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("AppTenantId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser applicationUser)
+        public async Task<IActionResult> Edit(string id, [Bind("AppTenantId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] ApplicationUser applicationUser)
         {
             if (id != applicationUser.Id)
             {
@@ -130,7 +129,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         }
 
         // GET: CmsCore/ApplicationUsers/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -150,7 +149,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // POST: CmsCore/ApplicationUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var applicationUser = await _context.ApplicationUser.SingleOrDefaultAsync(m => m.Id == id);
             _context.ApplicationUser.Remove(applicationUser);
@@ -158,7 +157,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool ApplicationUserExists(Guid id)
+        private bool ApplicationUserExists(string id)
         {
             return _context.ApplicationUser.Any(e => e.Id == id);
         }
