@@ -14,6 +14,9 @@ namespace CmsCoreV2.Models
             IsPublished = true;
             FormFields = new HashSet<FormField>();
             LanguageId = 1;
+            SendMailToUser = false;
+            SendSMS1ToUser = false;
+            SendSMS2ToUser = false;
         }
         [Required]
         [StringLength(200)]
@@ -38,6 +41,20 @@ namespace CmsCoreV2.Models
         public string GoogleAnalyticsCode { get; set; }
         [Display(Name = "Form Alanları")]
         public virtual ICollection<FormField> FormFields { get; set; }
+        [Display(Name ="Kullanıcıya Mail Gönderilsin Mi?")]
+        public bool SendMailToUser { get; set; }
+        [Display(Name ="Kullanıcıya Gönderilen Mailin İçeriği")]
+        public string UserMailContent { get; set; }
+        [Display(Name = "Kullanıcı Mailine Eklenecek Dosya")]
+        public string UserMailAttachment { get; set; }
+        [Display(Name ="Kullanıcıya 1. SMS gönderilsin mi?")]
+        public bool SendSMS1ToUser { get; set; }
+        [Display(Name = "Kullanıcı SMS1")]
+        public string UserSMS1 { get; set; }
+        [Display(Name = "Kullanıcıya 2. SMS gönderilsin mi?")]
+        public bool SendSMS2ToUser { get; set; }
+        [Display(Name = "Kullanıcı SMS2")]
+        public string UserSMS2 { get; set; }
         [Display(Name = "Yayında mı?")]
         public bool IsPublished { get; set; }
         [Required]
