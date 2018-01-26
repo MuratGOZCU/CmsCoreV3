@@ -56,11 +56,11 @@ namespace CmsCoreV2.Data
             AddGalleryItemGalleryItemCategories(context, tenant);
             AddPostPostCategories(context, tenant);
             AddResources(context, tenant);
+                    
 
 
 
-
-                context.SaveChanges();
+                    context.SaveChanges();
                 }
             else if (tenant.Name == "BirInsanBelge") {
 
@@ -95,15 +95,41 @@ namespace CmsCoreV2.Data
                     BirInsanBelgeAddGalleryItemGalleryItemCategories(context, tenant);
                     BirInsanBelgeAddPostPostCategories(context, tenant);
                     BirInsanBelgeAddResources(context, tenant);
-
-
-
-
                     context.SaveChanges();
                     // bir insan belgenin seed kodları buraya yazılacak
                 }
+                UserManager<ApplicationUser> _userManager = (UserManager<ApplicationUser>)accessor.HttpContext.RequestServices.GetService(typeof(UserManager<ApplicationUser>));
+                RoleManager<Role> _roleManager = (RoleManager<Role>)accessor.HttpContext.RequestServices.GetService(typeof(RoleManager<Role>));
+                AddUsers(_userManager);
+                AddRoles(_roleManager);
+                AddRoleToUser(_userManager);
             }
 
+        }
+        static ApplicationUser user;
+        private static void AddUsers(UserManager<ApplicationUser> _userManager)
+        {
+            user = new ApplicationUser { UserName = "cmscore@gmail.com", Email = "cmscore@gmail.com", EmailConfirmed = true, NormalizedEmail = "CMSCORE@GMAIL.COM", NormalizedUserName = "CMSCORE@GMAIL.COM" };
+            var task1 = Task.Run(() => _userManager.CreateAsync(user, "Cms123+"));
+            task1.Wait();
+        }
+
+        private static void AddRoles(RoleManager<Role> _roleManager)
+        {
+            string[] roles = { "ADMIN", "SLIDER", "MENU", "HOME", "FORM", "GALLERY", "MEDIA", "PAGE", "POST", "LINK", "SEO", "SETTING", "PRODUCT" };
+            string[] stamp = { "Yönetici", "Slayt", "Menü", "Anasayfa", "Formlar", "Galeri", "Medya", "Sayfalar", "Gönderiler", "Bağlantılar", "SEO", "Ayarlar", "Ürün" };
+
+            for (int i = 0; i < roles.Count(); i++)
+            {
+                var role = new Role { Name = roles[i], NormalizedName = roles[i], ConcurrencyStamp = stamp[i] };
+                var task1 = Task.Run(() => _roleManager.CreateAsync(role));
+                task1.Wait();
+            }
+        }
+        private static void AddRoleToUser(UserManager<ApplicationUser> _userManager)
+        {
+            var task1 = Task.Run(() => _userManager.AddToRoleAsync(user, "ADMIN"));
+            task1.Wait();
         }
         private static void AddPostPostCategories(ApplicationDbContext context, AppTenant tenant)
         {

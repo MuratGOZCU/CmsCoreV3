@@ -9,9 +9,11 @@ using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using SaasKit.Multitenancy;
 using CmsCoreV2.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     [Area("CmsCore")]
     public class CustomizationsController : ControllerBase
     {

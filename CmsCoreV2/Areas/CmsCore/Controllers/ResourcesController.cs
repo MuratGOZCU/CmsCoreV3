@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADMIN")]
     [Area("CmsCore")]
     public class ResourcesController : ControllerBase
     {

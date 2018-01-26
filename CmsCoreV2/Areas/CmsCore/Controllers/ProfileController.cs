@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADMIN")]
     [Area("CmsCore")]
     public class ProfileController : Controller
     {

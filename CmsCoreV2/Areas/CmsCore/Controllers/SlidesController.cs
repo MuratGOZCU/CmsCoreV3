@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,SLIDER")]
+    [Authorize(Roles = "ADMIN,SLIDE")]
     [Area("CmsCore")]
     public class SlidesController : ControllerBase
     {

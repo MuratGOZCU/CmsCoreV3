@@ -12,7 +12,7 @@ using SaasKit.Multitenancy;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADMIN")]
     [Area("CmsCore")]
     public class SubscriptionsController : ControllerBase
     {
