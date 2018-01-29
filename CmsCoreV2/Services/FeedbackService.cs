@@ -92,9 +92,21 @@ namespace CmsCoreV2.Services
             feed_back.UpdateDate = DateTime.Now;
             feed_back.UpdatedBy = "username";
          
-
             CreateFeedback(feed_back);
             SaveFeedback();
+            if (form.SendMailToUser)
+            {
+                FeedbackSendUserMail(form);
+            }
+            if (form.SendSMS1ToUser)
+            {
+                FeedbackSendUserSMS(form);
+            }
+            if (form.SendSMS2ToUser)
+            {
+                FeedbackSendUserSMS(form);
+            }
+
             body = body + "<br>" + "Gönderilme Tarihi : " + DateTime.Now;
             FeedbackPostMail(body, form.Id,upload);
             //return feed_back.FeedbackValues.ToList();
@@ -110,9 +122,16 @@ namespace CmsCoreV2.Services
         {
             Commit();
         }
+        // kullanıcıya e-posta gönderimi
+        public void FeedbackSendUserMail(Form form)
+        {
+            
+        }
+        public void FeedbackSendUserSMS(Form form)
+        {
 
-
-
+        }
+        // geri bildirim için e-posta gönderimi
         public void FeedbackPostMail(string body, long id, IFormFile[] upload)
         {
             var form = GetForm(id);
@@ -144,7 +163,7 @@ namespace CmsCoreV2.Services
                     }
                 }
                 var setting = DbContext.Settings.FirstOrDefault();
-                message.From = new MailAddress(tenant.Name, setting.SmtpUserName);
+                message.From = new MailAddress(setting.SmtpUserName, tenant.Name);
                 
                 
                 message.Subject = tenant.Name + " " + form.FormName;
@@ -175,8 +194,9 @@ namespace CmsCoreV2.Services
                
                 try
                 {
-                    using (var client = new SmtpClient("smtp.gmail.com", 587))
+                    using (var client = new SmtpClient(setting.SmtpHost, Convert.ToInt32(setting.SmtpPort)))
                     {
+                        client.EnableSsl = setting.SmtpUseSSL;
                         client.Credentials = new System.Net.NetworkCredential(setting.SmtpUserName, setting.SmtpPassword);
                         client.Send(message);
                     }

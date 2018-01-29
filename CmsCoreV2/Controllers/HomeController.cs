@@ -167,7 +167,7 @@ namespace CmsCoreV2.Controllers
 
         public IActionResult Successful(int id)
         {
-            ViewBag.FormClosingDescription = _context.Forms.Where(f => f.Id == id).FirstOrDefault().ClosingDescription;
+            ViewBag.FormClosingDescription = _context.Forms.Where(f => f.Id == id).FirstOrDefault()?.ClosingDescription;
             return View("Successful");
         }
         public ActionResult RedirectToDefaultLanguage()
@@ -202,6 +202,7 @@ namespace CmsCoreV2.Controllers
             }
         }
        
+        // gönderilen form önce burada işlenir
         [HttpPost]
         public IActionResult PostForm(IFormCollection formCollection,IFormFile[] upload)
         {

@@ -10,6 +10,7 @@
                     <fieldset>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="col-md-12 ">
+                            <input type="hidden" value="@Model.Id" name="FormId" />
                             @Html.HiddenFor(model => model.Id)
                             @Html.HiddenFor(model => model.Slug)
                             <div class="form-body">
@@ -18,20 +19,20 @@
                                 </div>
                                 <div class="form-group">
                                     @if (!String.IsNullOrEmpty(Model.Description))
-                                    {
-                                        @Html.Raw(Model.Description)
-                                    }
+            {
+                        @Html.Raw(Model.Description)
+}
                                 </div>
                                 @foreach (FormField item in Model.FormFields)
-                                {
-                                    <div class="form-group">
-                                        <formField form-field="item" required="false" css-class="form-job" read_only="false" show-label="true" />
-                                    </div>
-                                }
+        {
+                        <div class="form-group">
+                            <formField form-field="item" required="false" css-class="form-job" read_only="false" show-label="true" />
+                        </div>
+}
                             </div>
                             @*<div class="form-group">
-                                    @Html.Raw(Model.ClosingDescription)
-                                </div>*@
+            @Html.Raw(Model.ClosingDescription)
+        </div>*@
                             <input style="background-color:green" class="btn btn-success" type="submit" value="Gönder" /><br /><br />
                         </div>
                     </fieldset>

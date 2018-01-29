@@ -43,6 +43,8 @@ namespace CmsCoreV2.Models
         public virtual ICollection<FormField> FormFields { get; set; }
         [Display(Name ="Kullanıcıya Mail Gönderilsin Mi?")]
         public bool SendMailToUser { get; set; }
+        [Display(Name = "Kullanıcıya Gönderilen Mailin Konusu")]
+        public string UserMailSubject { get; set; }
         [Display(Name ="Kullanıcıya Gönderilen Mailin İçeriği")]
         public string UserMailContent { get; set; }
         [Display(Name = "Kullanıcı Mailine Eklenecek Dosya")]

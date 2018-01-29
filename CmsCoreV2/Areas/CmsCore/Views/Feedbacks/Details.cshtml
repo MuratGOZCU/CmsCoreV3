@@ -68,19 +68,23 @@
         <dd>
             @Html.DisplayFor(model => model.AppTenantId)
         </dd>
+       </dl>
+   
+    <fieldset>
+        <legend>Forma Girilen Bilgiler</legend>
+        <dl>
+
+            @foreach (var feedbackValue in (IEnumerable<FeedbackValue>)ViewBag.FeedbackValues)
+    {
         <dt>
-            @foreach (var feedbackValue in (IEnumerable<FeedbackValue>)ViewBag.FeedbackValues)
-            {
-                @feedbackValue.FormFieldName <br />
-            }
+            @feedbackValue.FormFieldName
         </dt>
-        <dd>
-            @foreach (var feedbackValue in (IEnumerable<FeedbackValue>)ViewBag.FeedbackValues)
-            {
-                @feedbackValue.Value <br />
-            }
-        </dd>
-    </dl>
+        <dd>@feedbackValue.Value</dd>
+       
+}
+        </dl>
+    </fieldset>
+   
 </div>
 <div>
     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> 
