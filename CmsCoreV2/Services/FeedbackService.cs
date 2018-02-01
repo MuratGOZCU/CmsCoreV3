@@ -125,7 +125,30 @@ namespace CmsCoreV2.Services
         // kullanıcıya e-posta gönderimi
         public void FeedbackSendUserMail(Form form)
         {
-            
+            var message = new MailMessage();
+            string toEmail = form.FormFields.OrderBy(o => o.Position).FirstOrDefault(f => f.FieldType == FieldType.email)?.Value;
+            if (!String.IsNullOrEmpty(toEmail)) {
+                message.To.Add(new MailAddress(toEmail));
+                message.Body = form.UserMailContent;
+                message.Subject = form.UserMailSubject;
+                message.IsBodyHtml = true;
+                var setting = DbContext.Settings.FirstOrDefault();
+                message.From = new MailAddress(setting.SmtpUserName, tenant.Name);
+                try
+                {
+                    using (var client = new SmtpClient(setting.SmtpHost, Convert.ToInt32(setting.SmtpPort)))
+                    {
+                        client.EnableSsl = setting.SmtpUseSSL;
+                        client.Credentials = new System.Net.NetworkCredential(setting.SmtpUserName, setting.SmtpPassword);
+                        client.Send(message);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
         }
         public void FeedbackSendUserSMS(Form form)
         {
