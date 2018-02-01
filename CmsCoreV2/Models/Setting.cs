@@ -15,7 +15,6 @@ namespace CmsCoreV2.Models
             ShippingRegions = new HashSet<SettingRegion>();
             SalesLocations = new HashSet<SaleRegion>();
             ShippingLocations = new HashSet<ShippingRegion>();
-            
         }
         //INDEX
         public string HeaderString { get; set; }
@@ -39,6 +38,10 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         public string SmtpPort { get; set; }
         public bool SmtpUseSSL { get; set; }
+        [StringLength(200)]
+        public string SmsApiToken { get; set; }
+        [StringLength(200)]
+        public string SmsApiScreet { get; set; }
         //E-STORE
       
         public CustomerLocation CustomerLocation { get; set; }

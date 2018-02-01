@@ -16,6 +16,7 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
     <PackageReference Include="SaasKit.Multitenancy" Version="1.1.4" />
     <PackageReference Include="Sakura.AspNetCore.Mvc.PagedList" Version="2.0.12" />
     <PackageReference Include="Sakura.AspNetCore.PagedList" Version="2.0.2" />

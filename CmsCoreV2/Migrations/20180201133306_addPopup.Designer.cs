@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180201133306_addPopup")]
+    partial class addPopup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1864,12 +1865,6 @@ namespace CmsCoreV2.Migrations
                     b.Property<int>("ShowTaxTotal");
 
                     b.Property<bool>("ShowVerifiedUserLabelInCustomerReviews");
-
-                    b.Property<string>("SmsApiScreet")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("SmsApiToken")
-                        .HasMaxLength(200);
 
                     b.Property<string>("SmtpHost")
                         .HasMaxLength(200);

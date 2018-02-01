@@ -104,7 +104,7 @@ namespace CmsCoreV2.Data
         public DbSet<ExcludeCouponProduct> ExcludeCouponProducts { get; set; }
         public DbSet<ExcludeCouponProductCategory> ExcludeCouponProductCategories { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
-
+        public DbSet<Popup> Popups { get; set; }
 
 
         // diğer dbsetler buraya eklenir

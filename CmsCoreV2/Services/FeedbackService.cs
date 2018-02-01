@@ -2,13 +2,17 @@
 using CmsCoreV2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CmsCoreV2.Services
@@ -21,11 +25,12 @@ namespace CmsCoreV2.Services
         void FeedbackPostMail(string body, long id, IFormFile[] upload);
         Form GetForm(long id);
         Form GetForm(string name);
-  
         void DeleteForm(long id);
         long FormCount();
         List<FormField> GetFormFieldsByFormId(long id);
         void SaveForm();
+        void FeedbackSendUserMail(Form form, Feedback feedback);
+        void FeedbackSendUserSMS(Form form, Feedback feedback);
     }
 
     public class FeedbackService:IFeedbackService
@@ -96,15 +101,15 @@ namespace CmsCoreV2.Services
             SaveFeedback();
             if (form.SendMailToUser)
             {
-                FeedbackSendUserMail(form);
+                FeedbackSendUserMail(form, feed_back);
             }
             if (form.SendSMS1ToUser)
             {
-                FeedbackSendUserSMS(form);
+                FeedbackSendUserSMS(form, feed_back);
             }
             if (form.SendSMS2ToUser)
             {
-                FeedbackSendUserSMS(form);
+                FeedbackSendUserSMS(form, feed_back);
             }
 
             body = body + "<br>" + "Gönderilme Tarihi : " + DateTime.Now;
@@ -123,10 +128,10 @@ namespace CmsCoreV2.Services
             Commit();
         }
         // kullanıcıya e-posta gönderimi
-        public void FeedbackSendUserMail(Form form)
+        public void FeedbackSendUserMail(Form form, Feedback feedback)
         {
             var message = new MailMessage();
-            string toEmail = form.FormFields.OrderBy(o => o.Position).FirstOrDefault(f => f.FieldType == FieldType.email)?.Value;
+            string toEmail = feedback.FeedbackValues.OrderBy(o => o.Position).FirstOrDefault(f => f.FieldType == FieldType.email)?.Value;
             if (!String.IsNullOrEmpty(toEmail)) {
                 message.To.Add(new MailAddress(toEmail));
                 message.Body = form.UserMailContent;
@@ -150,9 +155,62 @@ namespace CmsCoreV2.Services
             }
 
         }
-        public void FeedbackSendUserSMS(Form form)
+        public void FeedbackSendUserSMS(Form form, Feedback feedback)
         {
+            var setting = DbContext.Settings.FirstOrDefault();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.216bilisim.com/sms/send/single?key=" + setting.SmsApiToken + "&secret=" + setting.SmsApiScreet);
 
+            request.Method = "POST";
+            request.UserAgent = "global_sms";
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            dynamic obj = new ExpandoObject();
+            obj.turkish_character = "1";
+            string number = feedback.FeedbackValues.OrderBy(o => o.Position).FirstOrDefault(f => f.FieldType == FieldType.telephone)?.Value.ToString();
+            number = number.Remove(number.IndexOf(' '), 1);
+            if (number.IndexOf(',')>=0) { 
+            number = number.Remove(number.IndexOf(','), 1);
+            }
+            number = number.Remove(0, 1);
+            obj.numbers = number;
+            obj.text = form.SendSMS1ToUser;
+            obj.originator = "216BILISIM";
+            obj.time = "now";
+
+            string json_string = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            string postData = System.Web.HttpUtility.UrlEncode(json_string);
+
+            byte[] data = Encoding.ASCII.GetBytes("data=" + postData);
+
+            request.ContentLength = data.Length;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(data, 0, data.Length);
+            requestStream.Close();
+
+            WebResponse resp = request.GetResponse();
+            Stream stream = resp.GetResponseStream();
+            StreamReader sr = new StreamReader(stream);
+
+            string s = sr.ReadToEnd();
+
+            sr.Close();
+
+            
+            dynamic json = JObject.Parse(s);
+
+            if (json.result == false)
+            {
+                foreach (var error in json.errors)
+                {
+                    throw new Exception(error.error_text.ToString() + "(" + error.error_code.ToString() + ")");
+                }
+
+            }
+            else if (json.result == true)
+            {
+               // başarılı
+            }
         }
         // geri bildirim için e-posta gönderimi
         public void FeedbackPostMail(string body, long id, IFormFile[] upload)

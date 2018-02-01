@@ -311,9 +311,9 @@ License: You must have a valid license purchased only from themeforest(the above
                           =="Customers"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
                           =="Regions"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
-                            <i class="fa fa-cubes"></i>
-                            <span class="title">E-Ticaret</span>
-                            <span class="arrow"></span>
+                                <i class="fa fa-cubes"></i>
+                                <span class="title">E-Ticaret</span>
+                                <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item">
@@ -379,7 +379,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <a asp-controller="MenuItems" asp-action="Index" class="nav-link">
                                         <span class="title">Menü Öğeleri</span>
                                     </a>
-                                </li> 
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="sliders"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="slides"?"active":string.Empty) ">
@@ -397,6 +397,25 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="nav-item">
                                     <a asp-controller="Slides" asp-action="Index" class="nav-link">
                                         <span class="title">Slidelar</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="popups"?"active":string.Empty)">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="glyphicon glyphicon-th"></i>
+                                <span class="title">Popuplar</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a asp-controller="Popups" asp-action="Index" class="nav-link">
+                                        <span class="title">Popuplar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Popups" asp-action="Create" class="nav-link">
+                                        <span class="title">Popup Ekle</span>
                                     </a>
                                 </li>
                             </ul>
