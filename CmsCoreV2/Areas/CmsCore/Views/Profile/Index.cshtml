@@ -9,14 +9,9 @@
     <dl class="dl-horizontal">
         <dt>Şifre:</dt>
         <dd>
-            @if (Model.HasPassword)
-            {
+            
                 <a class="btn btn-primary" asp-controller="Profile" asp-action="ChangePassword" class="btn-bracketed">Değiştir</a>
-            }
-            else
-            {
-                <a asp-controller="Profile" asp-action="SetPassword" class="btn-bracketed">Oluştur</a>
-            }
+           
         </dd>
         <br />
         <dt>Harici Giriş:</dt>
