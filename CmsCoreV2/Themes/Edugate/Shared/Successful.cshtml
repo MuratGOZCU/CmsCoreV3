@@ -11,9 +11,9 @@
                             <h2 class="captions">İşlem Başarıyla Tamamlandı</h2><br />
                             <h3>@Html.Raw(ViewBag.FormClosingDescription)</h3><br />
                             <ol class="breadcrumb">
-                                <li><a href="/"><span id="counter">5</span> saniye içerisinde önceki sayfaya yönlendirileceksiniz.</a></li>
+                                <li><a href="/"><span id="counter">5</span> saniye içerisinde anasayfaya yönlendirileceksiniz.</a></li>
                             </ol>
-                            <button onclick="window.location.href='@TempData["Referer"]'" class="btn btn-404" style="background-color:#444750;"><span>Önceki Sayfa</span></button>
+                            <button onclick="window.location.href='/'" class="btn btn-404" style="background-color:#444750;"><span>Anasayfa</span></button>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
             count--;
             $("#counter").text(count);
             if (count <= 0) {
-                window.location.href = "@TempData["Referer"]";
+                window.location.href = "/";
             }
         }
     </script>

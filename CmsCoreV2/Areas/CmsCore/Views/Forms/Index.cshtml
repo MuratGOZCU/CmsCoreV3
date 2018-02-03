@@ -115,10 +115,11 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td class="text-nowrap">
-                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> 
-                <a class="btn btn-default" asp-action="Details" asp-route-id="@item.Id">Detaylar</a> 
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                <a class="btn btn-default" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
                 <a class="btn btn-success" asp-action="Preview" asp-route-id="@item.Id">Önizleme</a>
+                <a class="btn btn-success" asp-action="ExportToCsv" asp-route-id="@item.Id">Excel</a>
             </td>
         </tr>
 }

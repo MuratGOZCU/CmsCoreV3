@@ -7,6 +7,7 @@ using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -109,7 +110,7 @@ namespace CmsCoreV2.Services
             }
             if (form.SendSMS2ToUser)
             {
-                FeedbackSendUserSMS(form, feed_back);
+                FeedbackSendUserSMS2(form, feed_back);
             }
 
             body = body + "<br>" + "Gönderilme Tarihi : " + DateTime.Now;
@@ -134,6 +135,7 @@ namespace CmsCoreV2.Services
             string toEmail = feedback.FeedbackValues.OrderBy(o => o.Position).FirstOrDefault(f => f.FieldType == FieldType.email)?.Value;
             if (!String.IsNullOrEmpty(toEmail)) {
                 message.To.Add(new MailAddress(toEmail));
+                message.ReplyToList.Add(new MailAddress("bilgi@bilgikoleji.com"));
                 message.Body = form.UserMailContent;
                 message.Subject = form.UserMailSubject;
                 message.IsBodyHtml = true;
@@ -167,14 +169,17 @@ namespace CmsCoreV2.Services
             dynamic obj = new ExpandoObject();
             obj.turkish_character = "1";
             string number = feedback.FeedbackValues.OrderBy(o => o.Position).FirstOrDefault(f => f.FieldType == FieldType.telephone)?.Value.ToString();
-            number = number.Remove(number.IndexOf(' '), 1);
+            if (number.IndexOf(' ') >= 0)
+            {
+                number = number.Remove(number.IndexOf(' '), 1);
+            }
             if (number.IndexOf(',')>=0) { 
             number = number.Remove(number.IndexOf(','), 1);
             }
             number = number.Remove(0, 1);
             obj.numbers = number;
-            obj.text = form.SendSMS1ToUser;
-            obj.originator = "216BILISIM";
+            obj.text = form.UserSMS1;
+            obj.originator = "BILGIKOLEJI";
             obj.time = "now";
 
             string json_string = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
@@ -210,6 +215,78 @@ namespace CmsCoreV2.Services
             else if (json.result == true)
             {
                // başarılı
+            }
+        }
+        public void FeedbackSendUserSMS2(Form form, Feedback feedback)
+        {
+            var setting = DbContext.Settings.FirstOrDefault();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.216bilisim.com/sms/send/single?key=" + setting.SmsApiToken + "&secret=" + setting.SmsApiScreet);
+
+            request.Method = "POST";
+            request.UserAgent = "global_sms";
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            dynamic obj = new ExpandoObject();
+            obj.turkish_character = "1";
+            string number = feedback.FeedbackValues.OrderBy(o => o.Position).FirstOrDefault(f => f.FieldType == FieldType.telephone)?.Value.ToString();
+            if (number.IndexOf(' ') >= 0)
+            {
+                number = number.Remove(number.IndexOf(' '), 1);
+            }
+            if (number.IndexOf(',') >= 0)
+            {
+                number = number.Remove(number.IndexOf(','), 1);
+            }
+            number = number.Remove(0, 1);
+            var parameter = feedback.FeedbackValues.FirstOrDefault(f => f.FormFieldName == "Sınav Tarihi").Value;
+            string date = "";
+            string time = "";
+            if (parameter.IndexOf(" Saat")>=0)
+            {
+                date = parameter.Substring(0, parameter.IndexOf(" Saat"));
+                time = parameter.Substring(parameter.Length - 5);
+            }
+            DateTime datetime;
+            DateTime.TryParseExact(date + " " + time, "dd MMMM yyyy HH:mm", new CultureInfo("tr-TR"), DateTimeStyles.None, out datetime);
+
+            obj.numbers = number;
+            obj.text = string.Format(form.UserSMS2,datetime.ToString("dd MMMM yyyy dddd"), datetime.ToString("HH:mm"));
+            obj.originator = "BILGIKOLEJI";
+            obj.time = datetime.AddDays(-1).ToString("yyyy-MM-dd HH:mm:ss");
+
+            string json_string = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            string postData = System.Web.HttpUtility.UrlEncode(json_string);
+
+            byte[] data = Encoding.ASCII.GetBytes("data=" + postData);
+
+            request.ContentLength = data.Length;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(data, 0, data.Length);
+            requestStream.Close();
+
+            WebResponse resp = request.GetResponse();
+            Stream stream = resp.GetResponseStream();
+            StreamReader sr = new StreamReader(stream);
+
+            string s = sr.ReadToEnd();
+
+            sr.Close();
+
+
+            dynamic json = JObject.Parse(s);
+
+            if (json.result == false)
+            {
+                foreach (var error in json.errors)
+                {
+                    throw new Exception(error.error_text.ToString() + "(" + error.error_code.ToString() + ")");
+                }
+
+            }
+            else if (json.result == true)
+            {
+                // başarılı
             }
         }
         // geri bildirim için e-posta gönderimi

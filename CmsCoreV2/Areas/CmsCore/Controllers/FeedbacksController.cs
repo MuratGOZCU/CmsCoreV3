@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using CmsCoreV2.Services;
 using Z.EntityFramework.Plus;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
@@ -68,6 +69,69 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Export()
+        {
+            return View();
+        }
+
+        //public void ExportToExcel()
+        //{
+        //    var grid = new GridView();
+        //    grid.DataSource = from todoitems in db.TodoItems.ToList()
+        //                      select new
+        //                      {
+        //                          Baslik = todoitems.Title,
+        //                          Aciklama = todoitems.Description,
+        //                          Kategori = todoitems.Category.Name,
+        //                          DosyaEki = todoitems.Attachment,
+        //                          Departman = todoitems.Department.Name,
+        //                          Taraf = todoitems.Side.Name,
+        //                          Müsteri = todoitems.Customer.Name,
+        //                          Yonetici = todoitems.Manager.FirstName,
+        //                          Organizator = todoitems.Organizator.FirstName,
+        //                          Durum = todoitems.Status,
+        //                          ToplantiTarihi = todoitems.MeetingDate,
+        //                          PlanlananTarih = todoitems.PlannedDate,
+        //                          BitirilmeTarihi = todoitems.FinishDate,
+        //                          RevizeTarihi = todoitems.ReviseDate,
+        //                          GorusmeKonusu = todoitems.ConversationSubject,
+        //                          DestekleyenFirma = todoitems.SupporterCompany,
+        //                          DestekleyenHekim = todoitems.SupporterDoctor,
+        //                          GorusmeKatilimciSayisi = todoitems.ConversationAttendeeCount,
+        //                          PlanlananOrganizasyonTarihi = todoitems.ScheduledOrganizationDate,
+        //                          MailKonularý = todoitems.MailingSubjects,
+        //                          AfisKonusu = todoitems.PosterSubject,
+        //                          AfisSayisi = todoitems.PosterCount,
+        //                          Elearning = todoitems.Elearning,
+        //                          YapilanTaramalarýnTurleri = todoitems.TypesOfScans,
+        //                          YapilanTaramalardakiAsoSayisi = todoitems.AsoCountInScans,
+        //                          OrganizasyonTurleri = todoitems.TypesOfOrganization,
+        //                          OrganizasyondakiAsoSayisi = todoitems.AsoCountInOrganizations,
+        //                          AsýOrganizasyonTurleri = todoitems.TypesOfVaccinationOrganization,
+        //                          AsýOrganizasyonundakiAsoSayisi = todoitems.AsoCountInVaccinationOrganization,
+        //                          AfisicinTazminatMiktari = todoitems.AmountOfCompensationForPoster,
+        //                          KurumsalVerimlilikRaporu = todoitems.CorporateProductivityReport,
+        //                          Olusturulmatarihi = todoitems.CreateDate,
+        //                          OlusturanKullanici = todoitems.CreatedBy,
+        //                          GuncellenmeTarihi = todoitems.UpdateDate,
+        //                          GuncelleyenKullanici = todoitems.UpdatedBy
+        //                      };
+        //    grid.DataBind();
+        //    Response.Clear();
+        //    Response.AddHeader("content-disposition", "attachment;filename=yapilacaklar.xls");
+        //    Response.ContentType = "application/ms-excel";
+        //    Response.ContentEncoding = System.Text.Encoding.Unicode;
+        //    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+        //    System.IO.StringWriter sw = new System.IO.StringWriter();
+        //    System.Web.UI.HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+        //    grid.RenderControl(hw);
+
+        //    Response.Write(sw.ToString());
+        //    Response.End();
+        //}
 
         // GET: CmsCore/Feedbacks/Edit/5
         public async Task<IActionResult> Edit(long? id)

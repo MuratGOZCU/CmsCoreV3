@@ -10,6 +10,8 @@ using CmsCoreV2.Models;
 using SaasKit.Multitenancy;
 using Z.EntityFramework.Plus;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
@@ -22,6 +24,33 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         public FormsController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
         {
 
+        }
+
+        public IActionResult ExportToCsv(long id)
+        {
+            StringWriter sw = new StringWriter();
+            HttpContext.Response.Clear();
+            string formName = _context.Forms.FirstOrDefault(f => f.Id == id).Slug;
+            var fields = _context.FormFields.Where(f => f.FormId == id).OrderBy(o => o.Position).Select(s => s.Name).ToList().ToArray();
+            var fieldCount = fields.Count();
+            sw.WriteLine("sep=,");
+            sw.WriteLine(string.Join(",", fields));
+            Response.Headers.Add("content-disposition", "attachment;filename=" + formName + ".csv");
+            Response.ContentType = "text/csv";
+            var items = _context.FeedbackValues.Include(t => t.Feedback).Where(f => f.Feedback.FormId == id).OrderBy(o => o.Id).ToList();
+            int i = 0;
+            foreach (var item in items)
+            {
+
+                sw.Write(item.Value + ",");
+                i++;
+                if (i >= fieldCount)
+                {
+                    sw.WriteLine();
+                    i = 0;
+                }
+            }
+            return Content(sw.ToString(), "text/csv");
         }
 
         // GET: CmsCore/Forms
@@ -68,7 +97,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,Slug,AppTenantId,SendMailToUser,UserMailContent,UserMailAttachment,SendSMS1ToUser,UserSMS1,SendSMS2ToUser,UserSMS2")] Form form)
+        public async Task<IActionResult> Create([Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,Slug,AppTenantId,SendMailToUser,UserMailContent,UserMailSubject,UserMailAttachment,SendSMS1ToUser,UserSMS1,SendSMS2ToUser,UserSMS2")] Form form)
         {
             form.CreatedBy = User.Identity.Name ?? "username";
             form.CreateDate = DateTime.Now;
@@ -107,7 +136,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,Slug,AppTenantId,SendMailToUser,UserMailContent,UserMailAttachment,SendSMS1ToUser,UserSMS1,SendSMS2ToUser,UserSMS2")] Form form)
+        public async Task<IActionResult> Edit(long id, [Bind("FormName,EmailTo,EmailBcc,EmailCc,Description,Template,ClosingDescription,GoogleAnalyticsCode,IsPublished,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,Slug,AppTenantId,SendMailToUser,UserMailContent,UserMailSubject,UserMailAttachment,SendSMS1ToUser,UserSMS1,SendSMS2ToUser,UserSMS2")] Form form)
         {
             if (id != form.Id)
             {

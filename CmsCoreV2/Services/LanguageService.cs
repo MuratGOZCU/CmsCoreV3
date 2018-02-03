@@ -23,8 +23,8 @@ namespace CmsCoreV2.Services
         }
         public LocalizedString GetResource(string name, string currentCulture, params object[] arguments)
         {
-            var langId = Languages.SingleOrDefault(l => l.Culture == currentCulture && l.AppTenantId == Tenant.AppTenantId).Id;            
-            var resource = Resources.SingleOrDefault(r => r.Name == name && r.LanguageId == langId && r.AppTenantId == Tenant.AppTenantId);
+            var langId = Languages.FirstOrDefault(l => l.Culture == currentCulture && l.AppTenantId == Tenant.AppTenantId).Id;            
+            var resource = Resources.FirstOrDefault(r => r.Name == name && r.LanguageId == langId && r.AppTenantId == Tenant.AppTenantId);
             var value = name;
             if (resource != null)
             {
@@ -34,8 +34,8 @@ namespace CmsCoreV2.Services
         }
         public LocalizedString GetResource(string name, string currentCulture)
         {
-            var langId = Languages.SingleOrDefault(l => l.Culture == currentCulture && l.AppTenantId == Tenant.AppTenantId).Id;
-            var resource = Resources.SingleOrDefault(r => r.Name == name && r.LanguageId == langId && r.AppTenantId == Tenant.AppTenantId);
+            var langId = Languages.FirstOrDefault(l => l.Culture == currentCulture && l.AppTenantId == Tenant.AppTenantId).Id;
+            var resource = Resources.FirstOrDefault(r => r.Name == name && r.LanguageId == langId && r.AppTenantId == Tenant.AppTenantId);
             var value = name;
             if (resource != null)
             {
