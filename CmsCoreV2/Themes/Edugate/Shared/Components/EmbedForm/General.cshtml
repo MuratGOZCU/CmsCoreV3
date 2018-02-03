@@ -1,4 +1,6 @@
 ﻿@model CmsCoreV2.Models.Form
+@inject CustomLocalizer Localizer
+<script src='https://www.google.com/recaptcha/api.js'></script>
 @addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
 <div class="row">
     <div class="col-md-12">
@@ -19,21 +21,27 @@
                                 </div>
                                 <div class="form-group">
                                     @if (!String.IsNullOrEmpty(Model.Description))
-            {
-                        @Html.Raw(Model.Description)
-}
-                                </div>
-                                @foreach (FormField item in Model.FormFields)
-        {
-                        <div class="form-group">
-                            <formField form-field="item" required="false" css-class="form-job" read_only="false" show-label="true" />
-                        </div>
-}
+                                    {
+                                        @Html.Raw(Model.Description)
+                                     }
+                                    </div>
+                                    @foreach (FormField item in Model.FormFields)
+                                    {
+                                      <div class="form-group">
+                                            <formField form-field="item" required="false" css-class="form-job" read_only="false" show-label="true" />
+                                        </div>
+                                    }
                             </div>
-                            @*<div class="form-group">
-            @Html.Raw(Model.ClosingDescription)
-        </div>*@
-                            <input style="background-color:green" class="btn btn-success" type="submit" value="Gönder" /><br /><br />
+                            @*<div class="form-group">@Html.Raw(Model.ClosingDescription)</div>*@
+                            <script>
+                            function onSurveyFormSubmit() {
+                                    document.getElementById("submit_handle").click();
+                                }
+                            </script>
+                            <div class="contact-submit">
+                                <input id="submit_handle" type="submit" style="display: none">
+                                <input type="submit" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onSurveyFormSubmit' data-badge="inline" onclick="onSurveyFormSubmit()" value=@Localizer["Gönder"]>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
