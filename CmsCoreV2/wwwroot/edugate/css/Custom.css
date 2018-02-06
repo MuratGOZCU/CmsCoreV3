@@ -1014,3 +1014,9 @@ width: 28px !important;
 .staff-item .staff-info .staff-name {
     text-transform:none;
 }
+.bg-w-form .form-label {
+text-transform:none;
+}
+.group-title-index {
+text-align: left;
+}

@@ -51,7 +51,7 @@ namespace CmsCoreV2.Controllers
             
             HttpContext.Items["Culture"] = culture;
             slug = slug.ToLower();
-            ViewBag.Popup = _context.SetFiltered<Popup>().Where(w => w.IsPublished == true && w.PublishDate <= DateTime.Now && (w.FinishDate.HasValue ? w.FinishDate > DateTime.Now : true)).OrderByDescending(o => o.PublishDate).FirstOrDefault();
+            ViewBag.Popup = _context.SetFiltered<Popup>().Where(w => w.PageSlug == slug && w.IsPublished == true && w.PublishDate <= DateTime.Now && (w.FinishDate.HasValue ? w.FinishDate > DateTime.Now : true)).OrderByDescending(o => o.PublishDate).FirstOrDefault();
             if (message == "subscriptionSuccessful")
             {
                 ViewBag.SubscribeMessage = "E-bülten kaydınız yapılmıştır, teşekkür ederiz.";
