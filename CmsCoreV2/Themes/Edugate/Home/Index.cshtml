@@ -78,3 +78,6 @@
 @await Component.InvokeAsync("Gallery", new { Name = @Localizer["Anasayfa Galeri"].ToString() })
 <!-- SLIDER LOGO-->
 @await Component.InvokeAsync("Slider", new { Name = @Localizer["Logo Slider"].ToString() })
+@section scripts {
+<script src="~/edugate/libs/owl-carousel-2.0/owl.carousel.min.js"></script>
+}

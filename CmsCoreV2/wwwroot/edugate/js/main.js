@@ -1,8 +1,9 @@
 (function($) {
     "use strict";
     $(function () {
+	if ($("#myCarousel").html()!=null) {
         $("#myCarousel").carousel();
-    
+    }
         // BACK TOP
         $('#back-top a').on('click', function () {
             $('body,html').animate({
@@ -252,6 +253,7 @@
     // owl carousel for ....
     var shw_slider_carousel = function() {
          // owl carousel slider banner
+	if ($('.slider-banner').html()!=null) {
         $('.slider-banner').owlCarousel({
             margin: 0,
             loop: true,
@@ -274,8 +276,8 @@
                 }
             }
         });
-        
-
+        }
+if ($('.event-detail-list-staff').html()!=null) {
          // owl carousel event-detail-list-staff
         $('.event-detail-list-staff').owlCarousel({
             margin: 30,
@@ -304,8 +306,10 @@
                 }
             }
         });
-
+}
+if ($('.top-courses-slider').html()!=null) {
         // owl carousel top courses
+try {
         $('.top-courses-slider').owlCarousel({
             margin: 30,
             loop: true,
@@ -324,6 +328,7 @@
                 }
             }
         });
+
         // button click slider top courses
         $('.group-btn-top-courses-slider .btn-prev').on('click', function(){
             $('.top-courses-slider .owl-prev').click();
@@ -331,8 +336,10 @@
         $('.group-btn-top-courses-slider .btn-next').on('click', function(){
             $('.top-courses-slider .owl-next').click();
         });
-
+} catch(e) {}
+}
         // owl carousel slider logos
+if ($('.carousel-logos').html()!=null) {
         $('.carousel-logos').owlCarousel({
             margin: 115,
             loop: true,
@@ -372,7 +379,8 @@
                 }
             }
         });
-
+}
+if ($('.best-staff-content').html()!=null) {
         // owl carousel slider best staff
         $('.best-staff-content').owlCarousel({
             margin: 30,
@@ -409,9 +417,11 @@
         $('.best-staff .group-btn-slider .btn-next').on('click', function(){
             $('.best-staff .owl-next').click();
         });
+}
 
         // responsive for section pricing when screen < 768
         if ($(window).width() <= 768){
+if ($('.pricing-wrapper').html()) {
             $('.pricing-wrapper').owlCarousel({
                 margin: 15,
                 loop: true,
@@ -431,7 +441,8 @@
                     }
                 }
             });
-
+}
+if ($('.event-detail-content .row').html()!=null) {
             $('.event-detail-content .row').owlCarousel({
                 margin: 15,
                 loop: true,
@@ -456,9 +467,10 @@
         $('.pricing .group-btn-slider .btn-next').on('click', function(){
             $('.pricing-wrapper .owl-next').click();
         });
-
+}
         // Responsive for Progress bar when screen < 767
         if ($(window).width() <= 767){
+if ($('.progress-bar-wrapper .content').html()!=null) {
             $('.progress-bar-wrapper .content').owlCarousel({
                 margin: 0,
                 loop: true,
@@ -490,6 +502,7 @@
         $('.progress-bars .group-btn-slider .btn-next').on('click', function(){
             $('.progress-bars .owl-next').click();
         });
+}
     };
 
     // Responsive for table
