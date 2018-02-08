@@ -212,6 +212,7 @@ namespace CmsCoreV2.Controllers
             {
                 if (upload != null && upload.Length > 0)
                 {
+                    bool redirect = false;
                     foreach (var file in upload)
                     {
                         if (!(Path.GetExtension(file.FileName) == ".jpg" || Path.GetExtension(file.FileName) == ".jpeg" || Path.GetExtension(file.FileName) == ".png" || Path.GetExtension(file.FileName) == ".doc"
@@ -219,8 +220,12 @@ namespace CmsCoreV2.Controllers
                            || Path.GetExtension(file.FileName) == ".rtf"
                            || Path.GetExtension(file.FileName) == ".docx"))
                         {
-                            return Redirect(Request.Headers["Referer"].ToString() + "?message=Dosya uzantısı izin verilen uzantılardan olmalıdır.");
+                            redirect = true;
                         }
+                    }
+                    if (redirect)
+                    {
+                        Redirect(Request.Headers["Referer"].ToString() + "?message=Dosya uzantısı izin verilen uzantılardan olmalıdır.");
                     }
                 }
                 feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);

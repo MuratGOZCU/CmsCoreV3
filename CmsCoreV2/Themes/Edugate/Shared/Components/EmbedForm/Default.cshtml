@@ -4,7 +4,7 @@
 @addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
 @if (Model != null && Model.Id > 0)
 {
-    <form action="/Home/PostForm" method="post" enctype="multipart/form-data">
+    <form id="defaultForm" action="/Home/PostForm" method="post" enctype="multipart/form-data" onsubmit="var result = true; $.each($('#defaultForm input'), function (index, value) { if ($(value).val() == '') { result=false; } });return result;">
         <div style="position:relative;">
             <img src="~/edugate/images/icon-close.png" style="border:0px;position:absolute;right:0px;cursor:pointer;" onclick="$('#floatingForm').slideToggle('slow')" alt="Kapat" />
             <div style="padding: 9px;">
