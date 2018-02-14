@@ -82,13 +82,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        @Html.Raw(ViewBag.GoogleAnalytics)
 </head>
 <body style="margin:0px; padding:0px;">
-<!-- Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
 
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8D2LTM"
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8D2LTM"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
 
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-<!-- End Google Tag Manager (noscript) -->
+    <!-- End Google Tag Manager (noscript) -->
     @{
         Popup popup = (Popup)ViewBag.Popup;
     }
@@ -99,7 +100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-body">
-<button type="button" class="close" data-dismiss="modal">x</button>
+                        <button type="button" class="close" data-dismiss="modal">x</button>
                         <a href="@popup.Url" target="@popup.Target"><img src="@popup.Photo" style="border:0;width:100%;" /></a>
                     </div>
                 </div>
@@ -298,7 +299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- Temp Scripts-->
         <script src="~/edugate/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 
-        
+
         @*<script src="~/edugate/libs/appear/jquery.appear.js"></script>*@
         @*<script src="~/edugate/libs/count-to/jquery.countTo.js"></script>*@
         @*<script src="~/edugate/libs/wow-js/wow.min.js"></script>*@
@@ -377,7 +378,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 
     @RenderSection("scripts", required: false)
-    <script>$(function () { $('input[type=tel]').mask('0599 9999999'); });</script>
+
+    <script src="~/js/jquery.inputmask.bundle.js"></script>
+    <script>
+        Inputmask({ "mask": "0599 9999999" }).mask("[type='tel']");
+    </script>
+    
     @Html.Raw(ViewBag.FooterScript)
 </body>
 </html>

@@ -17,20 +17,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label form-label">@item.Name@Html.Raw(item.Required ? "<span class='highlight'>*</span>" : "")</label>
-                            
-                                
-                                @if (item.Required)
-                                {
-                                    <formField form-field="item" required="true" css-class="form-job" read_only="false" show-placeholder="true" />
-                                    @Html.ValidationMessage(item.Name, "", new { @class = "text-danger" })
 
-                                }
-                                else
-                                {
-                                    <formField form-field="item" read_only="false" css-class="form-job" show-placeholder="true" />
-                                }
 
-                                
+                            @if (item.Required)
+                            {
+                                <formField form-field="item" required="true" css-class="form-job" read_only="false" show-placeholder="true" />
+                                @Html.ValidationMessage(item.Name, "", new { @class = "text-danger" })
+
+                            }
+                            else
+                            {
+                                <formField form-field="item" read_only="false" css-class="form-job" show-placeholder="true" />
+                            }
+
+
 
                         </div>
 
@@ -45,16 +45,17 @@
     </div>
     <script>
         function onJobRecourseFormSubmit() {
-           document.getElementById("submit_handle").click();
-           
+            document.getElementById("submit_handle").click();
         }
-      
+
     </script>
     <div class="contact-submit">
         <input id="submit_handle" type="submit" style="display: none">
-        <input type="button" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onJobRecourseFormSubmit' data-badge="inline" value="Gönder"/>
+        <input type="button" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onJobRecourseFormSubmit' data-badge="inline" value="Gönder" />
     </div>
 </form>
 @section scripts{
-@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+   
 }
