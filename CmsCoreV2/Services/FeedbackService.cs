@@ -22,7 +22,7 @@ namespace CmsCoreV2.Services
     {
         IEnumerable<Form> Search(string search, int sortColumnIndex, string sortDirection, int displayStart, int displayLength, out int totalRecords, out int totalDisplayRecords);
     
-        void FeedbackPost(IFormCollection collection, string ip, string appTenantId, IFormFile[] upload);
+        bool FeedbackPost(IFormCollection collection, string ip, string appTenantId, IFormFile[] upload);
         void FeedbackPostMail(string body, long id, IFormFile[] upload);
         Form GetForm(long id);
         Form GetForm(string name);
@@ -46,7 +46,7 @@ namespace CmsCoreV2.Services
             this.dbSet = DbContext.Feedbacks;
         }
 
-        public void FeedbackPost(IFormCollection collection, string ip, string appTenantId, IFormFile[] upload)
+        public bool FeedbackPost(IFormCollection collection, string ip, string appTenantId, IFormFile[] upload)
         {
             Feedback feed_back = new Feedback();
             feed_back.IP = ip;
@@ -75,6 +75,10 @@ namespace CmsCoreV2.Services
                 {
                     if (item.Name == item2.Key)
                     {
+                        if (item.Required && string.IsNullOrEmpty(item2.Value))
+                        {
+                            return false;
+                        }
                         feedBackValue.Value = item2.Value;
                         body = body + item2.Key + " : " + item2.Value + "<br/>";
                     }
@@ -116,7 +120,7 @@ namespace CmsCoreV2.Services
             body = body + "<br>" + "Gönderilme Tarihi : " + DateTime.Now;
             FeedbackPostMail(body, form.Id,upload);
             //return feed_back.FeedbackValues.ToList();
-
+            return true;
         }
 
         public void CreateFeedback(Feedback Feedback)

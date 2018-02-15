@@ -228,7 +228,11 @@ namespace CmsCoreV2.Controllers
                         Redirect(Request.Headers["Referer"].ToString() + "?message=Dosya uzantısı izin verilen uzantılardan olmalıdır.");
                     }
                 }
-                feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
+                var result = feedbackService.FeedbackPost(formCollection, Request.HttpContext.Connection.RemoteIpAddress.ToString(), tenant.AppTenantId, upload);
+                if (result == false)
+                {
+                    return Redirect("/tr/form/" + formCollection["Slug"]);
+                }
                 TempData["Referer"] = Request.Headers["Referer"].ToString();
                 return RedirectToAction("Successful", new { id = formCollection["FormId"]});
             }
