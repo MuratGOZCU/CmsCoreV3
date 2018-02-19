@@ -50,7 +50,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     i = 0;
                 }
             }
-            return Content(sw.ToString(), "text/csv");
+            return Content(sw.ToString(), "text/csv", System.Text.Encoding.UTF8);
         }
 
         // GET: CmsCore/Forms
