@@ -215,6 +215,14 @@ header .header-main .navigation .nav-links li .main-menu {
     margin-bottom: -40px;
 }
 
+.slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(6) {
+    background-color: #092f87;
+    width: 20px;
+    height: 20px;
+    border: 0px;
+    margin-bottom: -40px;
+}
+
 .slider-banner .owl-controls .owl-dots .owl-dot.active {
     border: 2px solid white;
 }
@@ -727,6 +735,17 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     border-radius: 10px;
 }
 
+.carousel-indicators li:nth-of-type(6) {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 0px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #eb1c74;
+    border-radius: 10px;
+}
+
 .carousel-indicators .active:nth-of-type(1) {
     width: 20px;
     height: 20px;
@@ -761,7 +780,12 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     border: 2px solid white;
     background-color: #092f87;
 }
-
+.carousel-indicators .active:nth-of-type(6) {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    background-color: #eb1c74;
+}
 .footer-main .footer-main-wrapper {
     padding-top: 25px;
     padding-bottom: 0px;

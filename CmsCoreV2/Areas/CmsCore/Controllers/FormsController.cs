@@ -34,7 +34,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             var fields = _context.FormFields.Where(f => f.FormId == id).OrderBy(o => o.Position).Select(s => s.Name).ToList().ToArray();
             var fieldCount = fields.Count();
             sw.WriteLine("sep=,");
-            sw.WriteLine(string.Join(",", fields));
+            sw.WriteLine(string.Join(",", fields)+",CreateDate");
             Response.Headers.Add("content-disposition", "attachment;filename=" + formName + ".csv");
             Response.ContentType = "text/csv";
             var items = _context.FeedbackValues.Include(t => t.Feedback).Where(f => f.Feedback.FormId == id).OrderBy(o => o.Id).ToList();
@@ -46,6 +46,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 i++;
                 if (i >= fieldCount)
                 {
+                    sw.Write(item.CreateDate);
                     sw.WriteLine();
                     i = 0;
                 }
