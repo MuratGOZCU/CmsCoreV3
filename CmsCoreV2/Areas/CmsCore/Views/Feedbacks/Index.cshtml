@@ -4,8 +4,40 @@
     ViewData["Title"] = "Geri Bildirimler";
 }
 
-<h2>Geri Bildirim</h2>
+<h2>Geri Bildirimler</h2>
 
+        <form>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="skip" placeholder="Atla" value="@ViewBag.Skip" />
+                        <span class="input-group-addon">-</span>
+                        <input type="number" class="form-control" name="take" placeholder="Al" value="@ViewBag.Take" />
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="input-group">
+
+                        <select name="formId" class="form-control">
+                            @foreach (var item in ViewBag.Forms)
+                {
+                    @if (item.Id == ViewBag.FormId)
+        {
+            <option value="@item.Id" selected>@item.FormName</option>
+}
+else
+{
+            <option value="@item.Id">@item.FormName</option>
+}
+    }
+                        </select><span class="input-group-btn">
+                            <button type="submit" class="btn btn-success">Filtrele</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+<hr />
 <table id="tblRecords" class="table table-striped table-hover">
     <thead>
         <tr>

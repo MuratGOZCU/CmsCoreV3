@@ -32,17 +32,18 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             HttpContext.Response.Clear();
             string formName = _context.Forms.FirstOrDefault(f => f.Id == id).Slug;
             var fields = _context.FormFields.Where(f => f.FormId == id).OrderBy(o => o.Position).Select(s => s.Name).ToList().ToArray();
+            var fieldIds = _context.FormFields.Where(f => f.FormId == id).OrderBy(o => o.Position).Select(s => s.Id).ToList();
             var fieldCount = fields.Count();
-            sw.WriteLine("sep=,");
-            sw.WriteLine(string.Join(",", fields)+",CreateDate");
+            sw.WriteLine("sep=|");
+            sw.WriteLine(string.Join("|", fields)+"|CreateDate");
             Response.Headers.Add("content-disposition", "attachment;filename=" + formName + ".csv");
             Response.ContentType = "text/csv";
-            var items = _context.FeedbackValues.Include(t => t.Feedback).Where(f => f.Feedback.FormId == id).OrderBy(o => o.Id).ToList();
+            var items = _context.FeedbackValues.Include(t => t.Feedback).Where(f => f.Feedback.FormId == id && fieldIds.Contains(f.FormFieldId)).OrderBy(o=>o.FeedbackId).ThenBy(o => o.Position).ToList();
             int i = 0;
             foreach (var item in items)
             {
 
-                sw.Write(item.Value + ",");
+                sw.Write(item.Value + "|");
                 i++;
                 if (i >= fieldCount)
                 {

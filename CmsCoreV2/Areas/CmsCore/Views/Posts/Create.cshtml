@@ -6,7 +6,7 @@
 
 <link href="/metronic/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css">
 <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
-<script src="~/js/generate-slug.js"> </script>
+<script src="~/js/generate-slug.js"></script>
 
 <h2>Yazı Oluştur</h2>
 <hr />
@@ -83,13 +83,24 @@
                     <div class="input-group">
                         <input asp-for="Photo" class="form-control" />
                         <span class="input-group-btn">
-                            <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Photo')">...</a>
+                            <a class="btn btn-info" id="uploadModal" onclick="browseMedia('Photo')">...</a>
                         </span>
                     </div>
                 </div>
                 @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
             </div>
-
+            <div class="form-group">
+                <label asp-for="SmallPhoto" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.SmallPhoto)</label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input asp-for="SmallPhoto" class="form-control" />
+                        <span class="input-group-btn">
+                            <a class="btn btn-info" id="uploadModal2" onclick="browseMedia('SmallPhoto')">...</a>
+                        </span>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.SmallPhoto, "", new { @class = "text-danger" })
+            </div>
 
             <div class="form-group">
                 <label asp-for="Meta1" class="col-md-2 control-label"></label>
@@ -112,7 +123,7 @@
                     <span asp-validation-for="ViewCount" class="text-danger"></span>
                 </div>
             </div>
-          
+
             <div class="form-group">
                 <label asp-for="HeaderScript" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
@@ -160,7 +171,7 @@
             <div class="form-group">
                 <label asp-for="PublishDate" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="PublishDate" class="form-control"/>
+                    <input asp-for="PublishDate" class="form-control" />
                     <span asp-validation-for="PublishDate" class="text-danger"></span>
                 </div>
             </div>
@@ -209,7 +220,7 @@
     <a asp-action="Index">Listeye Geri Dön</a>
 </div>
 @Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Photo" } })
-
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "SmallPhoto" } })
 @section scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="/metronic/global/plugins/jstree/dist/jstree.js"></script>

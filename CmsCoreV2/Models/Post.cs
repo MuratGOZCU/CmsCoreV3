@@ -35,6 +35,9 @@ namespace CmsCoreV2.Models
         [Display(Name = "Resim")]
         [StringLength(200)]
         public string Photo { get; set; }
+        [Display(Name = "Küçük Resim")]
+        [StringLength(200)]
+        public string SmallPhoto { get; set; }
         [Display(Name = "Meta 1")]
         public string Meta1 { get; set; }
         [Display(Name = "Meta 2")]

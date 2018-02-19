@@ -10,19 +10,26 @@
         } else {
         @foreach (var item in Model)
         { <div class="edugate-layout-1">
-            <div class="edugate-image"><img src="@Html.Raw(item.Photo)" alt="" class="img-responsive" /></div>
-            <div class="edugate-content">
-                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
+    @if (string.IsNullOrEmpty(item.SmallPhoto))
+    {
+        <div class="edugate-image"><img src="@Html.Raw(item.Photo)" alt="" class="img-responsive" /></div>
+    }
+    else
+    {
+        <div class="edugate-image"><img src="@Html.Raw(item.SmallPhoto)" alt="" class="img-responsive" /></div>
+    }
+    <div class="edugate-content">
+        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
 
-                <div class="info">
-                    <div class="date-time item"><a href="#">@(item.PublishDate.HasValue ? item.PublishDate.Value.ToString("dd.MM.yyyy") : "")</a></div>
-                </div>
-                <div class="description">
-                    @Html.Raw(item.Description.PadLeft(120))
-                </div>
-                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="btn btn-green"><span>Devamını oku...</span></a>
-            </div>
+        <div class="info">
+            <div class="date-time item"><a href="#">@(item.PublishDate.HasValue ? item.PublishDate.Value.ToString("dd.MM.yyyy") : "")</a></div>
         </div>
+        <div class="description">
+            @Html.Raw(item.Description.PadLeft(120))
+        </div>
+        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="btn btn-green"><span>Devamını oku...</span></a>
+    </div>
+</div>
 
 
 

@@ -27,9 +27,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             this.feedbackService = feedbackService;
         }
         // GET: CmsCore/Feedbacks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int formId=1, int skip=0, int take=1000)
         {
-            return View(await _context.SetFiltered<Feedback>().Where(x => x.AppTenantId == tenant.AppTenantId).ToListAsync());
+            ViewBag.Forms = _context.Forms.ToList();
+            ViewBag.FormId = formId;
+            ViewBag.Skip = skip;
+            ViewBag.Take = take;
+            return View(await _context.SetFiltered<Feedback>().Where(x => x.AppTenantId == tenant.AppTenantId && x.FormId==formId).Skip(skip).Take(take).ToListAsync());
         }
 
         // GET: CmsCore/Feedbacks/Details/5
@@ -210,11 +214,14 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             
-            var feedbackValue = await _context.FeedbackValues.SingleOrDefaultAsync(m => m.FeedbackId == id);
-
-            _context.FeedbackValues.Remove(feedbackValue);
-            await _context.SaveChangesAsync();
-            var feedback = await _context.Feedbacks.SingleOrDefaultAsync(m => m.Id == id);
+            var feedbackValues = _context.FeedbackValues.Where(m => m.FeedbackId == id).ToList();
+            foreach (var item in feedbackValues)
+            {
+                _context.FeedbackValues.Remove(item);
+            }
+            _context.SaveChanges();
+            
+            var feedback = await _context.Feedbacks.FirstOrDefaultAsync(m => m.Id == id);
             _context.Feedbacks.Remove(feedback);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
