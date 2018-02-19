@@ -17,7 +17,9 @@
                 <div class="staff-item">
                     <div class="staff-item-wrapper">
                         <div class="staff-info">
-                            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="staff-avatar"><img src="@item.Photo" alt="" class="img-responsive" /></a><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="staff-name">@item.Title</a>
+                            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="staff-avatar">@if (string.IsNullOrEmpty(item.SmallPhoto))
+                            {<img src="@item.Photo" alt="" class="img-responsive" />}
+                            else { <img src="@item.SmallPhoto" alt="" class="img-responsive" />}</a><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="staff-name">@item.Title</a>
 
                             <div class="staff-job">@item.Meta1</div>
                             <div style="text-align:center" class="staff-desctiption">@Html.Raw(item.Description)</div>

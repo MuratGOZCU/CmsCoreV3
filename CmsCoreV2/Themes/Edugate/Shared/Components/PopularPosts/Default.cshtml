@@ -4,7 +4,8 @@
 
 {
     <div class="media">
-        <div class="media-left"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link"><img src="@Html.Raw(item.Photo)" alt="" class="media-image" /></a></div>
+        <div class="media-left"><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link">
+            @if (string.IsNullOrEmpty(item.SmallPhoto)) {<img src="@Html.Raw(item.Photo)" alt="" class="media-image" />} else {<img src="@Html.Raw(item.SmallPhoto)" alt="" class="media-image" />}</a></div>
         <div class="media-right">
  @if (item.PublishDate.HasValue)
  {           <div class="info">
