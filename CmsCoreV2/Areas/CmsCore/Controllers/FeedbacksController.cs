@@ -27,13 +27,17 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             this.feedbackService = feedbackService;
         }
         // GET: CmsCore/Feedbacks
-        public async Task<IActionResult> Index(int formId=1, int skip=0, int take=1000)
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, int formId=1, int skip=0, int take=1000)
         {
+            startDate = startDate ??  DateTime.MinValue;
+            endDate = endDate ?? DateTime.Now;
+            ViewBag.StartDate = startDate;
+            ViewBag.EndDate = endDate;
             ViewBag.Forms = _context.Forms.ToList();
             ViewBag.FormId = formId;
             ViewBag.Skip = skip;
             ViewBag.Take = take;
-            return View(await _context.SetFiltered<Feedback>().Where(x => x.AppTenantId == tenant.AppTenantId && x.FormId==formId).Skip(skip).Take(take).ToListAsync());
+            return View(await _context.SetFiltered<Feedback>().Where(x => x.AppTenantId == tenant.AppTenantId && x.FormId==formId && startDate <= x.CreateDate && x.CreateDate<=endDate).Skip(skip).Take(take).ToListAsync());
         }
 
         // GET: CmsCore/Feedbacks/Details/5

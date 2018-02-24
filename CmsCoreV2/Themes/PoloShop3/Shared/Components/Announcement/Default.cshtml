@@ -1,0 +1,26 @@
+﻿@addTagHelper *, Sakura.AspNetCore.Mvc.PagedList
+@model Sakura.AspNetCore.IPagedList<Post>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+
+<div class="marqueeCrawl">
+    @foreach (var item in Model)
+    {
+       
+        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">
+            <i class="fa fa-hand-o-right" aria-hidden="true"></i> 
+            @if (item.PublishDate != null)
+            {
+                <span class="rssViewerDate">@item.PublishDate.Value.ToString("dd MM yyyy") - </span>
+               
+            }
+         
+            <span class="rssViewerTitle">
+               @item.Title	&nbsp; 	&nbsp;
+            </span>
+        </a>
+    }
+
+</div>
+ 
+

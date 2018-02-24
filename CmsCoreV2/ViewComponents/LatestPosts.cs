@@ -18,8 +18,9 @@ namespace CmsCoreV2.ViewComponents
             this._context = context;
         }
    
-        public async Task<IViewComponentResult> InvokeAsync(string categoryNames = "", int count = 8)
+        public async Task<IViewComponentResult> InvokeAsync(string categoryNames = "", int count = 8, bool IsHomePage=false)
         {
+            ViewBag.IsHomePage = IsHomePage;
             var items = await GetItems(categoryNames, count);
             return View(items);
         }

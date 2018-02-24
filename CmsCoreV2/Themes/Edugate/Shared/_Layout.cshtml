@@ -4,82 +4,85 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<!-- Google Tag Manager -->
+    <!-- Google Tag Manager -->
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script>
+(function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+            'gtm.start':
 
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
 
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
 
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 
-})(window,document,'script','dataLayer','GTM-P8D2LTM');</script>
+        })(window, document, 'script', 'dataLayer', 'GTM-P8D2LTM');</script>
 
-<!-- End Google Tag Manager -->
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] @(!string.IsNullOrEmpty(Context.Request.Query["page"])?"- Sayfa " + Context.Request.Query["page"].ToString() + " ":"")- @Tenant.Title</title>
+    <title>@ViewData["Title"] @(!string.IsNullOrEmpty(Context.Request.Query["page"]) ? "- Sayfa " + Context.Request.Query["page"].ToString() + " " : "")- @Tenant.Title</title>
     <meta name="description" content="@ViewData["Description"]">
     @if (ViewData["Keywords"] != null && ViewData["Keywords"].ToString() != "")
     {
         <meta name="keywords" content="@ViewData["Keywords"]">
     }
-    @if (ViewData["Title"] != null && ViewData["Title"].ToString() == "404 - Sayfa bulunamadı")
+    @if (ViewBag.is404 == true || ( ViewData["Title"] != null && ViewData["Title"].ToString() == "404 - Sayfa bulunamadı"))
     {
         <meta name="robots" content="noindex">
     }
-        <environment names="Development">
+    <environment names="Development">
 
 
-            <!-- Temps Files-->
-            @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
-            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
-            <!-- LIBRARY CSS-->
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-            @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
+        <!-- Temps Files-->
+        @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
+        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
+        <!-- LIBRARY CSS-->
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
+        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
 
-            <!-- STYLE CSS    -->
-            <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
-            <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
-            @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
-        </environment>
-        <environment names="Staging,Production">
+        <!-- STYLE CSS    -->
+        <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
+        <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
+        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
+    </environment>
+    <environment names="Staging,Production">
 
 
-            <!-- Temps Files-->
-           
-            @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
-            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
-            <!-- LIBRARY CSS-->
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
-            <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
-            @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
+        <!-- Temps Files-->
+        @*<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400italic,700,900,300&subset=latin,latin-ext">*@
+        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-awesome-4.4.0/css/font-awesome.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/font/font-icon/font-svg/css/Glyphter.css">
+        <!-- LIBRARY CSS-->
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/animate/animate.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/bootstrap-3.3.5/css/bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/owl-carousel-2.0/assets/owl.carousel.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/selectbox/css/jquery.selectbox.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox.css">
+        <link type="text/css" rel="stylesheet" href="~/edugate/libs/fancybox/css/jquery.fancybox-buttons.css">
+        @*<link type="text/css" rel="stylesheet" href="~/edugate/libs/media-element/build/mediaelementplayer.min.css">*@
 
-            <!-- STYLE CSS    -->
-            <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
-            <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
-            <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
-            @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
+        <!-- STYLE CSS    -->
+        <link type="text/css" rel="stylesheet" href="~/edugate/css/color-4.css" id="color-skins">
+        <!--link(type="text/css", rel='stylesheet', href='#', id="color-skins")-->
+        <script src="~/edugate/libs/jquery/jquery-2.1.4.min.js"></script>
+        @*<script src="~/edugate/libs/js-cookie/js.cookie.js"></script>*@
 
-        </environment>
-        <link href="~/edugate/css/Custom.css" type="text/css" rel="stylesheet" />
-        <link href="~/home/customcss" type="text/css" rel="stylesheet" />
-        <link rel="icon" type="image/png" href="~/edugate/images/favicon.png" alt="favicon" />
-          
-       @Html.Raw(ViewBag.HeaderScript)
-       @Html.Raw(ViewBag.GoogleAnalytics)
+    </environment>
+    <link href="~/edugate/css/Custom.css" type="text/css" rel="stylesheet" />
+    <link href="~/home/customcss" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/edugate/images/favicon.png" alt="favicon" />
+    @Html.Raw(ViewBag.PageScript)
+    @Html.Raw(ViewBag.HeaderScript)
+    @Html.Raw(ViewBag.GoogleAnalytics)
 </head>
 <body style="margin:0px; padding:0px;">
     <!-- Google Tag Manager (noscript) -->

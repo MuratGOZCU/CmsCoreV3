@@ -48,7 +48,7 @@ namespace CmsCoreV2.Controllers
                 return Redirect("/tr");
             }
             ViewData["Culture"] = culture;
-            
+            ViewBag.PageScript = "";
             HttpContext.Items["Culture"] = culture;
             slug = slug.ToLower();
             ViewBag.Popup = _context.SetFiltered<Popup>().Where(w => w.PageSlug == slug && w.IsPublished == true && w.PublishDate <= DateTime.Now && (w.FinishDate.HasValue ? w.FinishDate > DateTime.Now : true)).OrderByDescending(o => o.PublishDate).FirstOrDefault();
@@ -58,7 +58,7 @@ namespace CmsCoreV2.Controllers
             }
             else if (message == "subscriptionUnsuccessful")
             {
-                ViewBag.SubscribeMessage = "E-bülten kaydınız mevcuttur.Mail adresinizi kontrol ediniz";
+                ViewBag.SubscribeMessage = "E-bülten kaydınız mevcuttur. Mail adresinizi kontrol ediniz.";
             }
             var setting = _context.SetFiltered<Setting>().FirstOrDefault();
             ViewBag.MapLat = setting.MapLat;
@@ -132,6 +132,7 @@ namespace CmsCoreV2.Controllers
                 pageVM.Photo = page.Photo;
                 pageVM.LayoutTemplate = page.LayoutTemplate;
                 pageVM.HeaderScript = page.HeaderScript;
+                ViewBag.PageScript = page.HeaderScript;
                 pageVM.Meta1 = page.Meta1;
                 pageVM.Meta2 = page.Meta2;
                 pageVM.Template = page.Template;

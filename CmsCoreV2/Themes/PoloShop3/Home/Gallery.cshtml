@@ -1,0 +1,16 @@
+﻿@inject CustomLocalizer Localizer
+<section class="p-b-10" style="padding-top:30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-item-description">
+                    <h2 class="h2">Galeri</h2>
+                    @await Component.InvokeAsync("Gallery", new { Name = "Galeri Sayfası", Template = "Gallery", count = 1000 })
+                    @*<div class="load-more">
+                            <button class="btn btn-green"><span>@Localizer["Diğer"]</span></button>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

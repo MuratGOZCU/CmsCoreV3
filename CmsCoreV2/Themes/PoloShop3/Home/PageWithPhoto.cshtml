@@ -1,0 +1,221 @@
+﻿@inject CustomLocalizer Localizer
+@model PageViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+@Html.Raw(Model.HeaderScript)
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/edugate/css/Custom.css" rel="stylesheet" />
+@*<style>
+
+    #PageWithPhoto.background-opacity:before {
+        background-image: url(@(String.IsNullOrEmpty(Model.Photo)? "/edugate/images/kindergarten.png":Model.Photo)) !important;
+        background-size: cover;
+            }
+    .category-widget li, .archive-widget li {width:90%;}
+    .widget .title-widget {
+    width: 90%;
+    margin: 0 auto;
+    }
+</style>*@
+
+<section id="page-title" class="background-overlay" data-parallax-image="@(String.IsNullOrEmpty(Model.Photo)?"/polocorporate5/images/parallax/14.jpg":Model.Photo)">
+    <div class="container">
+        <div class="page-title">
+            <h1 class="text-uppercase text-medium">@Model.Title</h1>
+            <span>@Model.Meta1</span>
+        </div>
+    </div>
+</section>
+
+
+ <section class="p-b-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="heading heading text-left">
+                            @*Kampanyamız*@
+                            <h2>@Model.Title</h2>  
+                            <span class="lead">@Model.Body </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="heading heading-center">
+            <h2>WHAT WE DO</h2>
+            <span class="lead">Create amaLorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="">
+                    <h4>Web Development</h4>
+                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="">
+                    <h4>Social Marketing</h4>
+                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="">
+                    <h4>Graphic Design</h4>
+                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="">
+                    <h4>Web Design</h4>
+                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="">
+                    <h4>App Development</h4>
+                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="">
+                    <h4>Hosting services</h4>
+                    <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. Suspendisse condimentum porttitor cursumus.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<div class="seperator">
+    <i class="fa fa-chevron-down"></i>
+</div>
+<section>
+
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <p class="lead">Our awesome clients we've had the pleasure to work with!</p>
+            </div>
+        </div>
+
+
+        <ul class="grid grid-5-columns">
+            <li>
+                <a href="#">
+                    <img src="images/clients/1.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/2.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/3.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/4.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/5.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/6.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/7.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/8.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/9.png" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/clients/10.png" alt="">
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</section>
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+    //$(window).load(function () {
+    //    var fSlider = $('#carousel').flexslider({
+    //        directionNav: false,
+    //    });
+
+    //    $(".homeForm div input").on("focus", function () {
+    //        $('#carousel').flexslider('pause');
+    //    });
+
+    //    $(".homeForm div input").on("blur", function () {
+    //        $('#carousel').flexslider('play');
+    //    });
+
+
+
+    //});
+    $(document).ready(function () {
+        if ($('.more').html().indexOf('<!-- more -->') > 0) {
+            var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
+            var ellipsestext = "...";
+            var moretext = "Devamını göster";
+            var lesstext = "Devamını gizle";
+
+            var content = $('.more').html();
+
+            if (content.length > showChar) {
+
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar - 1, content.length - showChar);
+
+                var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                $('.more').html(html);
+            }
+
+
+            $(".morelink").click(function () {
+                if ($(this).hasClass("less")) {
+                    $(this).removeClass("less");
+                    $(this).html(moretext);
+                } else {
+                    $(this).addClass("less");
+                    $(this).html(lesstext);
+                }
+                $(this).prev().toggle();
+                $(this).parent().prev().toggle();
+                return false;
+            });
+        }
+    });
+
+
+</script>

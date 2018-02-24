@@ -1,0 +1,60 @@
+﻿@model CmsCoreV2.Models.Form
+@inject CustomLocalizer Localizer
+
+@addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<form class="bg-w-form contact-form" action="/Home/PostForm" method="post" id="jobRecourseForm" enctype="multipart/form-data">
+
+    <div class="row">
+        @if (Model != null && Model.Id > 0)
+        {
+            <fieldset>
+                <input type="hidden" value="@Model.Id" name="FormId" />
+
+                @foreach (FormField item in Model.FormFields)
+                {
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label form-label">@item.Name<span class="highlight"></span></label>
+                            
+                                
+                                @if (item.Required)
+                                {
+                                    <formField form-field="item" required="true" css-class="form-job" read_only="false" show-placeholder="true" />
+                                    @Html.ValidationMessage(item.Name, "", new { @class = "text-danger" })
+
+                                }
+                                else
+                                {
+                                    <formField form-field="item" read_only="false" show-placeholder="true" />
+                                }
+
+                                
+
+                        </div>
+
+                    </div>
+                }
+            </fieldset>
+        }
+        else
+        {
+            <p>@Localizer["Form bulunamadı!"]: @Model.FormName</p>
+        }
+    </div>
+    <script>
+        function onJobRecourseFormSubmit() {
+           document.getElementById("submit_handle").click();
+           
+        }
+      
+    </script>
+    <div class="contact-submit">
+        <input id="submit_handle" type="submit" style="display: none">
+        <input type="button" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onJobRecourseFormSubmit' data-badge="inline"  onclick="onJobRecourseFormSubmit()" value="Gönder"/>
+    </div>
+</form>
+@section scripts{
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

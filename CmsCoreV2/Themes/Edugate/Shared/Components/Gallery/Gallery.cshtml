@@ -4,7 +4,7 @@
     <div class="group-title-index">
     
 
-        <h2 class="center-title">@Localizer["Galeri"]</h2>
+        <h1 class="center-title">@Localizer["Galeri"]</h1>
 
         <div class="bottom-title"><i class="bottom-icon icon-a-1-01"></i></div>
     </div>
@@ -15,7 +15,6 @@
             foreach (var cats in Model.Select(s => s.GalleryItemGalleryItemCategories).ToList())
             {
                 giCategories.AddRange(cats.Select(s => s.GalleryItemCategory).ToList());
-
             }
             giCategories = giCategories.Distinct().ToList();
         }

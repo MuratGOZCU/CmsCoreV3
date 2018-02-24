@@ -1,0 +1,41 @@
+﻿@model CmsCoreV2.Models.Form
+@inject CustomLocalizer Localizer
+
+@addTagHelper "CmsCoreV2.Helpers.FormFieldHelper, CmsCoreV2"
+ 
+<form class="widget-contact-form" action="/Home/PostFormAjax" method="post" id="contactForm" success-message="Form başarıyla gönderildi" data-error-message="Bir hata oluştu!">
+    <div class="row">
+        @if (Model != null && Model.Id > 0)
+        {
+            <fieldset>
+                <input type="hidden" value="@Model.Id" name="FormId" />
+                @foreach (FormField item in Model.FormFields)
+                {
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label form-label">@item.Name@Html.Raw(item.Required ? "<span class='highlight'>*</span>" : "")</label>
+                            @if (item.Required)
+                            {
+                                <formField form-field="item" required="true" css-class="form-input" read_only="false" show-placeholder="true" />
+                                @Html.ValidationMessage(item.Name, "", new { @class = "text-danger" })
+                            }
+                            else
+                            {
+                                <formField form-field="item" read_only="false" show-placeholder="true" />
+                            }
+
+                        </div>
+                    </div>
+                }
+            </fieldset>
+        }
+        else
+        {
+            <p>@Localizer["Form bulunamadı!"]: @Model.FormName</p>
+        }
+    </div>
+  
+    <div class="contact-submit">
+        <button type="submit" class="btn btn-default" id="form-submit"><i class="fa fa-paper-plane"></i>@Localizer["Gönder"]</button>
+    </div>
+</form>

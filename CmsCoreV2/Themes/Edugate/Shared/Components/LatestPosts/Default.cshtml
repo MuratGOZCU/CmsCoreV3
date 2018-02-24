@@ -8,8 +8,14 @@
         <div class="container">
             <div class="group-title-index">
                 <h4 class="top-title">@Localizer["GÜNCEL DUYURULAR"]</h4>
-
-                <h1 class="center-title">@Localizer["BİLGİ KOLEJİ'NDEN EN SON HABERLER"]</h1>
+                @if (ViewBag.IsHomePage == true)
+                {
+                    <h1 class="center-title">@Localizer["BİLGİ KOLEJİ'NDEN EN SON HABERLER"]</h1>
+                }
+                else
+                {
+                    <strong class="center-title">@Localizer["BİLGİ KOLEJİ'NDEN EN SON HABERLER"]</strong>
+                }
                 <div class="bottom-title"><i class="bottom-icon icon-icon-04"></i></div>
             </div>
             <div class="top-courses-wrapper">

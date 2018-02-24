@@ -1,10 +1,6 @@
 ﻿@inject CustomLocalizer Localizer
 @model PageViewModel
-
-@Html.Raw(Model.HeaderScript)
-
 <style>
-
     #PageWithPhoto.background-opacity:before {
         background-image: url(@(String.IsNullOrEmpty(Model.Photo)? "/edugate/images/kindergarten.png":Model.Photo)) !important;
         background-size: cover;

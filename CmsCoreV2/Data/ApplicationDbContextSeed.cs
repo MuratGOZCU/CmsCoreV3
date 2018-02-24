@@ -56,12 +56,8 @@ namespace CmsCoreV2.Data
             AddGalleryItemGalleryItemCategories(context, tenant);
             AddPostPostCategories(context, tenant);
             AddResources(context, tenant);
-                    
-
-
-
-                    context.SaveChanges();
-                }
+            context.SaveChanges();
+            }
             else if (tenant.Name == "BirInsanBelge") {
 
 
@@ -97,6 +93,24 @@ namespace CmsCoreV2.Data
                     BirInsanBelgeAddResources(context, tenant);
                     context.SaveChanges();
                     // bir insan belgenin seed kodları buraya yazılacak
+                } else if (tenant.Name == "BilgiStore") {
+                    if (context.SetFiltered<Language>().Where(l => l.AppTenantId == tenantId).Any())
+                    {
+                        return;   // DB has been seeded
+                    }
+
+                    // Perform seed operations
+                    var languageId = BilgiStoreAddLanguages(context, tenant);
+                    BilgiStoreAddPages(context, tenant, languageId);
+                    context.SaveChanges();
+                    BilgiStoreAddSettings(context, tenant);
+                    BilgiStoreAddCustomization(context, tenant);
+                    BilgiStoreAddMenus(context, tenant);
+                    BilgiStoreAddMenuItems(context, tenant);
+                    context.SaveChanges();
+                    BilgiStoreAddHomePageSlider(context, tenant);
+                    BilgiStoreAddHomePageSlide(context, tenant);
+                    context.SaveChanges();
                 }
                 UserManager<ApplicationUser> _userManager = (UserManager<ApplicationUser>)accessor.HttpContext.RequestServices.GetService(typeof(UserManager<ApplicationUser>));
                 RoleManager<Role> _roleManager = (RoleManager<Role>)accessor.HttpContext.RequestServices.GetService(typeof(RoleManager<Role>));
@@ -1469,6 +1483,154 @@ namespace CmsCoreV2.Data
 
             );
             context.SaveChanges();
+        }
+
+        /*********************************** Bilgi Store *****************************/
+        public static long BilgiStoreAddLanguages(ApplicationDbContext context, AppTenant tenant)
+        {
+            var l = new Language();
+            l.Name = "Turkish";
+            l.NativeName = "Türkçe";
+            l.Culture = "tr";
+            l.IsActive = true;
+            l.AppTenantId = tenant.AppTenantId;
+            context.Languages.Add(l);
+
+            context.SaveChanges();
+
+            return l.Id;
+
+
+        }
+        public static void BilgiStoreAddPages(ApplicationDbContext context, AppTenant tenant, long languageId)
+        {
+
+            context.AddRange(
+                new Page { Title = "Anasayfa", Slug = "anasayfa", Template = "Index", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "Blog", Slug = "blog", Template = "blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "İletişim Bilgileri", Slug = "iletisim-bilgileri", Template = "Contact", Photo = "/uploads/birinsan/8-2017/biz_kimiz.png", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId, Body = "<h3 class=\"text-uppercase\">Adres & Harita</h3><div class=\"row\"><div class=\"col-md-6\"><address><strong>Bilişim Eğitim Merkezi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div><div class=\"col-md-6\"><address><strong>Bir İnsan Akademisi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div></div>" },
+                new Page { Title = "Arama", Slug = "arama", Template = "Search", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
+                );
+
+        }
+
+
+        private static void BilgiStoreAddSettings(ApplicationDbContext context, AppTenant tenant)
+        {
+            var s = new Setting();
+            s.AppTenantId = tenant.AppTenantId;
+            s.HeaderString = "";
+            s.GoogleAnalytics = "";
+            s.FooterScript = "";
+            s.SmtpUserName = "denemecvhavuzu@gmail.com";
+            s.SmtpPassword = "123:Asdfg";
+            s.SmtpHost = "smtp.gmail.com";
+            s.SmtpPort = "587";
+            s.SmtpUseSSL = true;
+            s.CreateDate = DateTime.Now;
+            s.CreatedBy = "username";
+            s.UpdateDate = DateTime.Now;
+            s.UpdatedBy = "username";
+            s.MapLat = "40.989143";
+            s.MapLon = "29.0289560";
+            s.MapTitle = "Bilgi Store";
+            context.Settings.Add(s);
+            context.SaveChanges();
+
+
+        }
+        public static void BilgiStoreAddCustomization(ApplicationDbContext context, AppTenant tenant)
+        {
+            var customization = new Customization();
+            customization.AppTenantId = tenant.AppTenantId;
+            customization.ThemeId = tenant.ThemeId;
+            customization.ThemeName = tenant.ThemeName;
+            customization.MetaKeywords = tenant.Theme.MetaKeywords;
+            customization.MetaDescription = tenant.Theme.MetaDescription;
+            customization.MetaTitle = tenant.Theme.MetaTitle;
+            customization.Logo = tenant.Theme.Logo;
+            customization.ImageUrl = tenant.Theme.ImageUrl;
+            customization.CustomCSS = tenant.Theme.CustomCSS;
+            customization.CreateDate = DateTime.Now;
+            customization.CreatedBy = "UserName";
+            customization.UpdateDate = DateTime.Now;
+            customization.UpdatedBy = "UserName";
+            customization.PageTemplates = tenant.Theme.PageTemplates;
+            customization.ComponentTemplates = tenant.Theme.ComponentTemplates;
+            context.Customizations.Add(customization);
+            context.SaveChanges();
+
+        }
+
+        private static void BilgiStoreAddMenus(ApplicationDbContext context, AppTenant tenant)
+        {
+            var menu = new Menu { Name = "Ana Menü", MenuLocation = "Primary", LanguageId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId };
+           
+
+            context.AddRange(menu);
+       
+
+            context.SaveChanges();
+        }
+        private static void BilgiStoreAddMenuItems(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+
+                new MenuItem { Name = "Anaokulu", Url = "anaokulu", Position = 2, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İlkokul", Url = "ilkokul", Position = 3, IsPublished = true, MenuId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Ortaokul", Url = "ortaokul", Position = 4, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Lise", Url = "lise", Position = 5, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Ürünler", Url = "urunler", Position = 6, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Aksesuarlar", Url = "aksesuarlar", Position = 7, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Mağazalar", Url = "magazalar", Position = 7, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                );
+            context.SaveChanges();
+        }
+
+        private static void BilgiStoreAddHomePageSlider(ApplicationDbContext context, AppTenant tenant)
+        {
+            var slider = new Slider();
+            slider.AppTenantId = tenant.AppTenantId;
+
+            slider.IsPublished = true;
+            slider.Name = "Anasayfa Slider";
+            slider.Template = "Default";
+            slider.CreateDate = DateTime.Now;
+            slider.CreatedBy = "username";
+            slider.UpdateDate = DateTime.Now;
+            slider.UpdatedBy = "username";
+            slider.Slides = new HashSet<Slide>();
+            context.Sliders.Add(slider);
+            context.SaveChanges();
+
+
+        }
+
+        private static void BilgiStoreAddHomePageSlide(ApplicationDbContext context, AppTenant tenant)
+        {
+
+            var s2 = new Slide();
+            s2.AppTenantId = tenant.AppTenantId;
+
+            s2.Title = "Başlık2";
+            s2.SubTitle = "Alt Başlık2";
+            s2.Description = "Açıklama2";
+            s2.Position = 1;
+            s2.Photo = "/uploads/birinsan/8-2017/MYK_slider_v1.png";
+            s2.CallToActionText = "Buton2";
+            s2.CallToActionUrl = "#";
+            s2.DisplayTexts = false;
+            s2.IsPublished = true;
+            s2.SliderId = 1;
+            s2.CreateDate = DateTime.Now;
+            s2.CreatedBy = "username";
+            s2.UpdateDate = DateTime.Now;
+            s2.UpdatedBy = "username";
+            context.Slides.Add(s2);
+            context.SaveChanges();
+
+
         }
 
 

@@ -1,0 +1,37 @@
+﻿@model PageViewModel
+@inject CustomLocalizer Localizer
+
+@{
+    ViewData["Title"] = Model.SeoTitle;
+}
+<section class="p-b-10" style="padding-top:30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-item-description">
+
+                    <div class="contact-main-wrapper">
+                        <div class="row contact-method">
+                            <ul style="list-style-type: none;margin: 0; padding: 0; overflow: hidden;">
+                                <li style="float: left;">
+                                    <h2 class="h2">@Model.Title</h2>
+                                </li>
+                                <li>
+
+                                </li>
+                            </ul>
+
+                            <hr id="formhr">
+
+                            @Html.Raw(Model.Body)
+                            @if (!String.IsNullOrEmpty(Model.Meta1))
+                            {
+                                @await Component.InvokeAsync("EmbedForm", new { name = Localizer[Model.Meta1].ToString(), template = "JobApplicationForm" })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

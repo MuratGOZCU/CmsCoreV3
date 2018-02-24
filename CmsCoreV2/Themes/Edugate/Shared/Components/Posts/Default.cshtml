@@ -25,7 +25,7 @@
             <div class="date-time item"><a href="#">@(item.PublishDate.HasValue ? item.PublishDate.Value.ToString("dd.MM.yyyy") : "")</a></div>
         </div>
         <div class="description">
-            @Html.Raw(item.Description.PadLeft(120))
+            @Html.Raw(item.Description?.PadLeft(120))
         </div>
         <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="btn btn-green"><span>Devamını oku...</span></a>
     </div>

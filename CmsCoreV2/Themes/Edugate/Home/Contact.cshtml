@@ -14,6 +14,7 @@
                     <div class="container">
                         <div class="contact-main-wrapper">
                             <div class="row contact-method">
+                                <h1>@Html.Raw(Model.Title)</h1>
                                 @Html.Raw(Model.Body)
                                 @await Component.InvokeAsync("EmbedForm", new { name = "İletişim", template = "ContactForm" })
                             </div>
@@ -29,7 +30,7 @@
     </div>
 </div>
 @section scripts{
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAJyYNp6gK3IrXp_Xi3wPdmJNNvATrklpo"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJyYNp6gK3IrXp_Xi3wPdmJNNvATrklpo"></script>
     <script type="text/javascript">
     function initialize() {
         var canvas = $("#map_canvas");
