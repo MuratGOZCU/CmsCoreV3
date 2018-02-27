@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.ViewComponents
 {
-    public class ListProducts : ViewComponent
+    public class RelatedProducts : ViewComponent
     {
         private readonly ApplicationDbContext _context;
             
-        public ListProducts(ApplicationDbContext context)
+        public RelatedProducts(ApplicationDbContext context)
         {
             _context = context;            
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string categoryNames = "", int count = 8, string title = "Ürünler")
+        public async Task<IViewComponentResult> InvokeAsync(string categoryNames = "", int count = 8, string title = "İlgili Ürünler")
         {
             ViewBag.ComponentTitle = title;
             var items = await GetItems(categoryNames, count);

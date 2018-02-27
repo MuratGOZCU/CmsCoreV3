@@ -94,6 +94,8 @@ namespace CmsCoreV2.Models
         public string AlternateProductImage { get; set; }
         [Display(Name = "Kısa Açıklaması")]
         public string ShortDescription { get; set; }
+        [Display(Name = "Ek Bilgi")]
+        public string AdditionalInfo { get; set; }
         [Display(Name = "Ürün Medyası")]
         public ICollection<ProductMedia> ProductMedias { get; set; }
         [Display(Name = "Görüntülenme Sayısı")]

@@ -36,12 +36,12 @@
                     <div class="product-description">
                         <div class="product-category">@item.ProductProductCategories?.FirstOrDefault()?.ProductCategory?.Name</div>
                         <div class="product-title">
-                            <h3><a href="#">@item.Name</a></h3>
+                            <h3><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@item.Name</a></h3>
                         </div>
                         <div class="product-price">
                             <ins>@(item.SalePrice.HasValue?"₺"+item.SalePrice.Value:"satılmıyor")</ins>
                         </div>
-                        <div class="product-rate">
+                        @*<div class="product-rate">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="product-reviews">
                             <a href="#">6 müşteri görüşü</a>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>

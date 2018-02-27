@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Product>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+<div class="heading-fancy heading-line text-center">
+    <h4>@ViewBag.ComponentTitle</h4>
+</div>
+<div class="row">
+    @for (var skip = 0; skip <= 6; skip+=3)
+    {
+        <div class="col-md-4">
+
+
+            <div class="widget-shop">
+                @foreach (var item in Model.Skip(skip).Take(3))
+                {
+                    <div class="product">
+                        <div class="product-image">
+                            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.ProductImage" alt="@item.Name" /></a>
+                        </div>
+                        <div class="product-description">
+                            <div class="product-category">@item.ProductProductCategories?.FirstOrDefault()?.ProductCategory?.Name</div>
+                            <div class="product-title">
+                                <h3><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@item.Name</a></h3>
+                            </div>
+                            <div class="product-price">
+                                @if (item.UnitPrice.HasValue)
+                                {
+                                    <del>$@(item.UnitPrice.Value)</del>}<ins>@(item.SalePrice.HasValue ? "₺" + item.SalePrice.Value : "satılmıyor")</ins>
+                                </div>
+                                @*<div class="product-rate">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                    </div>*@
+                            </div>
+                        </div>
+                    }
+
+            </div>
+        </div>
+    }
+   
+            </div>
+
+    
