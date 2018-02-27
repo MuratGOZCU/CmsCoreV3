@@ -19,67 +19,86 @@
     }
     <!-- Stylesheets & Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,800,700,600|Montserrat:400,500,600,700|Raleway:100,300,600,700,800" rel="stylesheet" type="text/css" />
-    <link href="/polocorporate5/css/plugins.css" rel="stylesheet">
-    <link href="/polocorporate5/css/style.css" rel="stylesheet">
-    <link href="/polocorporate5/css/responsive.css" rel="stylesheet">
-    <link href="/polocorporate5/css/custom.css" rel="stylesheet">
-    <!-- Template color -->
-    <link href="/polocorporate5/css/color-variations/green.css" rel="stylesheet" type="text/css" media="screen">
-    <link rel="icon" type="image/png" href="/polocorporate5/images/favicon.png" alt="favicon" />
+    <link href="/poloshop3/css/plugins.css" rel="stylesheet">
+    <link href="/poloshop3/css/style.css" rel="stylesheet">
+    <link href="/poloshop3/css/responsive.css" rel="stylesheet">
+    <link href="/poloshop3/css/custom.css" rel="stylesheet">
     @Html.Raw(ViewBag.HeaderScript)
     @Html.Raw(ViewBag.GoogleAnalytics)
 </head>
 
 <body>
-
-
     <!-- Wrapper -->
     <div id="wrapper">
 
         <!-- TOPBAR -->
-        <div id="topbar" class="">
+        <div id="topbar" class="topbar-fullwidth visible-md visible-lg">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <ul class="top-menu">
-                            <li><a href="tel:02163462606">Telefon: 0216-346-26-06</a></li>
-                            <li><a href="mailto:belge@birinsan.com.tr">E-posta: belge@birinsan.com.tr</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 hidden-xs">
-                        <div class="social-icons social-icons-colored-hover">
-                            <ul>
-                                
-                                <li class="social-facebook"><a href="https://www.facebook.com/Bir-%C4%B0nsan-Belgelendirme-278542332631265/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                <li class="social-twitter"><a href="https://twitter.com/birinsanbelge" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                <li class="social-google"><a href="https://plus.google.com/u/3/103049096763076187517" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="social-pinterest"><a href="https://tr.pinterest.com/birnsanbelgelendirme/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="social-linkedin"><a href="https://www.linkedin.com/company/25038178/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                                <li class="icon-social-tumblr"><a href="https://www.tumblr.com/blog/birinsanbelgelendirmeposts" target="_blank"><i class="fa fa-tumblr"></i></a></li>
-                                <li class="social-youtube"><a href="https://www.youtube.com/channel/UC8Nlec50Gsuv_PPt0OSpTrA" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
-                                <li class="social-instagram"><a href="https://www.instagram.com/birinsanbelgelendirme/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
+
+
+                <div class="topbar-dropdown">
+                    <div class="title">Türkçe @*<i class="fa fa-caret-down"></i>*@</div>
+                    @*<div class="dropdown-list">
+                            <a class="list-entry" href="#">French</a>
+                            <a class="list-entry" href="#">Spanish</a>
+                        </div>*@
+                </div>
+                <div class="topbar-dropdown">
+                    <div class="title"><b>Para birimi:</b> ₺ TL @*<i class="fa fa-caret-down"></i>*@</div>
+                    @*<div class="dropdown-list">
+                            <a class="list-entry" href="#">$ CAD</a>
+                            <a class="list-entry" href="#">€ EUR</a>
+                        </div>*@
+                </div>
+                <div class="topbar-dropdown hidden-xs">
+                    <div class="title"><i class="fa fa-phone"></i>Herhangi bir sorunuz mu var? Bizi arayın: <a href="tel:4443236"><b>444 32 36</b></a></div>
+                </div>
+
+
+                <div class="topbar-dropdown hidden-xs float-right">
+                    <div class="title"><i class="fa fa-user"></i><a href="#">Giriş</a></div>
+
+                    <div class="topbar-form dropdown-invert">
+                        <form>
+                            <div class="form-group">
+                                <label class="sr-only">E-posta</label>
+                                <input placeholder="E-posta" class="form-control" type="text">
+
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only">Parola</label>
+                                <input placeholder="Parola" class="form-control" type="password">
+                            </div>
+                            <div class="form-inline form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox">
+                                        <small> Beni Hatırla</small>
+                                    </label>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-block">Giriş</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <!-- end: TOPBAR -->
         <!-- Header -->
-        <header id="header">
+        <header id="header" class="header-fullwidth">
             <div id="header-wrap">
                 <div class="container">
                     <!--Logo-->
                     <div id="logo">
-                        <a href="/" class="logo">
-                            <img src="/poloshop3/images/logo.png" alt="Bir İnsan Gelişim Akademisi Belgelendirme">
+                        <a href="/" class="logo" data-dark-logo="~/poloshop3/images/logo-dark.png">
+                            <img src="~/poloshop3/images/logo.png" alt="Polo Logo">
                         </a>
                     </div>
                     <!--End: Logo-->
                     <!--Top Search Form-->
                     <div id="top-search">
-                        <form action="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama">
-                            <input type="text" name="query" class="form-control" value="" placeholder="Arama Yapmak İçin Yazın ve Enter'e Basın">
+                        <form action="search-results-page.html" method="get">
+                            <input type="text" name="q" class="form-control" value="" placeholder="Yazmaya başlayın ve &quot;Enter&quot;a basın.">
                         </form>
                     </div>
                     <!--end: Top Search Form-->
@@ -94,8 +113,25 @@
                                 </a>
                                 <!--end: top search-->
                             </li>
-                            
-                          
+                            <li class="hidden-xs">
+                                <!--shopping cart-->
+                                <div id="shopping-cart">
+                                    <a href="shop-cart.html">
+                                        <span class="shopping-cart-items">8</span>
+
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </a>
+                                </div>
+                                <!--end: shopping cart-->
+                            </li>
+                            <li>
+                                <div class="topbar-dropdown">
+                                    <a class="title"><i class="fa fa-globe"></i></a>
+                                    <div class="dropdown-list">
+                                        <a class="list-entry" href="#">Türkçe</a>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <!--end: Header Extras-->
@@ -107,10 +143,7 @@
                     <!--Navigation-->
                     <div id="mainMenu" class="light">
                         <div class="container">
-                            
-                        @await Component.InvokeAsync("Menu", new { MenuLocation = "Primary" })
-                      
-                    
+                            @await Component.InvokeAsync("Menu", new { MenuLocation = "Primary" })
                         </div>
                     </div>
                     <!--end: Navigation-->
@@ -118,81 +151,111 @@
             </div>
         </header>
         <!-- end: Header -->
-
-        @RenderBody()
-
-
-
+        @RenderBody()       
         <!-- Footer -->
         <footer id="footer" class="footer-light">
             <div class="footer-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <!-- Footer widget area 1 -->
-                            <div class="widget clearfix widget-contact-us">
-                                <img id="footer-logo" src="/polocorporate5/images/logo.png" alt="Bir İnsan Gelişim Akademisi Belgelendirme">
-                                
+                            <div class="widget clearfix widget-contact-us" style="background-image: url('~/poloshop3/imagesworld-map-dark.png'); background-position: 50% 20px; background-repeat: no-repeat">
+                                <h4>BilgiStore Hakkında</h4>
+                                <ul class="list-icon">
+                                    <li>
+                                        <i class="fa fa-map-marker"></i> 795 Folsom Ave, Suite 600
+                                        <br>San Francisco, CA 94107
+                                    </li>
+                                    <li><i class="fa fa-phone"></i> (123) 456-7890 </li>
+                                    <li>
+                                        <i class="fa fa-envelope"></i> <a href="mailto:first.last@example.com">first.last@example.com</a>
+                                    </li>
+                                    <li>
+                                        <br><i class="fa fa-clock-o"></i>Monday - Friday: <strong>08:00 - 22:00</strong>
+                                        <br>Saturday, Sunday: <strong>Closed</strong>
+                                    </li>
+                                </ul>
+                                <!-- Social icons -->
+                                <div class="social-icons social-icons-border float-left m-t-20">
+                                    <ul>
+                                        <li class="social-rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+                                        <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="social-vimeo"><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                        <li class="social-youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                        <li class="social-pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        <li class="social-gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                                <!-- end: Social icons -->
                             </div>
                             <!-- end: Footer widget area 1 -->
                         </div>
                         <div class="col-md-2">
-                            <div class="row">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-8">
-                                    <!-- Footer widget area 2 -->
-                                    <div class="widget">
-                                        <ul class="list-icon list-icon-arrow">
-                                            <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/blog">Blog</a></li>
-                                            <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/duyurular">Duyurular</a></li>
-                                            <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/haberler">Haberler</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-1"></div>
-                                <!-- end: Footer widget area 2 -->
+                            <!-- Footer widget area 2 -->
+                            <div class="widget">
+                                <h4>Hızlı Bağlantılar</h4>
+                                <ul class="list-icon list-icon-arrow">
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Portfolio</a></li>
+                                    <li><a href="#">Shortcodes</a></li>
+                                </ul>
                             </div>
+                            <!-- end: Footer widget area 2 -->
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <!-- Footer widget area 3 -->
                             <div class="widget">
-                                <ul class="list-icon list-icon-arrow">
-                                    
-                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri">Fotoğraf Galerisi</a></li>
-                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/gizlilik-politikasi">Gizlilik Politikası</a></li>
-                                    <li><a href="@(Tenant.RequireSSL?" https":"http")://@Tenant.Hostname/@ViewData["culture"]/iletisim">Bize Ulaşın</a></li>
-                                </ul>
+                                <h4>Blog'umuzdan En Son Yazılar</h4>
+                                <div class="post-thumbnail-list">
+                                    <div class="post-thumbnail-entry">
+
+                                        <div class="post-thumbnail-content">
+                                            <a href="#">Suspendisse consectetur fringilla luctus</a>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i> 6m ago</span>
+                                            <span class="post-category"><i class="fa fa-tag"></i> Technology</span>
+                                        </div>
+                                    </div>
+                                    <div class="post-thumbnail-entry">
+
+                                        <div class="post-thumbnail-content">
+                                            <a href="#">Consectetur adipiscing elit</a>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i> 24h ago</span>
+                                            <span class="post-category"><i class="fa fa-tag"></i> Lifestyle</span>
+                                        </div>
+                                    </div>
+                                    <div class="post-thumbnail-entry">
+
+                                        <div class="post-thumbnail-content">
+                                            <a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i> 11h ago</span>
+                                            <span class="post-category"><i class="fa fa-tag"></i> Lifestyle</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- end: Footer widget area 3 -->
                         </div>
-                        <div class="col-md-2"></div>
-                        
-                    </div>
-                    <div class="social-icons social-icons-border">
-                        <ul class="center">
-                            <li class="social-facebook"><a href="https://www.facebook.com/Bir-%C4%B0nsan-Belgelendirme-278542332631265/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                            <li class="social-twitter"><a href="https://twitter.com/birinsanbelge" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li class="social-google"><a href="https://plus.google.com/u/3/103049096763076187517" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                            <li class="social-pinterest"><a href="https://tr.pinterest.com/birnsanbelgelendirme/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-                            <li class="social-linkedin"><a href="https://www.linkedin.com/company/25038178/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                            <li class="icon-social-tumblr"><a href="https://www.tumblr.com/blog/birinsanbelgelendirmeposts" target="_blank"><i class="fa fa-tumblr"></i></a></li>
-                            <li class="social-youtube"><a href="https://www.youtube.com/channel/UC8Nlec50Gsuv_PPt0OSpTrA" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
-                            <li class="social-instagram"><a href="https://www.instagram.com/birinsanbelgelendirme/" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
+                        <div class="col-md-3">
+                            <!-- Footer widget area 4 -->
+                            <div class="widget widget-tweeter" data-username="ardianmusliu" data-limit="2">
+                                <h4>Son Tweet'ler</h4>
+                            </div>
+                            <!-- end: Footer widget area 4 -->
+                        </div>
                     </div>
                 </div>
             </div>
-           
             <div class="copyright-content">
                 <div class="container">
                     <div class="copyright-text text-center">
-                       Bir İnsan Kariyer Gelişim & Belgelendirme A.Ş 2017 Tüm Hakkı Saklıdır.
+                        &copy; 2018 BilgiStore. Tüm hakları saklıdır. <a href="https://www.bilgikoleji.com" target="_blank">BilgiKoleji</a>
                     </div>
                 </div>
             </div>
-           
-
         </footer>
         <!-- end: Footer -->
 
@@ -201,81 +264,71 @@
     <!-- Go to top button -->
     <a id="goToTop"><i class="fa fa-angle-up top-icon"></i><i class="fa fa-angle-up"></i></a>
     <!--Plugins-->
-    <script src="/polocorporate5/js/jquery.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-            crossorigin="anonymous"></script>
-    
-    <script src="/polocorporate5/js/plugins.js"></script>
-    <!--Fix Form -->
-    <script src="~/polocorporate5/js/Global.js"></script>
+    <script src="~/poloshop3/js/jquery.js"></script>
+    <script src="~/poloshop3/js/plugins.js"></script>
 
     <!--Template functions-->
-    <script src="/polocorporate5/js/functions.js"></script>
+    <script src="~/poloshop3/js/functions.js"></script>
 
-    <!-- Temp Scripts-->
-  
-    <!-- LOADING SCRIPTS FOR PAGE-->
-   
-    <script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.carousel-logos').owlCarousel({
-                margin: 115,
-                loop: true,
-                //lazyLoad: true,
-                nav: false,
-                autoplay: true,
-                autoplayTimeout: 5000,
-                smartSpeed: 1500,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 2,
-                        margin: 30,
-                    },
-                    320: {
-                        items: 3,
-                        margin: 40,
-                    },
-                    480: {
-                        items: 3,
-                        margin: 50,
-                    },
-                    600: {
-                        items: 4,
-                        margin: 90,
-                    },
-                    768: {
-                        items: 5,
-                        margin: 60,
-                    },
-                    1024: {
-                        items: 5,
-                        margin: 90,
-                    },
-                    1025: {
-                        items: 6
-                    }
+<script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.carousel-logos').owlCarousel({
+            margin: 115,
+            loop: true,
+            //lazyLoad: true,
+            nav: false,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            smartSpeed: 1500,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 2,
+                    margin: 30,
+                },
+                320: {
+                    items: 3,
+                    margin: 40,
+                },
+                480: {
+                    items: 3,
+                    margin: 50,
+                },
+                600: {
+                    items: 4,
+                    margin: 90,
+                },
+                768: {
+                    items: 5,
+                    margin: 60,
+                },
+                1024: {
+                    items: 5,
+                    margin: 90,
+                },
+                1025: {
+                    items: 6
                 }
-            });
+            }
         });
-        function rssSetDuration() {
-            rssDuration = $(".marqueeCrawl a").length * 8 + "s";
-            $(".marqueeCrawl").css("animationDuration", rssDuration);
-            $(".marqueeCrawl").show(); // IE recalculate fix
-        }
-
-        $(window).on("load", function () {
-            rssSetDuration();
-        });
-    </script>
-    @if (HttpContextAccessor.HttpContext.Items["scripts"] != null)
-    {
-        @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
+    });
+    function rssSetDuration() {
+        rssDuration = $(".marqueeCrawl a").length * 8 + "s";
+        $(".marqueeCrawl").css("animationDuration", rssDuration);
+        $(".marqueeCrawl").show(); // IE recalculate fix
     }
-    @RenderSection("scripts", required: false)
-    @Html.Raw(ViewBag.FooterScript)
+
+    $(window).on("load", function () {
+        rssSetDuration();
+    });
+</script>
+@if (HttpContextAccessor.HttpContext.Items["scripts"] != null)
+{
+    @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
+}
+@RenderSection("scripts", required: false)
+@Html.Raw(ViewBag.FooterScript)
 </body>
 
 </html>

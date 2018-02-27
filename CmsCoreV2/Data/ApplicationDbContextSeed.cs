@@ -1576,14 +1576,15 @@ namespace CmsCoreV2.Data
         private static void BilgiStoreAddMenuItems(ApplicationDbContext context, AppTenant tenant)
         {
             context.AddRange(
-
+                new MenuItem { Name = "Tanıtım", Url = "tanitim", Position = 1, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new MenuItem { Name = "Anaokulu", Url = "anaokulu", Position = 2, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new MenuItem { Name = "İlkokul", Url = "ilkokul", Position = 3, IsPublished = true, MenuId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new MenuItem { Name = "Ortaokul", Url = "ortaokul", Position = 4, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new MenuItem { Name = "Lise", Url = "lise", Position = 5, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
                 new MenuItem { Name = "Ürünler", Url = "urunler", Position = 6, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new MenuItem { Name = "Aksesuarlar", Url = "aksesuarlar", Position = 7, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
-                new MenuItem { Name = "Mağazalar", Url = "magazalar", Position = 7, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                new MenuItem { Name = "Promosyonlar", Url = "promosyonlar", Position = 7, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Mağazalar", Url = "magazalar", Position = 7, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İletişim", Url = "iletisim", Position = 8, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
                 );
             context.SaveChanges();
         }
@@ -1617,7 +1618,7 @@ namespace CmsCoreV2.Data
             s2.SubTitle = "Alt Başlık2";
             s2.Description = "Açıklama2";
             s2.Position = 1;
-            s2.Photo = "/uploads/birinsan/8-2017/MYK_slider_v1.png";
+            s2.Photo = "/uploads/bilgistore/sample-slide.jpg";
             s2.CallToActionText = "Buton2";
             s2.CallToActionUrl = "#";
             s2.DisplayTexts = false;

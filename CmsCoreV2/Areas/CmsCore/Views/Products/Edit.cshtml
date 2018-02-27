@@ -4,7 +4,7 @@
     ViewData["Title"] = "Ürün Düzenle";
 }
 <link href="/metronic/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css">
-<script src="~/js/generate-slug.js"> </script>
+<script src="~/js/generate-slug.js"></script>
 
 <h2>Ürün Düzenle</h2>
 
@@ -183,6 +183,18 @@
             @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
+            <label asp-for="AlternateProductImage" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.AlternateProductImage)</label>
+            <div class="col-md-9">
+                <div class="input-group">
+                    <input asp-for="AlternateProductImage" class="form-control" />
+                    <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('AlternateProductImage')">...</a>
+                    </span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.AlternateProductImage, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
             <label asp-for="ShortDescription" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="ShortDescription" class="form-control" />
@@ -215,6 +227,22 @@
                 <div class="checkbox">
                     <input asp-for="IsFeatured" />
                     <label asp-for="IsFeatured"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsNew" />
+                    <label asp-for="IsNew"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsPublished" />
+                    <label asp-for="IsPublished"></label>
                 </div>
             </div>
         </div>
@@ -260,3 +288,4 @@
 </div>
 
 @Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "ProductImage" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "AlternateProductImage" } })

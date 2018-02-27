@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Product>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+<section>
+    <div class="container">
+
+        <div class="heading m-b-40">
+            <h4>@ViewBag.ComponentTitle</h4>
+        </div>
+
+        <!--Product list-->
+        <div class="shop">
+            <div class="row">
+                @foreach (var item in Model)
+    {
+            <div class="col-md-3">
+
+                <div class="product">
+                    <div class="product-image">
+                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.ProductImage" alt="@item.Name" /></a>
+                        @if (!string.IsNullOrEmpty(item.AlternateProductImage))
+    {
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.AlternateProductImage" alt="@item.Name" /></a>
+}
+                        @if (item.IsNew)
+    {
+                    <span class="product-new">YENİ</span>
+}
+                        <span class="product-wishlist">
+                            <a href="#"><i class="fa fa-heart"></i></a>
+                        </span>
+                        <div class="product-overlay">
+                            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug?ajax=1" data-lightbox="ajax">Hızlı Bakış</a>
+                        </div>
+                    </div>
+
+                    <div class="product-description">
+                        <div class="product-category">@item.ProductProductCategories?.FirstOrDefault()?.ProductCategory?.Name</div>
+                        <div class="product-title">
+                            <h3><a href="#">@item.Name</a></h3>
+                        </div>
+                        <div class="product-price">
+                            <ins>@(item.SalePrice.HasValue?"₺"+item.SalePrice.Value:"satılmıyor")</ins>
+                        </div>
+                        <div class="product-rate">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <div class="product-reviews">
+                            <a href="#">6 müşteri görüşü</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+}
+                
+
+            </div>
+        </div>
+    </div>
+</section>

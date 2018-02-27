@@ -6,7 +6,7 @@
 
 <link href="/metronic/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css">
 <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
-<script src="~/js/generate-slug.js"> </script>
+<script src="~/js/generate-slug.js"></script>
 
 <h2>Ürün Oluştur</h2>
 <hr />
@@ -140,19 +140,19 @@
         <div class="form-group">
             <label asp-for="UpSellId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="UpSellId" class ="form-control" asp-items="ViewBag.UpSellId"></select>
+                <select asp-for="UpSellId" class="form-control" asp-items="ViewBag.UpSellId"></select>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="CrossSellId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="CrossSellId" class ="form-control" asp-items="ViewBag.CrossSellId"></select>
+                <select asp-for="CrossSellId" class="form-control" asp-items="ViewBag.CrossSellId"></select>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="GroupedProductId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="GroupedProductId" class ="form-control" asp-items="ViewBag.GroupedProductId"></select>
+                <select asp-for="GroupedProductId" class="form-control" asp-items="ViewBag.GroupedProductId"></select>
             </div>
         </div>
         <div class="form-group">
@@ -180,6 +180,18 @@
                 </div>
             </div>
             @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label asp-for="AlternateProductImage" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.AlternateProductImage)</label>
+            <div class="col-md-9">
+                <div class="input-group">
+                    <input asp-for="AlternateProductImage" class="form-control" />
+                    <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('AlternateProductImage')">...</a>
+                    </span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.AlternateProductImage, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label asp-for="ShortDescription" class="col-md-2 control-label"></label>
@@ -218,6 +230,22 @@
             </div>
         </div>
         <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsNew" />
+                    <label asp-for="IsNew"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsPublished" />
+                    <label asp-for="IsPublished"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="CreateDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input readonly asp-for="CreateDate" class="form-control" />
@@ -245,7 +273,7 @@
                 <span asp-validation-for="UpdatedBy" class="text-danger"></span>
             </div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Kaydet" class="btn btn-primary" />
@@ -258,3 +286,4 @@
     <a asp-action="Index">Listeye Geri Dön</a>
 </div>
 @Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "ProductImage" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "AlternateProductImage" } })

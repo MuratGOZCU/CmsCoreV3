@@ -1,6 +1,9 @@
 ﻿@inject CustomLocalizer Localizer
 @model PageViewModel
-
+@if (ViewBag.IsAjax)
+{
+    Layout = null;
+}
 @{
     ViewData["Title"] = Model.SeoTitle;
 }
@@ -18,9 +21,9 @@
                             </div>
                         </div>
 
-                      
-                            @*<span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.UpdateDate &nbsp;</span>*@
-                        
+
+                        @*<span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.UpdateDate &nbsp;</span>*@
+
 
                         @*<span class="post-meta-category"><a href=""><i class="fa fa-eye"></i>@Model.ViewCount görüntüleme</a></span>*@
                         <br /><br />
@@ -49,7 +52,7 @@
         </div>
     </div>
 </section>
-    <!-- BUTTON BACK TO TOP-->
+<!-- BUTTON BACK TO TOP-->
 @section scripts {
     <script type="text/javascript" charset="utf-8">
         //$(window).load(function () {

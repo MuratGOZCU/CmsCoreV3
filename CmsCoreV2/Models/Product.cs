@@ -90,6 +90,8 @@ namespace CmsCoreV2.Models
         public ICollection<ProductProductTag> ProductProductTags { get; set; }
         [Display(Name = "Ürün Resmi")]
         public string ProductImage { get; set; }
+        [Display(Name = "Alternatif Ürün Resmi")]
+        public string AlternateProductImage { get; set; }
         [Display(Name = "Kısa Açıklaması")]
         public string ShortDescription { get; set; }
         [Display(Name = "Ürün Medyası")]
@@ -100,7 +102,12 @@ namespace CmsCoreV2.Models
         public int SaleCount { get; set; }
         [Display(Name = "Katalog Görünümü")]
         public CatalogVisibility CatalogVisibility { get; set; }
+        [Display(Name="Öne Çıkan")]
         public bool IsFeatured { get; set; }
+        [Display(Name="Yeni")]
+        public bool IsNew { get; set; }
+        [Display(Name="Yayında")]
+        public bool IsPublished { get; set; }
 
     }
 }

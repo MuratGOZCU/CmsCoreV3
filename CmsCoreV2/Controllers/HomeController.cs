@@ -41,7 +41,7 @@ namespace CmsCoreV2.Controllers
         {
             return Redirect(HttpContext.Items["NewUrl"].ToString());
         }
-        public IActionResult Index(string slug, string culture,string message="")
+        public IActionResult Index(string slug, string culture,string message="",string ajax = "")
         { 
             if (culture == "no")
             {
@@ -67,12 +67,22 @@ namespace CmsCoreV2.Controllers
             ViewBag.GoogleAnalytics = setting.GoogleAnalytics;
             ViewBag.HeaderScript = setting.HeaderString;
             ViewBag.FooterScript = setting.FooterScript;
+            ViewBag.IsAjax = (ajax == "1");
             var page = _context.SetFiltered<Page>().Include(i=> i.Language).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture== culture);
             if (page == null || page.IsPublished == false)
             {
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
                 if (post == null)
                 {
+                    var product = _context.SetFiltered<Product>().Include(i => i.Language).Include(i => i.ProductProductCategories).ThenInclude(t => t.ProductCategory).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture == culture && p.IsPublished == true);
+
+                    if (product != null)
+                    {
+                        ViewData["Title"] = product.Name;
+                        ViewData["Description"] = product.Description;
+
+                        return View("Product", product);
+                    }
                     ViewData["Title"] = "404 - Sayfa bulunamadı";
                     ViewData["Description"] = "Aradığınız sayfa adresi değiştirilmiş, yanlış ya da silinmiş. Site aramasını kullanarak sayfayı arayabilirsiniz.";
                     ViewData["Keywords"] = "404";
@@ -116,6 +126,7 @@ namespace CmsCoreV2.Controllers
             }
             else
             {
+                
                 if (page.IsPublished == false)
                 {
                     ViewData["Title"] = "404 - Sayfa bulunamadı";
@@ -123,6 +134,8 @@ namespace CmsCoreV2.Controllers
                     ViewData["Keywords"] = "404";
                     return View("Page404");
                 }
+                
+                
                 
                 PageViewModel pageVM = new PageViewModel();
                 pageVM.Id = page.Id;
