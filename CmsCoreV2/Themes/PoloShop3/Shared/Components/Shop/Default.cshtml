@@ -1,0 +1,187 @@
+﻿@addTagHelper *, Sakura.AspNetCore.Mvc.PagedList
+@model Sakura.AspNetCore.IPagedList<Product>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+
+<div class="content col-md-9">
+    <form id="shopForm" method="get">
+        <div class="row m-b-20">
+            <div class="col-md-6 p-t-10 m-b-20">
+                <h3 class="m-b-20">
+                    @if (ViewBag.ProductCategory != null)
+                    {@(ViewBag.ProductCategory.Name)}
+                else
+                {<text>Tüm Ürünler</text>}
+                </h3>
+                <p>@Html.Raw(ViewBag.ProductCategory?.Description)</p>
+            </div>
+
+            <div class="col-md-3">
+                <div class="order-select">
+                    <h6>Sırala</h6>
+                    <p>Toplam @Model.TotalCount ürün listeleniyor.</p>
+
+                    <select name="orderby" onchange="document.getElementById('shopForm').submit();">
+                        @if (ViewBag.OrderBy == "date")
+    {
+                    <option selected="selected" value="date">En yeni olan en önce</option>
+}
+else
+{
+                    <option value="date">En yeni olan en önce</option>
+
+}
+                        @if (ViewBag.OrderBy == "popularity")
+    {
+
+                    <option selected="selected" value="popularity">Popüleriteye göre sırala</option>
+}
+else
+{
+                    <option value="popularity">Popüleriteye göre sırala</option>
+}
+
+                        @if (ViewBag.OrderBy == "price")
+    {
+
+                    <option selected="selected" value="price">Fiyatı düşükten yükseğe</option>
+}
+else
+{
+                    <option value="price">Fiyatı düşükten yükseğe</option>
+}
+                        @if (ViewBag.OrderBy == "price-desc")
+    {
+                    <option selected="selected" value="price-desc">Fiyatı yüksekten düşüğe</option>
+}
+else
+{
+
+                    <option value="price-desc">Fiyatı yüksekten düşüğe</option>
+}
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="order-select">
+                    <h6>Fiyata göre filtrele</h6>
+                    <p>0 - @(Model.Max(m=>m.SalePrice)??0)₺ arası</p>
+
+                    <select name="price" onchange="document.getElementById('shopForm').submit();">
+                        @if (ViewBag.Price == "Tümü")
+    {
+                    <option selected="selected" value="Tümü">Tümü</option>
+}
+else
+{
+                    <option value="Tümü">Tümü</option>
+
+}
+                        @if (ViewBag.Price == "0-50")
+    {
+                    <option selected="selected" value="0-50">0₺ - 50₺</option>
+}
+else
+{
+                    <option value="0-50">0₺ - 50₺</option>
+
+}
+                        @if (ViewBag.Price == "51-90")
+    {
+                    <option selected="selected" value="51-90">51₺ - 90₺</option>
+}
+else
+{
+                    <option value="51-90">51₺ - 90₺</option>
+
+}
+                        @if (ViewBag.Price == "91-120")
+    {
+
+                    <option selected="selected" value="91-120">91₺ - 120₺</option>
+}
+else
+{
+                    <option value="91-120">91₺ - 120₺</option>
+}
+                        @if (ViewBag.Price == "121-200")
+    {
+
+                    <option selected="selected" value="121-200">121₺ - 200₺</option>
+
+}
+else
+{
+                    <option value="121-200">121₺ - 200₺</option>
+
+}
+
+
+                    </select>
+
+                </div>
+            </div>
+
+    </form>
+</div>
+    <!--Product list-->
+    <div class="shop">
+        <div class="grid-layout grid-3-columns" data-item="grid-item">
+            @foreach (var item in Model)
+            {
+        <div class="grid-item">
+            <div class="product">
+                <div class="product-image">
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.ProductImage" alt="@item.Name" /></a>
+                    @if (!string.IsNullOrEmpty(item.AlternateProductImage))
+    {
+                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.AlternateProductImage" alt="@item.Name" /></a>
+}
+                    @if (item.IsNew)
+    {
+                <span class="product-new">YENİ</span>
+}
+                    <span class="product-wishlist">
+                        <a href="#"><i class="fa fa-heart"></i></a>
+                    </span>
+                    <div class="product-overlay">
+                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug?ajax=1" data-lightbox="ajax">Hızlı Bakış</a>
+                    </div>
+                </div>
+
+                <div class="product-description">
+                    <div class="product-category">@item.ProductProductCategories?.FirstOrDefault()?.ProductCategory?.Name</div>
+                    <div class="product-title">
+                        <h3><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@item.Name</a></h3>
+                    </div>
+                    <div class="product-price">
+                        <ins>@(item.SalePrice.HasValue ? "₺" + item.SalePrice.Value : "satılmıyor")</ins>
+                    </div>
+                    @*<div class="product-rate">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                    <div class="product-reviews">
+                        <a href="#">6 customer reviews</a>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+            }
+        </div>
+        <hr>
+        <!-- Pagination -->
+        <div class="pagination">
+            <ul>
+                <pager resource='Product' />
+            </ul>
+        </div>
+        <!-- end: Pagination -->
+    </div>
+    <!--End: Product list-->
+</div>

@@ -1,0 +1,68 @@
+﻿@inject CustomLocalizer Localizer
+@model PageViewModel
+@if (ViewBag.IsAjax)
+{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = Model.SeoTitle;
+}<!-- Shop products -->
+<section id="page-content" class="sidebar-left">
+    <div class="container">
+        <div class="row">
+            <!-- Content-->
+            @await Component.InvokeAsync("Shop", new { categoryNames=Model.Meta1 })
+            <!-- end: Content-->
+            <!-- Sidebar-->
+            <div class="sidebar col-md-3">
+                <!--widget newsletter-->
+                @await Component.InvokeAsync("ProductCategories", new { categoryNames = "", count = 3, title = "Ürün Kategorileri" })
+                @await Component.InvokeAsync("LatestProducts", new { categoryNames = "", count = 3, title = "En Son Ürünler" })
+
+
+
+            </div>
+            <!-- end: Sidebar-->
+        </div>
+    </div>
+</section>
+<!-- end: Shop products -->
+<!-- DELIVERY INFO -->
+@if (!ViewBag.IsAjax)
+{
+<section class="background-grey p-t-40 p-b-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="icon-box effect small clean">
+                    <div class="icon">
+                        <a href="#"><i class="fa fa-gift"></i></a>
+                    </div>
+                    <h3>₺60 üstü siparişlerde ücretsiz kargo</h3>
+                    <p>₺60'den fazla sipariş verin ücretsiz kargo fırsatından yararlanın.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="icon-box effect small clean">
+                    <div class="icon">
+                        <a href="#"><i class="fa fa-plane"></i></a>
+                    </div>
+                    <h3>Türkiye çapında teslimat</h3>
+                    <p>Türkiye'nin tüm şehirlerine teslimat yapıyoruz.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="icon-box effect small clean">
+                    <div class="icon">
+                        <a href="#"><i class="fa fa-history"></i></a>
+                    </div>
+                    <h3>60 gün para iade garantisi!</h3>
+                    <p>Ürünümüzle mutlu olmazsanız, bize ücretsiz geri gönderin, paranızı %100 iade edeceğiz.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+}
