@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ProductCategory>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+<!--widget newsletter-->
+<div class="widget clearfix widget-archive">
+    <h4 class="widget-title">@ViewBag.ComponentTitle</h4>
+    <ul class="list list-lines">
+    @foreach (var item in Model)
+    {
+    <li>
+    <a href="#">@item.Name</a> <span class="count">(@item.ProductProductCategories.Select(s=>s.ProductId).Distinct().Count())</span>
+    </li>
+    }
+    </ul>
+</div>
+    

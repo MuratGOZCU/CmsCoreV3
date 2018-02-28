@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Product>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+<div class="widget clearfix widget-shop">
+
+    <h4 class="widget-title">@ViewBag.ComponentTitle</h4>@foreach (var item in Model)
+    {
+        <div class="product">
+            <div class="product-image">
+                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.ProductImage" alt="@item.Name" /></a>
+            </div>
+            <div class="product-description">
+                <div class="product-category">@item.ProductProductCategories?.FirstOrDefault()?.ProductCategory?.Name</div>
+                <div class="product-title">
+                    <h3><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@item.Name</a></h3>
+                </div>
+                <div class="product-price">
+                    @if (item.UnitPrice.HasValue)
+                    {
+                        <del>$@(item.UnitPrice.Value)</del>}<ins>@(item.SalePrice.HasValue ? "₺" + item.SalePrice.Value : "satılmıyor")</ins>
+                    </div>
+                    @*<div class="product-rate">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>*@
+                </div>
+            </div>
+        }
+</div>

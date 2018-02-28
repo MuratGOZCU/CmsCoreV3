@@ -228,142 +228,10 @@
             @if (!ViewBag.IsAjax)
             {
                 <!-- Sidebar-->
-                <div class="sidebar col-md-3">
-                    <!--widget newsletter-->
-                    <div class="widget clearfix widget-archive">
-                        <h4 class="widget-title">Product categories</h4>
-                        <ul class="list list-lines">
-                            <li>
-                                <a href="#">Bags</a> <span class="count">(6)</span>
-                            </li>
-                            <li>
-                                <a href="#">Jeans</a> <span class="count">(8)</span>
-                            </li>
-                            <li>
-                                <a href="#">Shoes</a> <span class="count">(7)</span>
-                            </li>
-                            <li>
-                                <a href="#">Sweaters</a> <span class="count">(7)</span>
-                            </li>
-                            <li>
-                                <a href="#">T-Shirts</a> <span class="count">(9)</span>
-                            </li>
-                            <li>
-                                <a href="#">Tops</a> <span class="count">(10)</span>
-                            </li>
-                            <li>
-                                <a href="#">Women</a> <span class="count">(25)</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="widget clearfix widget-shop">
-                        <h4 class="widget-title">Latest Products</h4>
-                        <div class="product">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="images/shop/products/10.jpg" alt="Shop product image!">
-                                </a>
-                            </div>
-                            <div class="product-description">
-                                <div class="product-category">Women</div>
-                                <div class="product-title">
-                                    <h3><a href="#">Bolt Sweatshirt</a></h3>
-                                </div>
-                                <div class="product-price">
-                                    <del>$30.00</del><ins>$15.00</ins>
-                                </div>
-                                <div class="product-rate">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-o"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="images/shop/products/6.jpg" alt="Shop product image!">
-                                </a>
-                            </div>
-
-                            <div class="product-description">
-                                <div class="product-category">Women</div>
-                                <div class="product-title">
-                                    <h3><a href="#">Consume Tshirt</a></h3>
-                                </div>
-                                <div class="product-price">
-                                    <ins>$39.00</ins>
-                                </div>
-                                <div class="product-rate">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-o"></i>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="product">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img src="images/shop/products/7.jpg" alt="Shop product image!">
-                                </a>
-                            </div>
-
-                            <div class="product-description">
-                                <div class="product-category">Man</div>
-                                <div class="product-title">
-                                    <h3><a href="#">Logo Tshirt</a></h3>
-                                </div>
-                                <div class="product-price">
-                                    <ins>$39.00</ins>
-                                </div>
-                                <div class="product-rate">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-o"></i>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="widget clearfix widget-tags">
-                        <h4 class="widget-title">Tags</h4>
-                        <div class="tags">
-                            <a href="#">Design</a>
-                            <a href="#">Portfolio</a>
-                            <a href="#">Digital</a>
-                            <a href="#">Branding</a>
-                            <a href="#">HTML</a>
-                            <a href="#">Clean</a>
-                            <a href="#">Peace</a>
-                            <a href="#">Love</a>
-                            <a href="#">CSS3</a>
-                            <a href="#">jQuery</a>
-                        </div>
-                    </div>
-                    <div class="widget clearfix widget-newsletter">
-                        <form class="form-inline" method="get" action="#">
-                            <h4 class="widget-title">Subscribe for Latest Offers</h4>
-                            <small>Subscribe to our Newsletter to get Sales Offers &amp; Coupon Codes etc.</small>
-                            <div class="input-group">
-
-                                <input type="email" placeholder="Enter your Email" class="form-control required email" name="widget-subscribe-form-email" aria-required="true">
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-paper-plane"></i></button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-
-
-                </div>
+            <div class="sidebar col-md-3">
+                @await Component.InvokeAsync("ProductCategories", new { categoryNames = "", count = 3, title = "Ürün Kategorileri" })
+                @await Component.InvokeAsync("LatestProducts", new { categoryNames = "", count = 3, title = "En Son Ürünler" })
+            </div>
                 <!-- end: Sidebar-->
             }
         </div>
@@ -373,40 +241,40 @@
 <!-- DELIVERY INFO -->
 @if (!ViewBag.IsAjax)
 {
-    <section class="background-grey p-t-40 p-b-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="icon-box effect small clean">
-                        <div class="icon">
-                            <a href="#"><i class="fa fa-gift"></i></a>
-                        </div>
-                        <h3>Free shipping on orders $60+</h3>
-                        <p>Order more than 60$ and you will get free shippining Worldwide. More info.</p>
+<section class="background-grey p-t-40 p-b-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="icon-box effect small clean">
+                    <div class="icon">
+                        <a href="#"><i class="fa fa-gift"></i></a>
                     </div>
+                    <h3>₺60 üstü siparişlerde ücretsiz kargo</h3>
+                    <p>₺60'den fazla sipariş verin ücretsiz kargo fırsatından yararlanın.</p>
                 </div>
+            </div>
 
-                <div class="col-md-4">
-                    <div class="icon-box effect small clean">
-                        <div class="icon">
-                            <a href="#"><i class="fa fa-plane"></i></a>
-                        </div>
-                        <h3>Worldwide delivery</h3>
-                        <p>We deliver to the following countries: USA, Canada, Europe, Australia</p>
+            <div class="col-md-4">
+                <div class="icon-box effect small clean">
+                    <div class="icon">
+                        <a href="#"><i class="fa fa-plane"></i></a>
                     </div>
+                    <h3>Türkiye çapında teslimat</h3>
+                    <p>Türkiye'nin tüm şehirlerine teslimat yapıyoruz.</p>
                 </div>
+            </div>
 
-                <div class="col-md-4">
-                    <div class="icon-box effect small clean">
-                        <div class="icon">
-                            <a href="#"><i class="fa fa-history"></i></a>
-                        </div>
-                        <h3>60 days money back guranty!</h3>
-                        <p>Not happy with our product, feel free to return it, we will refund 100% your money!</p>
+            <div class="col-md-4">
+                <div class="icon-box effect small clean">
+                    <div class="icon">
+                        <a href="#"><i class="fa fa-history"></i></a>
                     </div>
+                    <h3>60 gün para iade garantisi!</h3>
+                    <p>Ürünümüzle mutlu olmazsanız, bize ücretsiz geri gönderin, paranızı %100 iade edeceğiz.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 }
 <!-- end: DELIVERY INFO -->
