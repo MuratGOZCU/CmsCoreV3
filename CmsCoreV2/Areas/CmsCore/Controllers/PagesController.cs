@@ -59,7 +59,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             var page = new Page();
             ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName");
            
-            string[] TemplateNames = _context.Customizations.FirstOrDefault().PageTemplates.Split(',');
+            string[] TemplateNames = _context.Customizations.FirstOrDefault(c=>c.AppTenantId == tenant.AppTenantId).PageTemplates.Split(',');
 
             ViewData["Templates"] = TemplateNames;
             page.CreatedBy = User.Identity.Name ?? "username";
@@ -120,7 +120,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Pages/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {         
-            string[] TemplateNames = _context.Customizations.FirstOrDefault().PageTemplates.Split(',');
+            string[] TemplateNames = _context.Customizations.FirstOrDefault(c => c.AppTenantId == tenant.AppTenantId).PageTemplates.Split(',');
 
             ViewData["Templates"] = TemplateNames;
             if (id == null)

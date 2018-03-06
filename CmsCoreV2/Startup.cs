@@ -78,7 +78,7 @@ namespace CmsCoreV2
                     Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.SubFolder,
                     opts => { opts.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
-
+            
             services.Configure<RequestLocalizationOptions>(
                     opts =>
                     {
@@ -114,7 +114,6 @@ namespace CmsCoreV2
             {
                 // Set a short timeout for easy testing.
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.CookieHttpOnly = true;
             });
         }
 
@@ -148,9 +147,7 @@ namespace CmsCoreV2
             app.UsePerTenantStaticFiles<AppTenant>("tenant", x => x.Folder);
             app.UseStaticFiles();
             // üyelik sistemi devreye alınır
-            app.UseIdentity();
-
-
+            app.UseAuthentication();
 
             app.UseSession();
 

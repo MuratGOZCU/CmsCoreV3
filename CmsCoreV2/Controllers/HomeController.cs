@@ -180,7 +180,105 @@ namespace CmsCoreV2.Controllers
         {
             return View();
         }
+        public IActionResult AddToCart(string slug, int quantity)
+        {
+            string owner = User.Identity.Name;
+            if (string.IsNullOrEmpty(owner))
+            {
+                owner = HttpContext.Session.Id;
+            }
+            var cart = GetMyCart(owner);
+            if (cart == null)
+            {
+                cart = new Cart();
+                cart.Owner = owner;
+                var ci = new CartItem();
+                ci.Product = _context.Products.FirstOrDefault(p => p.Slug.ToLower() == slug.ToLower());
+                if (ci.Product != null)
+                {
+                    ci.CreateDate = DateTime.Now;
+                    ci.Cart = cart;
+                    ci.UpdateDate = DateTime.Now;
+                    ci.Quantity = quantity;
+                    cart.CartItems.Add(ci);
+                }
+                cart.CreateDate = DateTime.Now;
+                cart.UpdateDate = DateTime.Now;
+                cart.AppTenantId = tenant.AppTenantId;              
+                _context.Carts.Add(cart);
+                _context.SaveChanges();
+            } else
+            {
+                var p = cart.CartItems.FirstOrDefault(c => c.Product.Slug.ToLower() == slug.ToLower());
+                if (p == null)
+                {
+                    var ci = new CartItem();
+                    ci.Product = _context.Products.FirstOrDefault(f => f.Slug.ToLower() == slug.ToLower());
+                    if (ci.Product != null)
+                    {
+                        ci.UpdateDate = DateTime.Now;
+                        ci.Quantity = quantity;
+                        cart.CartItems.Add(ci);
+                    }
+                } else
+                {
+                    p.Quantity += quantity;
+                }
+                cart.UpdateDate = DateTime.Now;
+                _context.SaveChanges();
 
+            }
+            HttpContext.Session.SetString("cartId", cart.Id.ToString());
+            return Redirect("/tr/sepet");
+
+        }
+        public IActionResult RemoveFromCart(string slug)
+        {
+            string owner = User.Identity.Name;
+            if (string.IsNullOrEmpty(owner))
+            {
+                owner = HttpContext.Session.Id;
+            }
+            var cart = GetMyCart(owner);
+            if (cart != null)
+            {
+                var ci = cart.CartItems.FirstOrDefault(c => c.Product.Slug.ToLower() == slug.ToLower());
+                if (ci!=null)
+                {                    
+                    cart.CartItems.Remove(ci);
+                    cart.UpdateDate = DateTime.Now;
+                    _context.SaveChanges();
+                }
+            }
+            
+            return Redirect("/tr/sepet");
+        }
+        public IActionResult UpdateQuantity(string slug, int quantity)
+        {
+            string owner = User.Identity.Name;
+            if (string.IsNullOrEmpty(owner))
+            {
+                owner = HttpContext.Session.Id;
+            }
+            var cart = GetMyCart(owner);
+            if (cart != null)
+            {
+                var p = cart.CartItems.FirstOrDefault(c => c.Product.Slug.ToLower() == slug.ToLower());
+                if (p != null)
+                {
+                    p.UpdateDate = DateTime.Now;
+                    p.Quantity = quantity;
+                }
+                cart.UpdateDate = DateTime.Now;
+                _context.SaveChanges();
+            }
+            return Redirect("/tr/sepet");  
+        }
+        private Cart GetMyCart(string owner)
+        {
+            var cart = _context.Carts.Include(i => i.CartItems).ThenInclude(t => t.Product).FirstOrDefault(c => c.Owner == owner);
+            return cart;
+        }
         public IActionResult Successful(int id)
         {
             ViewBag.FormClosingDescription = _context.Forms.Where(f => f.Id == id).FirstOrDefault()?.ClosingDescription;
