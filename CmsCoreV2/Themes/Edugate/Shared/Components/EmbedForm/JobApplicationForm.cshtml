@@ -12,7 +12,7 @@
             <fieldset>
                 <input type="hidden" value="@Model.Id" name="FormId" />
 
-                @foreach (FormField item in Model.FormFields)
+                @foreach (FormField item in Model.FormFields.OrderBy(o => o.Position))
                 {
                     <div class="col-md-6">
                         <div class="form-group">

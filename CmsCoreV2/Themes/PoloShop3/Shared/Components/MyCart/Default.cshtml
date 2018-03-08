@@ -75,7 +75,7 @@
                         </form>
                     </div>
                     <div class="col-md-8 text-right">
-                        <button type="button" class="btn btn-default">Sepeti Güncelle</button>
+                        <a href="/tr/sepet" class="btn btn-default">Sepeti Güncelle</a>
                     </div>
                 </div>
                 <div class="row">
@@ -355,7 +355,7 @@
                                         </td>
 
                                         <td class="cart-product-name text-right">
-                                            <span class="amount">₺@Model.TotalPrice</span>
+                                            <span class="amount">₺@Model.SubtotalPrice</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -373,7 +373,7 @@
                                         </td>
 
                                         <td class="cart-product-name  text-right">
-                                            <span class="amount">%@(Model.Coupon)</span>
+                                            <span class="amount">-₺@(Model.DiscountPrice)</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -382,7 +382,7 @@
                                         </td>
 
                                         <td class="cart-product-name text-right">
-                                            <span class="amount color lead"><strong>@Model.TotalPrice</strong></span>
+                                            <span class="amount color lead"><strong>₺@Model.TotalPrice</strong></span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -391,7 +391,7 @@
 
                         </div>
 
-                        <a href="#" class="btn btn-default icon-left float-right"><span>Alışverişi Tamamla</span></a>
+                        <a href="/tr/kasa" class="btn btn-default icon-left float-right"><span>Alışverişi Tamamla</span></a>
                     </div>
                 </div>
             </div>

@@ -3,38 +3,78 @@
     ViewData["Title"] = "Kaydol";
 }
 
-<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <h4>Yeni bir hesap oluşturun</h4>
-    <hr />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label">E-Posta</label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label">Şifre</label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label">Şifre(Tekrar)</label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit">Kaydol</button>
+<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 center no-padding">
+                    <div class="col-md-12">
+                        <h3>Yeni Bir Hesap Oluşturun</h3>
+                        <p>Aşağıdaki bilgileri doldururak yeni bir hesap oluşturun. Eğer daha önce üye olduysanız sayfanın üst kısımdan giriş yapın.</p>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="FirstName">Ad</label>
+                        <input type="text" class="form-control input-lg" placeholder="Ad" asp-for="FirstName">
+                    </div><div class="col-md-6 form-group">
+                        <label class="sr-only">Soyad</label>
+                        <input type="text" class="form-control input-lg" placeholder="Soyad" asp-for="LastName">
+                    </div>
+
+
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="Address">Adres</label>
+                        <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="Address">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="Street">Cadde/Sokak</label>
+                        <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="Street">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="City">Şehir</label>
+                        <input type="text" class="form-control input-lg" placeholder="Şehir" asp-for="City">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="County">İlçe</label>
+                        <input type="text" class="form-control input-lg" placeholder="İlçe" asp-for="County">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="ZipCode">Posta Kodu</label>
+                        <input type="text" class="form-control input-lg" placeholder="Posta Kodu" asp-for="ZipCode">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="Country">Ülke</label>
+                        <input type="text" class="form-control input-lg" placeholder="Ülke" asp-for="Country">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="Phone">Telefon</label>
+                        <input type="text" class="form-control input-lg" placeholder="Telefon" asp-for="Phone">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="Email">E-posta</label>
+                        <input type="text" class="form-control input-lg" placeholder="E-posta" asp-for="Email">
+                    </div><div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="Password">Parola</label>
+                        <input type="password" class="form-control input-lg" placeholder="Parola" asp-for="Password">
+
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="ConfirmPassword">Parola (Tekrar)</label>
+                        <input type="password" class="form-control input-lg" placeholder="Parola (Tekrar)" asp-for="ConfirmPassword">
+
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="btn btn-default">Yeni Hesap Oluştur</button><a class="btn btn-danger m-l-10" href="/">İptal</a>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
+    </section>
 </form>
-
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }

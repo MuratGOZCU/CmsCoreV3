@@ -1,0 +1,32 @@
+﻿@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+@model CheckoutViewModel
+<!-- SHOP CHECKOUT COMPLETED -->
+<section class="p-b-10" style="padding-top:30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-item-description">
+                    <h2 class="h2">Sipariş Tamamlandı</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                    <section id="shop-checkout-completed">
+                        <div class="container">
+                            <div class="p-t-10 m-b-20 text-center">
+                                <div class="text-center">
+                                    <h3>Tebrikler! Siparişiniz tamamlandı!</h3>
+                                    <p>
+                                        Sipariş numaranız: <strong>#123456</strong>. Üye girişi yaptığınızda profil sayfanızdan
+                                        <a href="/tr/siparislerim" class="text-underline">
+                                            <mark>siparişinizi görüntüleyebilirsiniz.</mark>
+                                        </a>
+                                    </p>
+                                </div>
+                                <a href="/account/login" class="btn btn-default icon-left m-r-10"><span>Giriş Sayfasına Git</span></a><a class="btn btn-default icon-left" href="/"><span>Alışverişe Geri Dön</span></a>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- end: SHOP CHECKOUT COMPLETED -->

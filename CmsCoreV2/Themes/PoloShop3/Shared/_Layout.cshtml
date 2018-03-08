@@ -1,6 +1,8 @@
 ﻿@inject AppTenant Tenant;
 @inject CustomLocalizer Localizer
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -55,32 +57,52 @@
                 </div>
 
 
-                <div class="topbar-dropdown hidden-xs float-right">
-                    <div class="title"><i class="fa fa-user"></i><a href="#">Giriş</a></div>
 
-                    <div class="topbar-form dropdown-invert">
-                        <form>
-                            <div class="form-group">
-                                <label class="sr-only">E-posta</label>
-                                <input placeholder="E-posta" class="form-control" type="text">
 
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                        <div class="topbar-dropdown hidden-xs float-right">
+                            <div class="title">
+                                <i class="fa fa-user"></i>
+                                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hoşgeldiniz: @UserManager.GetUserName(User)!</a>
+
+                                <a href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">Çıkış</a>
+                               
                             </div>
-                            <div class="form-group">
-                                <label class="sr-only">Parola</label>
-                                <input placeholder="Parola" class="form-control" type="password">
-                            </div>
-                            <div class="form-inline form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">
-                                        <small> Beni Hatırla</small>
-                                    </label>
+                        </div>
+
+</form>
+                }
+                else
+                {
+                    <div class="topbar-dropdown hidden-xs float-right">
+                        <div class="title"><i class="fa fa-user"></i><a href="#">Giriş</a></div>
+
+                        <div class="topbar-form dropdown-invert">
+                            <form action="/account/login" method="post">
+                                <div class="form-group">
+                                    <label class="sr-only">E-posta</label>
+                                    <input placeholder="E-posta" class="form-control" type="text" name="Email">
+
                                 </div>
-                                <button type="button" class="btn btn-primary btn-block">Giriş</button>
-                            </div>
-                        </form>
+                                <div class="form-group">
+                                    <label class="sr-only">Parola</label>
+                                    <input placeholder="Parola" class="form-control" type="password" name="Password">
+                                </div>
+                                <div class="form-inline form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="RememberMe" value="1">
+                                            <small> Beni Hatırla</small>
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block">Giriş</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
         <!-- end: TOPBAR -->
@@ -151,7 +173,7 @@
             </div>
         </header>
         <!-- end: Header -->
-        @RenderBody()       
+        @RenderBody()
         <!-- Footer -->
         <footer id="footer" class="footer-light">
             <div class="footer-content">
@@ -270,65 +292,65 @@
     <!--Template functions-->
     <script src="~/poloshop3/js/functions.js"></script>
 
-<script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.carousel-logos').owlCarousel({
-            margin: 115,
-            loop: true,
-            //lazyLoad: true,
-            nav: false,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            smartSpeed: 1500,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 2,
-                    margin: 30,
-                },
-                320: {
-                    items: 3,
-                    margin: 40,
-                },
-                480: {
-                    items: 3,
-                    margin: 50,
-                },
-                600: {
-                    items: 4,
-                    margin: 90,
-                },
-                768: {
-                    items: 5,
-                    margin: 60,
-                },
-                1024: {
-                    items: 5,
-                    margin: 90,
-                },
-                1025: {
-                    items: 6
+    <script src="~/lib/jquery.maskedinput/dist/jquery.maskedinput.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.carousel-logos').owlCarousel({
+                margin: 115,
+                loop: true,
+                //lazyLoad: true,
+                nav: false,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                smartSpeed: 1500,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 2,
+                        margin: 30,
+                    },
+                    320: {
+                        items: 3,
+                        margin: 40,
+                    },
+                    480: {
+                        items: 3,
+                        margin: 50,
+                    },
+                    600: {
+                        items: 4,
+                        margin: 90,
+                    },
+                    768: {
+                        items: 5,
+                        margin: 60,
+                    },
+                    1024: {
+                        items: 5,
+                        margin: 90,
+                    },
+                    1025: {
+                        items: 6
+                    }
                 }
-            }
+            });
         });
-    });
-    function rssSetDuration() {
-        rssDuration = $(".marqueeCrawl a").length * 8 + "s";
-        $(".marqueeCrawl").css("animationDuration", rssDuration);
-        $(".marqueeCrawl").show(); // IE recalculate fix
-    }
+        function rssSetDuration() {
+            rssDuration = $(".marqueeCrawl a").length * 8 + "s";
+            $(".marqueeCrawl").css("animationDuration", rssDuration);
+            $(".marqueeCrawl").show(); // IE recalculate fix
+        }
 
-    $(window).on("load", function () {
-        rssSetDuration();
-    });
-</script>
-@if (HttpContextAccessor.HttpContext.Items["scripts"] != null)
-{
-    @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
-}
-@RenderSection("scripts", required: false)
-@Html.Raw(ViewBag.FooterScript)
+        $(window).on("load", function () {
+            rssSetDuration();
+        });
+    </script>
+    @if (HttpContextAccessor.HttpContext.Items["scripts"] != null)
+    {
+        @Html.Raw(HttpContextAccessor.HttpContext.Items["scripts"])
+    }
+    @RenderSection("scripts", required: false)
+    @Html.Raw(ViewBag.FooterScript)
 </body>
 
 </html>

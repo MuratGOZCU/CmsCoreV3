@@ -180,6 +180,10 @@ namespace CmsCoreV2.Controllers
         {
             return View();
         }
+        public IActionResult Checkout(CheckoutViewModel viewModel)
+        {
+            return View("CheckoutCompleted", viewModel);
+        }
         public IActionResult AddToCart(string slug, int quantity)
         {
             string owner = User.Identity.Name;

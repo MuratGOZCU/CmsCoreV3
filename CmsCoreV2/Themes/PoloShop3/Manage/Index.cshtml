@@ -1,0 +1,128 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Hesabınızı yönetin";
+}
+
+<section class="p-b-10" style="padding-top:30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-item-description">
+                    <h2 class="h2">@ViewData["Title"]</h2>
+                    <div class="post-meta">
+                        <div class="event-detail-des">
+                            <div class="event-detail-des-content">
+
+
+                                <h4>Hesabınızın ayarlarını değiştirin</h4>
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>Parola:</dt>
+                                    <dd>
+                                        <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Değiştir</a>
+                                    </dd>
+                                    <dt>Sosyal Medya Girişleri:</dt>
+                                    <dd>
+                                        Yok
+                                        @*@Model.Logins.Count <a asp-controller="Manage" asp-action="ManageLogins" class="btn-bracketed">Manage</a>*@
+                                    </dd>
+                                    @*<dt>Telefon Numarası:</dt>
+            <dd>
+
+                @(Model.PhoneNumber ?? "Yok")
+                    @if (Model.PhoneNumber != null)
+                    {
+                        <br />
+                        <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn-bracketed">Değiştir</a>
+                        <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post">
+                            [<button type="submit" class="btn-link">Kaldır</button>]
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn-bracketed">Ekle</a>
+                    }
+            </dd>*@
+
+                                    <dt>İki-faktörlü Kimlik Doğrulama:</dt>
+                                    <dd>
+                                        <p>
+                                            Kapalı
+                                        </p>
+                                        @*@if (Model.TwoFactor)
+                {
+                    <form asp-controller="Manage" asp-action="DisableTwoFactorAuthentication" method="post" class="form-horizontal">
+                        Enabled <button type="submit" class="btn-link btn-bracketed">Disable</button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="Manage" asp-action="EnableTwoFactorAuthentication" method="post" class="form-horizontal">
+                        <button type="submit" class="btn-link btn-bracketed">Enable</button> Disabled
+                    </form>
+                }*@
+                                    </dd>
+                                </dl>
+                                <hr />
+                                <h4>Profil Bilgilerim</h4>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12 center no-padding">
+                                        <div class="col-md-12">
+
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="FirstName">Ad</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Ad" asp-for="FirstName">
+                                        </div><div class="col-md-6 form-group">
+                                            <label class="sr-only">Soyad</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Soyad" asp-for="LastName">
+                                        </div>
+
+
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="Address">Adres</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="Address">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="Street">Cadde/Sokak</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="Street">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="City">Şehir</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Şehir" asp-for="City">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="County">İlçe</label>
+                                            <input type="text" class="form-control input-lg" placeholder="İlçe" asp-for="County">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="ZipCode">Posta Kodu</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Posta Kodu" asp-for="ZipCode">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="Country">Ülke</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Ülke" asp-for="Country">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="Phone">Telefon</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Telefon" asp-for="Phone">
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <button type="submit" class="btn btn-default">Kaydet</button><a class="btn btn-danger m-l-10" href="/">İptal</a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+</div>
+</div>
+</div>
+</div>
+</section>

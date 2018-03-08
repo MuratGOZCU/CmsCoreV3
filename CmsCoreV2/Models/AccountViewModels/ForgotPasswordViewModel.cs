@@ -10,6 +10,7 @@ namespace CmsCoreV2.Models.AccountViewModels
     {
         [Required]
         [EmailAddress]
+        [Display(Name ="E-posta")]
         public string Email { get; set; }
     }
 }

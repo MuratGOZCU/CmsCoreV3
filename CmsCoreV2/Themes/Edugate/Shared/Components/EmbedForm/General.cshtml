@@ -25,7 +25,7 @@
                                         @Html.Raw(Model.Description)
                                      }
                                     </div>
-                                    @foreach (FormField item in Model.FormFields)
+                                    @foreach (FormField item in Model.FormFields.OrderBy(o => o.Position))
                                     {
                                       <div class="form-group">
                                             <formField form-field="item" required="false" css-class="form-job" read_only="false" show-label="true" />

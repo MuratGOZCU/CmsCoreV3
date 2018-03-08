@@ -1,0 +1,156 @@
+﻿@model Order
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+@if (Model?.OrderItems != null)
+{
+    <section id="shop-cart">
+        <div class="container">
+            <div class="shop-cart">
+                <div class="table table-condensed table-striped table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="cart-product-remove"></th>
+                                <th class="cart-product-thumbnail">Ürün</th>
+                                <th class="cart-product-name">Açıklama</th>
+                                <th class="cart-product-price">Birim Fiyat</th>
+                                <th class="cart-product-quantity">Adet</th>
+                                <th class="cart-product-subtotal">Toplam</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderItems)
+                            {
+                                <tr>
+                                    <td class="cart-product-remove">
+                                        <a href="/home/removefromcart?slug=@item.Product.Slug"><i class="fa fa-close"></i></a>
+                                    </td>
+
+                                    <td class="cart-product-thumbnail">
+                                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Product.Slug">
+                                            <img src="@item.Product.ProductImage" alt="@item.Product.Name">
+                                        </a>
+                                        <div class="cart-product-thumbnail-name">@item.Product.Name</div>
+                                    </td>
+
+                                    <td class="cart-product-description">
+
+                                        <p>
+                                            @item.Product.ShortDescription
+                                        </p>
+                                    </td>
+
+                                    <td class="cart-product-price">
+                                        <span class="amount">₺@item.UnitPrice</span>
+                                    </td>
+
+                                    <td class="cart-product-quantity">
+                                        <div class="quantity">
+                                            <a class="minus" onclick="if ($('#qty@(item.Id)').val() > 1) {$('#qty@(item.Id)').val(parseInt($('#qty@(item.Id)').val())-1);} window.location='/home/updatequantity?slug=@(item.Product.Slug)&quantity='+$('#qty@(item.Id)').val();">-</a>
+                                            <input type="text" class="qty" id="qty@(item.Id)" value="@item.Quantity" name="quantity">
+                                            <a class="plus" onclick="if ($('#qty@(item.Id)').val() < @item.Product.StockCount) {$('#qty@(item.Id)').val(parseInt($('#qty@(item.Id)').val()) + 1);} window.location='/home/updatequantity?slug=@(item.Product.Slug)&quantity='+$('#qty@(item.Id)').val();">+</a>
+                                        </div>
+                                    </td>
+
+                                    <td class="cart-product-subtotal">
+                                        <span class="amount">₺@item.TotalPrice</span>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+                
+                <div class="row">
+                    <hr class="space">
+                    <div class="col-md-6">
+                        <h4>Fatura ve Teslimat Adresi:</h4>
+                        <form class="row">
+                            <div class="col-md-12 m-b-20">
+                                Ülke: Türkiye
+                            </div>
+                            <div class="col-md-6 form-group">
+                                Şehir: İstanbul
+                            </div>
+
+                            <div class="col-md-6  form-group">
+                                Posta Kodu: 34672
+                            </div>
+                            <div class="col-md-6  form-group">
+                                Posta Kodu: 34672
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-md-6 p-r-10 ">
+                        <div class="table-responsive">
+                            <h4>Sepet Alttoplam</h4>
+
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="cart-product-name">
+                                            <strong>Sepet Alttoplam</strong>
+                                        </td>
+
+                                        <td class="cart-product-name text-right">
+                                            <span class="amount">₺@Model.SubtotalPrice</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="cart-product-name">
+                                            <strong>Kargo</strong>
+                                        </td>
+
+                                        <td class="cart-product-name  text-right">
+                                            <span class="amount">@(Model.ShippingPrice == 0 ? "Ücretsiz Kargo" : "₺" + Model.ShippingPrice)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="cart-product-name">
+                                            <strong>İndirim</strong>
+                                        </td>
+
+                                        <td class="cart-product-name  text-right">
+                                            <span class="amount">-₺@(Model.DiscountPrice)</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="cart-product-name">
+                                            <strong>Toplam</strong>
+                                        </td>
+
+                                        <td class="cart-product-name text-right">
+                                            <span class="amount color lead"><strong>₺@Model.TotalPrice</strong></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <a href="/tr/kasa" class="btn btn-default icon-left float-right"><span>Alışverişi Tamamla</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section id="shop-cart">
+        <div class="container">
+            <div class="p-t-10 m-b-20 text-center">
+                <div class="heading-fancy heading-line text-center">
+                    <h4>Sepetiniz şu anda boş.</h4>
+                </div>
+                <a class="btn btn-default icon-left" href="/"><span>Alışverişe Dön</span></a>
+            </div>
+        </div>
+    </section>
+}

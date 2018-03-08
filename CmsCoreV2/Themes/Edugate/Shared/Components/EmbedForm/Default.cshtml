@@ -12,7 +12,7 @@
                     <legend><img src="~/edugate/images/icon-phone.png" style="border:0px; vertical-align:text-bottom;" /> @Model.FormName.ToUpper()</legend>
                     <input type="hidden" value="@Model.Id" name="FormId" />
                     <input type="hidden" value="@Model.Slug" name="Slug" />
-                    @foreach (FormField item in Model.FormFields)
+                    @foreach (FormField item in Model.FormFields.OrderBy(f=>f.Position))
                     { <div class="formField">
                         @if (item.Required)
                         {

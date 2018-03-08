@@ -7,9 +7,9 @@
 {
     <fieldset>
         <input type="hidden" value="@Model.Id" name="FormId" />
-        @foreach (FormField item in Model.FormFields)
+        @foreach (FormField item in Model.FormFields.OrderBy(o => o.Position))
         {
-     
+
             @if (item.Required)
             {
                 <formField form-field="item" required="true" css-class="form-select style-1" read_only="false" show-placeholder="true" />
