@@ -41,6 +41,17 @@ namespace CmsCoreV2.Controllers
         {
             return Redirect(HttpContext.Items["NewUrl"].ToString());
         }
+        public int GetCartProductCount()
+        {
+            string owner = User.Identity.Name;
+            if (string.IsNullOrEmpty(owner))
+            {
+                owner = HttpContext.Session.Id;
+            }
+            var cart = GetMyCart(owner);
+            return cart?.ProductCount ?? 0;
+        }
+       
         public IActionResult Index(string slug, string culture,string message="",string ajax = "")
         { 
             if (culture == "no")
@@ -51,6 +62,7 @@ namespace CmsCoreV2.Controllers
             ViewBag.PageScript = "";
             HttpContext.Items["Culture"] = culture;
             slug = slug.ToLower();
+            ViewBag.CartProductCount = GetCartProductCount();
             ViewBag.Popup = _context.SetFiltered<Popup>().Where(w => w.PageSlug == slug && w.IsPublished == true && w.PublishDate <= DateTime.Now && (w.FinishDate.HasValue ? w.FinishDate > DateTime.Now : true)).OrderByDescending(o => o.PublishDate).FirstOrDefault();
             if (message == "subscriptionSuccessful")
             {

@@ -12,7 +12,7 @@ namespace CmsCoreV2.Models
         public Order()
         {
             OrderMetaFields = new HashSet<OrderMetaField>();
-            OrderOrderItems = new HashSet<OrderOrderItem>();
+            OrderItems = new HashSet<OrderItem>();
             OrderNotes= new HashSet<OrderNote>();
         }
        
@@ -42,6 +42,13 @@ namespace CmsCoreV2.Models
         [Display(Name = "Müşteri Notu")]
         public string CustomerNote { get; set; }
         public virtual ICollection<OrderMetaField> OrderMetaFields { get; set; }
-        public virtual ICollection<OrderOrderItem> OrderOrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public string Owner { get; set; }
+        public int ProductCount { get { return OrderItems.Sum(ci => ci.Quantity); } }
+        public float SubtotalPrice { get { return OrderItems.Sum(ci => ci.TotalPrice); } }
+        public float ShippingPrice { get { return OrderItems.Sum(oi=>oi.ShippingPrice); } }
+        public float Coupon { get { return 20; } }
+        public float DiscountPrice { get { return (SubtotalPrice + ShippingPrice) * (Coupon / 100); } }
+        public float TotalPrice { get { return (SubtotalPrice + ShippingPrice) - (SubtotalPrice + ShippingPrice) * (Coupon / 100); } }
     }
 }

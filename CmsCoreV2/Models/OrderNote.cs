@@ -14,6 +14,6 @@ namespace CmsCoreV2.Models
         public string Note { get; set; }
         [Required]
         [Display(Name = "Özel mi?")]
-        public bool ISPrivate { get; set; }
+        public bool IsPrivate { get; set; }
     }
 }

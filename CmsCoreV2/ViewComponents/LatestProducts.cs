@@ -1,6 +1,7 @@
 ﻿using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,11 @@ namespace CmsCoreV2.ViewComponents
             _context = context;            
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string categoryNames = "", int count = 8, string title = "En Son Ürünler")
+        public async Task<IViewComponentResult> InvokeAsync(string categoryNames = "", int count = 8, string title = "En Son Ürünler", string template = "Default")
         {
             ViewBag.ComponentTitle = title;
             var items = await GetItems(categoryNames, count);
-            return View(items);
+            return View(template,items);
         }
         private async Task<List<Product>> GetItems(string categoryNames, int count)
         {
@@ -57,7 +58,7 @@ namespace CmsCoreV2.ViewComponents
             }
             else
             {
-                return (from p in _context.Products where p.IsPublished == true orderby p.CreateDate descending select p).Take(count).ToList();
+                return (from p in _context.Products.Include(i=>i.ProductProductCategories).ThenInclude(t=>t.ProductCategory) where p.IsPublished == true orderby p.CreateDate descending select p).Take(count).ToList();
             }
         }
         

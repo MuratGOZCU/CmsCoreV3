@@ -86,7 +86,6 @@ namespace CmsCoreV2.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<OrderMetaField> OrderMetaFields { get; set; }
         public DbSet<OrderNote> OrderNotes { get; set; }
-        public DbSet<OrderOrderItem> OrderOrderItems { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductAttribute> ProductAttributes { get; set; }
@@ -171,14 +170,6 @@ namespace CmsCoreV2.Data
             builder.Entity<OrderMetaField>().HasOne(bc => bc.MetaField)
                 .WithMany(c => c.OrderMetaFields)
                 .HasForeignKey(bc => bc.MetaFieldId).OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<OrderOrderItem>().HasKey(pc => new { pc.OrderId, pc.OrderItemId });
-            builder.Entity<OrderOrderItem>().HasOne(bc => bc.Order)
-                .WithMany(b => b.OrderOrderItems)
-                .HasForeignKey(bc => bc.OrderId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<OrderOrderItem>().HasOne(bc => bc.OrderItem)
-                .WithMany(c => c.OrderOrderItems)
-                .HasForeignKey(bc => bc.OrderItemId).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<ProductAttribute>().HasKey(pc => new { pc.ProductId, pc.AttributeId });
             builder.Entity<ProductAttribute>().HasOne(bc => bc.Product)

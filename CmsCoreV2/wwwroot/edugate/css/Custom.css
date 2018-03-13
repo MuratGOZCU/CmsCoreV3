@@ -1042,3 +1042,6 @@ width: 28px !important;
 text-transform:none;
 }
 .event-detail-des {text-align:left;}
+.bg-w-form .form-group {
+    min-height:initial !important;
+}

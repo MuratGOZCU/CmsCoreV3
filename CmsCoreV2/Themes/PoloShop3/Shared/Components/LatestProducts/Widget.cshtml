@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Product>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+<div class="widget">
+    <h4>Son Ürünler</h4>
+    @foreach (var item in Model)
+    {
+        <div class="post-thumbnail-list">
+            <div class="post-thumbnail-entry">
+
+                <div class="post-thumbnail-content">
+                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@(item.Name)</a>
+                    @if (item.SalePrice != null)
+                    {
+                        <span class="post-date"><i class="fa fa-money-o"></i> ₺@item.SalePrice</span>
+                    }
+                    @if (item.ProductProductCategories?.FirstOrDefault() != null)
+                    {
+                        <span class="post-category"><i class="fa fa-tag"></i>@item.ProductProductCategories.FirstOrDefault().ProductCategory?.Name</span>
+                    }
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
