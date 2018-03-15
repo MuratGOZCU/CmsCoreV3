@@ -254,6 +254,10 @@ header .header-main .navigation .nav-links li .main-menu {
     font-weight: bolder;
     color: green; 
     }
+    #floatingWhatsapp a img {width:68px;height:68px;}
+    @media screen and (max-width:767px) {
+        #floatingWhatsapp a img {width:48px;height:48px;}
+    }
 video {
     position: absolute;
     top: 50%;
