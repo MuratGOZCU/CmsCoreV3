@@ -216,12 +216,14 @@ header .header-main .navigation .nav-links li .main-menu {
 }
 
 .slider-banner .owl-controls .owl-dots .owl-dot:nth-of-type(6) {
-    background-color: #092f87;
+    background-color: #eb1c74;
     width: 20px;
     height: 20px;
     border: 0px;
     margin-bottom: -40px;
 }
+
+
 
 .slider-banner .owl-controls .owl-dots .owl-dot.active {
     border: 2px solid white;
@@ -242,7 +244,16 @@ header .header-main .navigation .nav-links li .main-menu {
     color: white;
     border-radius:20px !important;
 }
-
+#floatingWhatsapp a {
+    position: fixed;
+    bottom: 15px;
+    text-align: center;
+    font-size: 38px;
+    z-index: 101;  
+    left: 10px;
+    font-weight: bolder;
+    color: green; 
+    }
 video {
     position: absolute;
     top: 50%;
@@ -746,6 +757,17 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     border-radius: 10px;
 }
 
+.carousel-indicators li:nth-of-type(7) {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 0px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #ff9e19;
+    border-radius: 10px;
+}
+
 .carousel-indicators .active:nth-of-type(1) {
     width: 20px;
     height: 20px;
@@ -785,6 +807,12 @@ header .header-main .edugate-dropdown-menu-1 li .link-page, header .header-main 
     height: 20px;
     border: 2px solid white;
     background-color: #eb1c74;
+}
+.carousel-indicators .active:nth-of-type(7) {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    background-color: #ff9e19;
 }
 .footer-main .footer-main-wrapper {
     padding-top: 25px;

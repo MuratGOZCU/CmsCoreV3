@@ -152,6 +152,9 @@
                 <!-- CONTENT-->
                 <div class="content" style="overflow:hidden!important">
                     @RenderBody()
+                    <div id="floatingWhatsapp">
+                        <a href="https://api.whatsapp.com/send?phone=905384947369&text=Selam, web siteniz üzerinden irtibat kuruyorum."><i class="fa fa-whatsapp"></i></a>
+                    </div>
                     <div id="floatingButton">
                         <div class="embededForm" id="floatingForm" style="display:none">
                             @await Component.InvokeAsync("EmbedForm", new { name = Localizer["Sizi Arayalım"].ToString(), template = "Default" })
