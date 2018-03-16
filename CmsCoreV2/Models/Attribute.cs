@@ -11,6 +11,7 @@ namespace CmsCoreV2.Models
         public Attribute()
         {
             ProductAttributes = new HashSet<ProductAttribute>();
+            AttributeItems = new HashSet<AttributeItem>();
         }
 
         [Required]
@@ -32,7 +33,8 @@ namespace CmsCoreV2.Models
         [EnumDataType(typeof(AttributeType))]
         public AttributeType AttributeType { get; set; }
 
-        public ICollection<ProductAttribute> ProductAttributes { get; set; }
+        public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
+        public virtual ICollection<AttributeItem> AttributeItems {get; set;}
 
         [Display(Name = "Sıralama Düzeni")]
         [EnumDataType(typeof(AttributePosition))]

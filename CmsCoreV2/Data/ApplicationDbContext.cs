@@ -107,6 +107,8 @@ namespace CmsCoreV2.Data
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
 
+        public DbSet<ProductAttributeItem> ProductAttributeItems {get; set;}
+
         // diğer dbsetler buraya eklenir
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -174,6 +176,14 @@ namespace CmsCoreV2.Data
             builder.Entity<ProductAttribute>().HasKey(pc => new { pc.ProductId, pc.AttributeId });
             builder.Entity<ProductAttribute>().HasOne(bc => bc.Product)
                 .WithMany(b => b.ProductAttributes)
+                .HasForeignKey(bc => bc.ProductId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<ProductAttribute>().HasOne(bc => bc.Attribute)
+                .WithMany(c => c.ProductAttributes)
+                .HasForeignKey(bc => bc.AttributeId).OnDelete(DeleteBehavior.Cascade);
+
+                builder.Entity<ProductAttributeItem>().HasKey(pc => new { pc.ProductId, pc.AttributeItemId });
+            builder.Entity<ProductAttributeItem>().HasOne(bc => bc.Product)
+                .WithMany(b => b.ProductAttributeItems)
                 .HasForeignKey(bc => bc.ProductId).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<ProductAttribute>().HasOne(bc => bc.Attribute)
                 .WithMany(c => c.ProductAttributes)

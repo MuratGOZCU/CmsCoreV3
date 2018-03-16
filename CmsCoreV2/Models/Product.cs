@@ -31,7 +31,7 @@ namespace CmsCoreV2.Models
         public string Slug { get; set; }
         [Display(Name = "Açıklama"),
             MinLength(3, ErrorMessage = "{0} en az {1} karakter olmalıdır."),
-         MaxLength(500, ErrorMessage = "{0} en fazla {1} karakter olmalıdır.")]
+            MaxLength(500, ErrorMessage = "{0} en fazla {1} karakter olmalıdır.")]
         public string Description { get; set; }
         [Display(Name = "Dil")]
         public long? LanguageId { get; set; }
@@ -111,6 +111,11 @@ namespace CmsCoreV2.Models
         public bool IsNew { get; set; }
         [Display(Name="Yayında")]
         public bool IsPublished { get; set; }
-
+        public virtual ICollection<ProductAttributeItem> ProductAttributeItems {get; set;}
+        [Display(Name = "Tedarikçi")]
+        public long? SupplierId {get; set;}
+        [ForeignKey("SupplierId")]
+        [Display(Name = "Tedarikçi")]
+        public Supplier Supplier {get;set;}
     }
 }

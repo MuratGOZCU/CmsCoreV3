@@ -16,7 +16,7 @@
             <!-- Sidebar-->
             <div class="sidebar col-md-3">
                 <!--widget newsletter-->
-                @await Component.InvokeAsync("ProductCategories", new { categoryNames = "", count = 3, title = "Ürün Kategorileri" })
+                @await Component.InvokeAsync("ProductCategories", new { categoryNames = "", count = 10, title = "Ürün Kategorileri" })
                 @await Component.InvokeAsync("LatestProducts", new { categoryNames = "", count = 3, title = "En Son Ürünler" })
 
 

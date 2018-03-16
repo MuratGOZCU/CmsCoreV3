@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class ProductAttribute 
+    public class ProductAttributeItem 
     {
         public long ProductId { get; set; }
         public Product Product { get; set; }
-        public long AttributeId { get; set; }
-        public Attribute Attribute { get; set; }
+        public long AttributeItemId { get; set; }
+        public AttributeItem AttributeItem { get; set; }
         public string AppTenantId {get; set;}
     }
 }

@@ -9,6 +9,9 @@ namespace CmsCoreV2.Models
 {
     public class AttributeItem:BaseEntity
     {
+        public AttributeItem() {
+            ProductAttributeItems = new HashSet<ProductAttributeItem>();
+        }
 
         [Required]
         [Display(Name = "Ad")]
@@ -33,6 +36,8 @@ namespace CmsCoreV2.Models
         [ForeignKey("ProductAttributeId")]
         [Display(Name = "Ürün Niteliği")]
         public Attribute ProductAttribute { get; set; }
+
+        public virtual ICollection<ProductAttributeItem> ProductAttributeItems {get; set;}
 
         
     }
