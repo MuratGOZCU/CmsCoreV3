@@ -54,7 +54,7 @@ namespace CmsCoreV2.ViewComponents
         {
             if (categories.Length > 0)
             {
-                return (from c in _context.ProductCategories.Include("ProductProductCategories") where (categories.Length > 0 && c.parentCategory != null ? categories.Contains(c.parentCategory.Name.ToLower()) : true)  orderby c.CreateDate descending select c).Take(count).ToList();
+                return (from c in _context.ProductCategories.Include("ProductProductCategories") where (categories.Length > 0 && c.ParentCategory != null ? categories.Contains(c.ParentCategory.Name.ToLower()) : true)  orderby c.CreateDate descending select c).Take(count).ToList();
             }
             else
             {

@@ -12,10 +12,16 @@
 <hr />
 
 <form asp-action="Create">
+    <input type="hidden" name="categoriesHidden" id="categoriesHidden" />
     <div class="form-horizontal">
         <h4>Ürün</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div id="tree">
+
+            </div>
+        </div>
         <div class="form-group">
             <label asp-for="Name" class="col-md-2 control-label"></label>
             <div class="col-md-10">
@@ -84,14 +90,14 @@
         <div class="form-group">
             <label asp-for="TaxStatus" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="TaxStatus" class="form-control"></select>
+                <select asp-for="TaxStatus" class="form-control" asp-items="@Html.GetEnumSelectList(typeof(TaxStatus))"></select>
                 <span asp-validation-for="TaxStatus" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="TaxClass" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="TaxClass" class="form-control"></select>
+                <select asp-for="TaxClass" class="form-control"  asp-items="@Html.GetEnumSelectList(typeof(TaxClass))"></select>
                 <span asp-validation-for="TaxClass" class="text-danger"></span>
             </div>
         </div>
@@ -146,7 +152,7 @@
         <div class="form-group">
             <label asp-for="ProductType" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="ProductType" class="form-control"></select>
+                <select asp-for="ProductType" class="form-control"  asp-items="@Html.GetEnumSelectList(typeof(ProductType))"></select>
                 <span asp-validation-for="ProductType" class="text-danger"></span>
             </div>
         </div>
@@ -230,7 +236,7 @@
         <div class="form-group">
             <label asp-for="CatalogVisibility" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="CatalogVisibility" class="form-control"></select>
+                <select asp-for="CatalogVisibility" class="form-control"  asp-items="@Html.GetEnumSelectList(typeof(CatalogVisibility))"></select>
                 <span asp-validation-for="CatalogVisibility" class="text-danger"></span>
             </div>
         </div>
@@ -258,34 +264,11 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input readonly asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input readonly asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input readonly asp-for="UpdateDate" class="form-control" />
-                <span asp-validation-for="UpdateDate" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input readonly asp-for="UpdatedBy" class="form-control" />
-                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
-            </div>
-        </div>
+        <input asp-for="CreateDate" type="hidden" />
+                <input asp-for="CreatedBy" type="hidden" />
+                <input asp-for="UpdateDate" type="hidden" />
+                <input asp-for="UpdatedBy" type="hidden" />
+                <input asp-for="AppTenantId" type="hidden" />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -300,3 +283,56 @@
 </div>
 @Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "ProductImage" } })
 @Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "AlternateProductImage" } })
+@section scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="/metronic/global/plugins/jstree/dist/jstree.js"></script>
+
+    <script>
+        var handleSample = function () {
+            $('#tree').jstree({
+                'plugins': ["wholerow", "checkbox"],
+                'core': {
+                    "themes": {
+                        "responsive": false,
+                        "icons": false
+                    },
+                    'data': [
+                            @foreach(ProductCategory item in (IEnumerable<ProductCategory>)ViewBag.CategoryList)
+                    {
+                    if(item.ParentCategoryId==null)
+                    {
+                        <text>
+                        { "id": '@item.Id', "parent": "#", "text": "@item.Name" },
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                        { "id": '@item.Id', "parent": "@item.ParentCategoryId", "text": "@item.Name" },
+                        </text>
+                    }
+                }
+                    ]
+                }
+            });
+            }
+        handleSample();
+    </script>
+    <script>
+        $(function () {
+            // 6 create an instance when the DOM is ready
+            $('#tree').jstree();
+            // 7 bind to events triggered on the tree
+            $('#tree').on("changed.jstree", function (e, data) {
+                console.log(data.selected);
+                $('#categoriesHidden').val(data.selected);
+            });
+            // 8 interact with the tree - either way is OK
+            $('button').on('click', function () {
+                $('#tree').jstree(true).select_node('child_node_1');
+                $('#tree').jstree('select_node', 'child_node_1');
+                $.jstree.reference('#tree').select_node('child_node_1');
+            });
+        });
+    </script>
+}

@@ -55,16 +55,30 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             productCategory.UpdatedBy = User.Identity.Name ?? "username";
             productCategory.UpdateDate = DateTime.Now;
             productCategory.AppTenantId = tenant.AppTenantId;
-
+            var parentCategoryOptions = _context.ProductCategories.ToList();
+            var result = "";
+            recurseParentCategoryOptions(ref parentCategoryOptions, null, 0,null, ref result);
+            ViewBag.ParentCategoryOptions = result;
             return View(productCategory);
         }
+        private void recurseParentCategoryOptions(ref List<ProductCategory> cl, ProductCategory start, int level, long? selected, ref string result)
+        {
+            foreach (ProductCategory child in cl)
+            {
+                if (child.ParentCategory == start)
+                {
+                    result += "<option " + (selected.HasValue && child.Id == selected.Value ? "selected" : "") + " value='" + child.Id.ToString() + "'>" + (new String(' ', level * 2)).Replace(" ", "&nbsp&nbsp;") + child.Name + "</option>";
+                    recurseParentCategoryOptions(ref cl, child, level + 1,selected, ref result);
+                }
+            }
 
+        }
         // POST: CmsCore/ProductCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Slug,Description,SmallImage,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] ProductCategory productCategory)
+        public async Task<IActionResult> Create([Bind("ParentCategoryId,Name,Slug,Description,SmallImage,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] ProductCategory productCategory)
         {
             if (ModelState.IsValid)
             {
@@ -78,6 +92,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            var parentCategoryOptions = _context.ProductCategories.ToList();
+            var result = "";
+            recurseParentCategoryOptions(ref parentCategoryOptions, null, 0,productCategory.ParentCategoryId, ref result);
+            ViewBag.ParentCategoryOptions = result;
             return View(productCategory);
         }
 
@@ -98,7 +116,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             productCategory.UpdatedBy = User.Identity.Name ?? "username";
             productCategory.UpdateDate = DateTime.Now;
             productCategory.AppTenantId = productCategory.AppTenantId;
-
+            var parentCategoryOptions = _context.ProductCategories.ToList();
+            var result = "";
+            recurseParentCategoryOptions(ref parentCategoryOptions, null, 0,productCategory.ParentCategoryId, ref result);
+            ViewBag.ParentCategoryOptions = result;
             return View(productCategory);
         }
 
@@ -107,7 +128,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Name,Slug,Description,SmallImage,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] ProductCategory productCategory)
+        public async Task<IActionResult> Edit(long id, [Bind("ParentCategoryId,Name,Slug,Description,SmallImage,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] ProductCategory productCategory)
         {
             if (id != productCategory.Id)
             {
@@ -139,6 +160,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            var parentCategoryOptions = _context.ProductCategories.ToList();
+            var result = "";
+            recurseParentCategoryOptions(ref parentCategoryOptions, null, 0,productCategory.ParentCategoryId, ref result);
+            ViewBag.ParentCategoryOptions = result;
             return View(productCategory);
         }
 

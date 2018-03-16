@@ -9,6 +9,7 @@ using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using Microsoft.AspNetCore.Authorization;
 using SaasKit.Multitenancy;
+using Z.EntityFramework.Plus;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
@@ -64,6 +65,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name");
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture");
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name");
+            ViewBag.CategoryList = GetProductCategories();
             return View(product);
         }
 
@@ -72,19 +74,48 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product)
+        public async Task<IActionResult> Create([Bind("AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+                UpdateProductProductCategories(product.Id, categoriesHidden);
                 return RedirectToAction("Index");
             }
             ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name", product.CrossSellId);
             ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
+            ViewBag.CategoryList = GetProductCategories();            
+            ViewBag.CheckList = product.ProductProductCategories;
             return View(product);
+        }
+
+        public void UpdateProductProductCategories(long productId, string SelectedCategories)
+        {
+            string tenantId = tenant.AppTenantId;
+            var ppc = _context.SetFiltered<ProductProductCategory>().Where(x => x.AppTenantId == tenantId).Where(f => f.ProductId == productId).ToList();
+            var product = _context.SetFiltered<Product>().Where(x => x.AppTenantId == tenantId).Include("ProductProductCategories").Where(f => f.Id == productId).FirstOrDefault();
+            if (product.ProductProductCategories == null) {
+                product.ProductProductCategories = new HashSet<ProductProductCategory>();
+            }
+            if (SelectedCategories != null)
+            {
+                foreach (var c in ppc)
+                {
+                    _context.ProductProductCategories.Remove(c);
+                }
+                _context.SaveChanges();
+                var cateArray = SelectedCategories.Split(',');
+
+                foreach (var item in cateArray)
+                {
+                    product.ProductProductCategories.Add(new ProductProductCategory { ProductId = product.Id, ProductCategoryId = Convert.ToInt64(item), AppTenantId = tenantId });
+                }
+            }
+            _context.Update(product);
+            _context.SaveChanges();
         }
 
         // GET: CmsCore/Products/Edit/5
@@ -95,7 +126,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
+            var product = await _context.Products.Include(i=>i.ProductProductCategories).SingleOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
                 return NotFound();
@@ -104,6 +135,8 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
+            ViewBag.CategoryList = GetProductCategories();            
+            ViewBag.CheckList = product.ProductProductCategories;
             return View(product);
         }
 
@@ -112,7 +145,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product)
+        public async Task<IActionResult> Edit(long id, [Bind("AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
         {
             if (id != product.Id)
             {
@@ -125,6 +158,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 {
                     _context.Update(product);
                     await _context.SaveChangesAsync();
+                    UpdateProductProductCategories(product.Id, categoriesHidden);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -143,6 +177,8 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
+            ViewBag.CategoryList = GetProductCategories();            
+            ViewBag.CheckList = product.ProductProductCategories;
             return View(product);
         }
 
@@ -182,6 +218,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         private bool ProductExists(long id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+
+        public IEnumerable<ProductCategory> GetProductCategories()
+        {
+            var productCategories = _context.ProductCategories.AsQueryable().Include("ChildCategories").ToList();
+            return productCategories;
+
         }
     }
 }

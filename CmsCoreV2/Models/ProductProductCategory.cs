@@ -11,6 +11,6 @@ namespace CmsCoreV2.Models
         public Product Product { get; set; }
         public long ProductCategoryId { get; set; }
         public ProductCategory ProductCategory { get; set; }
-
+        public string AppTenantId { get; set; }
     }
 }

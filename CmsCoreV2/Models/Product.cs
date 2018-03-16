@@ -15,6 +15,7 @@ namespace CmsCoreV2.Models
             CouponProducts = new HashSet<CouponProduct>();
             ExcludeCouponProducts = new HashSet<ExcludeCouponProduct>();
             ProductAttributes = new HashSet<ProductAttribute>();
+            ProductProductCategories = new HashSet<ProductProductCategory>();
         }
         [Display(Name = "Kuponlar")]
         public virtual ICollection<CouponProduct> CouponProducts { get; set; }
