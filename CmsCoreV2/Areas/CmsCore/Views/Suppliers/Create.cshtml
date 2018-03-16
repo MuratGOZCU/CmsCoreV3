@@ -1,0 +1,108 @@
+﻿@model CmsCoreV2.Models.Supplier
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Tedarikçi Ekle</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Tedarikçi</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NotificationEmail" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NotificationEmail" class="form-control" />
+                <span asp-validation-for="NotificationEmail" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NotificationPhone" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NotificationPhone" class="form-control" />
+                <span asp-validation-for="NotificationPhone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="IsActive" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="IsActive" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="UpdateDate" class="form-control" />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="UpdatedBy" class="form-control" />
+                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <input asp-for="AppTenantId" type="hidden" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a class="btn btn-default" asp-action="Index">Listeye Geri Dön</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

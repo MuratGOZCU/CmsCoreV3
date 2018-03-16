@@ -108,6 +108,7 @@ namespace CmsCoreV2.Data
         public DbSet<CartItem> CartItems { get; set; }
 
         public DbSet<ProductAttributeItem> ProductAttributeItems {get; set;}
+        public DbSet<Supplier> Suppliers {get; set;}
 
         // diğer dbsetler buraya eklenir
 
