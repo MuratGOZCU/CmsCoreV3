@@ -66,6 +66,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture");
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name");
             ViewBag.CategoryList = GetProductCategories();
+            ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name");
             return View(product);
         }
 
@@ -74,7 +75,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
+        public async Task<IActionResult> Create([Bind("SupplierId,AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +90,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             ViewBag.CategoryList = GetProductCategories();            
             ViewBag.CheckList = product.ProductProductCategories;
+            ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name");
             return View(product);
         }
 
@@ -137,6 +139,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             ViewBag.CategoryList = GetProductCategories();            
             ViewBag.CheckList = product.ProductProductCategories;
+            ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",product.SupplierId);
             return View(product);
         }
 
@@ -145,7 +148,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
+        public async Task<IActionResult> Edit(long id, [Bind("SupplierId,AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
         {
             if (id != product.Id)
             {
@@ -179,6 +182,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             ViewBag.CategoryList = GetProductCategories();            
             ViewBag.CheckList = product.ProductProductCategories;
+             ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",product.SupplierId);
             return View(product);
         }
 

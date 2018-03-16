@@ -18,6 +18,14 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         public string Name {get; set;}
         [Required]
+        [Display(Name="Yetkili")]
+        [StringLength(200)]
+        public string Contact {get; set;}
+        [Required]
+        [Display(Name="Kullanıcı Adı")]
+        [StringLength(200)]
+        public string UserName {get; set;}
+        [Required]
         [Display(Name = "E-posta")]
         [StringLength(200)]
         public string Email {get; set;}
