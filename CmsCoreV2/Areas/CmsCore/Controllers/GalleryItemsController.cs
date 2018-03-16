@@ -139,7 +139,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Title,Description,Position,Photo,Video,Meta1,GalleryId,IsPublished,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] GalleryItem galleryItem,string categoriesHidden)
+        public IActionResult Edit(long id, [Bind("Title,Description,Position,Photo,Video,Meta1,GalleryId,IsPublished,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] GalleryItem galleryItem,string categoriesHidden)
         {
             if (id != galleryItem.Id)
             {

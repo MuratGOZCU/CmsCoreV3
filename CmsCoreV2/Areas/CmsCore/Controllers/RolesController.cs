@@ -20,9 +20,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
     {
         private readonly RoleManager<Role> _roleManager;
 
-        public RolesController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
+        public RolesController(ApplicationDbContext context, ITenant<AppTenant> tenant, RoleManager<Role> _roleManager) : base(context, tenant)
         {
-
+            this._roleManager = _roleManager;
         }
 
         // GET: CmsCore/Roles
