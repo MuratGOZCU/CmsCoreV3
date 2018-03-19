@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN,Supplier")]
     [Area("CmsCore")]
     public class CouponsController : Controller
     {

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN,Supplier")]
     [Area("CmsCore")]
     public class CommerceSettingsController : ControllerBase
     {
@@ -44,7 +44,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["TermsAndConditionsPageId"] = new SelectList(_context.Pages, "Id", "Slug", CommerceSetting.TermsAndConditionsPageId);
             ViewData["Region"] = new SelectList(_context.Regions, "Id", "Name");
             _context.Update(CommerceSetting);
-            ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
+            ViewBag.Message = "Ayarlar baï¿½arï¿½yla kaydedildi";
             return View(CommerceSetting);
         }
 
@@ -66,7 +66,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     setting.AppTenantId = tenant.AppTenantId;
                     _context.Update(setting);
                     await _context.SaveChangesAsync();
-                    ViewBag.Message = "Ayarlar baþarýyla kaydedildi";
+                    ViewBag.Message = "Ayarlar baï¿½arï¿½yla kaydedildi";
                 }
                 catch (DbUpdateConcurrencyException)
                 {

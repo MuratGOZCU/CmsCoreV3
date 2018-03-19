@@ -11,7 +11,7 @@
                 @{
                     var index = 0;
                 }
-                @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).OrderBy(f => f.Position).Take(7).ToList())
+                @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).OrderBy(f => f.Position).Take(8).ToList())
                 {
 
                     <li data-target="#myCarousel" data-slide-to="@index" class="@(index==0?"active":"")"></li>
@@ -23,7 +23,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 @{ index = 0;}
-                @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).OrderBy(f => f.Position).Take(7).ToList())
+                @foreach (var slide in Model.Slides.Where(w => w.IsPublished == true).OrderBy(f => f.Position).Take(8).ToList())
                 {
                 
                     @if (!String.IsNullOrEmpty(slide.Video))

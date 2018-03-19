@@ -13,7 +13,7 @@ using Z.EntityFramework.Plus;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN")]
+    [Authorize(Roles = "ADMIN,Supplier")]
     [Area("CmsCore")]
     public class ProductsController : ControllerBase
     {
