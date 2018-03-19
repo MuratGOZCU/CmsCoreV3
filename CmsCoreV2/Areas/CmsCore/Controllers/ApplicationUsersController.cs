@@ -9,6 +9,7 @@ using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using SaasKit.Multitenancy;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
@@ -18,11 +19,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
     {
         private readonly ApplicationDbContext _context;
         protected readonly AppTenant tenant;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ApplicationUsersController(ApplicationDbContext context, ITenant<AppTenant> tenant) 
+        public ApplicationUsersController(ApplicationDbContext context, ITenant<AppTenant> tenant,UserManager<ApplicationUser> _userManager) 
         {
             this.tenant = tenant?.Value;
             this._context = context;
+            this._userManager = _userManager;
         }
 
         // GET: CmsCore/ApplicationUsers
@@ -89,7 +92,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 return NotFound();
             }
             applicationUser.AppTenantId = tenant.AppTenantId;
-            ViewData["Roles"] = new SelectList(_context.Roles.ToList(), "Id", "Name");
+            ViewData["Roles"] = new MultiSelectList(_context.Roles.ToList(), "Name", "Name",await _userManager.GetRolesAsync(applicationUser));
             return View(applicationUser);
         }
 
@@ -98,20 +101,32 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("AppTenantId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled")] ApplicationUser applicationUser)
+        public async Task<IActionResult> Edit(string id, [Bind("AppTenantId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,FirstName,LastName,Address,Street,City,Country,County,ZipCode,Phone")] ApplicationUser applicationUser, IEnumerable<string> RoleId)
         {
             if (id != applicationUser.Id)
             {
                 return NotFound();
             }
-
+            var user = _context.ApplicationUser.FirstOrDefault(f=>f.Id == id);
             if (ModelState.IsValid)
             {
                 try
                 {
-                    applicationUser.AppTenantId = tenant.AppTenantId;
-                    ViewData["Roles"] = new SelectList(_context.Roles.ToList(), "Id", "Name");
-                    _context.Update(applicationUser);
+                    
+                    user.FirstName = applicationUser.FirstName;
+                    user.LastName = applicationUser.LastName;
+                    user.City = applicationUser.City;
+                    user.Address = applicationUser.Address;
+                    user.Country = applicationUser.Country;
+                    user.County = applicationUser.County;
+                    user.Phone = applicationUser.Phone;
+                    user.Street = applicationUser.Street;
+                    user.ZipCode = applicationUser.ZipCode;
+                    user.AppTenantId = tenant.AppTenantId;
+                    _context.Update(user);
+                    await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
+                    await _context.SaveChangesAsync();
+                    await _userManager.AddToRolesAsync(user, RoleId);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -127,6 +142,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewData["Roles"] = new MultiSelectList(_context.Roles.ToList(), "Name", "Name",await _userManager.GetRolesAsync(user));
             return View(applicationUser);
         }
 
