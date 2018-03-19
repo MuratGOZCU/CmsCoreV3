@@ -18,11 +18,6 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         public string Name { get; set; }
 
-        [Required]
-        [Display(Name = "Değer")]
-        [StringLength(200)]
-        public string Value { get; set; }
-
         [Display(Name = "Bağlantı")]
         [StringLength(200)]
         public string Slug { get; set; }
@@ -30,12 +25,11 @@ namespace CmsCoreV2.Models
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
 
-        [Display(Name = "Ürün Nitelik Kimliği")]
-        public long? ProductAttributeId { get; set; }
-
-        [ForeignKey("ProductAttributeId")]
-        [Display(Name = "Ürün Niteliği")]
-        public Attribute ProductAttribute { get; set; }
+        [Display(Name = "Özellik")]
+        public long? AttributeId { get; set; }
+        [Display(Name = "Özellik")]
+        [ForeignKey("AttributeId")]
+        public Attribute Attribute { get; set; }
 
         public virtual ICollection<ProductAttributeItem> ProductAttributeItems {get; set;}
 

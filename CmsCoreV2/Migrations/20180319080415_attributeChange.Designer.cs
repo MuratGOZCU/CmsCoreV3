@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180319080415_attributeChange")]
+    partial class attributeChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,6 +80,8 @@ namespace CmsCoreV2.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<long?>("ProductAttributeId");
+
                     b.Property<string>("Slug")
                         .HasMaxLength(200);
 
@@ -87,9 +90,13 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(200);
 
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AttributeId");
+                    b.HasIndex("ProductAttributeId");
 
                     b.ToTable("AttributeItems");
                 });
@@ -2465,43 +2472,7 @@ namespace CmsCoreV2.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
                     b.Property<string>("AppTenantId");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("County")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasMaxLength(200);
 
                     b.ToTable("ApplicationUser");
 
@@ -2512,7 +2483,7 @@ namespace CmsCoreV2.Migrations
                 {
                     b.HasOne("CmsCoreV2.Models.Attribute", "Attribute")
                         .WithMany("AttributeItems")
-                        .HasForeignKey("AttributeId");
+                        .HasForeignKey("ProductAttributeId");
                 });
 
             modelBuilder.Entity("CmsCoreV2.Models.CartItem", b =>

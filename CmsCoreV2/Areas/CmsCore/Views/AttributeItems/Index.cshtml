@@ -1,11 +1,11 @@
-﻿@model IEnumerable<CmsCoreV2.Models.Attribute>
+﻿@model IEnumerable<CmsCoreV2.Models.AttributeItem>
 
 @{
-    ViewData["Title"] = "Ürün Özellikleri";
+    ViewData["Title"] = "Özellik Öğeleri";
 }
-<h2>Ürün Özellikleri</h2>
+<h2>Özellik Öğeleri</h2>
 <p>
-    <a class="btn btn-primary" asp-action="Create">Yeni Özellik Oluştur</a>
+    <a class="btn btn-primary" asp-action="Create">Yeni Özellik Öğesi Oluştur</a>
 </p>
 <table id="tblRecords" class="table table-striped table-hover">
     <thead>
@@ -17,16 +17,10 @@
                 @Html.DisplayNameFor(model => model.Slug)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsVisible)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Variations)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AttributeType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AttributePosition)
+                @Html.DisplayNameFor(model => model.Attribute)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreateDate)
@@ -56,17 +50,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Slug)
                 </td>
-                <th>
-                    @Html.DisplayFor(modelItem => item.IsVisible)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.Variations)
-                </th>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AttributeType)
+                    @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AttributePosition)
+                    @Html.DisplayFor(modelItem => item.Attribute.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreateDate)

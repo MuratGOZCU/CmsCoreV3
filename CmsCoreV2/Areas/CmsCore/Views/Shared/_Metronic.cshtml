@@ -159,6 +159,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li class="heading">
                             <h3 class="uppercase">Modüller</h3>
                         </li>
+                        @if (!User.IsInRole("Supplier")) {
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="pages"?"active":string.Empty) ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-book-open"></i>
@@ -202,7 +203,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
-
+}
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="products"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="productcategories"?"active":string.Empty) ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-codepen"></i>
@@ -225,7 +226,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <span class="title">Ürün Kategorileri</span>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a asp-controller="Attributes" asp-action="Index" class="nav-link">
+                                        <span class="title">Ürün Özellikleri</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="AttributeItems" asp-action="Index" class="nav-link">
+                                        <span class="title">Özellik Öğeleri</span>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a asp-controller="ProductTags" asp-action="Index" class="nav-link">
                                         <span class="title">Ürün Etiketleri</span>
@@ -233,6 +243,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
+                        @if (!User.IsInRole("Supplier")) {
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="links"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="linkcategories"?"active":string.Empty) ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="glyphicon glyphicon-link"></i>
@@ -286,6 +297,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
+                       
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="medias"?"active":string.Empty) ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -305,11 +317,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
+ }
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="WooCommerce"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="Orders"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="Coupons"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
                           =="Reports"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
                           =="Settings"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
                           =="Customers"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
-                          =="Regions"?"active":string.Empty)">
+                          =="Regions"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()
+                          =="Suppliers"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-cubes"></i>
                                 <span class="title">E-Ticaret</span>
@@ -353,6 +367,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
+                        @if (!User.IsInRole("Supplier")) {
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="themes"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="menus"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="menuitems"?"active":string.Empty)">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-cubes"></i>
@@ -494,6 +509,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <span class="title">Kullanıcı Oluştur</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Roles" asp-action="Index" class="nav-link">
+                                        <span class="title">Roller</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item @(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="settings"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="languages"?"active":string.Empty)@(ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant()=="resources"?"active":string.Empty) ">
@@ -525,7 +545,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </li>
-
+}
 
                     </ul>
                     <!-- END SIDEBAR MENU -->

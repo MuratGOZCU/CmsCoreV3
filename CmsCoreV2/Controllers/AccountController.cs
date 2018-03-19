@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using SaasKit.Multitenancy;
 
 namespace CmsCoreV2.Controllers
 {
@@ -24,17 +25,18 @@ namespace CmsCoreV2.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
-
+        protected readonly AppTenant tenant;
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger, ApplicationDbContext context)
+            ILogger<AccountController> logger, ApplicationDbContext context, ITenant<AppTenant> tenant)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            this.tenant = tenant.Value;
         }
 
         [TempData]
@@ -232,7 +234,9 @@ namespace CmsCoreV2.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName,
+                Address = model.Address, Street = model.Street, City = model.City, Country = model.Country, County = model.County, ZipCode = model.ZipCode,
+                Phone = model.Phone, AppTenantId = tenant.AppTenantId };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

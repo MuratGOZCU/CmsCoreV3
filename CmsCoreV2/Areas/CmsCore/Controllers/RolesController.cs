@@ -28,7 +28,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Roles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Role.Where(x => x.AppTenantId == tenant.AppTenantId).ToListAsync());
+            return View(await _roleManager.Roles.ToListAsync());
         }
 
         // GET: CmsCore/Roles/Details/5

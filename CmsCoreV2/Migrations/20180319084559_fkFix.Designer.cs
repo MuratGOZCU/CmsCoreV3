@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180319084559_fkFix")]
+    partial class fkFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2465,43 +2466,7 @@ namespace CmsCoreV2.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
                     b.Property<string>("AppTenantId");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("County")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasMaxLength(200);
 
                     b.ToTable("ApplicationUser");
 
