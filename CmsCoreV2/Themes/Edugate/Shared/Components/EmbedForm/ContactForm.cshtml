@@ -40,7 +40,7 @@
          }
     </script>
     <div class="contact-submit">
-        <input type="submit" btn btn-contact btn-green" value=@Localizer["Gönder"]>
+        <input type="submit" class="btn btn-contact btn-green" value=@Localizer["Gönder"] id="formSubmit" onclick="$('#contactForm').submit(function(){$('#formSubmit').attr('disabled', true);})">
     </div>
     
 </form>

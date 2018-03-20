@@ -23,7 +23,7 @@
                 }
             }
             <div class="contact-submit">
-                <button type="submit" class="btn btn-green"><span>@Localizer["Gönder"]</span></button>
+                <button type="submit" class="btn btn-green" id="formSubmit" onclick="$('#highschool').submit(function(){$('#formSubmit').attr('disabled', true);})"><span>@Localizer["Gönder"]</span></button>
             </div>
         </fieldset>
     }

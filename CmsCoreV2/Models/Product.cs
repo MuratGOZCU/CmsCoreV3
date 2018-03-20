@@ -27,7 +27,7 @@ namespace CmsCoreV2.Models
          MinLength(3, ErrorMessage = "{0} en az {1} karakter olmalıdır."),
          MaxLength(250, ErrorMessage = "{0} en fazla {1} karakter olmalıdır.")]
         public string Name { get; set; }
-        [Display(Name = "Slug")]
+        [Display(Name = "Bağlantı")]
         public string Slug { get; set; }
         [Display(Name = "Açıklama"),
             MinLength(3, ErrorMessage = "{0} en az {1} karakter olmalıdır."),
@@ -51,7 +51,7 @@ namespace CmsCoreV2.Models
         [Display(Name = "Stok Kodu")]
         public string StockCode { get; set; }
         [Display(Name = "Stok Sayısı"),Required]
-        public int StockCount { get; set; }
+        public int? StockCount { get; set; }
         [Display(Name = "Stok Durumu")]
         public bool StockStatus { get; set; }
         [Display(Name = "Ağırlık")]
@@ -85,9 +85,9 @@ namespace CmsCoreV2.Models
         public string PurchaseNote { get; set; }
         [Display(Name = "Menu Siparişi")]
         public int MenuOrder { get; set; }
-        [Display(Name = "Ürün Kategorisi")]
+        [Display(Name = "Kategoriler")]
         public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
-        [Display(Name = "Ürün Etiketi")]
+        [Display(Name = "Etiketler")]
         public ICollection<ProductProductTag> ProductProductTags { get; set; }
         [Display(Name = "Ürün Resmi")]
         public string ProductImage { get; set; }

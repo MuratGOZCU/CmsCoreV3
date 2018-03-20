@@ -50,8 +50,8 @@
 
     </script>
     <div class="contact-submit">
-        <input id="submit_handle" type="submit" style="display: none">
-        <input type="button" class="g-recaptcha btn btn-contact btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onJobRecourseFormSubmit' data-badge="inline" value="Gönder" />
+       
+        <input type="submit" value="Gönder" class="btn btn-green"  id="formSubmit" onclick="$('#jobRecourseForm').submit(function(){$('#formSubmit').attr('disabled', true);})" />
     </div>
 </form>
 @section scripts{

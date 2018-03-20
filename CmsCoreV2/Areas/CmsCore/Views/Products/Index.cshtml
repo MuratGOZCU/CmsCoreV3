@@ -22,103 +22,31 @@
     <thead>
         <tr>
                 <th class="text-nowrap all">
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Slug)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.UnitPrice)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.SalePrice)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.TaxStatus)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.TaxClass)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.StockCode)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.StockCount)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.StockStatus)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Weight)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Length)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Height)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Width)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.ProductType)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.ProductUrl)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.PurchaseNote)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.MenuOrder)
-                </th>
-                <th class="text-nowrap">
                     @Html.DisplayNameFor(model => model.ProductImage)
                 </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.ShortDescription)
+                <th class="text-nowrap all">
+                    @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.ViewCount)
+                <th class="text-nowrap desktop">
+                    SKU
                 </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.SaleCount)
+                <th class="text-nowrap desktop">
+                    @Html.DisplayNameFor(model => model.StockStatus)
                 </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.CatalogVisibility)
+                <th class="text-nowrap desktop">
+                    Fiyat
                 </th>
-                <th class="text-nowrap">
+                <th class="text-nowrap desktop">
+                    @Html.DisplayNameFor(model => model.ProductProductCategories)
+                </th>
+                <th class="text-nowrap desktop">
+                    @Html.DisplayNameFor(model => model.ProductProductTags)
+                </th>
+                <th class="text-nowrap desktop">
                     @Html.DisplayNameFor(model => model.IsFeatured)
                 </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.CreateDate)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.CreatedBy)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.UpdateDate)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.UpdatedBy)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.AppTenantId)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.CrossSell)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.GroupedProduct)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Language)
-                </th>
-                <th class="text-nowrap all">
-                    @Html.DisplayNameFor(model => model.UpSell)
+                <th class="text-nowrap desktop">
+                   Tarih
                 </th>
             <th data-orderable="false" class="all">Eylemler</th>
         </tr>
@@ -127,103 +55,39 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                <img src="@(item.ProductImage)" width="80" />
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slug)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SalePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaxStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaxClass)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StockCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StockCount)
+                @if (item.StockStatus) {
+                    <span class="text-success">Stokta</span>
+                } @(item.StockCount.HasValue && item.StockCount > 0?"x " + item.StockCount.Value.ToString():"")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StockStatus)
+                @if (item.UnitPrice.HasValue) {
+                    <del>@Html.DisplayFor(modelItem => item.UnitPrice)</del>
+                }
+                @Html.DisplayFor(modelItem => item.SalePrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Weight)
+               (Kategoriler)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Length)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Width)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchaseNote)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MenuOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ViewCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SaleCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CatalogVisibility)
+                (Etiketler)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsFeatured)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppTenantId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CrossSell.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupedProduct.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Language.Culture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpSell.Name)
+                @item.CreateDate.ToShortDateString()
+                @if (item.IsPublished) {
+                    <text><br />Yayında</text>
+                }
             </td>
             <td class="text-nowrap">
                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
