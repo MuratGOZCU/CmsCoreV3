@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,Supplier")]
+    [Authorize(Roles = "ADMIN,Supplier,ATTRIBUTEITEM")]
     [Area("CmsCore")]
     public class AttributeItemsController : ControllerBase
     {
@@ -21,13 +21,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
 
         }
-
+        [Authorize(Roles="ADMIN,AttributeItemIndex")]
         // GET: CmsCore/Attributes
         public async Task<IActionResult> Index()
         {
             return View(await _context.AttributeItems.Include(i=>i.Attribute).ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,AttributeItemDetails")]
         // GET: CmsCore/Attributes/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -45,7 +45,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(attributeItem);
         }
-
+        [Authorize(Roles="ADMIN,AttributeItemCreate")]
         // GET: CmsCore/Attributes/Create
         public IActionResult Create()
         {
@@ -63,6 +63,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // POST: CmsCore/Attributes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles="ADMIN,AttributeItemCreate")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Models.AttributeItem attributeItem)
@@ -82,7 +83,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.Attributes = new SelectList(_context.Attributes.ToList(),"Id","Name",attributeItem.AttributeId);
             return View(attributeItem);
         }
-
+        [Authorize(Roles="ADMIN,AttributeItemEdit")]
         // GET: CmsCore/Attributes/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -103,6 +104,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // POST: CmsCore/Attributes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles="ADMIN,AttributeItemEdit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, Models.AttributeItem attributeItem)
@@ -140,7 +142,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.Attributes = new SelectList(_context.Attributes.ToList(),"Id","Name",attributeItem.AttributeId);
             return View(attributeItem);
         }
-
+        [Authorize(Roles="ADMIN,AttributeItemDelete")]
         // GET: CmsCore/Attributes/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -158,7 +160,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(attributeItem);
         }
-
+        [Authorize(Roles="ADMIN,AttributeItemDelete")]
         // POST: CmsCore/Attributes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,Supplier")]
+    [Authorize(Roles = "ADMIN,Supplier,ATTRIBUTE")]
     [Area("CmsCore")]
     public class AttributesController : ControllerBase
     {
@@ -21,13 +21,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
 
         }
-
+        [Authorize(Roles="ADMIN,AttributeIndex")]
         // GET: CmsCore/Attributes
         public async Task<IActionResult> Index()
         {
             return View(await _context.Attributes.ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,AttributeDetails")]
         // GET: CmsCore/Attributes/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -45,7 +45,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(attribute);
         }
-
+        [Authorize(Roles="ADMIN,AttributeCreate")]
         // GET: CmsCore/Attributes/Create
         public IActionResult Create()
         {
@@ -59,7 +59,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(attribute);
         }
-
+        [Authorize(Roles="ADMIN,AttributeCreate")]
         // POST: CmsCore/Attributes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -81,7 +81,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return View(attribute);
         }
-
+        [Authorize(Roles="ADMIN,AttributeEdit")]
         // GET: CmsCore/Attributes/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -97,7 +97,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return View(attribute);
         }
-
+        [Authorize(Roles="ADMIN,AttributeEdit")]
         // POST: CmsCore/Attributes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -137,7 +137,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return View(attribute);
         }
-
+        [Authorize(Roles="ADMIN,AttributeDelete")]
         // GET: CmsCore/Attributes/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -155,7 +155,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(attribute);
         }
-
+        [Authorize(Roles="ADMIN,AttributeDelete")]
         // POST: CmsCore/Attributes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

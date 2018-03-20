@@ -13,7 +13,7 @@ using Z.EntityFramework.Plus;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,Supplier")]
+    [Authorize(Roles = "ADMIN,PRODUCT,Supplier")]
     [Area("CmsCore")]
     public class ProductsController : ControllerBase
     {
@@ -22,17 +22,25 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
                 
         }
-
+        [Authorize(Roles="ADMIN,ProductIndex")]
         // GET: CmsCore/Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(long? supplierId)
         {
-            var applicationDbContext = _context.Products.Include(p => p.CrossSell).Include(p => p.GroupedProduct).Include(p => p.Language).Include(p => p.UpSell);
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
+            var applicationDbContext = _context.Products.Include(p => p.CrossSell).Include(p => p.GroupedProduct).Include(p => p.Language).Include(p => p.UpSell).Where(w=>(supplierId.HasValue?w.SupplierId==supplierId:true));
+            ViewBag.Suppliers = new SelectList(_context.Suppliers.ToList(),"Id","Name",supplierId);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,ProductDetails")]
         // GET: CmsCore/Products/Details/5
         public async Task<IActionResult> Details(long? id)
         {
+            long? supplierId = null;
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
             if (id == null)
             {
                 return NotFound();
@@ -43,7 +51,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 .Include(p => p.GroupedProduct)
                 .Include(p => p.Language)
                 .Include(p => p.UpSell)
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId==supplierId:true));
             if (product == null)
             {
                 return NotFound();
@@ -51,7 +59,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(product);
         }
-
+        [Authorize(Roles="ADMIN,ProductCreate")]
         // GET: CmsCore/Products/Create
         public IActionResult Create()
         {
@@ -66,10 +74,14 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture");
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name");
             ViewBag.CategoryList = GetProductCategories();
-            ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name");
+            long? supplierId = null;
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
+            ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",supplierId);
             return View(product);
         }
-
+        [Authorize(Roles="ADMIN,ProductCreate")]
         // POST: CmsCore/Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -77,8 +89,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SupplierId,AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
         {
+            long? supplierId = null;
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
             if (ModelState.IsValid)
             {
+                product.SupplierId=supplierId;
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 UpdateProductProductCategories(product.Id, categoriesHidden);
@@ -90,7 +107,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             ViewBag.CategoryList = GetProductCategories();            
             ViewBag.CheckList = product.ProductProductCategories;
-            ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name");
+            ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",supplierId);
             return View(product);
         }
 
@@ -119,7 +136,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             _context.Update(product);
             _context.SaveChanges();
         }
-
+        [Authorize(Roles="ADMIN,ProductEdit")]
         // GET: CmsCore/Products/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -127,8 +144,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 return NotFound();
             }
-
-            var product = await _context.Products.Include(i=>i.ProductProductCategories).SingleOrDefaultAsync(m => m.Id == id);
+            long? supplierId = null;
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
+            var product = await _context.Products.Include(i=>i.ProductProductCategories).SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId==supplierId:true));
             if (product == null)
             {
                 return NotFound();
@@ -142,7 +162,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",product.SupplierId);
             return View(product);
         }
-
+        [Authorize(Roles="ADMIN,ProductEdit")]
         // POST: CmsCore/Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -154,11 +174,15 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 return NotFound();
             }
-
+            long? supplierId = null;
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
+                    product.SupplierId = supplierId;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                     UpdateProductProductCategories(product.Id, categoriesHidden);
@@ -185,7 +209,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
              ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",product.SupplierId);
             return View(product);
         }
-
+        [Authorize(Roles="ADMIN,ProductDelete")]
         // GET: CmsCore/Products/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -193,13 +217,16 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 return NotFound();
             }
-
+            long? supplierId = null;
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
             var product = await _context.Products
                 .Include(p => p.CrossSell)
                 .Include(p => p.GroupedProduct)
                 .Include(p => p.Language)
                 .Include(p => p.UpSell)
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId == supplierId:true));
             if (product == null)
             {
                 return NotFound();
@@ -207,13 +234,17 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(product);
         }
-
+        [Authorize(Roles="ADMIN,ProductDelete")]
         // POST: CmsCore/Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
+            long? supplierId = null;
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
+            var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId == supplierId:true));
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -227,6 +258,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         public IEnumerable<ProductCategory> GetProductCategories()
         {
             var productCategories = _context.ProductCategories.AsQueryable().Include("ChildCategories").ToList();
+            
             return productCategories;
 
         }

@@ -13,21 +13,21 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,POST")]
+    [Authorize(Roles = "ADMIN,Supplier,PRODUCTCATEGORY")]
     [Area("CmsCore")]
     public class PostCategoriesController : ControllerBase
     {
         public PostCategoriesController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
         {
         }
-
+        [Authorize(Roles="ADMIN,ProductCategoryIndex")]
         // GET: CmsCore/PostCategories
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.SetFiltered<PostCategory>().Where(x => x.AppTenantId == tenant.AppTenantId).Include(p => p.Language).Include(p => p.ParentCategory);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,ProductCategoryDetails")]
         // GET: CmsCore/PostCategories/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -47,7 +47,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(postCategory);
         }
-
+        [Authorize(Roles="ADMIN,ProductCategoryCreate")]
         // GET: CmsCore/PostCategories/Create
         public IActionResult Create()
         {
@@ -79,6 +79,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
 
         }
+        [Authorize(Roles="ADMIN,ProductCategoryCreate")]
         // POST: CmsCore/PostCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -107,7 +108,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(postCategory);
         }
-
+        [Authorize(Roles="ADMIN,ProductCategoryEdit")]
         // GET: CmsCore/PostCategories/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -136,7 +137,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
            
             return View(postCategory);
         }
-
+        [Authorize(Roles="ADMIN,ProductCategoryEdit")]
         // POST: CmsCore/PostCategories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -181,7 +182,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.ParentPostOptions = result;
             return View(postCategory);
         }
-
+        [Authorize(Roles="ADMIN,ProductCategoryDelete")]
         // GET: CmsCore/PostCategories/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -201,6 +202,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(postCategory);
         }
+        [Authorize(Roles="ADMIN,ProductCategoryDelete")]
 
         // POST: CmsCore/PostCategories/Delete/5
         [HttpPost, ActionName("Delete")]

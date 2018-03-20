@@ -23,14 +23,14 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         }
 
 
-
+        [Authorize(Roles="ADMIN,ProductTagIndex")]
         // GET: CmsCore/ProductTags
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.SetFiltered<ProductTag>().Where(x => x.AppTenantId == tenant.AppTenantId);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,ProductTagDetails")]
         // GET: CmsCore/ProductTags/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -48,7 +48,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(productTag);
         }
-
+        [Authorize(Roles="ADMIN,ProductTagCreate")]
         // GET: CmsCore/ProductTags/Create
         public IActionResult Create()
         {
@@ -63,7 +63,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(productTag);
         }
-
+        [Authorize(Roles="ADMIN,ProductTagCreate")]
         // POST: CmsCore/ProductTags/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -85,7 +85,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return View(productTag);
         }
-
+        [Authorize(Roles="ADMIN,ProductTagEdit")]
         // GET: CmsCore/ProductTags/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -104,7 +104,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             productTag.AppTenantId = tenant.AppTenantId;
             return View(productTag);
         }
-
+        [Authorize(Roles="ADMIN,ProductTagEdit")]
         // POST: CmsCore/ProductTags/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -143,7 +143,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return View(productTag);
         }
-
+        [Authorize(Roles="ADMIN,ProductTagDelete")]
         // GET: CmsCore/ProductTags/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -161,7 +161,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(productTag);
         }
-
+        [Authorize(Roles="ADMIN,ProductTagDelete")]
         // POST: CmsCore/ProductTags/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

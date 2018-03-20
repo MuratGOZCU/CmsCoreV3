@@ -5,10 +5,19 @@
 }
 
 <h2>Ürünler</h2>
-
-<p>
-    <a class="btn btn-primary" asp-action="Create">Yeni Ürün Oluştur</a>
-</p>
+<form id="supplierForm">
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-primary" asp-action="Create">Yeni Ürün Oluştur</a>
+    </div>
+    <div class="col-md-6">
+        <select name="SupplierId" asp-items="@ViewBag.Suppliers" class="form-control pull-right" onchange="document.getElementById('supplierForm').submit()">
+            <option value="">Tüm Tedarikçiler</option>
+        </select>
+    </div>
+</div>
+</form>
+<hr />
 <table id="tblRecords" class="table table-striped table-hover">
     <thead>
         <tr>

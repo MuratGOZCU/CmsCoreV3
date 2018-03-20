@@ -159,7 +159,9 @@
         <div class="form-group">
             <label asp-for="SupplierId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="SupplierId" class="form-control"  asp-items="@ViewBag.Suppliers"></select>
+                <select asp-for="SupplierId" class="form-control"  asp-items="@ViewBag.Suppliers">
+                    <option value="">Seçiniz</option>
+                </select>
                 <span asp-validation-for="SupplierId" class="text-danger"></span>
             </div>
         </div>
