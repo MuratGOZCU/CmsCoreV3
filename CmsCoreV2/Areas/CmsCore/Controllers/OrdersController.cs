@@ -13,7 +13,7 @@ using Z.EntityFramework.Plus;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,Supplier")]
+    [Authorize(Roles = "ADMIN,Supplier,ORDER")]
     [Area("CmsCore")]
     public class OrdersController : ControllerBase
     {
@@ -23,14 +23,18 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
           
         }
-
+        [Authorize(Roles="ADMIN,OrderIndex")]
         // GET: CmsCore/Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(long? supplierId)
         {
-            var applicationDbContext = _context.SetFiltered<Order>().Where(x => x.AppTenantId == tenant.AppTenantId).Include(o => o.Customer).Include(o => o.PaymentMethod);
+            if (User.IsInRole("Supplier")) {
+                supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
+            }
+            var applicationDbContext = _context.SetFiltered<Order>().Where(x => x.AppTenantId == tenant.AppTenantId).Include(o => o.Customer).Include(o => o.PaymentMethod).Where(w=>w.OrderItems.Where(i=>i.Product.SupplierId == supplierId).Any());
+            ViewBag.Suppliers = new SelectList(_context.Suppliers.ToList(),"Id","Name",supplierId);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,OrderDetails")]
         // GET: CmsCore/Orders/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -50,7 +54,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(order);
         }
-
+        [Authorize(Roles="ADMIN,OrderCreate")]
         // GET: CmsCore/Orders/Create
         public IActionResult Create()
         {
@@ -66,7 +70,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods.ToList(), "Id", "Name");
             return View(order);
         }
-
+        [Authorize(Roles="ADMIN,OrderCreate")]
         // POST: CmsCore/Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -84,7 +88,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "Id", "Id", order.PaymentMethodId);
             return View(order);
         }
-
+        [Authorize(Roles = "ADMIN,OrderEdit")]
         // GET: CmsCore/Orders/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
@@ -106,6 +110,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // POST: CmsCore/Orders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles="ADMIN,OrderEdit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("OrderDate,OrderStatus,CustomerId,Email,Phone,TransactionId,PaymentMethodId,CustomerNote,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Order order)
@@ -139,7 +144,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewData["PaymentMethodId"] = new SelectList(_context.PaymentMethods, "Id", "Id", order.PaymentMethodId);
             return View(order);
         }
-
+        [Authorize(Roles="ADMIN,OrderDelete")]
         // GET: CmsCore/Orders/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -159,7 +164,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(order);
         }
-
+        [Authorize(Roles="ADMIN,OrderDelete")]
         // POST: CmsCore/Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

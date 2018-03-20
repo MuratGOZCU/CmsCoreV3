@@ -130,8 +130,16 @@ namespace CmsCoreV2.Data
 
         private static void AddRoles(RoleManager<Role> _roleManager)
         {
-            string[] roles = { "ADMIN", "SLIDER", "MENU", "HOME", "FORM", "GALLERY", "MEDIA", "PAGE", "POST", "LINK", "SEO", "SETTING", "PRODUCT" };
-            string[] stamp = { "Yönetici", "Slayt", "Menü", "Anasayfa", "Formlar", "Galeri", "Medya", "Sayfalar", "Gönderiler", "Bağlantılar", "SEO", "Ayarlar", "Ürün" };
+            string[] roles = { "ADMIN", "SLIDER", "MENU", "HOME", "FORM", "GALLERY", "MEDIA", "PAGE", "POST", "LINK", "SEO", "SETTING", "PRODUCT","PRODUCTCATEGORY","ATTRIBUTE","PRODUCTTAG","ATTRIBUTEITEM","ORDER","COUPON","Supplier","ProductIndex","ProductCreate","ProductDetails","ProductEdit","ProductDelete",
+            "ProductCategoryIndex","ProductCategoryDetails","ProductCategoryCreate","ProductCategoryEdit","ProductCategoryDelete","AttributeIndex","AttributeDetails","AttributeCreate","AttributeEdit","AttributeDelete",
+            "AttributeItemIndex","AttributeItemCreate","AttributeItemEdit","AttributeItemDelete","ProductTagIndex","ProductTagDetails","ProductTagCreate","ProductTagEdit","ProductTagDelete",
+            "OrderIndex","OrderCreate","OrderEdit","OrderDetails","OrderDelete","CouponIndex","CouponCreate","CouponEdit","CouponDetails","CouponDelete",
+            "SupplierIndex","SupplierCreate","SupplierEdit","SupplierDetails","SupplierDelete"};
+            string[] stamp = { "Yönetici", "Slayt", "Menü", "Anasayfa", "Formlar", "Galeri", "Medya", "Sayfalar", "Gönderiler", "Bağlantılar", "SEO", "Ayarlar", "Ürün","PRODUCTCATEGORY","ATTRIBUTE","PRODUCTTAG","ATTRIBUTEITEM","ORDER","COUPON","Supplier","ProductIndex","ProductCreate","ProductDetails","ProductEdit","ProductDelete",
+            "ProductCategoryIndex","ProductCategoryDetails","ProductCategoryCreate","ProductCategoryEdit","ProductCategoryDelete","AttributeIndex","AttributeDetails","AttributeCreate","AttributeEdit","AttributeDelete",
+            "AttributeItemIndex","AttributeItemCreate","AttributeItemEdit","AttributeItemDelete","ProductTagIndex","ProductTagDetails","ProductTagCreate","ProductTagEdit","ProductTagDelete",
+            "OrderIndex","OrderCreate","OrderEdit","OrderDetails","OrderDelete","CouponIndex","CouponCreate","CouponEdit","CouponDetails","CouponDelete",
+            "SupplierIndex","SupplierCreate","SupplierEdit","SupplierDetails","SupplierDelete"};
 
             for (int i = 0; i < roles.Count(); i++)
             {

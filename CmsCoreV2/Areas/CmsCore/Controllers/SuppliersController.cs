@@ -21,14 +21,14 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
              
         }
-
+        [Authorize(Roles="ADMIN,SupplierIndex")]
         // GET: CmsCore/Suppliers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Suppliers;
             return View(await applicationDbContext.ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,SupplierDetails")]
         // GET: CmsCore/Suppliers/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -46,7 +46,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(supplier);
         }
-
+        [Authorize(Roles="ADMIN,SupplierCreate")]
         // GET: CmsCore/Suppliers/Create
         public IActionResult Create()
         {
@@ -59,7 +59,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             
             return View(supplier);
         }
-
+        [Authorize(Roles="ADMIN,SupplierCreate")]
         // POST: CmsCore/Suppliers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -82,7 +82,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             return View(supplier);
         }
    
-        
+        [Authorize(Roles="ADMIN,SupplierEdit")]
     // GET: CmsCore/Suppliers/Edit/5
     public async Task<IActionResult> Edit(long? id)
         {
@@ -99,7 +99,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
           
             return View(supplier);
         }
-
+        [Authorize(Roles="ADMIN,SupplierEdit")]
         // POST: CmsCore/Suppliers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -138,6 +138,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(supplier);
         }
+        [Authorize(Roles="ADMIN,SupplierDelete")]
 
         // GET: CmsCore/Suppliers/Delete/5
         public async Task<IActionResult> Delete(long? id)
@@ -156,7 +157,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(supplier);
         }
-
+        [Authorize(Roles="ADMIN,SupplierDelete")]
         // POST: CmsCore/Suppliers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

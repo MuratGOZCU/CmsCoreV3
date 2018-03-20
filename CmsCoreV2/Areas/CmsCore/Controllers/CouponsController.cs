@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,Supplier")]
+    [Authorize(Roles = "ADMIN,Supplier,COUPON")]
     [Area("CmsCore")]
     public class CouponsController : Controller
     {
@@ -21,13 +21,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         {
             _context = context;    
         }
-
+        [Authorize(Roles="ADMIN,CouponIndex")]
         // GET: CmsCore/Coupons
         public async Task<IActionResult> Index()
         {
             return View(await _context.Coupons.ToListAsync());
         }
-
+        [Authorize(Roles="ADMIN,CouponDetails")]
         // GET: CmsCore/Coupons/Details/5
         public async Task<IActionResult> Details(long? id)
         {
@@ -45,7 +45,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(coupon);
         }
-
+        [Authorize(Roles="ADMIN,CouponCreate")]
         // GET: CmsCore/Coupons/Create
         public IActionResult Create()
         {
@@ -56,7 +56,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             coupon.UpdateDate = DateTime.Now;
             return View(coupon);
         }
-
+        [Authorize(Roles="ADMIN,CouponCreate")]
         // POST: CmsCore/Coupons/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -77,7 +77,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return View(coupon);
         }
-
+        [Authorize(Roles="ADMIN,CouponEdit")]
         // GET: CmsCore/Coupons/Edit/5
         public async Task<IActionResult> Edit(long? id, AppTenant tenant)
         {
@@ -98,7 +98,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             coupon.AppTenantId = tenant.AppTenantId;
             return View(coupon);
         }
-
+        [Authorize(Roles="ADMIN,CouponEdit")]
         // POST: CmsCore/Coupons/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -138,7 +138,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return View(coupon);
         }
-
+        [Authorize(Roles="ADMIN,CouponDelete")]
         // GET: CmsCore/Coupons/Delete/5
         public async Task<IActionResult> Delete(long? id)
         {
@@ -156,7 +156,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
 
             return View(coupon);
         }
-
+        [Authorize(Roles="ADMIN,CouponDelete")]
         // POST: CmsCore/Coupons/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
