@@ -40,9 +40,6 @@
                     @Html.DisplayNameFor(model => model.ProductProductCategories)
                 </th>
                 <th class="text-nowrap desktop">
-                    @Html.DisplayNameFor(model => model.ProductProductTags)
-                </th>
-                <th class="text-nowrap desktop">
                     @Html.DisplayNameFor(model => model.IsFeatured)
                 </th>
                 <th class="text-nowrap desktop">
@@ -75,10 +72,7 @@
                 @Html.DisplayFor(modelItem => item.SalePrice)
             </td>
             <td>
-               (Kategoriler)
-            </td>
-            <td>
-                (Etiketler)
+               @string.Join(", ",item.ProductProductCategories.Select(s=>s.ProductCategory.Name).ToList().ToArray())
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsFeatured)

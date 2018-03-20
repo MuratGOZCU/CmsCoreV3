@@ -29,7 +29,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             if (User.IsInRole("Supplier")) {
                 supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
             }
-            var applicationDbContext = _context.Products.Include(p => p.CrossSell).Include(p => p.GroupedProduct).Include(p => p.Language).Include(p => p.UpSell).Where(w=>(supplierId.HasValue?w.SupplierId==supplierId:true));
+            var applicationDbContext = _context.Products.Include(p=>p.ProductProductCategories).ThenInclude(t=>t.ProductCategory).Include(p => p.CrossSell).Include(p => p.GroupedProduct).Include(p => p.Language).Include(p => p.UpSell).Where(w=>(supplierId.HasValue?w.SupplierId==supplierId:true));
             ViewBag.Suppliers = new SelectList(_context.Suppliers.ToList(),"Id","Name",supplierId);
             return View(await applicationDbContext.ToListAsync());
         }
