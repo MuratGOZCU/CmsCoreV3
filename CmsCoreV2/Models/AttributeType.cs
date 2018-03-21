@@ -9,8 +9,8 @@ namespace CmsCoreV2.Models
   
         public enum AttributeType
         {
-            [Display(Name = "Metin")]
-            Text = 1
+            [Display(Name = "Seçim Listesi")]
+            Select = 1
 
         }
 

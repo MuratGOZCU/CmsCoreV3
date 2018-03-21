@@ -29,7 +29,7 @@ namespace CmsCoreV2.Models
         [Display(Name = "Varyasyonlar")]
         public bool Variations { get; set; }
 
-        [Display(Name = "Nitelik Türü")]
+        [Display(Name = "Özellik Türü")]
         [EnumDataType(typeof(AttributeType))]
         public AttributeType AttributeType { get; set; }
 

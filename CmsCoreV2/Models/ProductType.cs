@@ -16,8 +16,12 @@ namespace CmsCoreV2.Models
         [Display(Name="Harici")]
         External = 3
         ,*/
+        [Display(Name = "İndirilebilir")]
+        Downloadable = 2
+        /*
         [Display(Name = "Değişken")]
-        Variable = 4 
+        Variable = 4
+         */
 
     }
 }
