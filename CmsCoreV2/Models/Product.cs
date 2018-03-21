@@ -87,8 +87,6 @@ namespace CmsCoreV2.Models
         public int MenuOrder { get; set; }
         [Display(Name = "Kategoriler")]
         public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
-        [Display(Name = "Etiketler")]
-        public ICollection<ProductProductTag> ProductProductTags { get; set; }
         [Display(Name = "Ürün Resmi")]
         public string ProductImage { get; set; }
         [Display(Name = "Alternatif Ürün Resmi")]

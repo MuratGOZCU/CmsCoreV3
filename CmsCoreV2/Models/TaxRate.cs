@@ -9,6 +9,8 @@ namespace CmsCoreV2.Models
 {
     public class TaxRate:BaseEntity
     {
+        [Display(Name = "Vergi Sınıfı")]
+        public TaxClass TaxClass {get; set;}
         [Display(Name = "İlçe")]
         public long? DistrictId { get; set; }
         [ForeignKey("DistrictId")]
@@ -18,7 +20,7 @@ namespace CmsCoreV2.Models
         [Display(Name ="Ülke Kodu")]
         public string CountryCode { get; set; }
         [Display(Name = "Şehir Plaka Kodu")]
-        public int CityPlateCode { get; set; }
+        public string CityPlateCode { get; set; }
         [StringLength(200)]
         [Display(Name = "Posta Kodu")]
         public string ZipCode { get; set; }

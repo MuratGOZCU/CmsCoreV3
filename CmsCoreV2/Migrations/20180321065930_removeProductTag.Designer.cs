@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180321065930_removeProductTag")]
+    partial class removeProductTag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2199,7 +2200,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("AppTenantId");
 
-                    b.Property<string>("CityPlateCode");
+                    b.Property<int>("CityPlateCode");
 
                     b.Property<string>("CountryCode")
                         .HasMaxLength(200);

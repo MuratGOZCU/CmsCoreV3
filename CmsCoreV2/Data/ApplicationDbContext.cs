@@ -92,8 +92,6 @@ namespace CmsCoreV2.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductMedia> ProductMedias { get; set; }
         public DbSet<ProductProductCategory> ProductProductCategories { get; set; }
-        public DbSet<ProductProductTag> ProductProductTags { get; set; }
-        public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<SaleRegion> SaleRegions { get; set; }
         public DbSet<SettingRegion> SettingRegions { get; set; }
@@ -213,14 +211,6 @@ namespace CmsCoreV2.Data
             builder.Entity<ProductProductCategory>().HasOne(bc => bc.ProductCategory)
                 .WithMany(c => c.ProductProductCategories)
                 .HasForeignKey(bc => bc.ProductCategoryId).OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<ProductProductTag>().HasKey(pc => new { pc.ProductId, pc.ProductTagId });
-            builder.Entity<ProductProductTag>().HasOne(bc => bc.Product)
-                .WithMany(b => b.ProductProductTags)
-                .HasForeignKey(bc => bc.ProductId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<ProductProductTag>().HasOne(bc => bc.ProductTag)
-                .WithMany(c => c.ProductProductTags)
-                .HasForeignKey(bc => bc.ProductTagId).OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<SettingRegion>().HasKey(pc => new { pc.SettingId, pc.RegionId });
             builder.Entity<SettingRegion>().HasOne(bc => bc.Setting)

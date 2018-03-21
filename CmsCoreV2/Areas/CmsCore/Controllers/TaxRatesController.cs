@@ -67,7 +67,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DistrictId,CountryCode,CityPlateCode,ZipCode,Rate,TaxName,TaxRatePriority,TaxRateCompound,TaxRateShipping,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] TaxRate taxRate)
+        public async Task<IActionResult> Create([Bind("TaxClass,DistrictId,CountryCode,CityPlateCode,ZipCode,Rate,TaxName,TaxRatePriority,TaxRateCompound,TaxRateShipping,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] TaxRate taxRate)
         {
            
             if (ModelState.IsValid)
@@ -110,7 +110,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("DistrictId,CountryCode,CityPlateCode,ZipCode,Rate,TaxName,TaxRatePriority,TaxRateCompound,TaxRateShipping,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] TaxRate taxRate)
+        public async Task<IActionResult> Edit(long id, [Bind("TaxClass,DistrictId,CountryCode,CityPlateCode,ZipCode,Rate,TaxName,TaxRatePriority,TaxRateCompound,TaxRateShipping,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] TaxRate taxRate)
         {
             if (id != taxRate.Id)
             {
