@@ -236,7 +236,7 @@ namespace CmsCoreV2.Data
                 .WithMany(c => c.ShippingLocations)
                 .HasForeignKey(bc => bc.RegionId).OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Product>()
+            /*builder.Entity<Product>()
             .HasMany(e => e.UpSells) 
             .WithOne(e => e.UpSell) 
             .HasForeignKey(e => e.UpSellId);
@@ -248,7 +248,7 @@ namespace CmsCoreV2.Data
             builder.Entity<Product>()
             .HasMany(e => e.GroupedProducts)
             .WithOne(e => e.GroupedProduct)
-            .HasForeignKey(e => e.GroupedProductId);
+            .HasForeignKey(e => e.GroupedProductId);*/
         }
         // diğer dbsetler buraya eklenir
 

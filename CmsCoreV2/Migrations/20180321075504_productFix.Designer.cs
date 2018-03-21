@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180321075504_productFix")]
+    partial class productFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1435,8 +1436,6 @@ namespace CmsCoreV2.Migrations
                     b.Property<float?>("SalePrice")
                         .IsRequired();
 
-                    b.Property<long?>("ShippingClassId");
-
                     b.Property<string>("ShortDescription");
 
                     b.Property<string>("Slug")
@@ -1444,7 +1443,8 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("StockCode");
 
-                    b.Property<int?>("StockCount");
+                    b.Property<int?>("StockCount")
+                        .IsRequired();
 
                     b.Property<bool>("StockStatus");
 
@@ -1471,8 +1471,6 @@ namespace CmsCoreV2.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("LanguageId");
-
-                    b.HasIndex("ShippingClassId");
 
                     b.HasIndex("SupplierId");
 
@@ -2715,10 +2713,6 @@ namespace CmsCoreV2.Migrations
                     b.HasOne("CmsCoreV2.Models.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId");
-
-                    b.HasOne("CmsCoreV2.Models.ShippingClass", "ShippingClass")
-                        .WithMany()
-                        .HasForeignKey("ShippingClassId");
 
                     b.HasOne("CmsCoreV2.Models.Supplier", "Supplier")
                         .WithMany("Products")

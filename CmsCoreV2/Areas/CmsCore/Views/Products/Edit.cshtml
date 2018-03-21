@@ -170,27 +170,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="UpSellId" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="UpSellId" class="form-control" asp-items="ViewBag.UpSellId"></select>
-                <span asp-validation-for="UpSellId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="CrossSellId" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="CrossSellId" class="form-control" asp-items="ViewBag.CrossSellId"></select>
-                <span asp-validation-for="CrossSellId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="GroupedProductId" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="GroupedProductId" class="form-control" asp-items="ViewBag.GroupedProductId"></select>
-                <span asp-validation-for="GroupedProductId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
             <label asp-for="PurchaseNote" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="PurchaseNote" class="form-control" />
@@ -238,14 +217,14 @@
         <div class="form-group">
             <label asp-for="ViewCount" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ViewCount" class="form-control" />
+                <input asp-for="ViewCount" readonly class="form-control" />
                 <span asp-validation-for="ViewCount" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="SaleCount" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="SaleCount" class="form-control" />
+                <input asp-for="SaleCount" readonly class="form-control" />
                 <span asp-validation-for="SaleCount" class="text-danger"></span>
             </div>
         </div>
@@ -275,8 +254,8 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="checkbox">
-                    <input asp-for="IsPublished" />
-                    <label asp-for="IsPublished"></label>
+                    <input asp-for="IsApproved" />
+                    <label asp-for="IsApproved"></label>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             if (User.IsInRole("Supplier")) {
                 supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
             }
-            var applicationDbContext = _context.Products.Include(p=>p.ProductProductCategories).ThenInclude(t=>t.ProductCategory).Include(p => p.CrossSell).Include(p => p.GroupedProduct).Include(p => p.Language).Include(p => p.UpSell).Where(w=>(supplierId.HasValue?w.SupplierId==supplierId:true));
+            var applicationDbContext = _context.Products.Include(p=>p.ProductProductCategories).ThenInclude(t=>t.ProductCategory).Include(p => p.Language).Where(w=>(supplierId.HasValue?w.SupplierId==supplierId:true));
             ViewBag.Suppliers = new SelectList(_context.Suppliers.ToList(),"Id","Name",supplierId);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -47,10 +47,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
 
             var product = await _context.Products
-                .Include(p => p.CrossSell)
-                .Include(p => p.GroupedProduct)
                 .Include(p => p.Language)
-                .Include(p => p.UpSell)
                 .SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId==supplierId:true));
             if (product == null)
             {
@@ -69,15 +66,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             product.UpdatedBy = User.Identity.Name ?? "username";
             product.UpdateDate = DateTime.Now;
             product.AppTenantId = tenant.AppTenantId;
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name");
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name");
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture");
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name");
             ViewBag.CategoryList = GetProductCategories();
             long? supplierId = null;
             if (User.IsInRole("Supplier")) {
                 supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
             }
+            ViewBag.ShippingClasses = new SelectList(_context.ShippingClasses,"Id","Name",product.ShippingClassId);
             ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",supplierId);
             return View(product);
         }
@@ -87,7 +82,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SupplierId,AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
+        public async Task<IActionResult> Create([Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
         {
             long? supplierId = null;
             if (User.IsInRole("Supplier")) {
@@ -101,13 +96,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 UpdateProductProductCategories(product.Id, categoriesHidden);
                 return RedirectToAction("Index");
             }
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name", product.CrossSellId);
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             ViewBag.CategoryList = GetProductCategories();            
             ViewBag.CheckList = product.ProductProductCategories;
             ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",supplierId);
+             ViewBag.ShippingClasses = new SelectList(_context.ShippingClasses,"Id","Name",product.ShippingClassId);
             return View(product);
         }
 
@@ -153,10 +146,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 return NotFound();
             }
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name", product.CrossSellId);
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
             ViewBag.CategoryList = GetProductCategories();            
             ViewBag.CheckList = product.ProductProductCategories;
             ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",product.SupplierId);
@@ -168,7 +158,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("SupplierId,AdditionalInfo,IsNew,IsPublished,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,UpSellId,CrossSellId,GroupedProductId,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,CatalogVisibility,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
+        public async Task<IActionResult> Edit(long id, [Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden)
         {
             if (id != product.Id)
             {
@@ -200,10 +190,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["CrossSellId"] = new SelectList(_context.Products, "Id", "Name", product.CrossSellId);
-            ViewData["GroupedProductId"] = new SelectList(_context.Products, "Id", "Name", product.GroupedProductId);
+           
             ViewData["LanguageId"] = new SelectList(_context.Languages, "Id", "Culture", product.LanguageId);
-            ViewData["UpSellId"] = new SelectList(_context.Products, "Id", "Name", product.UpSellId);
+           
             ViewBag.CategoryList = GetProductCategories();            
             ViewBag.CheckList = product.ProductProductCategories;
              ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",product.SupplierId);
@@ -222,10 +211,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
             }
             var product = await _context.Products
-                .Include(p => p.CrossSell)
-                .Include(p => p.GroupedProduct)
                 .Include(p => p.Language)
-                .Include(p => p.UpSell)
                 .SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId == supplierId:true));
             if (product == null)
             {

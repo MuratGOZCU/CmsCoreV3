@@ -79,8 +79,8 @@
             </td>
             <td>
                 @item.CreateDate.ToShortDateString()
-                @if (item.IsPublished) {
-                    <text><br />Yayında</text>
+                @if (item.IsApproved) {
+                    <text><br />Onaylandı</text>
                 }
             </td>
             <td class="text-nowrap">

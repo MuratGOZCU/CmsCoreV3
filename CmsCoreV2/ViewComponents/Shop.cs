@@ -83,7 +83,7 @@ namespace CmsCoreV2.ViewComponents
         }
         public IQueryable<Product> GetAll(params string[] navigations)
         {
-            var set = _context.Products.Where(p=>p.IsPublished==true).AsQueryable();
+            var set = _context.Products.Where(p=>p.IsApproved==true  && (p.CatalogVisibility == CatalogVisibility.VisibilityBoth || p.CatalogVisibility == CatalogVisibility.VisibilityCatalog)).AsQueryable();
             foreach (string nav in navigations)
                 set = set.Include(nav);
             return set;
@@ -115,11 +115,11 @@ namespace CmsCoreV2.ViewComponents
             if (categories.Length > 0)
             {
                 ViewBag.ProductCategory = _context.ProductCategories.FirstOrDefault(c => c.Name.ToLower() == categories[0]);
-                return (from pc in _context.ProductProductCategories join p in _context.Products.Include("ProductProductCategories").Include("ProductProductCategories.ProductCategory") on pc.ProductId equals p.Id join c in _context.ProductCategories on pc.ProductCategoryId equals c.Id where (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) && p.IsPublished == true orderby p.CreateDate descending select p);
+                return (from pc in _context.ProductProductCategories join p in _context.Products.Include("ProductProductCategories").Include("ProductProductCategories.ProductCategory") on pc.ProductId equals p.Id join c in _context.ProductCategories on pc.ProductCategoryId equals c.Id where (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) && p.IsApproved == true && (p.CatalogVisibility == CatalogVisibility.VisibilityBoth || p.CatalogVisibility == CatalogVisibility.VisibilityCatalog) orderby p.CreateDate descending select p);
             }
             else
             {
-                return (from p in _context.Products.Include("ProductProductCategories").Include("ProductProductCategories.ProductCategory") where p.IsPublished == true orderby p.CreateDate descending select p);
+                return (from p in _context.Products.Include("ProductProductCategories").Include("ProductProductCategories.ProductCategory") where p.IsApproved == true  && (p.CatalogVisibility == CatalogVisibility.VisibilityBoth || p.CatalogVisibility == CatalogVisibility.VisibilityCatalog) orderby p.CreateDate descending select p);
             }
         }
     }

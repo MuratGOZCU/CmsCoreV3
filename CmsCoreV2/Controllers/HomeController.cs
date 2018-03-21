@@ -86,7 +86,7 @@ namespace CmsCoreV2.Controllers
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
                 if (post == null)
                 {
-                    var product = _context.SetFiltered<Product>().Include(i => i.Language).Include(i => i.ProductProductCategories).ThenInclude(t => t.ProductCategory).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture == culture && p.IsPublished == true);
+                    var product = _context.SetFiltered<Product>().Include(i => i.Language).Include(i => i.ProductProductCategories).ThenInclude(t => t.ProductCategory).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture == culture && p.IsApproved == true );
 
                     if (product != null)
                     {

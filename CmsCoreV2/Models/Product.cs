@@ -27,6 +27,7 @@ namespace CmsCoreV2.Models
          MinLength(3, ErrorMessage = "{0} en az {1} karakter olmalıdır."),
          MaxLength(250, ErrorMessage = "{0} en fazla {1} karakter olmalıdır.")]
         public string Name { get; set; }
+        [StringLength(200)]
         [Display(Name = "Bağlantı")]
         public string Slug { get; set; }
         [Display(Name = "Açıklama"),
@@ -50,22 +51,29 @@ namespace CmsCoreV2.Models
         public TaxClass TaxClass { get; set; }
         [Display(Name = "Stok Kodu")]
         public string StockCode { get; set; }
-        [Display(Name = "Stok Sayısı"),Required]
+        [Display(Name = "Stok Sayısı")]
         public int? StockCount { get; set; }
         [Display(Name = "Stok Durumu")]
         public bool StockStatus { get; set; }
         [Display(Name = "Ağırlık")]
-        public double Weight { get; set; }
+        public float Weight { get; set; }
         [Display(Name = "Uzunluk")]
-        public double Length { get; set; }
+        public float Length { get; set; }
         [Display(Name = "Yükseklik")]
-        public double Height { get; set; }
+        public float Height { get; set; }
         [Display(Name = "Genişlik")]
-        public double Width { get; set; }
+        public float Width { get; set; }
+        [Display(Name = "Kargo Sınıfı")]
+        public long? ShippingClassId {get; set;}
+        [ForeignKey("ShippingClassId")]
+        [Display(Name = "Kargo Sınıfı")]
+        public ShippingClass ShippingClass {get; set;}
         [Display(Name = "Ürün Tipi")]
         public ProductType ProductType { get; set; }
+        [StringLength(450)]
         [Display(Name = "Url")]
         public string ProductUrl { get; set; }
+        /*
         public long? UpSellId { get; set; }
         [ForeignKey("UpSellId")]
         public virtual Product UpSell { get; set; }
@@ -79,11 +87,12 @@ namespace CmsCoreV2.Models
         [ForeignKey("GroupedProductId")]
         public virtual Product GroupedProduct { get; set; }
         public ICollection<Product> GroupedProducts { get; set; }
-        [Display(Name = "Ürün Nitelikleri")]
+         */
+        [Display(Name = "Ürün Özellikleri")]
         public ICollection<ProductAttribute> ProductAttributes { get; set; }
         [Display(Name = "Satın Alma Notu")]
         public string PurchaseNote { get; set; }
-        [Display(Name = "Menu Siparişi")]
+        [Display(Name = "Menü Sırası")]
         public int MenuOrder { get; set; }
         [Display(Name = "Kategoriler")]
         public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
@@ -95,20 +104,20 @@ namespace CmsCoreV2.Models
         public string ShortDescription { get; set; }
         [Display(Name = "Ek Bilgi")]
         public string AdditionalInfo { get; set; }
-        [Display(Name = "Ürün Medyası")]
+        [Display(Name = "Ürün Görselleri")]
         public ICollection<ProductMedia> ProductMedias { get; set; }
         [Display(Name = "Görüntülenme Sayısı")]
         public int ViewCount { get; set; }
         [Display(Name = "Satış sayısı")]
         public int SaleCount { get; set; }
-        [Display(Name = "Katalog Görünümü")]
+        [Display(Name = "Katalog Görünürlüğü")]
         public CatalogVisibility CatalogVisibility { get; set; }
         [Display(Name="Öne Çıkan")]
         public bool IsFeatured { get; set; }
         [Display(Name="Yeni")]
         public bool IsNew { get; set; }
-        [Display(Name="Yayında")]
-        public bool IsPublished { get; set; }
+        [Display(Name="Onaylandı mı?")]
+        public bool IsApproved { get; set; }
         public virtual ICollection<ProductAttributeItem> ProductAttributeItems {get; set;}
         [Display(Name = "Tedarikçi")]
         public long? SupplierId {get; set;}

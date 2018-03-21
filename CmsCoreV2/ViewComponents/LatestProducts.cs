@@ -54,11 +54,11 @@ namespace CmsCoreV2.ViewComponents
         {
             if (categories.Length > 0)
             {
-                return (from pc in _context.ProductProductCategories join p in _context.Products on pc.ProductId equals p.Id join c in _context.ProductCategories on pc.ProductCategoryId equals c.Id where (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) && p.IsPublished == true orderby p.CreateDate descending select p).Take(count).ToList();
+                return (from pc in _context.ProductProductCategories join p in _context.Products on pc.ProductId equals p.Id join c in _context.ProductCategories on pc.ProductCategoryId equals c.Id where (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) && p.IsApproved == true  && (p.CatalogVisibility == CatalogVisibility.VisibilityBoth || p.CatalogVisibility == CatalogVisibility.VisibilityCatalog) orderby p.CreateDate descending select p).Take(count).ToList();
             }
             else
             {
-                return (from p in _context.Products.Include(i=>i.ProductProductCategories).ThenInclude(t=>t.ProductCategory) where p.IsPublished == true orderby p.CreateDate descending select p).Take(count).ToList();
+                return (from p in _context.Products.Include(i=>i.ProductProductCategories).ThenInclude(t=>t.ProductCategory) where p.IsApproved == true && (p.CatalogVisibility == CatalogVisibility.VisibilityBoth || p.CatalogVisibility == CatalogVisibility.VisibilityCatalog) orderby p.CreateDate descending select p).Take(count).ToList();
             }
         }
         
