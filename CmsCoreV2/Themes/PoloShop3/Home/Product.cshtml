@@ -16,9 +16,11 @@
                             <div class="product-image">
                                 <!-- Carousel slider -->
                                 <div class="carousel dots-inside dots-dark arrows-visible arrows-only arrows-dark" data-items="1" data-loop="true" data-autoplay="true" data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay-timeout="2500" data-lightbox="gallery">
-                                    <a href="@Model.ProductImage" data-lightbox="image" title="@Model.Name"><img src="@Model.ProductImage" alt="@Model.Name" /></a>@if (!string.IsNullOrEmpty(Model.AlternateProductImage))
+                                    <a href="@Model.ProductImage" data-lightbox="image" title="@Model.Name"><img src="@Model.ProductImage" alt="@Model.Name" /></a>
+                                    @foreach (var media in Model.ProductMedias)
                                     {
-                                        <a href="@Model.AlternateProductImage" data-lightbox="image" title="@Model.Name"><img src="@Model.AlternateProductImage" alt="@Model.Name" /></a>}
+                                        <a href="@media.MediaUrl" data-lightbox="image" title="@Model.Name"><img src="@media.MediaUrl" alt="@Model.Name" /></a>
+                                    }
                                 </div>
                                 <!-- Carousel slider -->
                             </div>

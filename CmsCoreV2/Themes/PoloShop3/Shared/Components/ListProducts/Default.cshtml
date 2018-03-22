@@ -18,17 +18,18 @@
                 <div class="product">
                     <div class="product-image">
                         <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.ProductImage" alt="@item.Name" /></a>
-                        @if (!string.IsNullOrEmpty(item.AlternateProductImage))
-    {
-                    <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.AlternateProductImage" alt="@item.Name" /></a>
-}
+                        @foreach (var media in item.ProductMedias)
+                                    {
+                                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@media.MediaUrl" alt="@item.Name" /></a>
+                                    break;
+                                    }
                         @if (item.IsNew)
     {
                     <span class="product-new">YENİ</span>
 }
-                        <span class="product-wishlist">
+                        @*<span class="product-wishlist">
                             <a href="#"><i class="fa fa-heart"></i></a>
-                        </span>
+                        </span>*@
                         <div class="product-overlay">
                             <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug?ajax=1" data-lightbox="ajax">Hızlı Bakış</a>
                         </div>

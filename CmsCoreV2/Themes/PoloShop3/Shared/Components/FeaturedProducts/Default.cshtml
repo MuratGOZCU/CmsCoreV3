@@ -17,10 +17,13 @@
 
                 <div class="product">
                     <div class="product-image">
-                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.ProductImage" alt="@item.Name" /></a>
-                        @if (!string.IsNullOrEmpty(item.AlternateProductImage)) { 
-                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@item.AlternateProductImage" alt="@item.Name" /></a>
-                        }
+                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">
+                        <img src="@item.ProductImage" alt="@item.Name" /></a>
+                        @foreach (var media in item.ProductMedias)
+                                    {
+                                        <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><img src="@media.MediaUrl" alt="@item.Name" /></a>
+                                    break;
+                                    }
                         @if (item.IsNew)
             {
                 <span class="product-new">YENİ</span>

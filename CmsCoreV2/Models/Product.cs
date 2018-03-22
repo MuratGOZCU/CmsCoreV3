@@ -98,8 +98,6 @@ namespace CmsCoreV2.Models
         public ICollection<ProductProductCategory> ProductProductCategories { get; set; }
         [Display(Name = "Ürün Resmi")]
         public string ProductImage { get; set; }
-        [Display(Name = "Alternatif Ürün Resmi")]
-        public string AlternateProductImage { get; set; }
         [Display(Name = "Kısa Açıklaması")]
         public string ShortDescription { get; set; }
         [Display(Name = "Ek Bilgi")]

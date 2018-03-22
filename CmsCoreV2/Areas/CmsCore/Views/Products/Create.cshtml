@@ -126,22 +126,52 @@
                     <input asp-for="ProductImage" class="form-control" />
                     <span class="input-group-btn">
                         <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('ProductImage')">...</a>
+                        <a class="btn btn-info" id="addMedia" type="button" onclick="AddMedia()"> + </a>
                     </span>
+                    <script>
+                        var mediaIndex = 1;
+                        function AddMedia() {
+                            if (mediaIndex <= 5) {
+                            $("#productMedias").append($("#productMediasHidden").html().replace("dummy","Media[]").replace("{0}",mediaIndex).replace("{0}",mediaIndex).replace("{0}",mediaIndex).replace("{0}",mediaIndex).replace("{0}",mediaIndex));
+                            mediaIndex++;
+                            } else {
+                                alert("En fazla 5 adet resim ekleyebilirsiniz.");
+                            }
+                        }
+                    </script>
                 </div>
             </div>
             @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            <label asp-for="AlternateProductImage" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.AlternateProductImage)</label>
-            <div class="col-md-9">
-                <div class="input-group">
-                    <input asp-for="AlternateProductImage" class="form-control" />
-                    <span class="input-group-btn">
-                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('AlternateProductImage')">...</a>
-                    </span>
+        <div id="productMediasHidden" style="display:none">
+            <div class="form-group">
+                <label for="Media{0}" class="col-md-2 control-label">Resim {0}</label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input name="dummy" id="Media{0}" class="form-control" />
+                        <span class="input-group-btn">
+                            <a class="btn btn-info" id="uploadModal{0}" type="button" onclick="browseMedia('Media{0}')">...</a>
+                        </span>
+                    </div>
                 </div>
             </div>
-            @Html.ValidationMessageFor(model => model.AlternateProductImage, "", new { @class = "text-danger" })
+        </div>
+        <div id="productMedias">
+            @{var index = 0;}
+            @foreach (var item in Model.ProductMedias) {
+                index++;
+            <div class="form-group">
+                <label for="Media@index" class="col-md-2 control-label">Resim @index</label>
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <input name="Media[]" id="Media@index" class="form-control" />
+                        <span class="input-group-btn">
+                            <a class="btn btn-info" id="uploadModal@index" type="button" onclick="browseMedia('Media@index')">...</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            }
         </div>
         <div class="form-group">
             <label asp-for="CatalogVisibility" class="col-md-2 control-label"></label>
@@ -358,7 +388,11 @@
     <a asp-action="Index">Listeye Geri Dön</a>
 </div>
 @Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "ProductImage" } })
-@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "AlternateProductImage" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Media1" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Media2" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Media3" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Media4" } })
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Media5" } })
 @section scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="/metronic/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>

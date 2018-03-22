@@ -52,7 +52,7 @@ namespace CmsCoreV2.Controllers
             return cart?.ProductCount ?? 0;
         }
        
-        public IActionResult Index(string slug, string culture,string message="",string ajax = "")
+        public IActionResult Index(string slug, string culture,string message="",string ajax="")
         { 
             if (culture == "no")
             {
@@ -86,7 +86,7 @@ namespace CmsCoreV2.Controllers
                 var post = _context.SetFiltered<Post>().FirstOrDefault(p => p.Slug.ToLower() == slug);
                 if (post == null)
                 {
-                    var product = _context.SetFiltered<Product>().Include(i => i.Language).Include(i => i.ProductProductCategories).ThenInclude(t => t.ProductCategory).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture == culture && p.IsApproved == true );
+                    var product = _context.SetFiltered<Product>().Include(i => i.Language).Include(i=>i.ProductMedias).Include(i => i.ProductProductCategories).ThenInclude(t => t.ProductCategory).FirstOrDefault(p => p.Slug.ToLower() == slug && p.Language.Culture == culture && p.IsApproved == true );
 
                     if (product != null)
                     {
@@ -187,7 +187,6 @@ namespace CmsCoreV2.Controllers
         {
             return View();
         }
-
         public IActionResult kindergarten()
         {
             return View();

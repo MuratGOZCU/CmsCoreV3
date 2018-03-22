@@ -188,22 +188,6 @@ namespace CmsCoreV2.Data
                 .WithMany(c => c.ProductAttributes)
                 .HasForeignKey(bc => bc.AttributeId).OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<ProductMedia>().HasKey(pc => new { pc.ProductId, pc.MediaId });
-            builder.Entity<ProductMedia>().HasOne(bc => bc.Product)
-                .WithMany(b => b.ProductMedias)
-                .HasForeignKey(bc => bc.ProductId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<ProductMedia>().HasOne(bc => bc.Media)
-                .WithMany(c => c.ProductMedias)
-                .HasForeignKey(bc => bc.MediaId).OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<ProductMedia>().HasKey(pc => new { pc.ProductId, pc.MediaId });
-            builder.Entity<ProductMedia>().HasOne(bc => bc.Product)
-                .WithMany(b => b.ProductMedias)
-                .HasForeignKey(bc => bc.ProductId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<ProductMedia>().HasOne(bc => bc.Media)
-                .WithMany(c => c.ProductMedias)
-                .HasForeignKey(bc => bc.MediaId).OnDelete(DeleteBehavior.Cascade);
-
             builder.Entity<ProductProductCategory>().HasKey(pc => new { pc.ProductId, pc.ProductCategoryId });
             builder.Entity<ProductProductCategory>().HasOne(bc => bc.Product)
                 .WithMany(b => b.ProductProductCategories)

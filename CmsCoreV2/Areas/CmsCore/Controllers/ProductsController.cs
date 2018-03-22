@@ -86,7 +86,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden,long[] AttributeItemId)
+        public async Task<IActionResult> Create([Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden,long[] AttributeItemId, string[] Media)
         {
             long? supplierId = null;
             if (User.IsInRole("Supplier")) {
@@ -98,11 +98,25 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 UpdateProductProductCategories(product.Id, categoriesHidden);
-                var prd = _context.Products.Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
+                var prd = _context.Products.Include(i=>i.ProductMedias).Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
                 prd.ProductAttributeItems.Clear();
                 await _context.SaveChangesAsync();
-                foreach (var k in AttributeItemId) {
-                    prd.ProductAttributeItems.Add(new ProductAttributeItem() {ProductId=prd.Id,AttributeItemId=k,AppTenantId=tenant.AppTenantId});
+                if (AttributeItemId != null) {
+                    foreach (var k in AttributeItemId) {
+                        prd.ProductAttributeItems.Add(new ProductAttributeItem() {ProductId=prd.Id,AttributeItemId=k,AppTenantId=tenant.AppTenantId});
+                    }
+                }
+                await _context.SaveChangesAsync();
+                prd.ProductMedias.Clear();
+                await _context.SaveChangesAsync();
+                if (Media != null) {
+                    var index = 0;
+                    foreach (var j in Media) {
+                        if (!string.IsNullOrEmpty(j)) {
+                            prd.ProductMedias.Add(new ProductMedia() {ProductId=prd.Id,MediaUrl=j,Position=index});
+                        }
+                        index++;
+                    }
                 }
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -153,7 +167,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             if (User.IsInRole("Supplier")) {
                 supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
             }
-            var product = await _context.Products.Include(p=>p.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).Include(i=>i.ProductProductCategories).SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId==supplierId:true));
+            var product = await _context.Products.Include(i=>i.ProductMedias).Include(p=>p.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).Include(i=>i.ProductProductCategories).SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId==supplierId:true));
             if (product == null)
             {
                 return NotFound();
@@ -173,7 +187,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden, long[] AttributeItemId)
+        public async Task<IActionResult> Edit(long id, [Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden, long[] AttributeItemId, string[] Media)
         {
             if (id != product.Id)
             {
@@ -191,12 +205,27 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                     UpdateProductProductCategories(product.Id, categoriesHidden);
-                    var prd = _context.Products.Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
+                    var prd = _context.Products.Include(i=>i.ProductMedias).Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
                     prd.ProductAttributeItems.Clear();
                     await _context.SaveChangesAsync();
-                    foreach (var k in AttributeItemId) {
-                        prd.ProductAttributeItems.Add(new ProductAttributeItem() {ProductId=prd.Id,AttributeItemId=k,AppTenantId=tenant.AppTenantId});
+                    if (AttributeItemId != null) {
+                        foreach (var k in AttributeItemId) {
+                            prd.ProductAttributeItems.Add(new ProductAttributeItem() {ProductId=prd.Id,AttributeItemId=k,AppTenantId=tenant.AppTenantId});
+                        }
                     }
+                    await _context.SaveChangesAsync();
+                    prd.ProductMedias.Clear();
+                    await _context.SaveChangesAsync();
+                    if (Media != null) {
+                        var index = 0;
+                        foreach (var j in Media) {
+                            if (!string.IsNullOrEmpty(j)) {
+                                prd.ProductMedias.Add(new ProductMedia() {ProductId=prd.Id,MediaUrl=j,Position=index});
+                            }
+                            index++;
+                        }
+                    }
+                await _context.SaveChangesAsync();
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

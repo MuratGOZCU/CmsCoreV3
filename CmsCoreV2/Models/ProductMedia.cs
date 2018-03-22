@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class ProductMedia
+    public class ProductMedia:BaseEntity
     { 
-
+        public ProductMedia() {
+            Position = 0;
+        }
         public long ProductId { get; set; }
+        [ForeignKey("ProductId")]
         public Product Product { get; set; }
-        public long MediaId { get; set; }
-        public Media Media { get; set; }
+        public string MediaUrl {get; set;}
+        public long Position {get; set;}
     }
 }
