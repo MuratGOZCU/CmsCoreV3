@@ -1683,6 +1683,9 @@ var INSPIRO = {},
                 $lightbox_ajax.each(function () {
                     $(this).magnificPopup({
                         type: 'ajax',
+                        closeOnContentClick: false,
+                        closeOnBgClick: true,
+                        showCloseBtn: true,
                         removalDelay: 500, //delay removal by X to allow out-animation
                         callbacks: {
                             ajaxContentAdded: function (mfpResponse) {
