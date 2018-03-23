@@ -191,6 +191,12 @@ namespace CmsCoreV2.Controllers
         {
             return View();
         }
+        public IList<Region> GetCities(string parentId) {
+            return _context.Regions.Where(r=>r.RegionType == RegionType.City && r.ParentRegion.Code == parentId).OrderBy(o=>o.Name).ToList();
+        }
+        public IList<Region> GetCounties(string parentId) {
+            return _context.Regions.Where(r=>r.RegionType == RegionType.District && r.ParentRegion.Code == parentId).OrderBy(o=>o.Name).ToList();
+        }
         public IActionResult Checkout(CheckoutViewModel viewModel)
         {
             return View("CheckoutCompleted", viewModel);

@@ -1,6 +1,7 @@
 ﻿using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace CmsCoreV2.ViewComponents
             var cart = await GetMyCart(owner);
             var cvm = new CheckoutViewModel();
             cvm.Cart = cart;
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name","TR");
             return View(cvm);
         }
         private async Task<Cart> GetMyCart(string owner)
