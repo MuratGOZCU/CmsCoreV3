@@ -11,10 +11,7 @@ namespace CmsCoreV2.Models
     {
         public Setting()
         {
-            
-            ShippingRegions = new HashSet<SettingRegion>();
-            SalesLocations = new HashSet<SaleRegion>();
-            ShippingLocations = new HashSet<ShippingRegion>();
+         
         }
         //INDEX
         public string HeaderString { get; set; }
@@ -63,12 +60,8 @@ namespace CmsCoreV2.Models
         public DimensionUnit DimensionUnit { get; set; }
         public SalesLocationOptions SalesLocationOptions { get; set; }
         public ShippingLocationsOptions ShippingLocationsOptions { get; set; }
-        [Display(Name = "Gönderi Bölgeleri")]
-        public virtual ICollection<SettingRegion> ShippingRegions { get; set; }
-        [Display(Name = "Satış Konumları")]
-        public virtual ICollection<SaleRegion> SalesLocations { get; set; }
-        [Display(Name = "Gönderi Konumları")]
-        public virtual ICollection<ShippingRegion> ShippingLocations { get; set; }
+     
+   
         [Display(Name = "Ana Konum")]
         public long? MainLocationId { get; set; }
         [ForeignKey("MainLocationId")]

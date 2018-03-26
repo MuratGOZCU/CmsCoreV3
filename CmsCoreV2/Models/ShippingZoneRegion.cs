@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace CmsCoreV2.Models
 {
-    public class ShippingRegion
+    public class ShippingZoneRegion
     {
         public long RegionId { get; set; }
         public Region Region { get; set; }
-        public long SettingId { get; set; }
-        public Setting Setting { get; set; }
+        public long ShippingZoneId { get; set; }
+        public ShippingZone ShippingZone { get; set; }
+        public string AppTenantId {get; set;}
     }
 }

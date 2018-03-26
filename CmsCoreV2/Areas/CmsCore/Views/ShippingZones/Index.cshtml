@@ -1,25 +1,22 @@
-﻿@model IEnumerable<CmsCoreV2.Models.ShippingClass>
+﻿@model IEnumerable<CmsCoreV2.Models.ShippingZone>
 
 @{
-    ViewData["Title"] = "Kargo Firmaları";
+    ViewData["Title"] = "Kargo Bölgeleri";
 }
 
-<h2>Kargo Firmaları</h2>
+<h2>Kargo Bölgeleri</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Yeni Kargo Firması</a>
+    <a asp-action="Create">Yeni Kargo Bölgesi</a>
 </p>
-<table class="table table-hover table-striped dt-responsive" id="tblRecords">
+<table class="table table-stripted table-hover dt-responsive" id="tblRecords">
     <thead>
         <tr>
-                <th class="all">
-                    @Html.DisplayNameFor(model => model.ShippingClassName)
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Slug)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.ShippingZoneRegions)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CreateDate)
@@ -43,13 +40,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ShippingClassName)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Slug)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+            @string.Join(", ",item.ShippingZoneRegions.Select(s=>s.Region.Name).ToList().ToArray())
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)

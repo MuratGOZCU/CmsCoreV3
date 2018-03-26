@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180323140321_shippingFix3")]
+    partial class shippingFix3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1465,6 +1466,8 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(500);
 
+                    b.Property<float>("Height");
+
                     b.Property<bool>("IsApproved");
 
                     b.Property<bool>("IsFeatured");
@@ -1472,6 +1475,8 @@ namespace CmsCoreV2.Migrations
                     b.Property<bool>("IsNew");
 
                     b.Property<long?>("LanguageId");
+
+                    b.Property<float>("Length");
 
                     b.Property<int>("MenuOrder");
 
@@ -1493,13 +1498,7 @@ namespace CmsCoreV2.Migrations
                     b.Property<float?>("SalePrice")
                         .IsRequired();
 
-                    b.Property<long?>("ShippingCityId");
-
                     b.Property<long?>("ShippingClassId");
-
-                    b.Property<int>("ShippingMethod");
-
-                    b.Property<long?>("ShippingZoneId");
 
                     b.Property<string>("ShortDescription");
 
@@ -1528,15 +1527,15 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<int>("ViewCount");
 
+                    b.Property<float>("Weight");
+
+                    b.Property<float>("Width");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LanguageId");
 
-                    b.HasIndex("ShippingCityId");
-
                     b.HasIndex("ShippingClassId");
-
-                    b.HasIndex("ShippingZoneId");
 
                     b.HasIndex("SupplierId");
 
@@ -2090,38 +2089,6 @@ namespace CmsCoreV2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShippingFlatRates");
-                });
-
-            modelBuilder.Entity("CmsCoreV2.Models.ShippingPrice", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AppTenantId");
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(200);
-
-                    b.Property<float>("Price");
-
-                    b.Property<long>("ProductId");
-
-                    b.Property<long>("ShippingZoneId");
-
-                    b.Property<DateTime>("UpdateDate");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasMaxLength(200);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("ShippingZoneId");
-
-                    b.ToTable("ShippingPrice");
                 });
 
             modelBuilder.Entity("CmsCoreV2.Models.ShippingSetting", b =>
@@ -2916,17 +2883,9 @@ namespace CmsCoreV2.Migrations
                         .WithMany()
                         .HasForeignKey("LanguageId");
 
-                    b.HasOne("CmsCoreV2.Models.Region", "ShippingCity")
-                        .WithMany("Products")
-                        .HasForeignKey("ShippingCityId");
-
                     b.HasOne("CmsCoreV2.Models.ShippingClass", "ShippingClass")
                         .WithMany()
                         .HasForeignKey("ShippingClassId");
-
-                    b.HasOne("CmsCoreV2.Models.ShippingZone", "ShippingZone")
-                        .WithMany()
-                        .HasForeignKey("ShippingZoneId");
 
                     b.HasOne("CmsCoreV2.Models.Supplier", "Supplier")
                         .WithMany("Products")
@@ -3034,19 +2993,6 @@ namespace CmsCoreV2.Migrations
                     b.HasOne("CmsCoreV2.Models.Page", "TermsAndConditionsPage")
                         .WithMany()
                         .HasForeignKey("TermsAndConditionsPageId");
-                });
-
-            modelBuilder.Entity("CmsCoreV2.Models.ShippingPrice", b =>
-                {
-                    b.HasOne("CmsCoreV2.Models.Product", "Product")
-                        .WithMany("ShippingPrices")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CmsCoreV2.Models.ShippingZone", "ShippingZone")
-                        .WithMany("ShippingPrices")
-                        .HasForeignKey("ShippingZoneId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CmsCoreV2.Models.ShippingSetting", b =>

@@ -55,6 +55,20 @@ namespace CmsCoreV2.Models
         public int? StockCount { get; set; }
         [Display(Name = "Stok Durumu")]
         public bool StockStatus { get; set; }
+        public ShippingMethod ShippingMethod {get; set;}
+        public long? ShippingCityId {get; set;}
+        [ForeignKey("ShippingCityId")]
+        public Region ShippingCity {get; set;}
+        public long? ShippingZoneId {get; set;}
+        [ForeignKey("ShippingZoneId")]
+        public ShippingZone ShippingZone {get; set;}
+        [Display(Name = "Kargo Firması")]
+        public long? ShippingClassId {get; set;}
+        [ForeignKey("ShippingClassId")]
+        [Display(Name = "Kargo Firması")]
+        public ShippingClass ShippingClass {get; set;}
+        public virtual ICollection<ShippingPrice> ShippingPrices {get; set;}
+        /*
         [Display(Name = "Ağırlık")]
         public float Weight { get; set; }
         [Display(Name = "Uzunluk")]
@@ -63,11 +77,8 @@ namespace CmsCoreV2.Models
         public float Height { get; set; }
         [Display(Name = "Genişlik")]
         public float Width { get; set; }
-        [Display(Name = "Kargo Sınıfı")]
-        public long? ShippingClassId {get; set;}
-        [ForeignKey("ShippingClassId")]
-        [Display(Name = "Kargo Sınıfı")]
-        public ShippingClass ShippingClass {get; set;}
+        
+         */
         [Display(Name = "Ürün Tipi")]
         public ProductType ProductType { get; set; }
         [StringLength(450)]

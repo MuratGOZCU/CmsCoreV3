@@ -93,10 +93,9 @@ namespace CmsCoreV2.Data
         public DbSet<ProductMedia> ProductMedias { get; set; }
         public DbSet<ProductProductCategory> ProductProductCategories { get; set; }
         public DbSet<Region> Regions { get; set; }
-        public DbSet<SaleRegion> SaleRegions { get; set; }
-        public DbSet<SettingRegion> SettingRegions { get; set; }
+    
         public DbSet<ShippingClass> ShippingClasses { get; set; }
-        public DbSet<ShippingRegion> ShippingRegions { get; set; }
+        public DbSet<ShippingZoneRegion> ShippingZoneRegions { get; set; }
         public DbSet<TaxRate> TaxRates { get; set; }
         public DbSet<ExcludeCouponProduct> ExcludeCouponProducts { get; set; }
         public DbSet<ExcludeCouponProductCategory> ExcludeCouponProductCategories { get; set; }
@@ -107,7 +106,11 @@ namespace CmsCoreV2.Data
 
         public DbSet<ProductAttributeItem> ProductAttributeItems {get; set;}
         public DbSet<Supplier> Suppliers {get; set;}
-
+        public DbSet<ShippingSetting> ShippingSettings {get; set;}
+        public DbSet<ShippingFlatRate> ShippingFlatRates {get;set;}
+        public DbSet<AdditionalRate> AdditionalRates {get; set;}
+        public DbSet<AdditionalCost> AdditionalCosts {get; set;}
+        public DbSet<CmsCoreV2.Models.ShippingZone> ShippingZones { get; set; }
         // diğer dbsetler buraya eklenir
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -196,28 +199,15 @@ namespace CmsCoreV2.Data
                 .WithMany(c => c.ProductProductCategories)
                 .HasForeignKey(bc => bc.ProductCategoryId).OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<SettingRegion>().HasKey(pc => new { pc.SettingId, pc.RegionId });
-            builder.Entity<SettingRegion>().HasOne(bc => bc.Setting)
-                .WithMany(b => b.ShippingRegions)
-                .HasForeignKey(bc => bc.SettingId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<SettingRegion>().HasOne(bc => bc.Region)
-                .WithMany(c => c.ShippingRegions)
-                .HasForeignKey(bc => bc.RegionId).OnDelete(DeleteBehavior.Cascade);
+            
+            
 
-            builder.Entity<SaleRegion>().HasKey(pc => new { pc.SettingId, pc.RegionId });
-            builder.Entity<SaleRegion>().HasOne(bc => bc.Setting)
-                .WithMany(b => b.SalesLocations)
-                .HasForeignKey(bc => bc.SettingId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<SaleRegion>().HasOne(bc => bc.Region)
-                .WithMany(c => c.SalesLocations)
-                .HasForeignKey(bc => bc.RegionId).OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<ShippingRegion>().HasKey(pc => new { pc.SettingId, pc.RegionId });
-            builder.Entity<ShippingRegion>().HasOne(bc => bc.Setting)
-                .WithMany(b => b.ShippingLocations)
-                .HasForeignKey(bc => bc.SettingId).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<ShippingRegion>().HasOne(bc => bc.Region)
-                .WithMany(c => c.ShippingLocations)
+            builder.Entity<ShippingZoneRegion>().HasKey(pc => new { pc.ShippingZoneId, pc.RegionId });
+            builder.Entity<ShippingZoneRegion>().HasOne(bc => bc.ShippingZone)
+                .WithMany(b => b.ShippingZoneRegions)
+                .HasForeignKey(bc => bc.ShippingZoneId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<ShippingZoneRegion>().HasOne(bc => bc.Region)
+                .WithMany(c => c.ShippingZoneRegions)
                 .HasForeignKey(bc => bc.RegionId).OnDelete(DeleteBehavior.Cascade);
 
             /*builder.Entity<Product>()
@@ -234,6 +224,9 @@ namespace CmsCoreV2.Data
             .WithOne(e => e.GroupedProduct)
             .HasForeignKey(e => e.GroupedProductId);*/
         }
+        // diğer dbsetler buraya eklenir
+
+        
         // diğer dbsetler buraya eklenir
 
     
