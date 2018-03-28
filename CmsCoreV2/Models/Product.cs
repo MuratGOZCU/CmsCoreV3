@@ -16,6 +16,8 @@ namespace CmsCoreV2.Models
             ExcludeCouponProducts = new HashSet<ExcludeCouponProduct>();
             ProductAttributes = new HashSet<ProductAttribute>();
             ProductProductCategories = new HashSet<ProductProductCategory>();
+            ProductMedias = new HashSet<ProductMedia>();
+            ShippingPrices = new HashSet<ShippingPrice>();
         }
         [Display(Name = "Kuponlar")]
         public virtual ICollection<CouponProduct> CouponProducts { get; set; }
@@ -55,11 +57,16 @@ namespace CmsCoreV2.Models
         public int? StockCount { get; set; }
         [Display(Name = "Stok Durumu")]
         public bool StockStatus { get; set; }
+        [Display(Name = "Kargo Yöntemi")]
         public ShippingMethod ShippingMethod {get; set;}
+        [Display(Name = "Nereden Kargolanacak?")]
         public long? ShippingCityId {get; set;}
+        [Display(Name = "Nereden Kargolanacak?")]
         [ForeignKey("ShippingCityId")]
         public Region ShippingCity {get; set;}
+        [Display(Name = "Kargo Hedefi")]
         public long? ShippingZoneId {get; set;}
+        [Display(Name = "Kargo Hedefi")]
         [ForeignKey("ShippingZoneId")]
         public ShippingZone ShippingZone {get; set;}
         [Display(Name = "Kargo Firması")]

@@ -78,6 +78,8 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.ShippingClasses = new SelectList(_context.ShippingClasses,"Id","ShippingClassName",product.ShippingClassId);
             ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",supplierId);
             ViewBag.Attributes = new SelectList(_context.Attributes,"Id","Name");
+            ViewBag.ShippingCities = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.City).ToList(),"Id","Name");
+            ViewBag.ShippingZones = new SelectList(_context.ShippingZones.ToList(),"Id","Name");
             return View(product);
         }
         [Authorize(Roles="ADMIN,ProductCreate")]
@@ -86,7 +88,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden,long[] AttributeItemId, string[] Media)
+        public async Task<IActionResult> Create([Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,ShippingCityId,ShippingZoneId,ShippingMethod,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden,long[] AttributeItemId, string[] Media, float[] ShippingPrice)
         {
             long? supplierId = null;
             if (User.IsInRole("Supplier")) {
@@ -98,12 +100,23 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 UpdateProductProductCategories(product.Id, categoriesHidden);
-                var prd = _context.Products.Include(i=>i.ProductMedias).Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
+                var prd = _context.Products.Include(i=>i.ShippingPrices).Include(i=>i.ProductMedias).Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
                 prd.ProductAttributeItems.Clear();
                 await _context.SaveChangesAsync();
                 if (AttributeItemId != null) {
                     foreach (var k in AttributeItemId) {
                         prd.ProductAttributeItems.Add(new ProductAttributeItem() {ProductId=prd.Id,AttributeItemId=k,AppTenantId=tenant.AppTenantId});
+                    }
+                }
+                await _context.SaveChangesAsync();
+                prd.ShippingPrices.Clear();
+                await _context.SaveChangesAsync();
+                var zones = _context.ShippingZones.ToList().ToArray();
+                if (ShippingPrice != null) {
+                    var x = 0;
+                    foreach (var s in ShippingPrice) {
+                        prd.ShippingPrices.Add(new Models.ShippingPrice() {ProductId=prd.Id,CreateDate=DateTime.Now,CreatedBy=User.Identity.Name ?? "username",UpdateDate=DateTime.Now,UpdatedBy=User.Identity.Name??"username",ShippingZoneId=zones[x].Id, AppTenantId=tenant.AppTenantId, Price=s});
+                        x++;
                     }
                 }
                 await _context.SaveChangesAsync();
@@ -127,6 +140,8 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.Suppliers = new SelectList(_context.Suppliers,"Id","Name",supplierId);
             ViewBag.ShippingClasses = new SelectList(_context.ShippingClasses,"Id","ShippingClassName",product.ShippingClassId);
             ViewBag.Attributes = new SelectList(_context.Attributes,"Id","Name");
+            ViewBag.ShippingCities = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.City).ToList(),"Id","Name");
+            ViewBag.ShippingZones = new SelectList(_context.ShippingZones.ToList(),"Id","Name");
             return View(product);
         }
 
@@ -167,7 +182,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             if (User.IsInRole("Supplier")) {
                 supplierId = _context.Suppliers.FirstOrDefault(s=>s.UserName.ToLower() == User.Identity.Name.ToLower())?.Id;
             }
-            var product = await _context.Products.Include(i=>i.ProductMedias).Include(p=>p.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).Include(i=>i.ProductProductCategories).SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId==supplierId:true));
+            var product = await _context.Products.Include(i=>i.ShippingPrices).Include(i=>i.ProductMedias).Include(p=>p.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).Include(i=>i.ProductProductCategories).SingleOrDefaultAsync(m => m.Id == id && (supplierId.HasValue?m.SupplierId==supplierId:true));
             if (product == null)
             {
                 return NotFound();
@@ -179,6 +194,8 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.ShippingClasses = new SelectList(_context.ShippingClasses,"Id","ShippingClassName",product.ShippingClassId);
             ViewBag.Attributes = new SelectList(_context.Attributes,"Id","Name");
             ViewBag.AttributesList = _context.Attributes.Include(a=>a.AttributeItems).ToList();
+            ViewBag.ShippingCities = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.City).ToList(),"Id","Name",product.ShippingCityId);
+            ViewBag.ShippingZones = new SelectList(_context.ShippingZones.ToList(),"Id","Name",product.ShippingZoneId);
             return View(product);
         }
         [Authorize(Roles="ADMIN,ProductEdit")]
@@ -187,7 +204,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,Weight,Length,Height,Width,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden, long[] AttributeItemId, string[] Media)
+        public async Task<IActionResult> Edit(long id, [Bind("ShippingClassId,CatalogVisibility,SupplierId,AdditionalInfo,IsNew,IsApproved,Name,Slug,Description,LanguageId,UnitPrice,SalePrice,TaxStatus,TaxClass,StockCode,StockCount,StockStatus,ShippingCityId,ShippingZoneId,ShippingMethod,ProductType,ProductUrl,PurchaseNote,MenuOrder,ProductImage,ShortDescription,ViewCount,SaleCount,IsFeatured,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Product product, string categoriesHidden, long[] AttributeItemId, string[] Media, float[] ShippingPrice)
         {
             if (id != product.Id)
             {
@@ -205,12 +222,23 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                     UpdateProductProductCategories(product.Id, categoriesHidden);
-                    var prd = _context.Products.Include(i=>i.ProductMedias).Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
+                    var prd = _context.Products.Include(i=>i.ShippingPrices).Include(i=>i.ProductMedias).Include(i=>i.ProductAttributeItems).ThenInclude(t=>t.AttributeItem).FirstOrDefault(f=>f.Id == product.Id);
                     prd.ProductAttributeItems.Clear();
                     await _context.SaveChangesAsync();
                     if (AttributeItemId != null) {
                         foreach (var k in AttributeItemId) {
                             prd.ProductAttributeItems.Add(new ProductAttributeItem() {ProductId=prd.Id,AttributeItemId=k,AppTenantId=tenant.AppTenantId});
+                        }
+                    }
+                    await _context.SaveChangesAsync();
+                    prd.ShippingPrices.Clear();
+                    await _context.SaveChangesAsync();
+                    var zones = _context.ShippingZones.ToList().ToArray();
+                    if (ShippingPrice != null) {
+                        var x = 0;
+                        foreach (var s in ShippingPrice) {
+                            prd.ShippingPrices.Add(new Models.ShippingPrice() {ProductId=prd.Id,CreateDate=DateTime.Now,CreatedBy=User.Identity.Name ?? "username",UpdateDate=DateTime.Now,UpdatedBy=User.Identity.Name??"username",ShippingZoneId=zones[x].Id, AppTenantId=tenant.AppTenantId, Price=s});
+                            x++;
                         }
                     }
                     await _context.SaveChangesAsync();
@@ -250,6 +278,8 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             ViewBag.ShippingClasses = new SelectList(_context.ShippingClasses,"Id","ShippingClassName",product.ShippingClassId);
             ViewBag.Attributes = new SelectList(_context.Attributes,"Id","Name");
             ViewBag.AttributesList = _context.Attributes.Include(a=>a.AttributeItems).ToList();
+            ViewBag.ShippingCities = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.City).ToList(),"Id","Name",product.ShippingCityId);
+            ViewBag.ShippingZones = new SelectList(_context.ShippingZones.ToList(),"Id","Name",product.ShippingZoneId);
             return View(product);
         }
         [Authorize(Roles="ADMIN,ProductDelete")]

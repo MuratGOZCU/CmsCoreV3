@@ -111,6 +111,7 @@ namespace CmsCoreV2.Data
         public DbSet<AdditionalRate> AdditionalRates {get; set;}
         public DbSet<AdditionalCost> AdditionalCosts {get; set;}
         public DbSet<CmsCoreV2.Models.ShippingZone> ShippingZones { get; set; }
+        public DbSet<ShippingPrice> ShippingPrices {get; set;}
         // diğer dbsetler buraya eklenir
 
         protected override void OnModelCreating(ModelBuilder builder)
