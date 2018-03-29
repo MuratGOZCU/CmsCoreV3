@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180329104443_addCartCoupons")]
+    partial class addCartCoupons
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,8 +171,6 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(200);
 
-                    b.Property<string>("DestinationCityCode");
-
                     b.Property<string>("Owner");
 
                     b.Property<DateTime>("UpdateDate");
@@ -238,7 +237,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("AppTenantId");
 
-                    b.Property<float>("CouponAmount");
+                    b.Property<decimal>("CouponAmount");
 
                     b.Property<string>("CouponCode")
                         .HasMaxLength(200);
@@ -262,9 +261,9 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<int?>("LimitUse");
 
-                    b.Property<float>("MaximumSpending");
+                    b.Property<decimal>("MaximumSpending");
 
-                    b.Property<float>("MinimumSpending");
+                    b.Property<decimal>("MinimumSpending");
 
                     b.Property<bool>("OnlyIndividualUse");
 

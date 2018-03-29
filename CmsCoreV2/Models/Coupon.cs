@@ -14,6 +14,7 @@ namespace CmsCoreV2.Models
             ExcludeCouponProducts = new HashSet<ExcludeCouponProduct>();
             CouponProductCategories = new HashSet<CouponProductCategory>();
             ExcludeCouponProductCategories = new HashSet<ExcludeCouponProductCategory>();
+            CartCoupons = new HashSet<CartCoupon>();
         }
         [Display(Name = "Kupon Başına Kullanım Sınırı")]
         public int LimitPerCoupon { get; set; }
@@ -29,15 +30,15 @@ namespace CmsCoreV2.Models
         [Display(Name = "Açıklama")]
         public string Description { get; set; }
         [Display(Name = "Kupon Tutarı")]
-        public decimal CouponAmount { get; set; }
+        public float CouponAmount { get; set; }
         [Display(Name = "Ücretsiz gönderime izin ver")]
         public bool AllowFreeShipping { get; set; }
         [Display(Name ="Kupon son kullanım tarihi")]
         public DateTime ExpirationDate { get; set; }
         [Display(Name = "Asgari Harcama")]
-        public decimal MinimumSpending { get; set; }
+        public float MinimumSpending { get; set; }
         [Display(Name = "Azami Harcama")]
-        public decimal MaximumSpending { get; set; }
+        public float MaximumSpending { get; set; }
         [Display(Name = "Sadece Bireysel Kullanım")]
         public bool OnlyIndividualUse { get; set; }
         [Display(Name = "İndirimdeki Ürünler Hariç")]
@@ -52,6 +53,7 @@ namespace CmsCoreV2.Models
         public virtual ICollection<ExcludeCouponProductCategory> ExcludeCouponProductCategories { get; set; }
         [Display(Name = "E-posta Kısıtlamaları")]
         public string RestrictedEmails { get; set; }
+        public virtual ICollection<CartCoupon> CartCoupons {get; set;}
 
     }
 }

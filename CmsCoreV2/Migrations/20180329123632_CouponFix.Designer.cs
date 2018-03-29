@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180329123632_CouponFix")]
+    partial class CouponFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,8 +170,6 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(200);
-
-                    b.Property<string>("DestinationCityCode");
 
                     b.Property<string>("Owner");
 

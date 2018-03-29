@@ -112,6 +112,7 @@ namespace CmsCoreV2.Data
         public DbSet<AdditionalCost> AdditionalCosts {get; set;}
         public DbSet<CmsCoreV2.Models.ShippingZone> ShippingZones { get; set; }
         public DbSet<ShippingPrice> ShippingPrices {get; set;}
+        public DbSet<CartCoupon> CartCoupons {get; set;}
         // diğer dbsetler buraya eklenir
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -143,6 +144,14 @@ namespace CmsCoreV2.Data
             builder.Entity<CouponProduct>().HasOne(bc=>bc.Product)
                 .WithMany(c=>c.CouponProducts)
                 .HasForeignKey(bc => bc.ProductId).OnDelete(DeleteBehavior.Restrict);
+
+                builder.Entity<CartCoupon>().HasKey(pc => new { pc.CouponId, pc.CartId});
+            builder.Entity<CartCoupon>().HasOne(bc => bc.Coupon)
+                .WithMany(b => b.CartCoupons)
+                .HasForeignKey(bc => bc.CouponId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<CartCoupon>().HasOne(bc=>bc.Cart)
+                .WithMany(c=>c.CartCoupons)
+                .HasForeignKey(bc => bc.CartId).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<CouponProductCategory>().HasKey(pc => new { pc.CouponId, pc.ProductCategoryId });
             builder.Entity<CouponProductCategory>().HasOne(bc => bc.Coupon)

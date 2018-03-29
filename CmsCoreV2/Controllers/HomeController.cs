@@ -201,6 +201,32 @@ namespace CmsCoreV2.Controllers
         {
             return View("CheckoutCompleted", viewModel);
         }
+        public IActionResult ApplyCoupon(string couponCode) {
+            string owner = User.Identity.Name;
+            if (string.IsNullOrEmpty(owner))
+            {
+                owner = HttpContext.Session.Id;
+            }
+            var cart = GetMyCart(owner);
+            if (cart == null)
+            {
+                cart = new Cart();
+                cart.Owner = owner;
+                cart.CreateDate = DateTime.Now;
+                cart.UpdateDate = DateTime.Now;
+                cart.AppTenantId = tenant.AppTenantId;              
+                _context.Carts.Add(cart);
+                _context.SaveChanges();
+            }
+            var coupon = _context.Coupons.FirstOrDefault(f=>(!string.IsNullOrEmpty(couponCode)?f.CouponCode.ToLower() == couponCode.ToLower():false));
+            if (coupon != null) {
+                // todo: check other restrictions here
+                cart.CartCoupons.Add(new CartCoupon() {CartId = cart.Id, CouponId = coupon.Id});
+                _context.SaveChanges();
+                return Redirect("/tr/sepet?status=1");
+            }
+            return Redirect("/tr/sepet?status=0");
+        }
         public IActionResult AddToCart(string slug, int quantity)
         {
             string owner = User.Identity.Name;
@@ -297,7 +323,7 @@ namespace CmsCoreV2.Controllers
         }
         private Cart GetMyCart(string owner)
         {
-            var cart = _context.Carts.Include(i => i.CartItems).ThenInclude(t => t.Product).FirstOrDefault(c => c.Owner == owner);
+            var cart = _context.Carts.Include(i=>i.CartCoupons).ThenInclude(t=>t.Coupon).Include(i => i.CartItems).ThenInclude(t => t.Product).FirstOrDefault(c => c.Owner == owner);
             return cart;
         }
         public IActionResult Successful(int id)
