@@ -17,7 +17,7 @@ namespace CmsCoreV2.Models
         }
         [Display(Name = "Kupon Başına Kullanım Sınırı")]
         public int LimitPerCoupon { get; set; }
-        [Display(Name = "Kullanımı X Ögeleriyle Sınırla")]
+        [Display(Name = "Kullanımı X Öğeyle Sınırla")]
         public int? LimitUse { get; set; }
         [Display(Name = "Kullanıcı Başına Kullanım Sınırı")]
         public int LimitPerUser { get; set; }

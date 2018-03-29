@@ -12,6 +12,9 @@
 <table id="tblRecords" class="table table-striped table-hover">
     <thead>
         <tr>
+            <th class="text-nowrap all">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.LimitPerCoupon)
             </th>
@@ -24,19 +27,16 @@
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.DiscountType)
             </th>
-            <th class="text-nowrap">
+            <th class="text-nowrap desktop">
                 @Html.DisplayNameFor(model => model.CouponCode)
             </th>
-            <th class="text-nowrap">
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th class="text-nowrap">
+            <th class="text-nowrap desktop">
                 @Html.DisplayNameFor(model => model.CouponAmount)
             </th>
             <th class="text-nowrap">
                 @Html.DisplayNameFor(model => model.AllowFreeShipping)
             </th>
-            <th class="text-nowrap">
+            <th class="text-nowrap desktop">
                 @Html.DisplayNameFor(model => model.ExpirationDate)
             </th>
             <th class="text-nowrap">
@@ -74,6 +74,9 @@
         @foreach (var item in Model)
         {
             <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LimitPerCoupon)
                 </td>
@@ -89,9 +92,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CouponCode)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.CouponAmount)
                 </td>

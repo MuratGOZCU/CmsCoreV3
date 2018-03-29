@@ -8,15 +8,11 @@ namespace CmsCoreV2.Models
 {
     public enum ShippingMethod
     {
-        [Display(Name = @"Sabit Oran")]
+        [Display(Name = @"Alıcı Öder")]
         FixedRate = 1,
-        [Display(Name = @"Ücretsiz Kargo")]
+        [Display(Name = @"Satıcı Öder/Ücretsiz Kargo")]
         FreeShipping = 2,
-        [Display(Name = "Uluslararası Kargo")]
-        InternationalShipping = 3,
-        [Display(Name = "Yerel Teslimat")]
-        LocalDelivery = 4,
-        [Display(Name = @"Mağazadan Teslim")]
-        Submission = 5
+        [Display(Name = @"Kargosuz/Mağazadan Teslim")]
+        NoShipping = 3
     }
 }

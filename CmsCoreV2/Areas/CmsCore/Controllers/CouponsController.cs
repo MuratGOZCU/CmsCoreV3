@@ -8,18 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using CmsCoreV2.Data;
 using CmsCoreV2.Models;
 using Microsoft.AspNetCore.Authorization;
+using SaasKit.Multitenancy;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
     [Authorize(Roles = "ADMIN,Supplier,COUPON")]
     [Area("CmsCore")]
-    public class CouponsController : Controller
+    public class CouponsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public CouponsController(ApplicationDbContext context)
+        public CouponsController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
         {
-            _context = context;    
+                
         }
         [Authorize(Roles="ADMIN,CouponIndex")]
         // GET: CmsCore/Coupons
@@ -54,6 +53,9 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             coupon.CreateDate = DateTime.Now;
             coupon.UpdatedBy = User.Identity.Name ?? "username";
             coupon.UpdateDate = DateTime.Now;
+            coupon.AppTenantId = tenant.AppTenantId;
+            ViewBag.Products = new MultiSelectList(_context.Products.ToList(),"Id","Name");
+            ViewBag.ProductCategories = new MultiSelectList(_context.ProductCategories.ToList(),"Id","Name");
             return View(coupon);
         }
         [Authorize(Roles="ADMIN,CouponCreate")]
@@ -62,7 +64,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LimitPerCoupon,LimitUse,LimitPerUser,DiscountType,CouponCode,Description,CouponAmount,AllowFreeShipping,ExpirationDate,MinimumSpending,MaximumSpending,OnlyIndividualUse,ExcludeDiscountProduct,RestrictedEmails,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Coupon coupon,AppTenant tenant)
+        public async Task<IActionResult> Create([Bind("LimitPerCoupon,LimitUse,LimitPerUser,DiscountType,CouponCode,Description,CouponAmount,AllowFreeShipping,ExpirationDate,MinimumSpending,MaximumSpending,OnlyIndividualUse,ExcludeDiscountProduct,RestrictedEmails,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Coupon coupon,long[] CouponProductId, long[] ExcludeCouponProductId, long[] CouponCategoryId, long[] ExcludeCouponCategoryId)
         {
             if (ModelState.IsValid)
             {
@@ -73,29 +75,58 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 coupon.AppTenantId = tenant.AppTenantId;
                 _context.Add(coupon);
                 await _context.SaveChangesAsync();
+                coupon = _context.Coupons.Include(i=>i.CouponProducts).Include(i=>i.ExcludeCouponProducts).Include(i=>i.CouponProductCategories).Include(i=>i.ExcludeCouponProductCategories).FirstOrDefault(f=>f.Id == coupon.Id);
+                coupon.CouponProducts.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in CouponProductId) {
+                    coupon.CouponProducts.Add(new CouponProduct() {CouponId = coupon.Id, ProductId = item });
+                }
+                await _context.SaveChangesAsync();
+                coupon.ExcludeCouponProducts.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in ExcludeCouponProductId) {
+                    coupon.ExcludeCouponProducts.Add(new ExcludeCouponProduct() {CouponId = coupon.Id, ProductId = item});
+                }
+                await _context.SaveChangesAsync();
+                coupon.CouponProductCategories.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in CouponCategoryId) {
+                    coupon.CouponProductCategories.Add(new CouponProductCategory() {CouponId = coupon.Id,ProductCategoryId = item });
+                }
+                await _context.SaveChangesAsync();
+                coupon.ExcludeCouponProductCategories.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in ExcludeCouponCategoryId) {
+                    coupon.ExcludeCouponProductCategories.Add(new ExcludeCouponProductCategory() {CouponId = coupon.Id,ProductCategoryId = item });
+                }
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.Products = new MultiSelectList(_context.Products.ToList(),"Id","Name");
+            ViewBag.ProductCategories = new MultiSelectList(_context.ProductCategories.ToList(),"Id","Name");
             return View(coupon);
         }
         [Authorize(Roles="ADMIN,CouponEdit")]
         // GET: CmsCore/Coupons/Edit/5
-        public async Task<IActionResult> Edit(long? id, AppTenant tenant)
+        public async Task<IActionResult> Edit(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var coupon = await _context.Coupons.SingleOrDefaultAsync(m => m.Id == id);
+            var coupon = await _context.Coupons.Include(i=>i.CouponProducts).Include(i=>i.ExcludeCouponProducts).Include(i=>i.CouponProductCategories).Include(i=>i.ExcludeCouponProductCategories).SingleOrDefaultAsync(m => m.Id == id);
             if (coupon == null)
             {
                 return NotFound();
             }
-            coupon.CreatedBy = User.Identity.Name ?? "username";
-            coupon.CreateDate = DateTime.Now;
             coupon.UpdatedBy = User.Identity.Name ?? "username";
             coupon.UpdateDate = DateTime.Now;
             coupon.AppTenantId = tenant.AppTenantId;
+            ViewBag.Products = new MultiSelectList(_context.Products.ToList(),"Id","Name",coupon.CouponProducts.Select(c=>c.ProductId).ToList());
+            ViewBag.Products2 = new MultiSelectList(_context.Products.ToList(),"Id","Name",coupon.ExcludeCouponProducts.Select(c=>c.ProductId).ToList());
+            ViewBag.ProductCategories = new MultiSelectList(_context.ProductCategories.ToList(),"Id","Name",coupon.CouponProductCategories.Select(c=>c.ProductCategoryId).ToList());
+            ViewBag.ProductCategories2 = new MultiSelectList(_context.ProductCategories.ToList(),"Id","Name",coupon.ExcludeCouponProductCategories.Select(c=>c.ProductCategoryId).ToList());
             return View(coupon);
         }
         [Authorize(Roles="ADMIN,CouponEdit")]
@@ -104,7 +135,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("LimitPerCoupon,LimitUse,LimitPerUser,DiscountType,CouponCode,Description,CouponAmount,AllowFreeShipping,ExpirationDate,MinimumSpending,MaximumSpending,OnlyIndividualUse,ExcludeDiscountProduct,RestrictedEmails,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Coupon coupon, AppTenant tenant)
+        public async Task<IActionResult> Edit(long id, [Bind("LimitPerCoupon,LimitUse,LimitPerUser,DiscountType,CouponCode,Description,CouponAmount,AllowFreeShipping,ExpirationDate,MinimumSpending,MaximumSpending,OnlyIndividualUse,ExcludeDiscountProduct,RestrictedEmails,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Coupon coupon, long[] CouponProductId, long[] ExcludeCouponProductId, long[] CouponCategoryId, long[] ExcludeCouponCategoryId)
         {
             if (id != coupon.Id)
             {
@@ -115,13 +146,37 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             {
                 try
                 {
-                    coupon.CreatedBy = User.Identity.Name ?? "username";
-                    coupon.CreateDate = DateTime.Now;
+                
                     coupon.UpdatedBy = User.Identity.Name ?? "username";
                     coupon.UpdateDate = DateTime.Now;
                     coupon.AppTenantId = tenant.AppTenantId;
                     _context.Update(coupon);
                     await _context.SaveChangesAsync();
+                    coupon = _context.Coupons.Include(i=>i.CouponProducts).Include(i=>i.ExcludeCouponProducts).Include(i=>i.CouponProductCategories).Include(i=>i.ExcludeCouponProductCategories).FirstOrDefault(f=>f.Id == coupon.Id);
+                coupon.CouponProducts.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in CouponProductId) {
+                    coupon.CouponProducts.Add(new CouponProduct() {CouponId = coupon.Id, ProductId = item });
+                }
+                await _context.SaveChangesAsync();
+                coupon.ExcludeCouponProducts.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in ExcludeCouponProductId) {
+                    coupon.ExcludeCouponProducts.Add(new ExcludeCouponProduct() {CouponId = coupon.Id, ProductId = item});
+                }
+                await _context.SaveChangesAsync();
+                coupon.CouponProductCategories.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in CouponCategoryId) {
+                    coupon.CouponProductCategories.Add(new CouponProductCategory() {CouponId = coupon.Id,ProductCategoryId = item });
+                }
+                await _context.SaveChangesAsync();
+                coupon.ExcludeCouponProductCategories.Clear();
+                await _context.SaveChangesAsync();
+                foreach (var item in ExcludeCouponCategoryId) {
+                    coupon.ExcludeCouponProductCategories.Add(new ExcludeCouponProductCategory() {CouponId = coupon.Id,ProductCategoryId = item });
+                }
+                await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -136,6 +191,10 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewBag.Products = new MultiSelectList(_context.Products.ToList(),"Id","Name",coupon.CouponProducts.Select(c=>c.ProductId).ToList());
+            ViewBag.Products2 = new MultiSelectList(_context.Products.ToList(),"Id","Name",coupon.ExcludeCouponProducts.Select(c=>c.ProductId).ToList());
+            ViewBag.ProductCategories = new MultiSelectList(_context.ProductCategories.ToList(),"Id","Name",coupon.CouponProductCategories.Select(c=>c.ProductCategoryId).ToList());
+            ViewBag.ProductCategories2 = new MultiSelectList(_context.ProductCategories.ToList(),"Id","Name",coupon.ExcludeCouponProductCategories.Select(c=>c.ProductCategoryId).ToList());
             return View(coupon);
         }
         [Authorize(Roles="ADMIN,CouponDelete")]

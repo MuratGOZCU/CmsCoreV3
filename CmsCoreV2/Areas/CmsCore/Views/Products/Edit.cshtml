@@ -348,7 +348,7 @@
                 <div id="attributeItems">
                     @foreach (var attr in ViewBag.AttributesList)
                     {
-               if (Model.ProductAttributeItems.Where(a=>a.AttributeItem.AttributeId==attr.Id).Any()) {
+               if (Model.ProductAttributeItems != null && Model.ProductAttributeItems.Where(a=>a.AttributeItem.AttributeId==attr.Id).Any()) {
                     <div class="form-group">
                     <div class="col-md-2"><label id="attr@(attr.Id)">@attr.Name</label>
                     </div>
