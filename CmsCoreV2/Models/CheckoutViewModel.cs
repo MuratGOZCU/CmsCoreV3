@@ -8,6 +8,7 @@ namespace CmsCoreV2.Models
 {
     public class CheckoutViewModel
     {
+        public long CartId {get; set;}
         public Cart Cart { get; set; }
         [Required]
         [StringLength(200)]

@@ -199,7 +199,51 @@ namespace CmsCoreV2.Controllers
         }
         public IActionResult Checkout(CheckoutViewModel viewModel)
         {
-            return View("CheckoutCompleted", viewModel);
+            if (ModelState.IsValid) {
+                string owner = User.Identity.Name;
+                if (string.IsNullOrEmpty(owner))
+                {
+                    owner = HttpContext.Session.Id;
+                }
+                var cart = GetMyCart(owner);
+                if (cart == null) {
+                    return Redirect("/tr/sepet?status=-1");
+                }
+                var order = new Order();
+                order.OrderDate = DateTime.Now;
+                order.CreateDate = DateTime.Now;
+                order.CreatedBy = User.Identity.Name ?? "(Bilinmeyen)";
+                order.UpdateDate = DateTime.Now;
+                order.UpdatedBy = User.Identity.Name ?? "(Bilinmeyen)";
+                order.Owner = owner;
+                order.OrderStatus = OrderStatus.PaymentWaiting;
+                order.AppTenantId = tenant.AppTenantId;
+                order.BillingAddress = viewModel.BillingAddress;
+                order.BillingCity = viewModel.BillingCity;
+                order.BillingCompanyName = viewModel.BillingCompanyName;
+                order.BillingCountry = viewModel.BillingCounty;
+                order.BillingEmail = viewModel.BillingEmail;
+                order.BillingFirstName = viewModel.BillingFirstName;
+                order.BillingLastName = viewModel.BillingLastName;
+                order.BillingIdentityNumber = viewModel.BillingIdentityNumber;
+                order.BillingPhone = viewModel.BillingPhone;
+                order.BillingStreet = viewModel.BillingStreet;
+                order.BillingZipCode = viewModel.BillingZipCode;
+                order.DeliveryAddress = viewModel.DeliveryAddress;
+                order.DeliveryCity = viewModel.DeliveryCity;
+                order.DeliveryCompanyName = viewModel.DeliveryCompanyName;
+                order.DeliveryCountry = viewModel.DeliveryCountry;
+                order.DeliveryCounty = viewModel.DeliveryCounty;
+                order.DeliveryFirstName = viewModel.DeliveryFirstName;
+                order.DeliveryLastName = viewModel.DeliveryLastName;
+                order.DeliveryStreet = viewModel.DeliveryStreet;
+                order.DeliveryZipCode = viewModel.DeliveryZipCode;
+                order.CartId = viewModel.CartId;
+                
+
+                return View("CheckoutCompleted", viewModel);
+            }
+            return Redirect("/tr/kasa?status=0");
         }
         public IActionResult ApplyCoupon(string couponCode) {
             string owner = User.Identity.Name;

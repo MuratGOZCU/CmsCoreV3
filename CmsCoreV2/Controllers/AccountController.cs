@@ -26,6 +26,7 @@ namespace CmsCoreV2.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         protected readonly AppTenant tenant;
+        private readonly ApplicationDbContext _context;
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -37,6 +38,7 @@ namespace CmsCoreV2.Controllers
             _emailSender = emailSender;
             _logger = logger;
             this.tenant = tenant.Value;
+            this._context = context;
         }
 
         [TempData]
@@ -223,7 +225,9 @@ namespace CmsCoreV2.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name");
+            var model = new RegisterViewModel();
+            return View(model);
         }
 
         [HttpPost]
@@ -234,12 +238,19 @@ namespace CmsCoreV2.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName,
-                Address = model.Address, Street = model.Street, City = model.City, Country = model.Country, County = model.County, ZipCode = model.ZipCode,
-                Phone = model.Phone, AppTenantId = tenant.AppTenantId };
+                
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, AppTenantId = tenant.AppTenantId };
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    
+                    var customer = new Customer {FirstName = model.FirstName, LastName = model.LastName,
+                Address = model.Address, Street = model.Street, City = model.City, Country = model.Country, County = model.County, ZipCode = model.ZipCode,
+                Phone = model.Phone, UserName = model.Email};
+                _context.Customers.Add(customer);
+                user.CustomerId = customer.Id;
+                await _userManager.UpdateAsync(user);
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -250,10 +261,12 @@ namespace CmsCoreV2.Controllers
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
+            
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",model.Country);
             return View(model);
         }
 

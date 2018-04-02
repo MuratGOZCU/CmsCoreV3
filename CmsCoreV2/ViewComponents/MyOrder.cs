@@ -46,7 +46,7 @@ namespace CmsCoreV2.ViewComponents
         }
         private async Task<Order> GetMyOrder(long orderId, string email)
         {
-            var order = await _context.Orders.Include(i=>i.OrderItems).ThenInclude(t=>t.Product).FirstOrDefaultAsync(c=> c.Id == orderId && c.Email == email);
+            var order = await _context.Orders.Include(i=>i.OrderItems).ThenInclude(t=>t.Product).FirstOrDefaultAsync(c=> c.Id == orderId && c.BillingEmail == email);
             return order;
         }
         

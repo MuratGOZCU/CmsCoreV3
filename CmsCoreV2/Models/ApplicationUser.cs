@@ -12,6 +12,9 @@ namespace CmsCoreV2.Models
     public class ApplicationUser : IdentityUser
     {
         public string AppTenantId { get; set; }
+        public long? CustomerId {get; set;}
+        public Customer Customer {get; set;}
+        /*
         [Required]
         [StringLength(200)]
         [Display(Name = "Ad")]
@@ -47,6 +50,6 @@ namespace CmsCoreV2.Models
         [Required]
         [StringLength(200)]
         [Display(Name = "Telefon")]
-        public string Phone { get; set; }
+        public string Phone { get; set; }*/
     }
 }

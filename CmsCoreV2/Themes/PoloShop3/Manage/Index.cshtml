@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Hesabınızı yönetin";
 }
-
+<form method="post">
 <section class="p-b-10" style="padding-top:30px;">
     <div class="container">
         <div class="row">
@@ -12,8 +12,6 @@
                     <div class="post-meta">
                         <div class="event-detail-des">
                             <div class="event-detail-des-content">
-
-
                                 <h4>Hesabınızın ayarlarını değiştirin</h4>
                                 <hr />
                                 <dl class="dl-horizontal">
@@ -68,11 +66,12 @@
                                 <hr />
                                 <div class="row">
                                     <div class="col-md-12 center no-padding">
+                                        <div class="row">
                                         <div class="col-md-12">
 
                                             <div asp-validation-summary="All" class="text-danger"></div>
                                         </div>
-
+                                        
                                         <div class="col-md-6 form-group">
                                             <label class="sr-only" asp-for="FirstName">Ad</label>
                                             <input type="text" class="form-control input-lg" placeholder="Ad" asp-for="FirstName">
@@ -82,36 +81,74 @@
                                         </div>
 
 
+                                        
                                         <div class="col-md-6 form-group">
-                                            <label class="sr-only" asp-for="Address">Adres</label>
-                                            <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="Address">
+                                            <label class="sr-only" asp-for="Country">Ülke</label>
+                                            <select asp-for="Country" class="form-control" asp-items="@ViewBag.Countries" onchange='LoadOptions($("#City"), $("#Country").val(), "/Home/GetCities", "Şehir seçiniz", function() {$("#City").val("");LoadOptions($("#County"),$("#City").val(),"/Home/GetCounties","İlçe seçiniz",function() {alert("İlçeler yüklendi");});});'>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="City">Şehir</label>
+                                            <select asp-for="City" class="form-control" onchange="LoadOptions($('#County'),$('#City').val(),'/Home/GetCounties','İlçe seçiniz',function() {});">
+                                <option value="">Şehir seçiniz</option>
+                            </select>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label class="sr-only" asp-for="County">İlçe</label>
+                                            <select asp-for="County" class="form-control">
+                                <option value="">İlçe seçiniz</option>
+                            </select>
+                            <script>
+                            window.onload = function() {
+                                LoadOptions($("#City"), $("#Country").val(), "/Home/GetCities", "Şehir seçiniz", function() {$("#City").val('@(Model.City)'); LoadOptions($("#County"),$("#City").val(),"/Home/GetCounties","İlçe seçiniz", function() {$("#County").val('@(Model.County)');});});
+                            }
+
+                            function LoadOptions(elm, parentId, url, defaultOption,done) {
+                                
+                                elm.empty();
+                                $.post(url,{parentId:parentId},function(result) {
+                                        elm.append('<option value="">' + defaultOption + '</option>');
+                                        $.each(result, function(i, item) {
+                                            elm.append('<option value="'+item.code+'">'+item.name+'</option>');
+                                            done();
+                                        });
+                                });
+                            
+                                
+                            }
+                            </script>
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label class="sr-only" asp-for="Street">Cadde/Sokak</label>
                                             <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="Street">
                                         </div>
-                                        <div class="col-md-6 form-group">
-                                            <label class="sr-only" asp-for="City">Şehir</label>
-                                            <input type="text" class="form-control input-lg" placeholder="Şehir" asp-for="City">
                                         </div>
+                                        <div class="row">
                                         <div class="col-md-6 form-group">
-                                            <label class="sr-only" asp-for="County">İlçe</label>
-                                            <input type="text" class="form-control input-lg" placeholder="İlçe" asp-for="County">
+                                            <label class="sr-only" asp-for="Address">Adres</label>
+                                            <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="Address">
                                         </div>
                                         <div class="col-md-6 form-group">
                                             <label class="sr-only" asp-for="ZipCode">Posta Kodu</label>
                                             <input type="text" class="form-control input-lg" placeholder="Posta Kodu" asp-for="ZipCode">
                                         </div>
-                                        <div class="col-md-6 form-group">
-                                            <label class="sr-only" asp-for="Country">Ülke</label>
-                                            <input type="text" class="form-control input-lg" placeholder="Ülke" asp-for="Country">
                                         </div>
-                                        <div class="col-md-6 form-group">
+                                        <div class="row">
+    
+                                            <div class="col-md-6 ">
                                             <label class="sr-only" asp-for="Phone">Telefon</label>
                                             <input type="text" class="form-control input-lg" placeholder="Telefon" asp-for="Phone">
                                         </div>
+                                        <div class="col-md-6 ">
+                                            <label class="sr-only" asp-for="Email">E-posta</label>
+                                            <input type="text" class="form-control input-lg" placeholder="E-posta" readonly asp-for="Email" />
+                                        </div>
+                                        
+                                        </div>
+                                        <div class="row">
                                         <div class="col-md-12 form-group">
                                             <button type="submit" class="btn btn-default">Kaydet</button><a class="btn btn-danger m-l-10" href="/">İptal</a>
+                                        </div>
                                         </div>
 
                                     </div>
@@ -126,3 +163,4 @@
 </div>
 </div>
 </section>
+</form>

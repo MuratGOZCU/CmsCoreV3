@@ -4,6 +4,26 @@
 }
 
 <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+    <script>
+        window.onload = function() {
+            LoadOptions($("#City"), $("#Country").val(), "/Home/GetCities", "Şehir seçiniz", function() {$("#City").val("@Model.City"); LoadOptions($("#County"),$("#City").val(),"/Home/GetCounties","İlçe seçiniz", function() {$("#County").val("@Model.County");});});
+            // LoadOptions($("#DeliveryCity"), $("#DeliveryCountry").val(), "/Home/GetCities", "Şehir seçiniz", function() {LoadOptions($("#DeliveryCounty"),$("#DeliveryCity").val(),"/Home/GetCounties","İlçe seçiniz",function() {});});
+        }
+
+        function LoadOptions(elm, parentId, url, defaultOption,done) {
+            
+            elm.empty();
+            $.post(url,{parentId:parentId},function(result) {
+                    elm.append('<option value="">' + defaultOption + '</option>');
+                    $.each(result, function(i, item) {
+                        elm.append('<option value="'+item.code+'">'+item.name+'</option>');
+                        done();
+                    });
+            });
+           
+            
+        }
+        </script>
     <section>
         <div class="container">
             <div class="row">
@@ -20,32 +40,36 @@
                     </div><div class="col-md-6 form-group">
                         <label class="sr-only">Soyad</label>
                         <input type="text" class="form-control input-lg" placeholder="Soyad" asp-for="LastName">
-                    </div>
-
-
+                    </div>                    
                     <div class="col-md-6 form-group">
-                        <label class="sr-only" asp-for="Address">Adres</label>
-                        <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="Address">
+                        <label class="sr-only" asp-for="Country">Ülke</label>
+                        <select asp-for="Country" asp-items="@ViewBag.Countries" onchange='LoadOptions($("#City"), $("#Country").val(), "/Home/GetCities", "Şehir seçiniz", function() {LoadOptions($("#County"),$("#City").val(),"/Home/GetCounties","İlçe seçiniz",function() {});});'>
+                        <option value="">Ülke seçiniz</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="City">Şehir</label>
+                        <select asp-for="City" onchange="LoadOptions($('#County'),$('#City').val(),'/Home/GetCounties','İlçe seçiniz',function() {});">
+                            <option value="">Şehir seçiniz</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="sr-only" asp-for="County">İlçe</label>
+                        <select asp-for="County">
+                            <option value="">İlçe seçiniz</option>
+                        </select>
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="sr-only" asp-for="Street">Cadde/Sokak</label>
                         <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="Street">
                     </div>
                     <div class="col-md-6 form-group">
-                        <label class="sr-only" asp-for="City">Şehir</label>
-                        <input type="text" class="form-control input-lg" placeholder="Şehir" asp-for="City">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label class="sr-only" asp-for="County">İlçe</label>
-                        <input type="text" class="form-control input-lg" placeholder="İlçe" asp-for="County">
+                        <label class="sr-only" asp-for="Address">Adres</label>
+                        <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="Address">
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="sr-only" asp-for="ZipCode">Posta Kodu</label>
                         <input type="text" class="form-control input-lg" placeholder="Posta Kodu" asp-for="ZipCode">
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label class="sr-only" asp-for="Country">Ülke</label>
-                        <input type="text" class="form-control input-lg" placeholder="Ülke" asp-for="Country">
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="sr-only" asp-for="Phone">Telefon</label>

@@ -101,29 +101,41 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("AppTenantId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,FirstName,LastName,Address,Street,City,Country,County,ZipCode,Phone")] ApplicationUser applicationUser, IEnumerable<string> RoleId)
+        public async Task<IActionResult> Edit(string id, [Bind("AppTenantId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled")] ApplicationUser applicationUser, Customer c, IEnumerable<string> RoleId)
         {
             if (id != applicationUser.Id)
             {
                 return NotFound();
             }
             var user = _context.ApplicationUser.FirstOrDefault(f=>f.Id == id);
+            var customer = _context.Customers.FirstOrDefault(f=>f.Id == user.CustomerId);
             if (ModelState.IsValid)
             {
                 try
                 {
-                    
-                    user.FirstName = applicationUser.FirstName;
-                    user.LastName = applicationUser.LastName;
-                    user.City = applicationUser.City;
-                    user.Address = applicationUser.Address;
-                    user.Country = applicationUser.Country;
-                    user.County = applicationUser.County;
-                    user.Phone = applicationUser.Phone;
-                    user.Street = applicationUser.Street;
-                    user.ZipCode = applicationUser.ZipCode;
-                    user.AppTenantId = tenant.AppTenantId;
-                    _context.Update(user);
+                    var isNew = false;
+                    if (customer != null) {
+                        customer = new Customer();
+                        isNew = true;
+                    }
+                    customer.FirstName = c.FirstName;
+                    customer.LastName = c.LastName;
+                    customer.City = c.City;
+                    customer.Address = c.Address;
+                    customer.Country = c.Country;
+                    customer.County = c.County;
+                    customer.Phone = c.Phone;
+                    customer.Street = c.Street;
+                    customer.ZipCode = c.ZipCode;
+                    customer.AppTenantId = tenant.AppTenantId;
+                    customer.UserName = user.UserName;
+                    if (isNew) {
+                        _context.Add(customer);
+                        user.CustomerId = customer.Id;
+                    } else {
+                        _context.Update(customer);
+                        _context.Update(user);
+                    }
                     await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
                     await _context.SaveChangesAsync();
                     await _userManager.AddToRolesAsync(user, RoleId);

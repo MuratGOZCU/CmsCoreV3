@@ -12,18 +12,23 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using SaasKit.Multitenancy;
+
 namespace CmsCoreV2.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
-    public class ManageController : Controller
+    public class ManageController:Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        protected readonly AppTenant tenant;
+        private readonly ApplicationDbContext _context;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
@@ -32,13 +37,15 @@ namespace CmsCoreV2.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder, ApplicationDbContext context)
+          UrlEncoder urlEncoder, ApplicationDbContext context, ITenant<AppTenant> tenant)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            this._context = context;
+            this.tenant = tenant.Value;
         }
 
         [TempData]
@@ -48,20 +55,30 @@ namespace CmsCoreV2.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+            
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
+            var customer = _context.Customers.FirstOrDefault(f=>f.Id == user.CustomerId);
             var model = new IndexViewModel
             {
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Country = customer.Country,
+                City = customer.City,
+                County = customer.County,
+                Address = customer.Address,
+                Phone = customer.Phone,
+                Street = customer.Street,
+                ZipCode = customer.ZipCode
             };
-
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name","TR");
             return View(model);
         }
 
@@ -71,6 +88,7 @@ namespace CmsCoreV2.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Countries = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",model.Country);
                 return View(model);
             }
 
@@ -99,8 +117,20 @@ namespace CmsCoreV2.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
-
-            StatusMessage = "Your profile has been updated";
+            var customer = _context.Customers.FirstOrDefault(f=>f.Id == user.CustomerId);
+            customer.FirstName = model.FirstName;
+            customer.LastName = model.LastName;
+            customer.Country = model.Country;
+            customer.City = model.City;
+            customer.County = model.County;
+            customer.Address = model.Address;
+            customer.Phone = model.Phone;
+            customer.Street = model.Street;
+            customer.ZipCode = model.ZipCode;
+            _context.Customers.Update(customer);
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            StatusMessage = "Profil güncellendi";
             return RedirectToAction(nameof(Index));
         }
 

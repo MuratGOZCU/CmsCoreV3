@@ -23,7 +23,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.BillingCity).Include(c => c.BillingCountry).Include(c => c.BillingDistrict).Include(c => c.ShippingCity).Include(c => c.ShippingCountry).Include(c => c.ShippingDistrict);
+            var applicationDbContext = _context.Customers;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,12 +36,6 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.BillingCity)
-                .Include(c => c.BillingCountry)
-                .Include(c => c.BillingDistrict)
-                .Include(c => c.ShippingCity)
-                .Include(c => c.ShippingCountry)
-                .Include(c => c.ShippingDistrict)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -90,12 +84,12 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingCityId);
-            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingCountryId);
-            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingDistrictId);
-            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingCityId);
-            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingCountryId);
-            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingDistrictId);
+            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.City);
+            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.Country);
+            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.County);
+            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCity);
+            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCountry);
+            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCounty);
             return View(customer);
         }
 
@@ -117,12 +111,12 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             customer.UpdateDate = DateTime.Now;
             customer.AppTenantId = tenant.AppTenantId;
 
-            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingCityId);
-            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingCountryId);
-            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingDistrictId);
-            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingCityId);
-            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingCountryId);
-            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingDistrictId);
+            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.City);
+            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.Country);
+            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.County);
+            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCity);
+            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCountry);
+            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCounty);
             return View(customer);
         }
 
@@ -162,12 +156,12 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingCityId);
-            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingCountryId);
-            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Id", "Name", customer.BillingDistrictId);
-            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingCityId);
-            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingCountryId);
-            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Id", "Name", customer.ShippingDistrictId);
+            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.City);
+            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.Country);
+            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.County);
+            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCity);
+            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCountry);
+            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCounty);
             return View(customer);
         }
 
@@ -180,12 +174,6 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
 
             var customer = await _context.Customers
-                .Include(c => c.BillingCity)
-                .Include(c => c.BillingCountry)
-                .Include(c => c.BillingDistrict)
-                .Include(c => c.ShippingCity)
-                .Include(c => c.ShippingCountry)
-                .Include(c => c.ShippingDistrict)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
