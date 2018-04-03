@@ -247,7 +247,7 @@ namespace CmsCoreV2.Controllers
                     
                     var customer = new Customer {FirstName = model.FirstName, LastName = model.LastName,
                 Address = model.Address, Street = model.Street, City = model.City, Country = model.Country, County = model.County, ZipCode = model.ZipCode,
-                Phone = model.Phone, UserName = model.Email};
+                Phone = model.Phone, UserName = model.Email, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
                 _context.Customers.Add(customer);
                 user.CustomerId = customer.Id;
                 await _userManager.UpdateAsync(user);

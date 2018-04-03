@@ -56,12 +56,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             customer.AppTenantId = tenant.AppTenantId;
 
 
-            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Id", "Name");
-            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Id", "Name");
-            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Id", "Name");
-            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Id", "Name");
-            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Id", "Name");
-            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Id", "Name");
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
             return View(customer);
         }
 
@@ -70,7 +65,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BillingAddress,BillingFirstName,BillingLastName,BillingCompanyName,BillingDistrictId,BillingCityId,BillingZipCode,BillingCountryId,ShippingAddress,ShippingFirstName,ShippingLastName,ShippingCompanyName,ShippingDistrictId,ShippingCityId,ShippingCountryId,ShippingZipCode,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Customer customer)
+        public async Task<IActionResult> Create(Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -84,12 +79,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.City);
-            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.Country);
-            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.County);
-            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCity);
-            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCountry);
-            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCounty);
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
             return View(customer);
         }
 
@@ -111,12 +101,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             customer.UpdateDate = DateTime.Now;
             customer.AppTenantId = tenant.AppTenantId;
 
-            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.City);
-            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.Country);
-            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.County);
-            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCity);
-            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCountry);
-            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCounty);
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
             return View(customer);
         }
 
@@ -125,7 +110,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("BillingAddress,BillingFirstName,BillingLastName,BillingCompanyName,BillingDistrictId,BillingCityId,BillingZipCode,BillingCountryId,ShippingAddress,ShippingFirstName,ShippingLastName,ShippingCompanyName,ShippingDistrictId,ShippingCityId,ShippingCountryId,ShippingZipCode,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Customer customer)
+        public async Task<IActionResult> Edit(long id, Customer customer)
         {
             if (id != customer.Id)
             {
@@ -156,12 +141,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["BillingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.City);
-            ViewData["BillingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.Country);
-            ViewData["BillingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.County);
-            ViewData["ShippingCityId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCity);
-            ViewData["ShippingCountryId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCountry);
-            ViewData["ShippingDistrictId"] = new SelectList(_context.Regions, "Code", "Name", customer.ShippingCounty);
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
             return View(customer);
         }
 

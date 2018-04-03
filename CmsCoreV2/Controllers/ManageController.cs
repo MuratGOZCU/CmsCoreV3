@@ -68,15 +68,15 @@ namespace CmsCoreV2.Controllers
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                Country = customer.Country,
-                City = customer.City,
-                County = customer.County,
-                Address = customer.Address,
-                Phone = customer.Phone,
-                Street = customer.Street,
-                ZipCode = customer.ZipCode
+                FirstName = customer?.FirstName,
+                LastName = customer?.LastName,
+                Country = customer?.Country,
+                City = customer?.City,
+                County = customer?.County,
+                Address = customer?.Address,
+                Phone = customer?.Phone,
+                Street = customer?.Street,
+                ZipCode = customer?.ZipCode
             };
             ViewBag.Countries = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name","TR");
             return View(model);
@@ -127,6 +127,8 @@ namespace CmsCoreV2.Controllers
             customer.Phone = model.Phone;
             customer.Street = model.Street;
             customer.ZipCode = model.ZipCode;
+            customer.UpdateDate = DateTime.Now;
+            customer.UpdatedBy = User.Identity.Name;
             _context.Customers.Update(customer);
             _context.Users.Update(user);
             _context.SaveChanges();
