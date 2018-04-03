@@ -13,7 +13,18 @@ namespace CmsCoreV2.Models
         {
         
         }
-
+        [Display(Name = "Ürün Adı")]
+        [StringLength(200)]
+        public string ProductName {get; set;}
+       [StringLength(200)]
+        [Display(Name = "Bağlantı")]
+        public string Slug { get; set; }
+        [Display(Name = "Açıklama")]
+        public string Description { get; set; }        
+        [Display(Name = "Satış Fiyatı")]
+        public float SalePrice { get; set; }
+        [Display(Name = "Stok Kodu")]
+        public string StockCode { get; set; }
         [Display(Name = "Adet")]
         public int Quantity { get; set; }
         [Display(Name = "Toplam Fiyat")]

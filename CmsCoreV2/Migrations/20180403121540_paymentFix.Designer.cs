@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180403121540_paymentFix")]
+    partial class paymentFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1114,8 +1115,6 @@ namespace CmsCoreV2.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
-                    b.Property<string>("DeliveryNotes");
-
                     b.Property<string>("DeliveryStreet")
                         .IsRequired()
                         .HasMaxLength(200);
@@ -1217,16 +1216,11 @@ namespace CmsCoreV2.Migrations
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(200);
 
-                    b.Property<string>("Description");
-
                     b.Property<float>("DiscountPrice");
 
                     b.Property<long>("OrderId");
 
                     b.Property<long?>("ProductId");
-
-                    b.Property<string>("ProductName")
-                        .HasMaxLength(200);
 
                     b.Property<int>("Quantity");
 
@@ -1234,14 +1228,7 @@ namespace CmsCoreV2.Migrations
 
                     b.Property<string>("RefundDetails");
 
-                    b.Property<float>("SalePrice");
-
                     b.Property<float>("ShippingPrice");
-
-                    b.Property<string>("Slug")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("StockCode");
 
                     b.Property<float>("TotalPrice");
 

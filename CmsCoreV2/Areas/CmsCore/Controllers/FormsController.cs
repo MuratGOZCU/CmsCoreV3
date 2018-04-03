@@ -12,6 +12,7 @@ using Z.EntityFramework.Plus;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
@@ -67,7 +68,31 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             }
             return Content(sw.ToString(), "text/csv", System.Text.Encoding.UTF8);
         }
-
+        public async Task<IActionResult> Clone(long id) {
+            var form = await _context.Forms.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            form.Id = 0;             
+            string cloneString = JsonConvert.SerializeObject(form);
+            Form form2 = JsonConvert.DeserializeObject<Form>(cloneString);
+            form2.CreateDate = DateTime.Now;
+            form2.CreatedBy = User.Identity.Name ?? "username";
+            form2.UpdateDate = DateTime.Now;
+            form2.UpdatedBy = User.Identity.Name ?? "username";            
+            form2.FormName += " (Kopya)";
+            form2.Slug += "-kopya";
+            _context.Forms.Add(form2);
+            _context.SaveChanges();
+            form2.FormFields = new HashSet<FormField>();
+            var formFields = _context.FormFields.AsNoTracking().Where(w=>w.FormId == id).ToList();
+            foreach (var item in formFields) {
+                item.Id = 0;             
+                string cloneString2 = JsonConvert.SerializeObject(item);
+                FormField item2 = JsonConvert.DeserializeObject<FormField>(cloneString2);            
+                item2.FormId = form2.Id;
+                form2.FormFields.Add(item2);
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Edit", new {id=form2.Id});
+        }
         // GET: CmsCore/Forms
         public async Task<IActionResult> Index()
         {

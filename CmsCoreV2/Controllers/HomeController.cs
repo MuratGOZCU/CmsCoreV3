@@ -12,6 +12,7 @@ using Z.EntityFramework.Plus;
 using SaasKit.Multitenancy;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace CmsCoreV2.Controllers
 {
@@ -20,11 +21,18 @@ namespace CmsCoreV2.Controllers
         protected readonly AppTenant tenant;
         private readonly ApplicationDbContext _context;
         private readonly IFeedbackService feedbackService;
-        public HomeController(ApplicationDbContext context, IFeedbackService _feedbackService, ITenant<AppTenant> _tenant)
+        private UserManager<ApplicationUser> userManager;
+        private SignInManager<ApplicationUser> signInManager;
+        private IEmailSender emailSender;
+        public HomeController(ApplicationDbContext context, SignInManager<ApplicationUser> signInManager,
+            IEmailSender emailSender, UserManager<ApplicationUser> userManager, IFeedbackService _feedbackService, ITenant<AppTenant> _tenant)
         {
             _context = context;
             this.feedbackService = _feedbackService;
             this.tenant = _tenant.Value;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+            this.emailSender = emailSender;
         }
         public string GetCategoryName(long id)
         {
@@ -197,7 +205,7 @@ namespace CmsCoreV2.Controllers
         public IList<Region> GetCounties(string parentId) {
             return _context.Regions.Where(r=>r.RegionType == RegionType.District && r.ParentRegion.Code == parentId).OrderBy(o=>o.Name).ToList();
         }
-        public IActionResult Checkout(CheckoutViewModel viewModel)
+        public async Task<IActionResult> Checkout(CheckoutViewModel viewModel)
         {
             if (ModelState.IsValid) {
                 string owner = User.Identity.Name;
@@ -209,7 +217,40 @@ namespace CmsCoreV2.Controllers
                 if (cart == null) {
                     return Redirect("/tr/sepet?status=-1");
                 }
-                var order = new Order();
+                if (string.IsNullOrEmpty(owner) && string.IsNullOrEmpty(viewModel.Password)) {
+                    return Redirect("/tr/kasa?status=1");
+                }
+                else if (string.IsNullOrEmpty(owner)) {
+                    var user = new ApplicationUser { UserName = viewModel.BillingEmail, Email = viewModel.BillingEmail, AppTenantId = tenant.AppTenantId };
+                    var result = await userManager.CreateAsync(user, viewModel.Password);
+
+                    if (result.Succeeded)
+                    {
+                        var customer = new Customer {FirstName = viewModel.BillingFirstName, LastName = viewModel.BillingLastName,
+                        Address = viewModel.BillingAddress, Street = viewModel.BillingStreet, City = viewModel.BillingCity, Country = viewModel.BillingCountry, County = viewModel.BillingCounty, ZipCode = viewModel.BillingZipCode,
+                        Phone = viewModel.BillingPhone, UserName = viewModel.BillingEmail, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
+                        _context.Customers.Add(customer);
+                        _context.SaveChanges();
+                        user.CustomerId = customer.Id;
+                        await userManager.UpdateAsync(user);
+                        var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                        await emailSender.SendEmailConfirmationAsync(viewModel.BillingEmail, callbackUrl);
+                        await signInManager.SignInAsync(user, isPersistent: false);                    
+                    } else
+                    {
+                        string errors = "";
+                        foreach (var error in result.Errors)
+                        {
+                            errors += error.Description + "|";
+                        }
+                        return Redirect("/tr/kasa?errors="+errors);
+                    }
+                }
+                var u = await userManager.GetUserAsync(User);
+                var c = _context.Customers.FirstOrDefault(f=>f.Id == u.CustomerId);
+                
+                var order = new Order();            
                 order.OrderDate = DateTime.Now;
                 order.CreateDate = DateTime.Now;
                 order.CreatedBy = User.Identity.Name ?? "(Bilinmeyen)";
@@ -239,7 +280,16 @@ namespace CmsCoreV2.Controllers
                 order.DeliveryStreet = viewModel.DeliveryStreet;
                 order.DeliveryZipCode = viewModel.DeliveryZipCode;
                 order.CartId = viewModel.CartId;
-                
+                order.CustomerId = c.Id;
+                order.PaymentMethodId = _context.PaymentMethods.FirstOrDefault(f=>f.Code==viewModel.PaymentMethod).Id;
+                order.DeliveryNotes = viewModel.DeliveryNotes;
+                _context.Orders.Add(order);
+                foreach (var item in cart.CartItems) {
+                    var oi = new OrderItem() {AppTenantId=tenant.AppTenantId, CreateDate=DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name,
+                    OrderId=order.Id, ProductId=item.ProductId, SalePrice = item.Product.SalePrice.Value };
+                    order.OrderItems.Add(oi);
+                }
+                _context.SaveChanges();                        
 
                 return View("CheckoutCompleted", viewModel);
             }

@@ -119,6 +119,8 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         [Display(Name = "Posta Kodu")]
         public string DeliveryZipCode { get; set; }
+        [Display(Name = "Teslimat Notları")]
+        public string DeliveryNotes { get; set; }
         public string Owner {get; set;}
         public long CartId {get; set;}
         public virtual ICollection<OrderMetaField> OrderMetaFields { get; set; }

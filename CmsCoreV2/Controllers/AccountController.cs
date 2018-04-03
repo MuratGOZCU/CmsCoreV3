@@ -249,6 +249,7 @@ namespace CmsCoreV2.Controllers
                 Address = model.Address, Street = model.Street, City = model.City, Country = model.Country, County = model.County, ZipCode = model.ZipCode,
                 Phone = model.Phone, UserName = model.Email, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
                 _context.Customers.Add(customer);
+                _context.SaveChanges();
                 user.CustomerId = customer.Id;
                 await _userManager.UpdateAsync(user);
                     _logger.LogInformation("User created a new account with password.");

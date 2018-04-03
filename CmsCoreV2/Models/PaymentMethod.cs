@@ -10,34 +10,15 @@ namespace CmsCoreV2.Models
     {
         [StringLength(200)]
         public string Title { get; set; }
+        [StringLength(200)]
+        public string Code { get; set; }
         public bool Enable { get; set; }
         public string Description { get; set; }
-        public string Instructions { get; set; }
-        public string AccountName { get; set; }
-        public string AccountNumber { get; set; }
-        public string BankName { get; set; }
-        public string IBAN { get; set; }
-        public string BIC { get; set; }
-        public bool EnableCheckPayments { get; set; }
-        public bool EnablePayAtTheDoor { get; set; }
-        public ShippingMethod EnableForShipmentMethods { get; set; }
-        public bool AcceptForVirtualOrders { get; set; }
-        public bool EnablePayPalStandart { get; set; }
-        public string PayPalEmail { get; set; }
-        public bool PayPalTestMethod { get; set; }
-        public bool DebugRegister { get; set; }
-        public string BuyerEmail { get; set; }
-        public string PayPalIdentityKey { get; set; }
-        public string InvoiceFront { get; set; }
-        public bool SubmissionInformation { get; set; }
-        public bool AddressInvalid { get; set; }
-        public PaymentAction PaymentAction { get; set; }
-        public string PageFormat { get; set; }
-        public string ImageAddress { get; set; }
-        public string ApiUserName { get; set; }
-        public string ApiPassword { get; set; }
-        public string ApiSignature { get; set; }
-
-
+        [StringLength(200)]
+        public string ApiUrl {get; set;}
+        [StringLength(200)]
+        public string ApiUserName {get; set;}
+        [StringLength(200)]
+        public string ApiPassword {get; set;}
     }
 }
