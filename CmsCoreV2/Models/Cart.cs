@@ -20,7 +20,7 @@ namespace CmsCoreV2.Models
             return totalShippingPrice; } }
         public float DiscountPrice { get { return (SubtotalPrice + ShippingPrice) * (CartCoupons.Sum(c=>c.Coupon.CouponAmount) / 100); } }
         public float TotalPrice { get { return (SubtotalPrice + ShippingPrice)-(SubtotalPrice + ShippingPrice)*((CartCoupons.Sum(c=>c.Coupon.CouponAmount))/100); } }
-        public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual ICollection<CartItem> CartItems {get; set;}
         public virtual ICollection<CartCoupon> CartCoupons {get; set;}
         public string DestinationCityCode {get; set;}
         public bool IsCheckout {get; set;}

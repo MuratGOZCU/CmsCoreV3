@@ -86,7 +86,11 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             foreach (var item in formFields) {
                 item.Id = 0;             
                 string cloneString2 = JsonConvert.SerializeObject(item);
-                FormField item2 = JsonConvert.DeserializeObject<FormField>(cloneString2);            
+                FormField item2 = JsonConvert.DeserializeObject<FormField>(cloneString2); 
+                item2.CreateDate = DateTime.Now;
+                item2.CreatedBy = User.Identity.Name;
+                item2.UpdateDate = DateTime.Now;
+                item2.UpdatedBy = User.Identity.Name;
                 item2.FormId = form2.Id;
                 form2.FormFields.Add(item2);
             }

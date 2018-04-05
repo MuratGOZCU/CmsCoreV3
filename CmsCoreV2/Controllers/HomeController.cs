@@ -249,7 +249,15 @@ namespace CmsCoreV2.Controllers
                 }
                 var u = await userManager.GetUserAsync(User);
                 var c = _context.Customers.FirstOrDefault(f=>f.Id == u.CustomerId);
-                
+                if (c==null) {
+                        c = new Customer {FirstName = viewModel.BillingFirstName, LastName = viewModel.BillingLastName,
+                        Address = viewModel.BillingAddress, Street = viewModel.BillingStreet, City = viewModel.BillingCity, Country = viewModel.BillingCountry, County = viewModel.BillingCounty, ZipCode = viewModel.BillingZipCode,
+                        Phone = viewModel.BillingPhone, UserName = viewModel.BillingEmail, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
+                        _context.Customers.Add(c);
+                        _context.SaveChanges();                        
+                        u.CustomerId = c.Id;
+                        await userManager.UpdateAsync(u);
+                }
                 var order = new Order();            
                 order.OrderDate = DateTime.Now;
                 order.CreateDate = DateTime.Now;
@@ -261,8 +269,9 @@ namespace CmsCoreV2.Controllers
                 order.AppTenantId = tenant.AppTenantId;
                 order.BillingAddress = viewModel.BillingAddress;
                 order.BillingCity = viewModel.BillingCity;
+                order.BillingCounty = viewModel.BillingCounty;
                 order.BillingCompanyName = viewModel.BillingCompanyName;
-                order.BillingCountry = viewModel.BillingCounty;
+                order.BillingCountry = viewModel.BillingCountry;
                 order.BillingEmail = viewModel.BillingEmail;
                 order.BillingFirstName = viewModel.BillingFirstName;
                 order.BillingLastName = viewModel.BillingLastName;
@@ -270,15 +279,15 @@ namespace CmsCoreV2.Controllers
                 order.BillingPhone = viewModel.BillingPhone;
                 order.BillingStreet = viewModel.BillingStreet;
                 order.BillingZipCode = viewModel.BillingZipCode;
-                order.DeliveryAddress = viewModel.DeliveryAddress;
-                order.DeliveryCity = viewModel.DeliveryCity;
-                order.DeliveryCompanyName = viewModel.DeliveryCompanyName;
-                order.DeliveryCountry = viewModel.DeliveryCountry;
-                order.DeliveryCounty = viewModel.DeliveryCounty;
-                order.DeliveryFirstName = viewModel.DeliveryFirstName;
-                order.DeliveryLastName = viewModel.DeliveryLastName;
-                order.DeliveryStreet = viewModel.DeliveryStreet;
-                order.DeliveryZipCode = viewModel.DeliveryZipCode;
+                order.DeliveryAddress = viewModel.DeliveryAddress ?? order.BillingAddress;
+                order.DeliveryCity = viewModel.DeliveryCity ?? order.BillingCity;
+                order.DeliveryCompanyName = viewModel.DeliveryCompanyName ?? order.BillingCompanyName;
+                order.DeliveryCountry = viewModel.DeliveryCountry ?? order.BillingCountry;
+                order.DeliveryCounty = viewModel.DeliveryCounty ?? order.BillingCounty;
+                order.DeliveryFirstName = viewModel.DeliveryFirstName ?? order.BillingFirstName;
+                order.DeliveryLastName = viewModel.DeliveryLastName ?? order.BillingLastName;
+                order.DeliveryStreet = viewModel.DeliveryStreet ?? order.BillingStreet;
+                order.DeliveryZipCode = viewModel.DeliveryZipCode ?? order.BillingZipCode;
                 order.CartId = viewModel.CartId;
                 order.CustomerId = c.Id;
                 order.PaymentMethodId = _context.PaymentMethods.FirstOrDefault(f=>f.Code==viewModel.PaymentMethod).Id;
@@ -286,14 +295,20 @@ namespace CmsCoreV2.Controllers
                 _context.Orders.Add(order);
                 foreach (var item in cart.CartItems) {
                     var oi = new OrderItem() {AppTenantId=tenant.AppTenantId, CreateDate=DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name,
-                    OrderId=order.Id, ProductId=item.ProductId, SalePrice = item.Product.SalePrice.Value };
+                    OrderId=order.Id, ProductId=item.ProductId, StockCode = item.Product.StockCode, SalePrice = item.Product.SalePrice.Value, ShippingPrice = item.ShippingPrice, DiscountPrice=0, Quantity=item.Quantity, Refund=0};
                     order.OrderItems.Add(oi);
                 }
                 _context.SaveChanges();                        
-
+                viewModel.Order = order;
                 return View("CheckoutCompleted", viewModel);
             }
-            return Redirect("/tr/kasa?status=0");
+            var errs = "";
+            foreach (var item in ModelState) {
+                foreach (var e in item.Value.Errors) {
+                    errs += e.ErrorMessage + "|";
+                }
+            }
+            return Redirect("/tr/kasa?status=0&errors="+System.Net.WebUtility.UrlEncode(errs));
         }
         public IActionResult ApplyCoupon(string couponCode) {
             string owner = User.Identity.Name;

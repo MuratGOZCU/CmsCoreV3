@@ -129,8 +129,8 @@ namespace CmsCoreV2.Models
         public float ShippingPrice { get { 
             var totalShippingPrice = OrderItems?.Where(c=>c.Product.ShippingMethod == ShippingMethod.FixedRate).Sum(ci=>ci.Product?.ShippingPrices?.FirstOrDefault(s=>(s.ShippingZoneId == (s.ShippingZone.ShippingZoneRegions.FirstOrDefault(r=>r.Region.Code == DestinationCityCode)?.ShippingZoneId ?? 0)))?.Price ?? (ci.Product?.ShippingPrices?.FirstOrDefault(p=>ci.Product.ShippingCity?.Code == DestinationCityCode)?.Price ?? 0)) ?? 0;
             return totalShippingPrice; } }
-        public float DiscountPrice { get { return (SubtotalPrice + ShippingPrice) * (OrderCoupons.Sum(c=>c.CouponAmount) / 100); } }
-        public float TotalPrice { get { return (SubtotalPrice + ShippingPrice)-(SubtotalPrice + ShippingPrice)*(OrderCoupons.Sum(c=>c.CouponAmount)/100); } }
+        public float DiscountPrice { get { return (SubtotalPrice + ShippingPrice) * (OrderCoupons?.Sum(c=>c.CouponAmount)??0 / 100); } }
+        public float TotalPrice { get { return (SubtotalPrice + ShippingPrice)-(SubtotalPrice + ShippingPrice)*(OrderCoupons?.Sum(c=>c.CouponAmount)??0/100); } }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual ICollection<OrderCoupon> OrderCoupons {get; set;}
         public string DestinationCityCode {get; set;}

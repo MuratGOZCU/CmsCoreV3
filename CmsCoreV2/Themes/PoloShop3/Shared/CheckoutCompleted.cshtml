@@ -19,7 +19,7 @@
                                 <div class="text-center">
                                     <h3>Tebrikler! Siparişiniz tamamlandı!</h3>
                                     <p>
-                                        Sipariş numaranız: <strong>#123456</strong>. Üye girişi yaptığınızda profil sayfanızdan
+                                        Sipariş numaranız: <strong>#@string.Format("{0:000000}",Model.Order?.Id)</strong>. Üye girişi yaptığınızda profil sayfanızdan
                                         <a href="/tr/siparislerim" class="text-underline">
                                             <mark>siparişinizi görüntüleyebilirsiniz.</mark>
                                         </a>
