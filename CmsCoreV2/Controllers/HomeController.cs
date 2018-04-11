@@ -13,6 +13,9 @@ using SaasKit.Multitenancy;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Iyzipay.Request;
+using Iyzipay.Model;
+using Iyzipay;
 
 namespace CmsCoreV2.Controllers
 {
@@ -290,7 +293,8 @@ namespace CmsCoreV2.Controllers
                 order.DeliveryZipCode = viewModel.DeliveryZipCode ?? order.BillingZipCode;
                 order.CartId = viewModel.CartId;
                 order.CustomerId = c.Id;
-                order.PaymentMethodId = _context.PaymentMethods.FirstOrDefault(f=>f.Code==viewModel.PaymentMethod).Id;
+                var paymentMethod = _context.PaymentMethods.FirstOrDefault(f => f.Code == viewModel.PaymentMethod);
+                order.PaymentMethodId = paymentMethod.Id;
                 order.DeliveryNotes = viewModel.DeliveryNotes;
                 _context.Orders.Add(order);
                 foreach (var item in cart.CartItems) {
@@ -301,7 +305,12 @@ namespace CmsCoreV2.Controllers
                 _context.SaveChanges();                        
                 viewModel.Order = order;
                 if (viewModel.PaymentMethod == "CC") {
-                    PayWithIyzipay(viewModel);
+                    var options = new Options();
+                    options.ApiKey = paymentMethod.ApiUserName;
+                    options.SecretKey = paymentMethod.ApiPassword;
+                    options.BaseUrl = paymentMethod.ApiUrl;
+                    var url = PayWithIyzipay(viewModel, options);
+                    return Redirect(url);
                 }
                 return View("CheckoutCompleted", viewModel);
             }
@@ -313,16 +322,16 @@ namespace CmsCoreV2.Controllers
             }
             return Redirect("/tr/kasa?status=0&errors="+System.Net.WebUtility.UrlEncode(errs));
         }
-        private void PayWithIyzipay(CheckoutViewModel viewModel) {
+        private async Task<string> PayWithIyzipay(CheckoutViewModel viewModel, Options options) {
             CreateCheckoutFormInitializeRequest request = new CreateCheckoutFormInitializeRequest();
             request.Locale = Locale.TR.ToString();
-            request.ConversationId = "123456789";
-            request.Price = "1";
-            request.PaidPrice = "1.2";
-            request.Currency = Currency.TRY.ToString();
-            request.BasketId = "B67832";
+            request.ConversationId = viewModel.Order.Id.ToString();
+            request.Price = viewModel.Order.TotalPrice.ToString();
+            request.PaidPrice = viewModel.Order.TotalPrice.ToString();
+            request.Currency = Iyzipay.Model.Currency.TRY.ToString();
+            request.BasketId = viewModel.Order.CartId.ToString();
             request.PaymentGroup = PaymentGroup.PRODUCT.ToString();
-            request.CallbackUrl = "https://www.merchant.com/callback";
+            request.CallbackUrl = "https://localhost:5000/";
 
             List<int> enabledInstallments = new List<int>();
             enabledInstallments.Add(2);
@@ -332,15 +341,16 @@ namespace CmsCoreV2.Controllers
             request.EnabledInstallments = enabledInstallments;
 
             Buyer buyer = new Buyer();
-            buyer.Id = "BY789";
-            buyer.Name = "John";
-            buyer.Surname = "Doe";
-            buyer.GsmNumber = "+905350000000";
-            buyer.Email = "email@email.com";
-            buyer.IdentityNumber = "74300864791";
-            buyer.LastLoginDate = "2015-10-05 12:43:35";
+            buyer.Id = viewModel.Order.Customer.Id.ToString();
+            buyer.Name = viewModel.Order.Customer.FirstName.ToString();
+            buyer.Surname = viewModel.Order.Customer.LastName.ToString();
+            buyer.GsmNumber = viewModel.Order.Customer.Phone.ToString();
+            buyer.Email = viewModel.Order.Customer.UserName.ToString(); // email eksik
+            buyer.IdentityNumber = viewModel.Order.Customer.Phone.ToString(); // tc kimlik no eksik
+            var u = await userManager.GetUserAsync(User);
+            buyer.LastLoginDate = "2018-04-01 15:12:09"; // last login ve registration tarihleri eksik
             buyer.RegistrationDate = "2013-04-21 15:12:09";
-            buyer.RegistrationAddress = "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1";
+            buyer.RegistrationAddress = viewModel.Order.Customer.Address.ToString();
             buyer.Ip = "85.34.78.112";
             buyer.City = "Istanbul";
             buyer.Country = "Turkey";
@@ -393,6 +403,7 @@ namespace CmsCoreV2.Controllers
             request.BasketItems = basketItems;
 
             CheckoutFormInitialize checkoutFormInitialize = CheckoutFormInitialize.Create(request, options);
+            return checkoutFormInitialize.PaymentPageUrl;
         }
 
         public IActionResult ApplyCoupon(string couponCode) {
