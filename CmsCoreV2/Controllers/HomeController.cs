@@ -309,7 +309,7 @@ namespace CmsCoreV2.Controllers
                     options.ApiKey = paymentMethod.ApiUserName;
                     options.SecretKey = paymentMethod.ApiPassword;
                     options.BaseUrl = paymentMethod.ApiUrl;
-                    var url = PayWithIyzipay(viewModel, options);
+                    var url = await PayWithIyzipay(viewModel, options);
                     return Redirect(url);
                 }
                 return View("CheckoutCompleted", viewModel);
@@ -351,7 +351,7 @@ namespace CmsCoreV2.Controllers
             buyer.LastLoginDate = "2018-04-01 15:12:09"; // last login ve registration tarihleri eksik
             buyer.RegistrationDate = "2013-04-21 15:12:09";
             buyer.RegistrationAddress = viewModel.Order.Customer.Address.ToString();
-            buyer.Ip = "85.34.78.112";
+            buyer.Ip = HttpContext.Connection.RemoteIpAddress.ToString();
             buyer.City = "Istanbul";
             buyer.Country = "Turkey";
             buyer.ZipCode = "34732";

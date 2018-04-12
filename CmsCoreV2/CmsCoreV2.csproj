@@ -16,6 +16,7 @@
 
   
   <ItemGroup>
+    <PackageReference Include="Iyzipay" Version="2.1.14" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
     <PackageReference Include="SaasKit.Multitenancy" Version="1.1.4" />
@@ -28,9 +29,7 @@
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Iyzipay\Iyzipay.csproj" />
-  </ItemGroup>
+  
   <ItemGroup>
     <Content Update="Areas\CmsCore\Views\Dashboard\Index.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
