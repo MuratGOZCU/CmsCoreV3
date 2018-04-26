@@ -299,7 +299,7 @@ namespace CmsCoreV2.Controllers
                 _context.Orders.Add(order);
                 foreach (var item in cart.CartItems) {
                     var oi = new OrderItem() {AppTenantId=tenant.AppTenantId, CreateDate=DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name,
-                    OrderId=order.Id, ProductId=item.ProductId, StockCode = item.Product.StockCode, SalePrice = item.Product.SalePrice.Value, ShippingPrice = item.ShippingPrice, DiscountPrice=0, Quantity=item.Quantity, Refund=0};
+                    OrderId=order.Id, ProductId=item.ProductId, StockCode = item.Product.StockCode, SalePrice = item.Product.SalePrice.Value, TotalPrice = item.TotalPrice, ShippingPrice = item.ShippingPrice, DiscountPrice=0, Quantity=item.Quantity, Refund=0};
                     order.OrderItems.Add(oi);
                 }
                 _context.SaveChanges();                        
