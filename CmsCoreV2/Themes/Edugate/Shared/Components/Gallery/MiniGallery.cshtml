@@ -7,7 +7,7 @@
         <div class="gallery-list">
             @foreach (GalleryItem item in Model)
             {
-                <a href="javascript:void(0)" class="thumb"><img src="@item.Photo" alt="@item.Title" class="img-responsive" /></a>
+                <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri" class="thumb"><img src="@item.Photo" alt="@item.Title" class="img-responsive" /></a>
             }
 
         </div>
