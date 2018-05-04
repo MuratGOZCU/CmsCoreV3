@@ -9,7 +9,6 @@
             {
                 <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri" class="thumb"><img src="@item.Photo" alt="@item.Title" class="img-responsive" /></a>
             }
-
         </div>
         <div class="clearfix"></div>
         <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/galeri" class="view-more">@Localizer["Daha Fazla Fotoğraf"]&nbsp;<i class="fa fa-angle-double-right mls"></i></a>
