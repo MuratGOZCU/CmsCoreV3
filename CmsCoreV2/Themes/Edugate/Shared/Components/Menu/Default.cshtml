@@ -7,8 +7,16 @@
     {
 
         <li @(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "class=dropdown" : "")>
-            <a href="#" class="main-menu" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
+            <a @(item.ChildMenuItems.Count()>0?"href=#":"href="+(Tenant.RequireSSL?"https":"http")+"://"+Tenant.Hostname+"/"+@ViewData["culture"]+"/"+@item.Url) @(item.ChildMenuItems.Count()>0?"":"onclick=window.location='"+(Tenant.RequireSSL?"https":"http")+"://"+Tenant.Hostname+"/"+@ViewData["culture"]+"/"+@item.Url+"'") class="main-menu" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
+                @if (!string.IsNullOrEmpty(item.CssClass)){
+                    <span class="@item.CssClass">
+                    @Localizer[item.Name]
+                    </span>
+                } else {
+                    <text>
                 @Localizer[item.Name]
+                </text>
+                }
                 @Html.Raw(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "<span class='fa fa-angle-down icons-dropdown'></span>" : "")
             </a>
             @if (item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0)

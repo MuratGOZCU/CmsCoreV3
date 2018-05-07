@@ -1092,3 +1092,4 @@ text-transform:none;
 .bg-w-form .form-group {
     min-height:initial !important;
 }
+.Strong {background-color:rgb(207,0,4) !important; border-radius:20px !important; color:white !important; padding:5px 7px !important;}

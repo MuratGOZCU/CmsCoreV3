@@ -51,7 +51,7 @@ namespace CmsCoreV2.ViewComponents
         {
             if (categoryNames != null)
             {
-                return await Task.FromResult(GetPostsByCategoryNames(categoryNames, 4).Where(w => w.IsPublished == true).ToList());
+                return await Task.FromResult(GetPostsByCategoryNames(categoryNames, 1000).Where(w => w.IsPublished == true).ToList());
             }
             else
             {
