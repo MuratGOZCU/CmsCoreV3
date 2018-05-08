@@ -220,7 +220,7 @@ namespace CmsCoreV2.Controllers
                 if (cart == null) {
                     return Redirect("/tr/sepet?status=-1");
                 }
-                if (string.IsNullOrEmpty(owner) && string.IsNullOrEmpty(viewModel.Password)) {
+                if (string.IsNullOrEmpty(User.Identity.Name) && string.IsNullOrEmpty(viewModel.Password)) {
                     return Redirect("/tr/kasa?status=1");
                 }
                 else if (string.IsNullOrEmpty(owner)) {
@@ -268,6 +268,7 @@ namespace CmsCoreV2.Controllers
                 order.UpdateDate = DateTime.Now;
                 order.UpdatedBy = User.Identity.Name ?? "(Bilinmeyen)";
                 order.Owner = owner;
+                order.SessionId = HttpContext.Session.Id;
                 order.OrderStatus = OrderStatus.PaymentWaiting;
                 order.AppTenantId = tenant.AppTenantId;
                 order.BillingAddress = viewModel.BillingAddress;
@@ -299,7 +300,7 @@ namespace CmsCoreV2.Controllers
                 _context.Orders.Add(order);
                 foreach (var item in cart.CartItems) {
                     var oi = new OrderItem() {AppTenantId=tenant.AppTenantId, CreateDate=DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name,
-                    OrderId=order.Id, ProductId=item.ProductId, StockCode = item.Product.StockCode, SalePrice = item.Product.SalePrice.Value, TotalPrice = item.TotalPrice, ShippingPrice = item.ShippingPrice, DiscountPrice=0, Quantity=item.Quantity, Refund=0};
+                    OrderId=order.Id, ProductId=item.ProductId, StockCode = item.Product.StockCode, ProductName = item.Product.Name, SalePrice = item.Product.SalePrice.Value, TotalPrice = item.TotalPrice, ShippingPrice = item.ShippingPrice, DiscountPrice=0, Quantity=item.Quantity, Refund=0};
                     order.OrderItems.Add(oi);
                 }
                 _context.SaveChanges();                        
@@ -312,7 +313,7 @@ namespace CmsCoreV2.Controllers
                     var url = await PayWithIyzipay(viewModel, options);
                     return Redirect(url);
                 }
-                return View("CheckoutCompleted", viewModel);
+                return RedirectToAction("CheckoutCompleted");
             }
             var errs = "";
             foreach (var item in ModelState) {
@@ -321,6 +322,13 @@ namespace CmsCoreV2.Controllers
                 }
             }
             return Redirect("/tr/kasa?status=0&errors="+System.Net.WebUtility.UrlEncode(errs));
+        }
+        public IActionResult CheckoutCompleted(string sId, string oId)
+        {
+            string sessionId = sId;
+            long orderId = Convert.ToInt64(oId);
+            var order = _context.Orders.OrderByDescending(w=>w.OrderDate).FirstOrDefault(o => o.SessionId == sessionId && o.Id == orderId);
+            return View(order);
         }
         private async Task<string> PayWithIyzipay(CheckoutViewModel viewModel, Options options) {
             CreateCheckoutFormInitializeRequest request = new CreateCheckoutFormInitializeRequest();
@@ -331,7 +339,7 @@ namespace CmsCoreV2.Controllers
             request.Currency = Iyzipay.Model.Currency.TRY.ToString();
             request.BasketId = viewModel.Order.CartId.ToString();
             request.PaymentGroup = PaymentGroup.PRODUCT.ToString();
-            request.CallbackUrl = "https://localhost:5000/";
+            request.CallbackUrl = "http://localhost:5000/Home/CheckoutCompleted?sId="+HttpContext.Session.Id+"&oId=" +viewModel.Order.Id.ToString();
 
             List<int> enabledInstallments = new List<int>();
             enabledInstallments.Add(2);
@@ -374,32 +382,17 @@ namespace CmsCoreV2.Controllers
             request.BillingAddress = billingAddress;
 
             List<BasketItem> basketItems = new List<BasketItem>();
-            BasketItem firstBasketItem = new BasketItem();
-            firstBasketItem.Id = "BI101";
-            firstBasketItem.Name = "Binocular";
-            firstBasketItem.Category1 = "Collectibles";
-            firstBasketItem.Category2 = "Accessories";
-            firstBasketItem.ItemType = BasketItemType.PHYSICAL.ToString();
-            firstBasketItem.Price = "0.3";
-            basketItems.Add(firstBasketItem);
+            foreach (var orderItem in viewModel.Order.OrderItems) {
+                BasketItem firstBasketItem = new BasketItem();
+                firstBasketItem.Id = orderItem.Id.ToString();
+                firstBasketItem.Name = orderItem.ProductName.ToString() + "(" + orderItem.Quantity.ToString() + " Adet)";
+                firstBasketItem.Category1 = "Collectibles";
+                firstBasketItem.Category2 = "Accessories";
+                firstBasketItem.ItemType = BasketItemType.PHYSICAL.ToString();
+                firstBasketItem.Price = orderItem.TotalPrice.ToString();
+                basketItems.Add(firstBasketItem);
+            }
 
-            BasketItem secondBasketItem = new BasketItem();
-            secondBasketItem.Id = "BI102";
-            secondBasketItem.Name = "Game code";
-            secondBasketItem.Category1 = "Game";
-            secondBasketItem.Category2 = "Online Game Items";
-            secondBasketItem.ItemType = BasketItemType.VIRTUAL.ToString();
-            secondBasketItem.Price = "0.5";
-            basketItems.Add(secondBasketItem);
-
-            BasketItem thirdBasketItem = new BasketItem();
-            thirdBasketItem.Id = "BI103";
-            thirdBasketItem.Name = "Usb";
-            thirdBasketItem.Category1 = "Electronics";
-            thirdBasketItem.Category2 = "Usb / Cable";
-            thirdBasketItem.ItemType = BasketItemType.PHYSICAL.ToString();
-            thirdBasketItem.Price = "0.2";
-            basketItems.Add(thirdBasketItem);
             request.BasketItems = basketItems;
 
             CheckoutFormInitialize checkoutFormInitialize = CheckoutFormInitialize.Create(request, options);

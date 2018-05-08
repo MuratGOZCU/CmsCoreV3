@@ -122,6 +122,7 @@ namespace CmsCoreV2.Models
         [Display(Name = "Teslimat Notları")]
         public string DeliveryNotes { get; set; }
         public string Owner {get; set;}
+        public string SessionId {get; set;}
         public long CartId {get; set;}
         public virtual ICollection<OrderMetaField> OrderMetaFields { get; set; }
         public int ProductCount { get { return OrderItems.Sum(ci => ci.Quantity); } }

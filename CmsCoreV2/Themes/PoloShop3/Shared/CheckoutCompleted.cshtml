@@ -1,6 +1,6 @@
 ﻿@inject CustomLocalizer Localizer
 @inject AppTenant Tenant
-@model CheckoutViewModel
+@model Order
 <!-- SHOP CHECKOUT COMPLETED -->
 <section class="p-b-10" style="padding-top:30px;">
     <div class="container">
@@ -19,7 +19,7 @@
                                 <div class="text-center">
                                     <h3>Tebrikler! Siparişiniz tamamlandı!</h3>
                                     <p>
-                                        Sipariş numaranız: <strong>#@string.Format("{0:000000}",Model.Order?.Id)</strong>. Üye girişi yaptığınızda profil sayfanızdan
+                                        Sipariş numaranız: <strong>#@string.Format("{0:000000}",Model.Id)</strong>. Üye girişi yaptığınızda profil sayfanızdan
                                         <a href="/tr/siparislerim" class="text-underline">
                                             <mark>siparişinizi görüntüleyebilirsiniz.</mark>
                                         </a>

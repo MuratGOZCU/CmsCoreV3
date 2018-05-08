@@ -113,6 +113,7 @@ namespace CmsCoreV2.Data
         public DbSet<CmsCoreV2.Models.ShippingZone> ShippingZones { get; set; }
         public DbSet<ShippingPrice> ShippingPrices {get; set;}
         public DbSet<CartCoupon> CartCoupons {get; set;}
+        public DbSet<Notification> Notifications {get; set;}
         // diğer dbsetler buraya eklenir
 
         protected override void OnModelCreating(ModelBuilder builder)

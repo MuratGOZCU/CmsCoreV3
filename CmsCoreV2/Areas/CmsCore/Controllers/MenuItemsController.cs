@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,MEDIA")]
+    [Authorize(Roles = "ADMIN,MENU")]
     [Area("CmsCore")]
     public class MenuItemsController : ControllerBase
     {
