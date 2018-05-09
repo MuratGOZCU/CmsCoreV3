@@ -28,8 +28,8 @@
                     <option value="3">Beklemede</option>
                     <option value="4">Tamamlandı</option>
                     <option value="5">İptal Edildi</option>
-                    <option value="5">İade Edildi</option>
-                    <option value="5">Başarısız</option>
+                    <option value="6">İade Edildi</option>
+                    <option value="7">Başarısız</option>
 
                 </select>
                 <span asp-validation-for="OrderStatus" class="text-danger"></span>
@@ -37,17 +37,17 @@
         </div>
      
         <div class="form-group">
-            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <label asp-for="BillingEmail" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="BillingEmail" class="form-control" />
+                <span asp-validation-for="BillingEmail" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Phone" class="col-md-2 control-label"></label>
+            <label asp-for="BillingPhone" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <input asp-for="BillingPhone" class="form-control" />
+                <span asp-validation-for="BillingPhone" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
