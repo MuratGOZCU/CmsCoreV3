@@ -38,7 +38,7 @@ namespace CmsCoreV2.ViewComponents
             var set = _context.Posts.AsQueryable();
             foreach (string nav in navigations)
                 set = set.Include(nav);
-            return set.AsEnumerable();
+            return set.Where(p=> (p.PublishDate.HasValue ? p.PublishDate <= DateTime.Now : true)).AsEnumerable();
         }
 
 

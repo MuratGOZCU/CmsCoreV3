@@ -89,7 +89,7 @@ namespace CmsCoreV2.ViewComponents
         {
             if (categories.Length > 0)
             {
-                return (from pc in _context.PostPostCategories join p in _context.Posts on pc.PostId equals p.Id join c in _context.PostCategories on pc.PostCategoryId equals c.Id where (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) orderby p.CreateDate descending select p).Take(count).ToList();
+                return (from pc in _context.PostPostCategories join p in _context.Posts on pc.PostId equals p.Id join c in _context.PostCategories on pc.PostCategoryId equals c.Id where (p.PublishDate.HasValue ? p.PublishDate <= DateTime.Now : true) && (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) orderby p.CreateDate descending select p).Take(count).ToList();
             }
             else
             {
@@ -101,11 +101,11 @@ namespace CmsCoreV2.ViewComponents
         {
             if (categories.Length > 0)
             {
-                return (from pc in _context.PostPostCategories join p in _context.Posts on pc.PostId equals p.Id join c in _context.PostCategories on pc.PostCategoryId equals c.Id where (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) orderby p.CreateDate descending select p).Where(c => c.Id != id).Take(count).ToList();
+                return (from pc in _context.PostPostCategories join p in _context.Posts on pc.PostId equals p.Id join c in _context.PostCategories on pc.PostCategoryId equals c.Id where (p.PublishDate.HasValue ? p.PublishDate <= DateTime.Now : true) && (categories.Length > 0 ? categories.Contains(c.Name.ToLower()) : true) orderby p.CreateDate descending select p).Where(c => c.Id != id).Take(count).ToList();
             }
             else
             {
-                return (from p in _context.Posts orderby p.CreateDate descending select p).Where(c => c.Id != id).Take(count).ToList();
+                return (from p in _context.Posts where (p.PublishDate.HasValue?p.PublishDate<=DateTime.Now:true) orderby p.CreateDate descending select p).Where(c => c.Id != id).Take(count).ToList();
             }
 
         }

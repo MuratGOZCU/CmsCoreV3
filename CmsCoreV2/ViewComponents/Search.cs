@@ -63,7 +63,7 @@ namespace CmsCoreV2.ViewComponents
             {
                 if (word != null && word != "")
                 {
-                    dto = query.Where(w => w.IsPublished == true).Where(p => p.Body.Contains(word) || p.Title.Contains(word) || p.Description.Contains(word) || p.SeoDescription.Contains(word) || p.SeoKeywords.Contains(word) || p.SeoKeywords.Contains(word)).Select(s => new SearchDto { Title = s.Title, Slug = s.Slug, Description = s.Description, ViewCount = s.ViewCount, Culture = s.Language.Culture }).ToList();
+                    dto = query.Where(w => (w.PublishDate.HasValue ? w.PublishDate <= DateTime.Now : true) && w.IsPublished == true).Where(p => p.Body.Contains(word) || p.Title.Contains(word) || p.Description.Contains(word) || p.SeoDescription.Contains(word) || p.SeoKeywords.Contains(word) || p.SeoKeywords.Contains(word)).Select(s => new SearchDto { Title = s.Title, Slug = s.Slug, Description = s.Description, ViewCount = s.ViewCount, Culture = s.Language.Culture }).ToList();
                 }
             }
             return dto;
