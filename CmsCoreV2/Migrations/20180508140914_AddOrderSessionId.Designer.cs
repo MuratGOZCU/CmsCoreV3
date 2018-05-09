@@ -13,9 +13,10 @@ using System;
 namespace CmsCoreV2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180508140914_AddOrderSessionId")]
+    partial class AddOrderSessionId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1020,42 +1021,6 @@ namespace CmsCoreV2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MetaFields");
-                });
-
-            modelBuilder.Entity("CmsCoreV2.Models.Notification", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AppTenantId");
-
-                    b.Property<string>("Body");
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(200);
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("MailCc");
-
-                    b.Property<string>("MailTo");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Subject")
-                        .HasMaxLength(200);
-
-                    b.Property<DateTime>("UpdateDate");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasMaxLength(200);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("CmsCoreV2.Models.Order", b =>

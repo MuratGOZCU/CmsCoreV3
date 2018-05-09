@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,12 +13,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CmsCoreV2.Areas.CmsCore.Controllers
 {
-    [Authorize(Roles = "ADMIN,MENU")]
+    [Authorize(Roles = "ADMIN,NOTIFICATION")]
     [Area("CmsCore")]
-    public class MenusController : ControllerBase
+    public class NotificationsController : ControllerBase
     {
 
-        public MenusController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
+        public NotificationsController(ApplicationDbContext context, ITenant<AppTenant> tenant) : base(context, tenant)
         { 
 
         }
@@ -26,7 +26,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // GET: CmsCore/Menus
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.SetFiltered<Menu>().Where(x => x.AppTenantId == tenant.AppTenantId).Include(m => m.Language);
+            var applicationDbContext = _context.SetFiltered<Notification>().Where(x => x.AppTenantId == tenant.AppTenantId);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,21 +38,19 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 return NotFound();
             }
 
-            var menu = await _context.Menus
-                .Include(m => m.Language)
+            var notification = await _context.Notifications
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (menu == null)
+            if (notification == null)
             {
                 return NotFound();
             }
 
-            return View(menu);
+            return View(notification);
         }
 
         // GET: CmsCore/Menus/Create
         public IActionResult Create()
         {
-            ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName");
             return View();
         }
 
@@ -61,22 +59,22 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,MenuLocation,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Menu menu)
+        public async Task<IActionResult> Create(Notification notification)
         {
-            menu.CreatedBy = User.Identity.Name ?? "username";
-            menu.CreateDate = DateTime.Now;
-            menu.UpdatedBy = User.Identity.Name ?? "username";
-            menu.UpdateDate = DateTime.Now;
-            menu.AppTenantId = tenant.AppTenantId;
+            notification.CreatedBy = User.Identity.Name ?? "username";
+            notification.CreateDate = DateTime.Now;
+            notification.UpdatedBy = User.Identity.Name ?? "username";
+            notification.UpdateDate = DateTime.Now;
+            notification.AppTenantId = tenant.AppTenantId;
             if (ModelState.IsValid)
             {
-                _context.Add(menu);
+                _context.Add(notification);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
                
             }
-            ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName", menu.LanguageId);
-            return View(menu);
+
+            return View(notification);
         }
 
         // GET: CmsCore/Menus/Edit/5
@@ -87,13 +85,13 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 return NotFound();
             }
 
-            var menu = await _context.Menus.SingleOrDefaultAsync(m => m.Id == id);
-            if (menu == null)
+            var notification = await _context.Notifications.SingleOrDefaultAsync(m => m.Id == id);
+            if (notification == null)
             {
                 return NotFound();
             }
-            ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName", menu.LanguageId);
-            return View(menu);
+           
+            return View(notification);
         }
 
         // POST: CmsCore/Menus/Edit/5
@@ -101,25 +99,25 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Name,MenuLocation,LanguageId,Id,CreateDate,CreatedBy,UpdateDate,UpdatedBy,AppTenantId")] Menu menu)
+        public async Task<IActionResult> Edit(long id, Notification notification)
         {
-            if (id != menu.Id)
+            if (id != notification.Id)
             {
                 return NotFound();
             }
-            menu.UpdatedBy = User.Identity.Name ?? "username";
-            menu.UpdateDate = DateTime.Now;
-            menu.AppTenantId = tenant.AppTenantId;
+            notification.UpdatedBy = User.Identity.Name ?? "username";
+            notification.UpdateDate = DateTime.Now;
+            notification.AppTenantId = tenant.AppTenantId;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(menu);
+                    _context.Update(notification);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MenuExists(menu.Id))
+                    if (!NotificationExists(notification.Id))
                     {
                         return NotFound();
                     }
@@ -130,8 +128,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["LanguageId"] = new SelectList(_context.Languages.ToList(), "Id", "NativeName", menu.LanguageId);
-            return View(menu);
+            return View(notification);
         }
 
         // GET: CmsCore/Menus/Delete/5
@@ -142,15 +139,14 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 return NotFound();
             }
 
-            var menu = await _context.Menus
-                .Include(m => m.Language)
+            var notification = await _context.Notifications
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (menu == null)
+            if (notification == null)
             {
                 return NotFound();
             }
 
-            return View(menu);
+            return View(notification);
         }
 
         // POST: CmsCore/Menus/Delete/5
@@ -158,15 +154,15 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var menu = await _context.Menus.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Menus.Remove(menu);
+            var notification = await _context.Notifications.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Notifications.Remove(notification);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool MenuExists(long id)
+        private bool NotificationExists(long id)
         {
-            return _context.Menus.Any(e => e.Id == id);
+            return _context.Notifications.Any(e => e.Id == id);
         }
     }
 }

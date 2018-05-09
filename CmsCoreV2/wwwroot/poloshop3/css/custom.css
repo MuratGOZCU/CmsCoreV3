@@ -6,3 +6,22 @@
  <link href="css/custom.css" rel="stylesheet">
 
 */
+.owl-nav button.owl-next, .owl-nav button.owl-prev {
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.5) !important;
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,.5) !important;
+    -ms-box-shadow: 0 0 10px rgba(0,0,0,.5) !important;
+    -o-box-shadow: 0 0 10px rgba(0,0,0,.5) !important;
+    box-shadow: 0 0 10px rgba(0,0,0,.5) !important;
+    border-radius: 50% !important;
+    width: 22px !important;
+    height: 30px !important;
+    background-color: #FFF !important;
+    line-height: 30px !important;
+}
+
+.owl-nav button.owl-next i, .owl-nav button.owl-prev i
+{
+    color: gray !important;
+    padding-top:0px !important;
+    line-height:30px !important;
+}
