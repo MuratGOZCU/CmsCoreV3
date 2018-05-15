@@ -99,7 +99,7 @@ namespace CmsCoreV2.ViewComponents
             }
             else
             {
-                return (from p in _context.Posts orderby p.CreateDate descending select p).Take(count).ToList();
+                return (from p in _context.Posts where (p.PublishDate.HasValue ? p.PublishDate <= DateTime.Now : true) orderby p.CreateDate descending select p).Take(count).ToList();
             }
         }
     }
