@@ -29,7 +29,7 @@
                                         <div class="edugate-content">
                                             <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
                                             <div class="info">
-                                                @if (item.PublishDate != null)
+                                                @if (false && item.PublishDate != null)
                                                 {            
                                                 <div class="date-time item">@item.PublishDate.Value.ToString("dd MMM yyyy")</div>
                                                 }

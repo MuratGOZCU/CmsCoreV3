@@ -10,7 +10,7 @@
  @if (item.PublishDate.HasValue)
  {           <div class="info">
 
-                <div class="date-created item"><a href="@(Tenant.RequireSSL ? "https" : "http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><span>@(item.PublishDate.HasValue ? item.PublishDate.Value.ToString("dd.MM.yyyy") : "")</span></a></div>
+                <div class="date-created item"><a href="@(Tenant.RequireSSL ? "https" : "http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug"><span>@(false && item.PublishDate.HasValue ? item.PublishDate.Value.ToString("dd.MM.yyyy") : "")</span></a></div>
 
             </div>}
             <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="link title">@(item.Title)</a>

@@ -22,7 +22,7 @@
         <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug" class="title">@item.Title</a>
 
         <div class="info">
-            <div class="date-time item"><a href="#">@(item.PublishDate.HasValue ? item.PublishDate.Value.ToString("dd.MM.yyyy") : "")</a></div>
+            <div class="date-time item"><a href="#">@(false && item.PublishDate.HasValue ? item.PublishDate.Value.ToString("dd.MM.yyyy") : "")</a></div>
         </div>
         <div class="description">
             @Html.Raw(item.Description?.PadLeft(120))
