@@ -64,10 +64,11 @@
 
 </div>
 
-<!-- KADROMUZ -->
-@await Component.InvokeAsync("ListPosts", new { categoryNames = "Kadromuz", count = 100 })
+
 <!-- LATEST POSTS -->
 @await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["Haberler"].ToString(), count = 8, IsHomePage = true })
+<!-- KADROMUZ -->
+@await Component.InvokeAsync("ListPosts", new { categoryNames = "Kadromuz", count = 100 })
 <!-- WHY CHOOSE US-->
 
 <a name="GoToActivity"></a>

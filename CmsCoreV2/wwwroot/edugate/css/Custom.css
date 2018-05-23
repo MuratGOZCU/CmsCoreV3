@@ -154,7 +154,7 @@ header .header-main .logo .header-logo img {
 }
 
 .section-padding {
-    padding: 50px 0;
+    padding: 30px 0;
 }
 
 header .header-topbar {
@@ -1093,3 +1093,7 @@ text-transform:none;
     min-height:initial !important;
 }
 .Strong {background-color:rgb(207,0,4) !important; border-radius:20px !important; color:white !important; padding:5px 7px !important;}
+
+.top-courses .top-courses-slider {
+     margin-bottom: 0px !important;
+}
