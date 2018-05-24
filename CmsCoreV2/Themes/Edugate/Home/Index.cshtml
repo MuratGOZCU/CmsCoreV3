@@ -2,7 +2,8 @@
 @inject AppTenant Tenant
 
 @await Component.InvokeAsync("Slider", new { Name = "Anasayfa Slider"})
-
+<!-- LATEST POSTS -->
+@await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["Haberler"].ToString(), count = 8, IsHomePage = true })
 <!-- CHOOSE COURSES-->
 <div class="section section-padding choose-course">
     <div class="container">
@@ -64,9 +65,6 @@
 
 </div>
 
-
-<!-- LATEST POSTS -->
-@await Component.InvokeAsync("LatestPosts", new { categoryNames = @Localizer["Haberler"].ToString(), count = 8, IsHomePage = true })
 <!-- KADROMUZ -->
 @await Component.InvokeAsync("ListPosts", new { categoryNames = "Kadromuz", count = 100 })
 <!-- WHY CHOOSE US-->
