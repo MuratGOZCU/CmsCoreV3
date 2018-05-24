@@ -33,6 +33,10 @@ namespace CmsCoreV2.Models.ManageViewModels
         [StringLength(200)]
         [Display(Name = "Adres")]
         public string Address { get; set; }
+         [Required]
+        [StringLength(200)]
+        [Display(Name = "Mahalle/Semt")]
+        public string District { get; set; }
         [Required]
         [StringLength(200)]
         [Display(Name = "Cadde/Sokak")]

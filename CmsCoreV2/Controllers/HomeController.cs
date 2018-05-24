@@ -229,9 +229,9 @@ namespace CmsCoreV2.Controllers
 
                     if (result.Succeeded)
                     {
-                        var customer = new Customer {FirstName = viewModel.BillingFirstName, LastName = viewModel.BillingLastName,
-                        Address = viewModel.BillingAddress, Street = viewModel.BillingStreet, City = viewModel.BillingCity, Country = viewModel.BillingCountry, County = viewModel.BillingCounty, ZipCode = viewModel.BillingZipCode,
-                        Phone = viewModel.BillingPhone, UserName = viewModel.BillingEmail, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
+                        var customer = new Customer {BillingFirstName = viewModel.BillingFirstName, BillingLastName = viewModel.BillingLastName,
+                        BillingAddress = viewModel.BillingAddress, BillingDistrict=viewModel.BillingDistrict, BillingStreet = viewModel.BillingStreet, BillingCity = viewModel.BillingCity, BillingCountry = viewModel.BillingCountry, BillingCounty = viewModel.BillingCounty, BillingZipCode = viewModel.BillingZipCode,
+                        BillingPhone = viewModel.BillingPhone, UserName = viewModel.BillingEmail, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
                         _context.Customers.Add(customer);
                         _context.SaveChanges();
                         user.CustomerId = customer.Id;
@@ -253,9 +253,9 @@ namespace CmsCoreV2.Controllers
                 var u = await userManager.GetUserAsync(User);
                 var c = _context.Customers.FirstOrDefault(f=>f.Id == u.CustomerId);
                 if (c==null) {
-                        c = new Customer {FirstName = viewModel.BillingFirstName, LastName = viewModel.BillingLastName,
-                        Address = viewModel.BillingAddress, Street = viewModel.BillingStreet, City = viewModel.BillingCity, Country = viewModel.BillingCountry, County = viewModel.BillingCounty, ZipCode = viewModel.BillingZipCode,
-                        Phone = viewModel.BillingPhone, UserName = viewModel.BillingEmail, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
+                        c = new Customer {BillingFirstName = viewModel.BillingFirstName, BillingLastName = viewModel.BillingLastName,
+                        BillingAddress = viewModel.BillingAddress, BillingDistrict = viewModel.BillingDistrict, BillingStreet = viewModel.BillingStreet, BillingCity = viewModel.BillingCity, BillingCountry = viewModel.BillingCountry, BillingCounty = viewModel.BillingCounty, BillingZipCode = viewModel.BillingZipCode,
+                        BillingPhone = viewModel.BillingPhone, UserName = viewModel.BillingEmail, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
                         _context.Customers.Add(c);
                         _context.SaveChanges();                        
                         u.CustomerId = c.Id;
@@ -281,6 +281,7 @@ namespace CmsCoreV2.Controllers
                 order.BillingLastName = viewModel.BillingLastName;
                 order.BillingIdentityNumber = viewModel.BillingIdentityNumber;
                 order.BillingPhone = viewModel.BillingPhone;
+                order.BillingDistrict = viewModel.BillingDistrict;
                 order.BillingStreet = viewModel.BillingStreet;
                 order.BillingZipCode = viewModel.BillingZipCode;
                 order.DeliveryAddress = viewModel.DeliveryAddress ?? order.BillingAddress;
@@ -350,15 +351,15 @@ namespace CmsCoreV2.Controllers
 
             Buyer buyer = new Buyer();
             buyer.Id = viewModel.Order.Customer.Id.ToString();
-            buyer.Name = viewModel.Order.Customer.FirstName.ToString();
-            buyer.Surname = viewModel.Order.Customer.LastName.ToString();
-            buyer.GsmNumber = viewModel.Order.Customer.Phone.ToString();
+            buyer.Name = viewModel.Order.Customer.BillingFirstName.ToString();
+            buyer.Surname = viewModel.Order.Customer.BillingLastName.ToString();
+            buyer.GsmNumber = viewModel.Order.Customer.BillingPhone.ToString();
             buyer.Email = viewModel.Order.Customer.UserName.ToString(); // email eksik
-            buyer.IdentityNumber = viewModel.Order.Customer.Phone.ToString(); // tc kimlik no eksik
+            buyer.IdentityNumber = viewModel.Order.Customer.BillingIdentityNumber.ToString(); // tc kimlik no eksik
             var u = await userManager.GetUserAsync(User);
             buyer.LastLoginDate = "2018-04-01 15:12:09"; // last login ve registration tarihleri eksik
             buyer.RegistrationDate = "2013-04-21 15:12:09";
-            buyer.RegistrationAddress = viewModel.Order.Customer.Address.ToString();
+            buyer.RegistrationAddress = viewModel.Order.Customer.BillingAddress.ToString();
             buyer.Ip = HttpContext.Connection.RemoteIpAddress.ToString();
             buyer.City = "Istanbul";
             buyer.Country = "Turkey";

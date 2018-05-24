@@ -30,6 +30,7 @@ namespace CmsCoreV2.ViewComponents
             var cvm = new CheckoutViewModel();
             cvm.Cart = cart;
             ViewBag.Countries = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name","TR");
+            ViewBag.PaymentMethods = await _context.PaymentMethods.ToListAsync();
             return View(cvm);
         }
         private async Task<Cart> GetMyCart(string owner)

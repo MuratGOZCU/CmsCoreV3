@@ -32,20 +32,24 @@ namespace CmsCoreV2.Models
         public string BillingCompanyName { get; set; }
         [Required]
         [StringLength(200)]
-        [Display(Name = "Adres")]
-        public string BillingAddress { get; set; }
-        [Required]
-        [StringLength(200)]
-        [Display(Name = "Cadde/Sokak")]
-        public string BillingStreet { get; set; }
-        [Required]
-        [StringLength(200)]
         [Display(Name = "Şehir")]
         public string BillingCity { get; set; }
         [Required]
         [StringLength(200)]
         [Display(Name = "İlçe")]
         public string BillingCounty { get; set; }
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Mahalle/Semt")]
+        public string BillingDistrict { get; set; }
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Cadde/Sokak")]
+        public string BillingStreet { get; set; }
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Adres")]
+        public string BillingAddress { get; set; }
         [Required]
         [StringLength(200)]
         [Display(Name = "Posta Kodu")]
@@ -77,15 +81,6 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         [Display(Name = "Firma Adı")]
         public string DeliveryCompanyName { get; set; }
-    
-        [StringLength(200)]
-        [Display(Name = "Adres")]
-        public string DeliveryAddress { get; set; }
-      
-        [StringLength(200)]
-        [Display(Name = "Cadde/Sokak")]
-        public string DeliveryStreet { get; set; }
-       
         [StringLength(200)]
         [Display(Name = "Şehir")]
         public string DeliveryCity { get; set; }
@@ -93,6 +88,18 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         [Display(Name = "İlçe")]
         public string DeliveryCounty { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Mahalle/Semt")]
+        public string DeliveryDistrict { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Cadde/Sokak")]
+        public string DeliveryStreet { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Adres")]
+        public string DeliveryAddress { get; set; }
        
         [StringLength(200)]
         [Display(Name = "Posta Kodu")]
@@ -101,6 +108,7 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         [Display(Name = "Sipariş Notları")]
         public string DeliveryNotes { get; set; }
+        
         [Required]
         [StringLength(200)]
         [Display(Name = "Ödeme Yöntemi")]

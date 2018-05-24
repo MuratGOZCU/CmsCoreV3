@@ -8,65 +8,99 @@ namespace CmsCoreV2.Models
 {
     public class Customer:BaseEntity
     {
-        [Display(Name="Adres")]
-        [StringLength(4000)]
-        public string Address { get; set; }
-        [Display(Name="Ad")]
+        [Required]
         [StringLength(200)]
-        public string FirstName { get; set; }
-        [Display(Name="Soyad")]
+        [Display(Name ="Ülke")]
+        public string BillingCountry { get; set; }
+        [Required]
         [StringLength(200)]
-        public string LastName { get; set; }
-        [Display(Name="Firma Adı")]
+        [Display(Name = "Ad")]
+        public string BillingFirstName { get; set; }
+        [Required]
         [StringLength(200)]
-        public string CompanyName { get; set; }
+        [Display(Name = "Soyad")]
+        public string BillingLastName { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="İlçe")]
-        public string County { get; set; }
+        [Display(Name = "Kimlik/Vergi No")]
+        public string BillingIdentityNumber { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Şehir")]
-        public string City { get; set; }
+        [Display(Name = "Firma Adı")]
+        public string BillingCompanyName { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Posta Kodu")]
-        public string ZipCode { get; set; }
+        [Display(Name = "Şehir")]
+        public string BillingCity { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Ülke")]
-        public string Country { get; set; }
+        [Display(Name = "İlçe")]
+        public string BillingCounty { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Cadde/Sokak")]
-        public string Street { get; set; }
+        [Display(Name = "Mahalle/Semt")]
+        public string BillingDistrict { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Telefon")]
-        public string Phone { get; set; }
+        [Display(Name = "Cadde/Sokak")]
+        public string BillingStreet { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Kullanıcı Adı")]
-        public string UserName { get; set; }
-        [StringLength(4000)]
-        [Display(Name="Teslimat Adresi")]
-        public string ShippingAddress { get; set; }
+        [Display(Name = "Adres")]
+        public string BillingAddress { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Teslimat Ad")]
-        public string ShippingFirstName { get; set; }
+        [Display(Name = "Posta Kodu")]
+        public string BillingZipCode { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Teslimat Soyad")]
-        public string ShippingLastName { get; set; }
+        [Display(Name = "E-posta")]
+        public string BillingEmail { get; set; }
+        [Required]
         [StringLength(200)]
-        [Display(Name="Teslimat Firma Adı")]
-        public string ShippingCompanyName { get; set; }
+        [Display(Name = "Telefon")]
+        public string BillingPhone { get; set; }
+      
         [StringLength(200)]
-        [Display(Name="Teslimat İlçe")]
-        public string ShippingCounty { get; set; }
+        [Display(Name = "Ülke")]
+        public string DeliveryCountry { get; set; }
+        
         [StringLength(200)]
-        [Display(Name="Teslimat Şehir")]
-        public string ShippingCity { get; set; }
+        [Display(Name = "Ad")]
+        public string DeliveryFirstName { get; set; }
+        
         [StringLength(200)]
-        [Display(Name="Teslimat Ülke")]
-        public string ShippingCountry { get; set; }
+        [Display(Name = "Soyad")]
+        public string DeliveryLastName { get; set; }
+       
         [StringLength(200)]
-        [Display(Name="Teslimat Cadde/Sokak")]
-        public string ShippingStreet { get; set; }
+        [Display(Name = "Firma Adı")]
+        public string DeliveryCompanyName { get; set; }
         [StringLength(200)]
-        [Display(Name="Teslimat Posta Kodu")]
-        public string ShippingZipCode { get; set; }
+        [Display(Name = "Şehir")]
+        public string DeliveryCity { get; set; }
+       
+        [StringLength(200)]
+        [Display(Name = "İlçe")]
+        public string DeliveryCounty { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Mahalle/Semt")]
+        public string DeliveryDistrict { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Cadde/Sokak")]
+        public string DeliveryStreet { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Adres")]
+        public string DeliveryAddress { get; set; }
+       
+        [StringLength(200)]
+        [Display(Name = "Posta Kodu")]
+        public string DeliveryZipCode { get; set; }
+        [StringLength(200)]
+        [Display(Name = "Kullanıcı Adı")]
+        public string UserName {get; set;}
     }
 }

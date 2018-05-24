@@ -54,14 +54,6 @@
                             <input type="text" class="form-control input-lg" placeholder="Firma Adı" asp-for="BillingCompanyName">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label class="sr-only">Adres</label>
-                            <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="BillingAddress">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label class="sr-only">Cadde/Sokak</label>
-                            <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="BillingStreet">
-                        </div>
-                        <div class="col-md-6 form-group">
                             <label class="sr-only">Şehir</label>
                             <select asp-for="BillingCity" onchange="LoadOptions($('#BillingCounty'),$('#BillingCity').val(),'/Home/GetCounties','İlçe seçiniz',function() {});">
                                 <option value="">Şehir seçiniz</option>
@@ -72,6 +64,18 @@
                             <select asp-for="BillingCounty">
                                 <option value="">İlçe seçiniz</option>
                             </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="sr-only">Mahalle/Semt</label>
+                            <input type="text" class="form-control input-lg" placeholder="Mahalle/Semt" asp-for="BillingDistrict">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="sr-only">Cadde/Sokak</label>
+                            <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="BillingStreet">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="sr-only">Adres</label>
+                            <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="BillingAddress">
                         </div>
                         <div class="col-md-6 form-group">
                             <label class="sr-only">Posta Kodu</label>
@@ -133,27 +137,33 @@
                                                 <label class="sr-only">Firma Adı</label>
                                                 <input type="text" class="form-control input-lg" placeholder="Firma Adı" asp-for="DeliveryCompanyName">
                                             </div>
-                                            <div class="col-md-6 form-group">
-                                                <label class="sr-only">Adres</label>
-                                                <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="DeliveryAddress">
-                                            </div>
-                                            <div class="col-md-6 form-group">
-                                                <label class="sr-only">Cadde/Sokak</label>
-                                                <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="DeliveryStreet">
-                                            </div>
+                                            
+                                            
                                             <div class="col-md-6 form-group">
                                                 <label class="sr-only">Şehir</label>
                                                 <select asp-for="DeliveryCity" onchange="LoadOptions($('#DeliveryCounty'),$('#DeliveryCity').val(),'/Home/GetCounties','İlçe seçiniz',function() {});">
                                                     <option value="">Şehir seçiniz</option>
                                                 </select>
                                             </div>
-                                            </div>
-                                            <div class="row">
                                             <div class="col-md-6 form-group">
                                                 <label class="sr-only">İlçe</label>
                                                 <select asp-for="DeliveryCounty">
                                                     <option value="">İlçe seçiniz</option>
                                                 </select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label class="sr-only">Mahalle/Semt</label>
+                                                <input type="text" class="form-control input-lg" placeholder="Mahalle/Semt" asp-for="DeliveryDistrict">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label class="sr-only">Cadde/Sokak</label>
+                                                <input type="text" class="form-control input-lg" placeholder="Cadde/Sokak" asp-for="DeliveryStreet">
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                <label class="sr-only">Adres</label>
+                                                <input type="text" class="form-control input-lg" placeholder="Adres" asp-for="DeliveryAddress">
                                             </div>
                                             <div class="col-md-6 form-group">
                                                 <label class="sr-only">Posta Kodu</label>
@@ -283,34 +293,19 @@
 
                         <table class="payment-method table table-bordered table-condensed table-responsive">
                             <tbody>
+                            @foreach (var item in (IEnumerable<PaymentMethod>)ViewBag.PaymentMethods)
+                            {
                                 <tr>
                                     <td>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="paymentMethod" @(Model.PaymentMethod == "Bank"?"checked":"") value="Bank"><b class="dark">Havale/EFT</b>
+                                                <input type="radio" name="paymentMethod" @(Model.PaymentMethod == item.Code?"checked":"") value="@item.Code"><b class="dark">@item.Title</b>
                                                 <br>
                                             </label>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="paymentMethod"  @(Model.PaymentMethod == "CC"?"checked":"") value="CC"><b class="dark">Kredi Kartı</b>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="paymentMethod" @(Model.PaymentMethod == "XRP"?"checked":"") value="XRP"><b class="dark">Kripto-para: Ripple (XRP)</b>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
+                            }
                             </tbody>
                         </table>
                         <button type="submit" class="btn btn-default icon-left float-right">ÖDEME YAP ve ALIŞVERİŞİ TAMAMLA</button>

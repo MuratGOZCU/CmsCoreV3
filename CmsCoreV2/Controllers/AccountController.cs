@@ -245,9 +245,9 @@ namespace CmsCoreV2.Controllers
                 if (result.Succeeded)
                 {
                     
-                    var customer = new Customer {FirstName = model.FirstName, LastName = model.LastName,
-                Address = model.Address, Street = model.Street, City = model.City, Country = model.Country, County = model.County, ZipCode = model.ZipCode,
-                Phone = model.Phone, UserName = model.Email, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
+                    var customer = new Customer {BillingFirstName = model.FirstName, BillingLastName = model.LastName,
+                BillingAddress = model.Address, BillingDistrict = model.District, BillingStreet = model.Street, BillingCity = model.City, BillingCountry = model.Country, BillingCounty = model.County, BillingZipCode = model.ZipCode,
+                BillingPhone = model.Phone, UserName = model.Email, CreateDate = DateTime.Now, CreatedBy = User.Identity.Name, UpdateDate = DateTime.Now, UpdatedBy = User.Identity.Name, AppTenantId = tenant.AppTenantId};
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
                 user.CustomerId = customer.Id;

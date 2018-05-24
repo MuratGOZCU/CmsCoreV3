@@ -56,7 +56,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             customer.AppTenantId = tenant.AppTenantId;
 
 
-            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name");
             return View(customer);
         }
 
@@ -79,7 +79,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.BillingCountry);
             return View(customer);
         }
 
@@ -101,7 +101,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
             customer.UpdateDate = DateTime.Now;
             customer.AppTenantId = tenant.AppTenantId;
 
-            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.BillingCountry);
             return View(customer);
         }
 
@@ -141,7 +141,7 @@ namespace CmsCoreV2.Areas.CmsCore.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.Country);
+            ViewBag.Countries = new SelectList(_context.Regions.Where(r=>r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name",customer.BillingCountry);
             return View(customer);
         }
 

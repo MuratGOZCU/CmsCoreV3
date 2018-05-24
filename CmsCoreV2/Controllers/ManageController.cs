@@ -68,15 +68,16 @@ namespace CmsCoreV2.Controllers
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage,
-                FirstName = customer?.FirstName,
-                LastName = customer?.LastName,
-                Country = customer?.Country,
-                City = customer?.City,
-                County = customer?.County,
-                Address = customer?.Address,
-                Phone = customer?.Phone,
-                Street = customer?.Street,
-                ZipCode = customer?.ZipCode
+                FirstName = customer?.BillingFirstName,
+                LastName = customer?.BillingLastName,
+                Country = customer?.BillingCountry,
+                City = customer?.BillingCity,
+                County = customer?.BillingCounty,
+                Address = customer?.BillingAddress,
+                Phone = customer?.BillingPhone,
+                District = customer?.BillingDistrict,
+                Street = customer?.BillingStreet,
+                ZipCode = customer?.BillingZipCode
             };
             ViewBag.Countries = new SelectList(_context.Regions.Where(r => r.RegionType == RegionType.Country).OrderBy(o=>o.Name).ToList(),"Code","Name","TR");
             return View(model);
@@ -118,15 +119,16 @@ namespace CmsCoreV2.Controllers
                 }
             }
             var customer = _context.Customers.FirstOrDefault(f=>f.Id == user.CustomerId);
-            customer.FirstName = model.FirstName;
-            customer.LastName = model.LastName;
-            customer.Country = model.Country;
-            customer.City = model.City;
-            customer.County = model.County;
-            customer.Address = model.Address;
-            customer.Phone = model.Phone;
-            customer.Street = model.Street;
-            customer.ZipCode = model.ZipCode;
+            customer.BillingFirstName = model.FirstName;
+            customer.BillingLastName = model.LastName;
+            customer.BillingCountry = model.Country;
+            customer.BillingCity = model.City;
+            customer.BillingCounty = model.County;
+            customer.BillingAddress = model.Address;
+            customer.BillingPhone = model.Phone;
+            customer.BillingDistrict = model.District;
+            customer.BillingStreet = model.Street;
+            customer.BillingZipCode = model.ZipCode;
             customer.UpdateDate = DateTime.Now;
             customer.UpdatedBy = User.Identity.Name;
             _context.Customers.Update(customer);

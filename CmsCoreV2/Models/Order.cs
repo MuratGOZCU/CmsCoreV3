@@ -35,7 +35,7 @@ namespace CmsCoreV2.Models
         public virtual PaymentMethod PaymentMethod { get; set; }
         [Display(Name = "Müşteri Notu")]
         public string CustomerNote { get; set; }
-        [Required]
+         [Required]
         [StringLength(200)]
         [Display(Name ="Ülke")]
         public string BillingCountry { get; set; }
@@ -57,20 +57,24 @@ namespace CmsCoreV2.Models
         public string BillingCompanyName { get; set; }
         [Required]
         [StringLength(200)]
-        [Display(Name = "Adres")]
-        public string BillingAddress { get; set; }
-        [Required]
-        [StringLength(200)]
-        [Display(Name = "Cadde/Sokak")]
-        public string BillingStreet { get; set; }
-        [Required]
-        [StringLength(200)]
         [Display(Name = "Şehir")]
         public string BillingCity { get; set; }
         [Required]
         [StringLength(200)]
         [Display(Name = "İlçe")]
         public string BillingCounty { get; set; }
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Mahalle/Semt")]
+        public string BillingDistrict { get; set; }
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Cadde/Sokak")]
+        public string BillingStreet { get; set; }
+        [Required]
+        [StringLength(200)]
+        [Display(Name = "Adres")]
+        public string BillingAddress { get; set; }
         [Required]
         [StringLength(200)]
         [Display(Name = "Posta Kodu")]
@@ -83,42 +87,46 @@ namespace CmsCoreV2.Models
         [StringLength(200)]
         [Display(Name = "Telefon")]
         public string BillingPhone { get; set; }
-        [Required]
+      
         [StringLength(200)]
         [Display(Name = "Ülke")]
         public string DeliveryCountry { get; set; }
-        [Required]
+        
         [StringLength(200)]
         [Display(Name = "Ad")]
         public string DeliveryFirstName { get; set; }
-        [Required]
+        
         [StringLength(200)]
         [Display(Name = "Soyad")]
         public string DeliveryLastName { get; set; }
-        [Required]
+       
         [StringLength(200)]
         [Display(Name = "Firma Adı")]
         public string DeliveryCompanyName { get; set; }
-        [Required]
-        [StringLength(200)]
-        [Display(Name = "Adres")]
-        public string DeliveryAddress { get; set; }
-        [Required]
-        [StringLength(200)]
-        [Display(Name = "Cadde/Sokak")]
-        public string DeliveryStreet { get; set; }
-        [Required]
         [StringLength(200)]
         [Display(Name = "Şehir")]
         public string DeliveryCity { get; set; }
-        [Required]
+       
         [StringLength(200)]
         [Display(Name = "İlçe")]
         public string DeliveryCounty { get; set; }
-        [Required]
+
+        [StringLength(200)]
+        [Display(Name = "Mahalle/Semt")]
+        public string DeliveryDistrict { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Cadde/Sokak")]
+        public string DeliveryStreet { get; set; }
+
+        [StringLength(200)]
+        [Display(Name = "Adres")]
+        public string DeliveryAddress { get; set; }
+       
         [StringLength(200)]
         [Display(Name = "Posta Kodu")]
         public string DeliveryZipCode { get; set; }
+        
         [Display(Name = "Teslimat Notları")]
         public string DeliveryNotes { get; set; }
         public string Owner {get; set;}
