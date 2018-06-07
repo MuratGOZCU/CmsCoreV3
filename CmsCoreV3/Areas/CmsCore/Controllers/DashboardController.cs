@@ -21,6 +21,7 @@ namespace CmsCoreV3.Areas.CmsCore.Controllers
         }
         public IActionResult Index()
         {
+
             return View();
         }
 

@@ -124,8 +124,8 @@ namespace CmsCoreV3.Data
                 // add users and roles
                 UserManager<ApplicationUser> _userManager = (UserManager<ApplicationUser>)accessor.HttpContext.RequestServices.GetService(typeof(UserManager<ApplicationUser>));
                 RoleManager<Role> _roleManager = (RoleManager<Role>)accessor.HttpContext.RequestServices.GetService(typeof(RoleManager<Role>));
-                AddUsers(_userManager);
-                AddRoles(_roleManager);
+                AddUsers(_userManager, tenantId);
+                AddRoles(_roleManager, tenantId);
                 AddRolesToUsers(_userManager);
             }
 
@@ -1823,14 +1823,14 @@ namespace CmsCoreV3.Data
 
         // add users and roles
         static ApplicationUser user;
-        private static void AddUsers(UserManager<ApplicationUser> _userManager)
+        private static void AddUsers(UserManager<ApplicationUser> _userManager, string tenantId)
         {
-            user = new ApplicationUser { UserName = "cmscore@gmail.com", Email = "cmscore@gmail.com", EmailConfirmed = true, NormalizedEmail = "CMSCORE@GMAIL.COM", NormalizedUserName = "CMSCORE@GMAIL.COM" };
+            user = new ApplicationUser { AppTenantId = tenantId, UserName = "meryem.yucel@digimark.com.tr", Email = "meryem.yucel@digimark.com.tr", EmailConfirmed = true, NormalizedEmail = "MERYEM.YUCEL@DIGIMARK.COM.TR", NormalizedUserName = "MERYEM.YUCEL@DIGIMARK.COM.TR" };
             var task1 = Task.Run(() => _userManager.CreateAsync(user, "Cms123+"));
             task1.Wait();
         }
 
-        private static void AddRoles(RoleManager<Role> _roleManager)
+        private static void AddRoles(RoleManager<Role> _roleManager, string tenantId)
         {
             string[] roles = { "ADMIN", "SLIDER", "MENU", "HOME", "FORM", "GALLERY", "MEDIA", "PAGE", "POST", "LINK", "SEO", "SETTING", "PRODUCT","PRODUCTCATEGORY","ATTRIBUTE","ATTRIBUTEITEM","ORDER","COUPON","Supplier","ProductIndex","ProductCreate","ProductDetails","ProductEdit","ProductDelete",
             "ProductCategoryIndex","ProductCategoryDetails","ProductCategoryCreate","ProductCategoryEdit","ProductCategoryDelete","AttributeIndex","AttributeDetails","AttributeCreate","AttributeEdit","AttributeDelete",
@@ -1845,7 +1845,7 @@ namespace CmsCoreV3.Data
 
             for (int i = 0; i < roles.Count(); i++)
             {
-                var role = new Role { Name = roles[i], NormalizedName = roles[i], ConcurrencyStamp = stamp[i] };
+                var role = new Role {AppTenantId = tenantId, Name = roles[i], NormalizedName = roles[i], ConcurrencyStamp = stamp[i] };
                 var task1 = Task.Run(() => _roleManager.CreateAsync(role));
                 task1.Wait();
             }
