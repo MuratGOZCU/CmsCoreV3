@@ -385,3 +385,10 @@ a:hover {
     }
 
 }
+.logos { height:30px; }
+@media (max-width: 410px) {
+.logosLink { margin-top:10px;}
+.logos {
+	height:50px !important;
+}
+}
