@@ -1,0 +1,229 @@
+﻿@model CmsCoreV3.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Düzenle</h2>
+
+<form asp-action="Edit">
+   <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CompanyName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+        </div>
+        <script>
+        window.onload = function() {
+            LoadOptions($("#City"), $("#Country").val(), "/Home/GetCities", "Şehir seçiniz", function() {$("#City").val("@Model.City");LoadOptions($("#County"),$("#City").val(),"/Home/GetCounties","İlçe seçiniz", function() {$("#County").val("@Model.County");});});
+            LoadOptions($("#ShippingCity"), $("#ShippingCountry").val(), "/Home/GetCities", "Şehir seçiniz", function() {$("#ShippingCity").val("@Model.ShippingCity");LoadOptions($("#ShippingCounty"),$("#ShippingCity").val(),"/Home/GetCounties","İlçe seçiniz",function() {$("#ShippingCounty").val("@Model.ShippingCounty");});});
+        }
+        function LoadOptions(elm, parentId, url, defaultOption,done) {
+            
+            elm.empty();
+            $.post(url,{parentId:parentId},function(result) {
+                    elm.append('<option value="">' + defaultOption + '</option>');
+                    $.each(result, function(i, item) {
+                        elm.append('<option value="'+item.code+'">'+item.name+'</option>');
+                        done();
+                    });
+            });
+           
+            
+        }
+        </script>
+        <div class="form-group">
+            <label asp-for="Country" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Country" class ="form-control" asp-items="ViewBag.Countries" onchange='LoadOptions($("#City"), $("#Country").val(), "/Home/GetCities", "Şehir seçiniz", function() {LoadOptions($("#County"),$("#City").val(),"/Home/GetCounties","İlçe seçiniz", function() {});});'>
+                    <option value="">Ülke seçiniz</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="City" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="City" class ="form-control" onchange='LoadOptions($("#County"),$("#City").val(),"/Home/GetCounties","İlçe seçiniz", function() {});'>
+                    <option value="">Şehir seçiniz</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="County" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="County" class ="form-control">
+                    <option value="">İlçe seçiniz</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Street" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>        
+        <div class="form-group">
+            <label asp-for="ZipCode" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ZipCode" class="form-control" />
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingFirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ShippingFirstName" class="form-control" />
+                <span asp-validation-for="ShippingFirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingLastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ShippingLastName" class="form-control" />
+                <span asp-validation-for="ShippingLastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingCompanyName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ShippingCompanyName" class="form-control" />
+                <span asp-validation-for="ShippingCompanyName" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="ShippingCountry" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ShippingCountry" class ="form-control" asp-items="ViewBag.Countries" onchange='LoadOptions($("#ShippingCity"), $("#ShippingCountry").val(), "/Home/GetCities", "Şehir seçiniz", function() {LoadOptions($("#ShippingCounty"),$("#ShippingCity").val(),"/Home/GetCounties","İlçe seçiniz",function() {});});'>
+                    <option value="">Ülke seçiniz</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingCity" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ShippingCity" class ="form-control" onchange='LoadOptions($("#ShippingCounty"),$("#ShippingCity").val(),"/Home/GetCounties","İlçe seçiniz",function() {});'>
+                    <option value="">Şehir seçiniz</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingCounty" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ShippingCounty" class ="form-control">
+                    <option value="">İlçe seçiniz</option>
+                </select>
+            </div>
+        </div>
+         <div class="form-group">
+            <label asp-for="ShippingStreet" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ShippingStreet" class="form-control" />
+                <span asp-validation-for="ShippingStreet" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingAddress" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ShippingAddress" class="form-control" />
+                <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ShippingZipCode" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ShippingZipCode" class="form-control" />
+                <span asp-validation-for="ShippingZipCode" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="UpdateDate" class="form-control" />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="UpdatedBy" class="form-control" />
+                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="AppTenantId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="AppTenantId" class="form-control" />
+                <span asp-validation-for="AppTenantId" class="text-danger"></span>
+            </div>
+        </div>
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

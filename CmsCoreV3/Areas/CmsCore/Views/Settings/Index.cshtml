@@ -1,0 +1,107 @@
+﻿@model CmsCoreV3.Models.Setting
+
+@{
+    ViewData["Title"] = "Genel Ayarlar";
+}
+
+<h2>Genel Ayarlar</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+      
+        <hr />
+        @if (!String.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-success">
+                @ViewBag.Message
+            </div>
+
+        }
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="HeaderString" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea rows="6" asp-for="HeaderString" class="form-control"></textarea>
+                <span asp-validation-for="HeaderString" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GoogleAnalytics" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea rows="6" asp-for="GoogleAnalytics" class="form-control"></textarea>
+                <span asp-validation-for="GoogleAnalytics" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FooterScript" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea rows="6" asp-for="FooterScript" class="form-control"></textarea>
+                <span asp-validation-for="FooterScript" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MapTitle" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MapTitle" class="form-control" />
+                <span asp-validation-for="MapTitle" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MapLat" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MapLat" class="form-control" />
+                <span asp-validation-for="MapLat" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MapLon" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MapLon" class="form-control" />
+                <span asp-validation-for="MapLon" class="text-danger"></span>
+            </div>
+        </div>
+       
+    <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="UpdateDate" class="form-control" />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input readonly asp-for="UpdatedBy" class="form-control" />
+                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

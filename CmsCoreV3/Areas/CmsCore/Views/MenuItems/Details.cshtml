@@ -1,0 +1,98 @@
+﻿@model CmsCoreV3.Models.MenuItem
+
+@{
+    ViewData["Title"] = "Menü Ögesi Detayları";
+}
+
+<h2>Menü Öğeleri Detaylar</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CssClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CssClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Target)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Target)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPublished)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsPublished)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AppTenantId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AppTenantId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Menu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Menu.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentMenuItem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParentMenuItem.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+  
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a>
+    <a class="btn btn-default" asp-action="Index">Listeye Geri Dön</a>
+</div>

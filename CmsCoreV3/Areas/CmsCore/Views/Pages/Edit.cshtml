@@ -1,0 +1,236 @@
+﻿@model CmsCoreV3.Models.Page
+
+@{
+    ViewData["Title"] = "Sayfayı Düzenle";
+}
+<link href="/metronic/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css">
+<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
+<script src="~/js/generate-slug.js"> </script>
+<h2>Düzenle</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+            </div>
+        </div>
+        <div class="form-group">
+            <div id="tree">
+
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <h4>Sayfalar</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input type="text" asp-for="Title" class="form-control" tabindex="1" autofocus="autofocus" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Title').val().toLowerCase(),'-'));}" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slug" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input type="text" asp-for="Slug" class="form-control" tabindex="2" onblur="if ($('#Slug').val() == '') {$('#Slug').val(slug($('#Title').val().toLowerCase(),'-'));}" />
+                <span class="text-danger" asp-validation-for="Slug"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Body" class="col-md-2 control-label"></label>
+
+            <div class="col-md-10">
+                <textarea asp-for="Body" tabindex="3" class="form-control"></textarea>
+                <span class="text-danger" asp-validation-for="Body"></span>
+                <script type="text/javascript">
+                    CKEDITOR.dtd.$removeEmpty['i'] = false;
+                    var editor = CKEDITOR.replace('Body');
+                    editor.config.allowedContent = true;
+                    editor.config.protectedSource.push(/<\label[\s\S]*?\>[\s\S]*?<\/label\>/g);
+                </script>
+
+                <div id="content2" style="display: none" data-sample="2">
+                    <p>The number of <code>change</code> events:<strong><span id="changes"></span></strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Position" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Position" class="form-control" />
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ViewCount" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ViewCount" class="form-control" />
+                <span asp-validation-for="ViewCount" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentPageId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="ParentPageId" class="form-control">
+                    <option value="">Seçiniz</option>
+                    @Html.Raw(ViewBag.ParentPagesOptions)
+                </select>
+                <span asp-validation-for="ParentPageId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Photo" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.Photo)</label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <input asp-for="Photo" class="form-control" />
+                    <span class="input-group-btn">
+                        <a class="btn btn-info" id="uploadModal" type="button" onclick="browseMedia('Photo')">...</a>
+                    </span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+        </div>
+        @*<div class="form-group">
+            <label asp-for="Photo" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="Meta1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Meta1" class="form-control" />
+                <span asp-validation-for="Meta1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Meta2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Meta2" class="form-control" />
+                <span asp-validation-for="Meta2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Meta3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Meta3" class="form-control" />
+                <span asp-validation-for="Meta3" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LayoutTemplate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LayoutTemplate" class="form-control" />
+                <span asp-validation-for="LayoutTemplate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SeoTitle" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SeoTitle" class="form-control" />
+                <span asp-validation-for="SeoTitle" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SeoDescription" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="SeoDescription" class="form-control"></textarea>
+                <span asp-validation-for="SeoDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SeoKeywords" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="SeoKeywords" class="form-control"> </textarea>
+                <span asp-validation-for="SeoKeywords" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="HeaderScript" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="HeaderScript" class="form-control"> </textarea>
+                <span asp-validation-for="HeaderScript" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="IsPublished" />
+                    <label asp-for="IsPublished"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Template" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Template" class="form-control">
+                    <option value=""> Seçiniz..</option>
+                    @foreach (var temp in ViewBag.Templates)
+                    {
+                        <option value="@temp">@temp</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LanguageId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.LanguageId"></select>
+                <span asp-validation-for="LanguageId" class="text-danger"></span>
+            </div>
+        </div>
+        <input type="hidden" asp-for="Id" readonly />
+        <div class="form-group">
+            <label asp-for="CreateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreateDate" class="form-control" readonly />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CreatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="CreatedBy" class="form-control" readonly />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdateDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UpdateDate" class="form-control" readonly />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedBy" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="UpdatedBy" class="form-control" readonly />
+                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+</form>
+@Html.Partial("_BrowseMedia", new ViewDataDictionary(this.ViewData) { { "element", "Photo" } })
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
