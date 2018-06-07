@@ -1,4 +1,4 @@
-# CmsCoreV2
+# CmsCoreV3
 .NET Core Multi-Tenant CMS
 
 We are recreating CmsCore using multi-tenant single layer architecture. We didn't use Onion Architecture, because it is decreasing productivity.
