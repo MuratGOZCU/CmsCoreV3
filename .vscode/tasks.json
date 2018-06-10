@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/CmsCoreV2/CmsCoreV2.csproj"
+                "${workspaceFolder}/CmsCoreV3/CmsCoreV3.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
