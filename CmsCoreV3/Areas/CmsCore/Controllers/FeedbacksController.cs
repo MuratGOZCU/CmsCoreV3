@@ -27,7 +27,7 @@ namespace CmsCoreV3.Areas.CmsCore.Controllers
             this.feedbackService = feedbackService;
         }
         // GET: CmsCore/Feedbacks
-        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, int formId=1, int skip=0, int take=1000)
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, int? formId, int skip=0, int take=1000)
         {
             startDate = startDate ??  DateTime.MinValue;
             endDate = endDate ?? DateTime.Now;
@@ -37,7 +37,7 @@ namespace CmsCoreV3.Areas.CmsCore.Controllers
             ViewBag.FormId = formId;
             ViewBag.Skip = skip;
             ViewBag.Take = take;
-            return View(await _context.SetFiltered<Feedback>().Where(x => x.AppTenantId == tenant.AppTenantId && x.FormId==formId && startDate <= x.CreateDate && x.CreateDate<=endDate).Skip(skip).Take(take).ToListAsync());
+            return View(await _context.SetFiltered<Feedback>().Where(x => x.AppTenantId == tenant.AppTenantId && (formId.HasValue?x.FormId==formId:true) && startDate <= x.CreateDate && x.CreateDate<=endDate).Skip(skip).Take(take).ToListAsync());
         }
 
         // GET: CmsCore/Feedbacks/Details/5
