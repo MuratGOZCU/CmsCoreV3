@@ -26,6 +26,7 @@
                         <div class="input-group">
 
                             <select name="formId" class="form-control">
+                            <option value="">Tüm Formlar</option>
                                 @foreach (var item in ViewBag.Forms)
                 {
                     @if (item.Id == ViewBag.FormId)
