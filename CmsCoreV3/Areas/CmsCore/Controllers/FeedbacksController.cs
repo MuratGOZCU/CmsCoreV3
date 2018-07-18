@@ -31,6 +31,7 @@ namespace CmsCoreV3.Areas.CmsCore.Controllers
         {
             startDate = startDate ??  DateTime.MinValue;
             endDate = endDate ?? DateTime.Now;
+			endDate = endDate.Value.AddDays(1);
             ViewBag.StartDate = startDate;
             ViewBag.EndDate = endDate;
             ViewBag.Forms = _context.Forms.ToList();
