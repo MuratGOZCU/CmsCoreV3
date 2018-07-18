@@ -26,11 +26,11 @@
                     {
                         if (childItem.MenuId == 1)
                         {
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
+                            <li><a href="@(childItem.Url.Contains("http")?childItem.Url:((Tenant.RequireSSL?"https":"http")+"://" + Tenant.Hostname + "/" + ViewData["culture"] + "/" + childItem.Url))" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
                         }
                         else if (childItem.MenuId == 2)
                         {
-                            <li><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@childItem.Url" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
+                            <li><a href="@(childItem.Url.Contains("http")?childItem.Url:((Tenant.RequireSSL?"https":"http")+"://" + Tenant.Hostname + "/" + ViewData["culture"] + "/" + childItem.Url))" class="link-page" @(!String.IsNullOrEmpty(item.Target) ? "target='" + childItem.Target + "'" : "")>@Localizer[childItem.Name]</a></li>
                         }
 
                     }
