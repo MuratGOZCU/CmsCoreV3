@@ -4,7 +4,7 @@
 @addTagHelper "CmsCoreV3.Helpers.FormFieldHelper, CmsCoreV3"
 @if (Model != null && Model.Id > 0)
 {
-    <form class="widget-contact-form" action="/Home/PostFormAjax" method="post" id="contactForm" success-message="Form başarıyla gönderildi" data-error-message="Bir hata oluştu!">
+    <form action="/Home/PostForm" method="post" success-message="Form başarıyla gönderildi" data-error-message="Bir hata oluştu!">
         <div style="position:relative;">
             <div style="padding: 9px;">
                 <fieldset>
@@ -26,7 +26,7 @@
                     </div>
                     }
                     <div style="text-align:center">
-                        <button type="submit" class="btn btn-default" id="form-submit"><i class="fa fa-paper-plane"></i>@Localizer["Gönder"]</button>
+                        <button type="submit" class="btn btn-default" id="form-submit2"><i class="fa fa-paper-plane"></i>@Localizer["Gönder"]</button>
                     </div>
                 </fieldset>
             </div>

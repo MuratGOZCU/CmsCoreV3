@@ -3,7 +3,7 @@
 
 @addTagHelper "CmsCoreV3.Helpers.FormFieldHelper, CmsCoreV3"
  
-<form class="widget-contact-form" action="/Home/PostFormAjax" method="post" id="contactForm" success-message="Form başarıyla gönderildi" data-error-message="Bir hata oluştu!">
+<form class="widget-contact-form" action="/Home/PostForm" method="post" success-message="Form başarıyla gönderildi" data-error-message="Bir hata oluştu!">
     <div class="row">
         @if (Model != null && Model.Id > 0)
         {

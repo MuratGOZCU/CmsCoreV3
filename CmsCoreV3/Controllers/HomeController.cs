@@ -527,7 +527,13 @@ namespace CmsCoreV3.Controllers
         }
         public IActionResult Successful(int id)
         {
-            ViewBag.FormClosingDescription = _context.Forms.Where(f => f.Id == id).FirstOrDefault()?.ClosingDescription;
+            var form = _context.Forms.Where(f => f.Id == id).FirstOrDefault();
+
+            if (form != null) { 
+                ViewBag.FormClosingDescription = form.ClosingDescription;
+                ViewBag.GoogleAnalyticsCode = form.GoogleAnalyticsCode;
+            }
+
             return View("Successful");
         }
         public ActionResult RedirectToDefaultLanguage()
