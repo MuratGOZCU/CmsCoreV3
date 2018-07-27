@@ -27,7 +27,7 @@ namespace CmsCoreV3.Areas.CmsCore.Controllers
 
         }
 
-        public IActionResult ExportToCsv(long id)
+        public IActionResult ExportToCsv(long id, DateTime startDate, DateTime endDate)
         {
             StringWriter sw = new StringWriter();
             HttpContext.Response.Clear();
@@ -40,7 +40,7 @@ namespace CmsCoreV3.Areas.CmsCore.Controllers
             sw.WriteLine(string.Join("|", fieldNames)+"|CreateDate");
             Response.Headers.Add("content-disposition", "attachment;filename=" + formName + ".csv");
             Response.ContentType = "text/csv";
-            var items = _context.FeedbackValues.Include(t => t.Feedback).Where(f => f.Feedback.FormId == id && fieldIds.Contains(f.FormFieldId)).OrderBy(o=>o.FeedbackId).ToList();
+            var items = _context.FeedbackValues.Include(t => t.Feedback).Where(f => f.Feedback.FormId == id && fieldIds.Contains(f.FormFieldId) && f.CreateDate >= startDate && f.CreateDate <= endDate).OrderBy(o=>o.FeedbackId).ToList();
             int i = 0;
             var feedbackIds = items.Select(s => s.FeedbackId).Distinct().ToList();
             foreach (var fId in feedbackIds)

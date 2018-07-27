@@ -28,16 +28,7 @@
                     @Html.DisplayNameFor(model => model.EmailCc)
                 </th>
                 <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th class="text-nowrap">
                     @Html.DisplayNameFor(model => model.Template)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.ClosingDescription)
-                </th>
-                <th class="text-nowrap">
-                    @Html.DisplayNameFor(model => model.GoogleAnalyticsCode)
                 </th>
                 <th class="text-nowrap">
                     @Html.DisplayNameFor(model => model.IsPublished)
@@ -82,16 +73,7 @@
                 @Html.DisplayFor(modelItem => item.EmailCc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Template)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClosingDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GoogleAnalyticsCode)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsPublished)
@@ -120,9 +102,47 @@
                 <a class="btn btn-default" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
                 <a class="btn btn-success" asp-action="Preview" asp-route-id="@item.Id">Önizleme</a>
-                <a class="btn btn-success" asp-action="ExportToCsv" asp-route-id="@item.Id">Excel</a>
+                <a class="btn btn-success" href="javascript:void(0);" onclick="$('#myModal').modal('show'); $('#dateRangeId').val('@item.Id');">Excel</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Excel'e Export Et</h4>
+            </div>
+            <div class="modal-body">
+                <form id="dateRangeForm" asp-action="ExportToCsv">
+                    <input type="hidden" name="Id" id="dateRangeId" />
+                    <div class="row">
+                        <div class="col-md-4">
+                            Başlangıç Tarihi
+                        </div>
+                        <div class="col-md-8">
+                            <input type="date" name="startDate" class="form-control" id="startDate" value="@(DateTime.Now.Year)-@(DateTime.Now.Month-1)-1" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            Bitiş Tarihi
+                        </div>
+                        <div class="col-md-8">
+                            <input type="date" name="endDate" class="form-control" id="endDate" value="@(DateTime.Now.Year)-@(DateTime.Now.Month)-1" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('dateRangeForm').submit();">Export</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+
+    </div>
+</div>
