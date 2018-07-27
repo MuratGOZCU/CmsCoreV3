@@ -1,0 +1,94 @@
+﻿@inject CustomLocalizer Localizer
+@model PageViewModel
+
+@*<style>
+    #primaryschool.search-input {
+        background-color: #ff791a !important;
+    }
+
+    #middleschool.search-input {
+        background-color: #34b44a !important;
+    }
+
+    #highschool.search-input {
+        background-color: #ed2867 !important;
+    }
+</style>*@
+<!-- WRAPPER-->
+<div id="wrapper-content">
+    <!-- PAGE WRAPPER-->
+    <div id="page-wrapper">
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <!-- CONTENT-->
+            <div class="content">
+                <div class="section section-padding courses-detail event-detail-section">
+                    <div class="container">
+                        <div class="courses-detail-wrapper">
+                            <div class="row">
+                                <div class="col-md-12 layout-left">
+                                    <h1 class="event-detail-title">@Html.Raw(Model.Title)</h1>
+
+                                    <div class="event-detail-des">
+                                        <div class="event-detail-des-content">
+                                            <div class="more">@Html.Raw(Model.Body)</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="event-detail-des">
+                                        <div class="event-detail-des-content">
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BUTTON BACK TO TOP-->
+<div id="back-top"><a href="#top"><i class="fa fa-angle-double-up"></i></a></div>
+@section scripts {
+<script>
+    $(document).ready(function () {
+        if ($('.more').html().indexOf('<!-- more -->') > 0) {
+        var showChar = $('.more').html().indexOf('<!-- more -->') + 14;
+        var ellipsestext = "...";
+        var moretext = "Devamını göster";
+        var lesstext = "Devamını gizle";
+
+        var content = $('.more').html();
+
+        if (content.length > showChar) {
+
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar - 1, content.length - showChar);
+
+            var html = c + '<span class="moreelipses">' + ellipsestext + '</span>&nbsp;<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+            $('.more').html(html);
+        }
+
+
+        $(".morelink").click(function () {
+            if ($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).prev().toggle();
+            $(this).parent().prev().toggle();
+            return false;
+        });
+        }
+    });
+
+
+</script>
+}

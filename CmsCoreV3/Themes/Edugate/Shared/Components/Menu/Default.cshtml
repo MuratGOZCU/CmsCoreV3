@@ -7,7 +7,13 @@
     {
 
         <li @(item.ChildMenuItems != null && item.ChildMenuItems.Count() > 0 ? "class=dropdown" : "")>
-            <a @(item.ChildMenuItems.Count()>0?"href=#":"href="+(item.Url.Contains("http")?item.Url:(Tenant.RequireSSL?"https":"http")+"://"+Tenant.Hostname+"/"+@ViewData["culture"]+"/"+@item.Url)) @(item.ChildMenuItems.Count()>0?"":string.Format("onclick=window.location='{0}'",(item.Url.Contains("http")?item.Url:(Tenant.RequireSSL?"https":"http")+"://"+Tenant.Hostname+"/"+@ViewData["culture"]+"/"+@item.Url+"\"'"))) class="main-menu" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
+            @{
+                var relativeLink = (Tenant.RequireSSL ? "https" : "http") + "://" + Tenant.Hostname + "/" + ViewData["culture"] + "/" + item.Url;
+                var location = (item.Url.Contains("http") ? item.Url : relativeLink);
+                var link2 = string.Format("onclick=window.location='{0}'", location);
+                var link = (item.ChildMenuItems.Count() > 0 ? "" : link2);
+            }
+            <a @(item.ChildMenuItems.Count()>0?"href=#":"href="+(item.Url.Contains("http")?item.Url:(Tenant.RequireSSL?"https":"http")+"://"+Tenant.Hostname+"/"+@ViewData["culture"]+"/"+@item.Url)) @link class="main-menu" @(!String.IsNullOrEmpty(item.Target) ? "target='" + item.Target + "'" : "")>
                 @if (!string.IsNullOrEmpty(item.CssClass)){
                     <span class="@item.CssClass">
                     @Localizer[item.Name]

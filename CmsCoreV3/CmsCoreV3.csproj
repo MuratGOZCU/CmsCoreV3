@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
     <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
   </PropertyGroup>
 <!-- 
@@ -35,6 +35,9 @@
   <ItemGroup>
     <Content Update="Areas\CmsCore\Views\Dashboard\Index.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Themes\Edugate\Home\PageWithoutMenu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
   <ItemGroup>
