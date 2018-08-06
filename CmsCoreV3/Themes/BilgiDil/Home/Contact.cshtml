@@ -1,0 +1,127 @@
+﻿@inject CustomLocalizer Localizer
+@model PageViewModel
+@{
+    ViewData["Title"] = Model.SeoTitle;
+}
+
+<!-- Page title -->
+<section id="page-title" data-parallax-image="@Model.Photo">
+    <div class="container">
+        <div class="page-title">
+            <h1>@Model.Title</h1>
+            <span>@Model.Meta1</span>
+        </div>
+        @*<div class="breadcrumb">
+            <ul>
+                <li><a href="#">Home</a> </li>
+                <li><a href="#">Pages</a> </li>
+                <li class="active"><a href="#">Contact Us</a> </li>
+            </ul>
+        </div>*@
+    </div>
+</section>
+<!-- end: Page title -->
+<!-- CONTENT -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="h2">@Model.Title</h2>
+                <p>@Model.Meta1</p>
+                <div class="m-t-30">
+                    @await Component.InvokeAsync("EmbedForm", new { name = "İletişim", template = "ContactForm" })
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.Raw(Model.Body)
+
+                <!-- Google map sensor -->
+                @*<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.exp"></script>
+                <div class="map m-t-30" data-map-address="Melburne, Australia" data-map-zoom="10" data-map-icon="images/markers/marker2.png" data-map-type="ROADMAP"></div>*@
+                
+                <style>
+                    #map {
+                        height: 400px;
+                        width: 100%;
+                    }
+                </style>
+
+                <div id="map"></div>
+                <button class="btn btn-blue col-md-12" onclick="goMap()">Yol Tarifi Al</button>
+                <!-- Google map sensor -->
+                              
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end: CONTENT -->
+
+<script>
+
+        var mapLat = @ViewBag.MapLat;
+        var mapLng = @ViewBag.MapLon;
+        var mapTitle = "@Html.Raw(ViewBag.MapTitle)";
+
+        function initMap() {
+
+            var uluru = { lat: mapLat, lng: mapLng };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+
+
+
+            });
+
+            infowindow = new google.maps.InfoWindow({ content: mapTitle });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+            infowindow.open(map, marker);
+
+
+
+        }
+
+        function goMap() {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+
+
+            function showPosition(position) {
+
+                alert("Yol Tarifi İçin Google Haritalara Yönlendiriliyorsunuz");
+
+
+
+                window.open('https://www.google.com.tr/maps/dir/' + position.coords.latitude + ',' + position.coords.longitude + '/' + mapLat + ',' + mapLng + '/@@' + mapLat + ',' + mapLng + ',10z');
+
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaPeFjLrFwwLc1CFAuvjdv0ljWbtuJ760&callback=initMap">
+</script>
+
+

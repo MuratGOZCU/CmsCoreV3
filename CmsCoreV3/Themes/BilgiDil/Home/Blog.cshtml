@@ -1,0 +1,36 @@
+﻿@inject CustomLocalizer Localizer
+@model PageViewModel
+@{
+    ViewData["Title"] = "Blog";
+}
+<style type="text/css">
+    .h2 {margin-bottom: 40px; margin-top: 0px;}
+</style>
+<section id="page-content">
+    <div class="container">
+        <!-- post content -->
+        <!-- Page title -->
+        <div class="page-title">
+            <h2 class="h2">@Model.Title</h2>
+            @*<div class="breadcrumb float-left">
+                <ul>
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">Three Columns</a>
+                    </li>
+                </ul>
+            </div>*@
+        </div>
+        <!-- end: Page title -->
+        <!-- Blog -->
+     
+            @await Component.InvokeAsync("Posts", new {categoryNames = Model.Meta1, pageSize = 6 })
+      
+        </div>     
+</section>
+

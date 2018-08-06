@@ -1,0 +1,34 @@
+﻿@model IEnumerable<GalleryItem>
+@inject CustomLocalizer Localizer
+
+<h2 class="center-title"style="text-align:center;">@Localizer["Galeri"]</h2>
+<section class="p-b-0">
+    <div class="container">
+        <div id="portfolio" class="grid-layout portfolio-3-columns" data-margin="40">
+            @foreach (var item in Model)
+            {
+                if (item.IsPublished == true)
+                {
+                    <div class="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
+                        <div class="portfolio-item-wrap">
+                            <div class="portfolio-image">
+                                <a href="#"><img src="@item.Photo" alt=""></a>
+                            </div>
+                            <div class="portfolio-description">
+                                <a href="portfolio-page-grid-gallery.html">
+                                    <h3>@item.Title</h3>
+                                    <span>@item.Description</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            <!-- portfolio item -->
+            
+            <!-- end: portfolio item -->
+         
+        </div>
+    </div>
+</section>

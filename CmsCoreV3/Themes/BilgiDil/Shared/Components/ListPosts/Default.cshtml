@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Post>
+@inject CustomLocalizer Localizer
+
+@inject AppTenant Tenant
+<h2>Duyurular</h2>
+
+@{ var i = 0;}
+@foreach (var item in Model)
+{
+@if (i % 3 == 0) { 
+    <text>
+<div class="row">
+    </text>
+}
+<div class="col-sm-4">
+    <div class="thumbnail">
+        <img src="@item.SmallPhoto" alt="@item.Title" style="width:100%">
+        <p><strong><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@item.Title</a></strong></p>
+        <p>@item.Description</p>
+    </div>
+</div>
+    i++;
+@if (i % 3 == 0)
+{
+    <text>
+        @Html.Raw("</div>")
+    </text>
+}
+
+}
+

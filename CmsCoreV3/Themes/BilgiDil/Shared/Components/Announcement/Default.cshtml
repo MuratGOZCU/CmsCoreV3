@@ -1,0 +1,20 @@
+﻿@addTagHelper *, Sakura.AspNetCore.Mvc.PagedList
+@model Sakura.AspNetCore.IPagedList<Post>
+@inject CustomLocalizer Localizer
+@inject AppTenant Tenant
+<h2>Duyurular</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="@item.SmallPhoto" alt="@item.Title" width="400" height="300">
+                <p><strong><a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@item.Title</a></strong></p>
+                <p>@item.Description</p>
+            </div>
+        </div>
+    }
+
+</div>
+ 
+

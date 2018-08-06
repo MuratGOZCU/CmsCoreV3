@@ -23,7 +23,7 @@ namespace CmsCoreV3.Data
             {
                 this.tenant = tenant;
                 var tenantId = this.tenant.AppTenantId;
-                this.Seed(accessor);
+                // this.Seed(accessor);
                 //QueryFilterManager.Filter<Page>(q => q.Where(x => x.AppTenantId == tenantId));
                 //QueryFilterManager.Filter<Language>(q => q.Where(x => x.AppTenantId == tenantId));
                 //QueryFilterManager.Filter<Media>(q => q.Where(x => x.AppTenantId == tenantId));

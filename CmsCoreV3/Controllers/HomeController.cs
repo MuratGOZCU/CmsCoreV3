@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Iyzipay.Request;
 using Iyzipay.Model;
 using Iyzipay;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace CmsCoreV3.Controllers
 {
@@ -26,10 +27,12 @@ namespace CmsCoreV3.Controllers
         private readonly IFeedbackService feedbackService;
         private UserManager<ApplicationUser> userManager;
         private SignInManager<ApplicationUser> signInManager;
+        private IHttpContextAccessor accessor;
         private IEmailSender emailSender;
-        public HomeController(ApplicationDbContext context, SignInManager<ApplicationUser> signInManager,
+        public HomeController(IHttpContextAccessor accessor, ApplicationDbContext context, SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender, UserManager<ApplicationUser> userManager, IFeedbackService _feedbackService, ITenant<AppTenant> _tenant)
         {
+            this.accessor = accessor;
             _context = context;
             this.feedbackService = _feedbackService;
             this.tenant = _tenant.Value;
@@ -62,9 +65,14 @@ namespace CmsCoreV3.Controllers
             var cart = GetMyCart(owner);
             return cart?.ProductCount ?? 0;
         }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            ViewBag.Logo = _context.SetFiltered<Customization>().FirstOrDefault()?.Logo;
+        }
        
         public IActionResult Index(string slug, string culture,string message="",string ajax="")
-        { 
+        {
             if (culture == "no")
             {
                 return Redirect("/tr");

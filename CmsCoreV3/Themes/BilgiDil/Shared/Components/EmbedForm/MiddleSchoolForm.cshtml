@@ -1,0 +1,43 @@
+﻿@model CmsCoreV3.Models.Form
+@inject CustomLocalizer Localizer
+@addTagHelper "CmsCoreV3.Helpers.FormFieldHelper, CmsCoreV3"
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<form action="/Home/PostForm" method="post" id="MiddleSchoolForm">
+    @if (Model != null && Model.Id > 0)
+    {
+        <fieldset>
+            <input type="hidden" value="@Model.Id" name="FormId" />
+            @foreach (FormField item in Model.FormFields)
+            {
+
+                @if (item.Required)
+                {
+                    <formField form-field="item" required="true" css-class="form-select style-1" read_only="false" show-placeholder="true" />
+                    @Html.ValidationMessage(item.Name, "", new { @class = "text-danger" })
+
+                }
+                else
+                {
+                    <formField form-field="item" read_only="false" show-placeholder="true" />
+
+                }
+            }
+            <div class="contact-submit">
+                <button type="submit"  class="btn btn-green" data-sitekey="6LfZnCAUAAAAACP1aluJpAewm5GdbMMEbEWBb-j9" data-callback='onContactFormSubmit' data-badge="inline"><span>@Localizer["Gönder"]</span></button>
+            </div>
+        </fieldset>
+    }
+    else
+    {
+        <p>@Localizer["Form bulunamadı!"]</p>
+    }
+
+
+
+</form>
+
+<script>
+    function onContactFormSubmit() {
+        document.getElementById("MiddleSchoolForm").submit();
+    }
+</script>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Post>
+@inject AppTenant Tenant
+@foreach (var item in Model)
+
+{
+    <div class="post-thumbnail-entry">
+        <img alt="" src="@Html.Raw(item.Photo)">
+        <div class="post-thumbnail-content">
+            <a href="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/@item.Slug">@(item.Title)</a>
+            
+            @if (item.PublishDate != null)
+            {
+            <span class="post-date"><i class="fa fa-clock-o"></i> @item.PublishDate</span>
+            }
+            else
+            {
+
+                <br />
+            }
+
+            @if (item.PostPostCategories.FirstOrDefault() != null)
+            {
+                <span class="post-category"><i class="fa fa-tag"></i> @item.PostPostCategories.FirstOrDefault().PostCategory</span>
+            }
+            else
+            {
+            
+            }
+
+        </div>
+    </div>
+}

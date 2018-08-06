@@ -1,0 +1,117 @@
+﻿@model PostViewModel
+@inject AppTenant Tenant
+@{
+    ViewData["Title"] = Model.SeoTitle;
+}
+@Html.Raw(Model.HeaderScript)
+
+
+<!-- Page Content -->
+<section id="page-content" class="sidebar-right">
+    <div class="container">
+        <div class="row">
+            <!-- content -->
+            <div class="content col-md-9">
+                <!-- Blog -->
+                <div id="blog" class="single-post">
+                    <!-- Post single item-->
+                    <div class="post-item">
+                        <div class="post-item-wrap">
+                            <div class="post-image">
+                                <a href="#">
+                                    <img  class="img-responsive" src="@Model.Photo">
+                                </a>
+                            </div>
+                            <div class="post-item-description">
+                                <h2>@(Model.Title)</h2>
+                                <div class="post-meta">
+                                    @if (Model.PublishDate.HasValue) { 
+                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>@Model.PublishDate.Value.ToString("dd.MM.yyyy")</span>
+                                    }
+                                    @if (Model.PostPostCategories.FirstOrDefault()!= null)
+                                    {
+                                        <span class="post-meta-category"><a href=""><i class="fa fa-tag"></i>@Model.PostPostCategories.FirstOrDefault().PostCategory.Name</a></span>
+
+                                    } else
+                                    {
+
+                                    }
+                                    <div class="post-meta-share">
+                                        <a class="btn btn-xs btn-slide btn-facebook" href="#">
+                                            <i class="fa fa-facebook"></i>
+                                            <span>Facebook</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-twitter" href="#" data-width="100">
+                                            <i class="fa fa-twitter"></i>
+                                            <span>Twitter</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-instagram" href="#" data-width="118">
+                                            <i class="fa fa-instagram"></i>
+                                            <span>Instagram</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-googleplus" href="mailto:#" data-width="80">
+                                            <i class="fa fa-envelope"></i>
+                                            <span>Mail</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <p style="text-align:justify">@Html.Raw(Model.Body)</p>                             
+                            </div>                       
+                                                              
+                        </div>
+                    </div>
+                    <!-- end: Post single item-->
+                </div>
+            </div>
+            <!-- end: content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-md-3">
+                <div class="pinOnScroll">
+                    <!--widget newsletter-->
+                    <div class="widget  widget-newsletter">
+
+                        <form id="widget-search-form-sidebar" action="@(Tenant.RequireSSL?"https":"http")://@Tenant.Hostname/@ViewData["culture"]/arama" method="get" class="form-inline">
+
+                            <div class="input-group">
+                                <input type="text" aria-required="true" name="query" class="form-control widget-search-form" placeholder="Arama">
+                                <span class="input-group-btn">
+                                    <button type="submit" id="widget-widget-search-form-button" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end: widget newsletter-->
+                    <!--Tabs with Posts-->
+                    <div class="widget">
+                        <div id="tabs-01" class="tabs simple">
+                            <ul class="tabs-navigation">
+                                <li class="active"><a href="#tab1">Popüler Yazılar  </a> </li>
+                                <li class=""><a href="#tab2">Son Yazılar </a> </li>                       
+                            </ul>
+                            <div class="tabs-content">
+                                <div class="tab-pane active" id="tab1">
+                                    <div class="post-thumbnail-list">    
+                                        
+                                        @await Component.InvokeAsync("PopularPosts", new { total = 4, id = Model.Id })
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <div class="post-thumbnail-list">
+                                     
+                                        @await Component.InvokeAsync("LatestsPostsWidget", new { count = 4, id = Model.Id })
+                                        
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                    <!--End: Tabs with Posts-->                           
+                </div>
+            </div>
+            <!-- end: sidebar-->
+        </div>
+    </div>
+</section>
+<!-- end: Page Content -->

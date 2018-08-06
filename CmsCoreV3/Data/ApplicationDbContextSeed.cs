@@ -63,6 +63,45 @@ namespace CmsCoreV3.Data
                     BilgiKoleji_AddPostCategories(context, tenant);
                     BilgiKoleji_AddPostPostCategories(context, tenant);
                 }
+                else if (tenant.Name == "BilgiDil")
+                {
+
+                    // Look for any existing records
+                    if (context.SetFiltered<Language>().Where(l => l.AppTenantId == tenantId).Any())
+                    {
+                        return;   // DB has been seeded
+                    }
+
+                    // Perform seed operations
+                    var defaultLanguageId = BilgiDil_AddLanguages(context, tenant);
+                    BilgiDil_AddPages(context, tenant, defaultLanguageId);
+
+                    BilgiDil_AddSettings(context, tenant);
+                    BilgiDil_AddCustomization(context, tenant);
+                    BilgiDil_AddMenus(context, tenant);
+                    BilgiDil_AddMenuItems(context, tenant);
+                    BilgiDil_AddResources(context, tenant);
+
+                    BilgiDil_AddHomePageSlider(context, tenant);
+                    BilgiDil_AddHomePageSlides(context, tenant);
+                    BilgiDil_AddSecondarySlider(context, tenant);
+                    BilgiDil_AddSecondarySlides(context, tenant);
+                    BilgiDil_AddLogoSlider(context, tenant);
+                    BilgiDil_AddLogoSlides(context, tenant);
+
+                    BilgiDil_AddForms(context, tenant);
+                    BilgiDil_AddFormFields(context, tenant);
+
+                    BilgiDil_AddGalleries(context, tenant);
+                    BilgiDil_AddGalleryItems(context, tenant);
+                    BilgiDil_AddGalleryItemCategories(context, tenant);
+                    BilgiDil_AddGalleryItemGalleryItemCategories(context, tenant);
+
+                    BilgiDil_AddPosts(context, tenant);
+                    BilgiDil_AddPostCategories(context, tenant);
+                    BilgiDil_AddPostPostCategories(context, tenant);
+
+                }
                 else if (tenant.Name == "BirInsanBelge") {
 
                     // Look for any existing records
@@ -1100,6 +1139,577 @@ namespace CmsCoreV3.Data
             );
             context.SaveChanges();
         }
+
+        //BilgiDil Seed------------------------------------------------
+
+        private static void BilgiDil_AddPostPostCategories(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+                new PostPostCategory { PostId = 1, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 3, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 4, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 5, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 6, PostCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 3, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 4, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 4, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 5, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 5, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 6, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 6, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 1, PostCategoryId = 7, AppTenantId = tenant.AppTenantId },
+                new PostPostCategory { PostId = 2, PostCategoryId = 7, AppTenantId = tenant.AppTenantId }
+
+                );
+            context.SaveChanges();
+        }
+        private static void BilgiDil_AddGalleryItemGalleryItemCategories(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+                new GalleryItemGalleryItemCategory { GalleryItemId = 1, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new GalleryItemGalleryItemCategory { GalleryItemId = 1, GalleryItemCategoryId = 2, AppTenantId = tenant.AppTenantId },
+                new GalleryItemGalleryItemCategory { GalleryItemId = 2, GalleryItemCategoryId = 1, AppTenantId = tenant.AppTenantId },
+                new GalleryItemGalleryItemCategory { GalleryItemId = 2, GalleryItemCategoryId = 2, AppTenantId = tenant.AppTenantId }
+
+
+                );
+            context.SaveChanges();
+        }
+        private static void BilgiDil_AddPostCategories(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = null, LanguageId = 1, Name = "Haberler", ParentCategoryId = null, Slug = "haberler", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = null, LanguageId = 1, Name = "Kadromuz", ParentCategoryId = null, Slug = "kadromuz", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "blog", LanguageId = 1, Name = "Blog", ParentCategoryId = null, Slug = "blog", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Anaokulu", LanguageId = 1, Name = "Anaokulu", ParentCategoryId = 1, Slug = "anaokulu", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "İlkokul", LanguageId = 1, Name = "İlkokul", ParentCategoryId = 1, Slug = "ilkokul", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Ortaokul", LanguageId = 1, Name = "ortaokul", ParentCategoryId = 1, Slug = "ortaokul", AppTenantId = tenant.AppTenantId },
+                new PostCategory { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "Lise", LanguageId = 1, Name = "lise", ParentCategoryId = 1, Slug = "lise", AppTenantId = tenant.AppTenantId }
+
+                );
+            context.SaveChanges();
+        }
+        private static void BilgiDil_AddPosts(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+                new Post { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Body = "<p>Donec rutrum ante augue, eu rutrum turpis finibus vel. Quisque augue sapien, ornare ut turpis ac, faucibus tempus purus. Ut consectetur aliquam ligula. Phasellus efficitur at erat sit amet tincidunt. Sed pellentesque viverra posuere. Phasellus convallis at mauris quis tincidunt. Etiam condimentum odio ut vehicula eleifend. Etiam mi metus, pulvinar a iaculis eget, hendrerit sed est. Fusce felis lectus, elementum quis ultricies ullamcorper, maximus id mi. Aliquam quis finibus ipsum. Proin ut feugiat purus. Nulla in risus eleifend, sodales quam eget, volutpat leo.</p>", Description = "küçük masa lambası", IsPublished = true, LanguageId = 1, Meta1 = "meta1 nedir", Meta2 = "meta2 nedir", Photo = "/uploads/images/18.jpg", SeoDescription = "post", SeoKeywords = "post", SeoTitle = "post", Slug = "haber1", Title = "Donec rutrum ante augue, eu rutrum turpis finibus vel", ViewCount = 0, AppTenantId = tenant.AppTenantId },
+                new Post { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Body = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus tortor, vitae congue nisi maximus vitae. Nunc id sapien ut est ultrices porta. In euismod dui vitae metus venenatis vehicula. Pellentesque non lacinia odio. Fusce id lectus eu justo euismod congue. Suspendisse potenti. Pellentesque rhoncus volutpat orci sed maximus. Mauris volutpat quam ac dui rhoncus, vel vestibulum nisl tristique. Aliquam scelerisque nunc in consectetur porta. Fusce quis molestie lacus. Phasellus molestie egestas arcu, sit amet condimentum mauris facilisis ut. Ut tempor felis erat, vitae hendrerit felis fermentum at. Quisque risus justo, lacinia id nibh in, lacinia aliquet enim.</p>", Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", IsPublished = true, LanguageId = 1, Meta1 = null, Meta2 = null, Photo = "/uploads/images/19.jpg", SeoDescription = "blog", SeoKeywords = "blog", SeoTitle = "blog", Slug = "ilk-blog-yazisi", Title = "İlk blog yazısı", ViewCount = 0, AppTenantId = tenant.AppTenantId },
+                new Post { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Body = "<h3>Section 1.10.32 of &quot;de Finibus Bonorum et Malorum&quot;, written by Cicero in 45 BC</h3>", Description = "culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias co", IsPublished = true, LanguageId = 1, Meta1 = null, Meta2 = null, Photo = "/uploads/images/20.jpg", SeoDescription = "yok", SeoKeywords = "yok", SeoTitle = "yok", Slug = "flat-resimler", Title = "Flat resimler", ViewCount = 0, AppTenantId = tenant.AppTenantId },
+                new Post { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Body = "<h3>Section 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot;, written by Cicero in 45 BC</h3>", Description = "culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias co", IsPublished = true, LanguageId = 1, Meta1 = null, Meta2 = null, Photo = "/uploads/images/21.jpg", SeoDescription = null, SeoKeywords = null, SeoTitle = null, Slug = "flat-2-resim-haber", Title = "Flat 2. resim haber ", ViewCount = 0, AppTenantId = tenant.AppTenantId },
+                new Post { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Body = "<h3>The standard Lorem Ipsum passage, used since the 1500s</h3>", Description = "nis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque po", IsPublished = true, LanguageId = 1, Meta1 = "a", Meta2 = "a", Photo = "/uploads/images/21.jpg", SeoDescription = "a", SeoKeywords = "a", SeoTitle = "a", Slug = "fil-haberleri-basliyor", Title = "Fil haberleri başlıyor", ViewCount = 0, AppTenantId = tenant.AppTenantId },
+                new Post { CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Body = "<h3>1914 translation by H. Rackham</h3>", Description = "st, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures ha", IsPublished = true, LanguageId = 1, Meta1 = "a", Meta2 = "a", Photo = "/uploads/images/22.jpg", SeoDescription = "a", SeoKeywords = "a", SeoTitle = "a", Slug = "kameralar-geldi", Title = "Kameralar geldi", ViewCount = 0, AppTenantId = tenant.AppTenantId }
+
+
+                );
+            context.SaveChanges();
+        }
+
+        private static void BilgiDil_AddFeedbackValues(ApplicationDbContext context, AppTenant tenant)
+        {
+            /*context.AddRange(
+                new FeedbackValue { CreatedBy = "username", CreateDate = DateTime.Now, FeedbackId = 1, FieldType = FieldType.fullName, FormFieldId = 1, FormFieldName = "Ad Soyad", UpdatedBy = "username", UpdateDate = DateTime.Now, Position = 1, AppTenantId = tenant.AppTenantId },
+
+                new FeedbackValue { CreatedBy = "username", CreateDate = DateTime.Now, FeedbackId = 1, FieldType = FieldType.email, FormFieldId = 2, FormFieldName = "E-posta", UpdatedBy = "username", UpdateDate = DateTime.Now, Position = 2, AppTenantId = tenant.AppTenantId },
+                new FeedbackValue { CreatedBy = "username", CreateDate = DateTime.Now, FeedbackId = 1, FieldType = FieldType.telephone, FormFieldId = 3, FormFieldName = "Telefon", UpdatedBy = "username", UpdateDate = DateTime.Now, Position = 3, AppTenantId = tenant.AppTenantId },
+                new FeedbackValue { CreatedBy = "username", CreateDate = DateTime.Now, FeedbackId = 1, FieldType = FieldType.radioButtons, FormFieldId = 4, FormFieldName = "Çocuğunuzu kaydettirmeyi düşündüğünüz okul aşağıdakilerden hangisidir?", UpdatedBy = "username", UpdateDate = DateTime.Now, Position = 4, Value = null, AppTenantId = tenant.AppTenantId },
+                new FeedbackValue { CreatedBy = "username", CreateDate = DateTime.Now, FeedbackId = 1, FieldType = FieldType.dropdownMenu, FormFieldId = 5, FormFieldName = "Çocuğunuzu kaydettirmeyi düşündüğünüz sınıf hangisidir?", UpdatedBy = "username", UpdateDate = DateTime.Now, Position = 5, Value = "Seçiniz", AppTenantId = tenant.AppTenantId },
+                new FeedbackValue { CreatedBy = "username", CreateDate = DateTime.Now, FeedbackId = 1, FieldType = FieldType.checkbox, FormFieldId = 6, FormFieldName = "Abonelik", UpdatedBy = "username", UpdateDate = DateTime.Now, Position = 6, Value = null, AppTenantId = tenant.AppTenantId }
+                );*/
+        }
+        private static void BilgiDil_AddFeedbacks(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+                new Feedback { CreatedBy = "username", CreateDate = DateTime.Now, FormId = 1, FormName = "Sizi Arayalım", UpdatedBy = "username", UpdateDate = DateTime.Now, UserName = "username", SentDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
+
+                );
+            context.SaveChanges();
+
+        }
+        public static long BilgiDil_AddLanguages(ApplicationDbContext context, AppTenant tenant)
+        {
+            var l = new Language();
+            l.Name = "Turkish";
+            l.NativeName = "Türkçe";
+            l.Culture = "tr";
+            l.IsActive = true;
+            l.AppTenantId = tenant.AppTenantId;
+            context.Languages.Add(l);
+
+            var eng = new Language();
+            eng.AppTenantId = tenant.AppTenantId;
+            eng.Name = "English";
+            eng.NativeName = "İngilizce";
+            eng.Culture = "en";
+            eng.IsActive = true;
+            context.Languages.Add(eng);
+            context.SaveChanges();
+
+            return l.Id;
+
+
+        }
+        public static void BilgiDil_AddPages(ApplicationDbContext context, AppTenant tenant, long languageId)
+        {
+
+            context.AddRange(
+                new Page { Title = "Anasayfa", Slug = "anasayfa", Template = "Index", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "Blog", Slug = "blog", Template = "blog", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Page { Title = "İletişim Bilgileri", Slug = "iletisim-bilgileri", Template = "Contact", Photo = "/uploads/birinsan/8-2017/biz_kimiz.png", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId, Body = "<h3 class=\"text-uppercase\">Adres & Harita</h3><div class=\"row\"><div class=\"col-md-6\"><address><strong>Bilişim Eğitim Merkezi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div><div class=\"col-md-6\"><address><strong>Bir İnsan Akademisi</strong><br>Bahariye Cad.SüleymanPaşa Sok.No:2<br>Kadıköy, İstanbul<br><abbr title = \"Phone\" > Tel:</abbr> 216-346-26-06</address></div></div>" },
+                new Page { Title = "Arama", Slug = "arama", Template = "Search", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
+                );
+            context.SaveChanges();
+
+        }
+
+
+        private static void BilgiDil_AddSettings(ApplicationDbContext context, AppTenant tenant)
+        {
+            var s = new Setting();
+            s.AppTenantId = tenant.AppTenantId;
+            s.HeaderString = "";
+            s.GoogleAnalytics = "";
+            s.FooterScript = "";
+            s.SmtpUserName = "denemecvhavuzu@gmail.com";
+            s.SmtpPassword = "123:Asdfg";
+            s.SmtpHost = "smtp.gmail.com";
+            s.SmtpPort = "587";
+            s.SmtpUseSSL = true;
+            s.CreateDate = DateTime.Now;
+            s.CreatedBy = "username";
+            s.UpdateDate = DateTime.Now;
+            s.UpdatedBy = "username";
+            s.MapLat = "40.989143";
+            s.MapLon = "29.0289560";
+            s.MapTitle = "Bir İnsan Belge";
+            context.Settings.Add(s);
+            context.SaveChanges();
+
+
+        }
+        public static void BilgiDil_AddCustomization(ApplicationDbContext context, AppTenant tenant)
+        {
+            var customization = new Customization();
+            customization.AppTenantId = tenant.AppTenantId;
+            customization.ThemeId = tenant.ThemeId;
+            customization.ThemeName = tenant.ThemeName;
+            customization.MetaKeywords = tenant.Theme.MetaKeywords;
+            customization.MetaDescription = tenant.Theme.MetaDescription;
+            customization.MetaTitle = tenant.Theme.MetaTitle;
+            customization.Logo = tenant.Theme.Logo;
+            customization.ImageUrl = tenant.Theme.ImageUrl;
+            customization.CustomCSS = tenant.Theme.CustomCSS;
+            customization.CreateDate = DateTime.Now;
+            customization.CreatedBy = "UserName";
+            customization.UpdateDate = DateTime.Now;
+            customization.UpdatedBy = "UserName";
+            customization.PageTemplates = tenant.Theme.PageTemplates;
+            customization.ComponentTemplates = tenant.Theme.ComponentTemplates;
+            context.Customizations.Add(customization);
+            context.SaveChanges();
+
+        }
+        private static void BilgiDil_AddForms(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+                new Form { FormName = "Sizi Arayalım", Slug = "sizi-arayalim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Form { FormName = "İletişim", Slug = "iletisim", EmailTo = "mdemirci@outlook.com", LanguageId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
+
+
+                );
+            context.SaveChanges();
+        }
+
+        private static void BilgiDil_AddFormFields(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+                new FormField { Name = "Ad Soyad", FormId = 1, FieldType = FieldType.fullName, Position = 1, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "E-posta", FormId = 1, FieldType = FieldType.email, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Telefon", FormId = 1, FieldType = FieldType.telephone, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Çocuğunuzu kaydettirmeyi düşündüğünüz okul aşağıdakilerden hangisidir?", FormId = 1, FieldType = FieldType.radioButtons, Position = 4, Required = true, Value = "Anaokulu,İlkokul,Ortaokul,Lise", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Çocuğunuzu kaydettirmeyi düşündüğünüz sınıf hangisidir?", FormId = 1, FieldType = FieldType.dropdownMenu, Position = 5, Required = true, Value = "Seçiniz,1,2,3,4", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Abonelik", FormId = 1, FieldType = FieldType.checkbox, Position = 6, Required = true, Value = "Bilgi Koleji Okullarından gönderilen her türlü haber&#44; bilgi ve tanıtım içeriklerinden e-posta adresim ve telefonum aracılığıyla haberdar olmak istiyorum.", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                );
+            context.SaveChanges();
+            context.AddRange(
+                new FormField { Name = "Ad Soyad", FormId = 2, FieldType = FieldType.fullName, Position = 1, Required = false, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "E-posta", FormId = 2, FieldType = FieldType.email, Position = 2, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Telefon", FormId = 2, FieldType = FieldType.telephone, Position = 3, Required = false, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new FormField { Name = "Mesajınız", FormId = 2, FieldType = FieldType.largeText, Position = 3, Required = true, Value = "", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                );
+            context.SaveChanges();
+
+
+
+        }
+
+        private static void BilgiDil_AddMenus(ApplicationDbContext context, AppTenant tenant)
+        {
+            var menu = new Menu { Name = "Ana Menü", MenuLocation = "Primary", LanguageId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId };
+            var menu2 = new Menu { Name = "Home Menu", MenuLocation = "Primary", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId };
+
+            context.AddRange(menu);
+            context.AddRange(menu2);
+
+            context.SaveChanges();
+        }
+        private static void BilgiDil_AddMenuItems(ApplicationDbContext context, AppTenant tenant)
+        {
+            context.AddRange(
+
+                new MenuItem { Name = "Kurumsal", Url = "kurumsal", Position = 2, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Sınav ve Belgelendirme", Url = "sinav-ve-belgelendirme", Position = 3, IsPublished = true, MenuId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Meslek Grupları", Url = "meslek-gruplari", Position = 4, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Blog", Url = "blog", Position = 5, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Dijital Kütüphane", Url = "dijital-kutuphane", Position = 6, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İletişim", Url = "iletisim", Position = 7, MenuId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+                );
+            context.SaveChanges();
+
+            context.AddRange(
+                new MenuItem { Name = "Misyon-Vizyon", Url = "misyon-vizyon", Position = 1, MenuId = 1, IsPublished = true, ParentMenuItemId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Kalite Politikamız", Url = "kalite-politikamiz", Position = 2, IsPublished = true, MenuId = 1, ParentMenuItemId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Organizasyon Şeması", Url = "organizasyon-semasi", MenuId = 1, Position = 3, IsPublished = true, ParentMenuItemId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Yetki Belgelerimiz", Url = "yetki-belgelerimiz", MenuId = 1, IsPublished = true, Position = 4, ParentMenuItemId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Taahütnameler", Url = "taahütnameler", MenuId = 1, IsPublished = true, Position = 5, ParentMenuItemId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Belge,Marka ve Logo Kullanım Talimatı", Url = "belge-marka-ve-logo-kullanim-talimati", MenuId = 1, IsPublished = true, Position = 6, ParentMenuItemId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İnsan Kaynakları", Url = "insan-kaynaklari", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 1, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Genel Bilgiler", Url = "genel-bilgiler", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Başvuru Süreci", Url = "basvuru-sureci", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Belgelendirme Kapsamı", Url = "belgelendirme-kapsami", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Belgelendirme Süreci", Url = "belgelendirme-sureci", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Ücret Politikası", Url = "ucret-politikasi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Fiyat Listesi", Url = "fiyat-listesi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Banka Hesap Bilgileri", Url = "banka-hesap-bilgileri", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Sınavlar", Url = "sinavlar", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Sınav Takvimi", Url = "sinav-takvimi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Sınav Kuralları", Url = "sinav-kurallari", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Sınav Giriş Belgesi", Url = "sinav-giris-belgesi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Belge Süreci Dolmuş Aday Listesi", Url = "belge-sureci-dolmus-aday-listesi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Mevzuat", Url = "mevzuat", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Meslek Standartları", Url = "meslek-standartlari", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Ulusal Yeterlilik", Url = "ulusal-yeterlilik", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Yönetmelik", Url = "yonetmelikr", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Tebliğ", Url = "teblig", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Şartnameler", Url = "sartnameler", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Teşvikler", Url = "tesvikler", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Formlar", Url = "formlar", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Belgelendirme Talep Formu", Url = "belgelendirme-talep-formu", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İtiraz ve Şikayet Formu", Url = "itiraz-ve-sikayet-formu", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Belgesi Askıya Alınan ve İptal Edilenler", Url = "belgesi-askiya-alinanlar-ve-iptal-edilenler", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Dökümanlar", Url = "dokumanlar", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Ahşap Kalıpçı", Url = "ahsap-kalipci", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Alçı Levha Uygulamacısı", Url = "alci-levha-uygulamacisi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Alçı Sıva Uygulamacısı", Url = "alci-siva-uygulamacisi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Betoncu", Url = "betoncu", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Duvarcı", Url = "duvarci", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İnşaat Boyacısı", Url = "insaat-boyacisi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İnşaat İşçisi", Url = "insaat-iscisi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Isı Yalıtımcı", Url = "isi-yalitimci", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İskele Kurulum Elemanı", Url = "iskele-kurulum-elemani", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Panel Kalıpçı", Url = "panel-kalipci", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Seramik Karo Kaplamacılığı", Url = "seramik-karo-kaplamaciligi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Sıvacı", Url = "sivaci", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Su Yalıtımcısı", Url = "su-yalitimcisi", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 3, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Sıkça Sorulan Sorular", Url = "sikca-sorulan-sorular", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 5, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Faydalı Linkler", Url = "faydali-linkler", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 5, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Doküman İndir", Url = "dokuman-indir", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 5, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "İletişim Bilgileri", Url = "iletisim-bilgileri", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 6, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Merkez Ofis", Url = "merkez-ofis", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 6, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new MenuItem { Name = "Uygulamalı Sınav Yeri", Url = "uygulamali-sinav-yeri", MenuId = 1, IsPublished = true, Position = 7, ParentMenuItemId = 6, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
+
+                );
+
+
+
+            context.SaveChanges();
+        }
+
+        private static void BilgiDil_AddHomePageSlider(ApplicationDbContext context, AppTenant tenant)
+        {
+            var slider = new Slider();
+            slider.AppTenantId = tenant.AppTenantId;
+
+            slider.IsPublished = true;
+            slider.Name = "Anasayfa Slider";
+            slider.Template = "Default";
+            slider.CreateDate = DateTime.Now;
+            slider.CreatedBy = "username";
+            slider.UpdateDate = DateTime.Now;
+            slider.UpdatedBy = "username";
+            slider.Slides = new HashSet<Slide>();
+            context.Sliders.Add(slider);
+            context.SaveChanges();
+
+
+        }
+
+        private static void BilgiDil_AddHomePageSlides(ApplicationDbContext context, AppTenant tenant)
+        {
+
+            var s2 = new Slide();
+            s2.AppTenantId = tenant.AppTenantId;
+
+            s2.Title = "Başlık2";
+            s2.SubTitle = "Alt Başlık2";
+            s2.Description = "Açıklama2";
+            s2.Position = 1;
+            s2.Photo = "/uploads/bilgidil/8-2017/MYK_slider_v1.png";
+            s2.CallToActionText = "Buton2";
+            s2.CallToActionUrl = "#";
+            s2.DisplayTexts = false;
+            s2.IsPublished = true;
+            s2.SliderId = 1;
+            s2.CreateDate = DateTime.Now;
+            s2.CreatedBy = "username";
+            s2.UpdateDate = DateTime.Now;
+            s2.UpdatedBy = "username";
+            context.Slides.Add(s2);
+            context.SaveChanges();
+
+
+        }
+
+        private static void BilgiDil_AddSecondarySlider(ApplicationDbContext context, AppTenant tenant)
+        {
+            var slider = new Slider();
+            slider.AppTenantId = tenant.AppTenantId;
+
+            slider.IsPublished = true;
+            slider.Name = "Anasayfa İkinci Slider";
+            slider.Template = "Secondary";
+            slider.CreateDate = DateTime.Now;
+            slider.CreatedBy = "username";
+            slider.UpdateDate = DateTime.Now;
+            slider.UpdatedBy = "username";
+            slider.Slides = new HashSet<Slide>();
+
+            context.Sliders.Add(slider);
+            context.SaveChanges();
+
+
+        }
+
+        private static void BilgiDil_AddSecondarySlides(ApplicationDbContext context, AppTenant tenant)
+        {
+            var s1 = new Slide();
+            s1.AppTenantId = tenant.AppTenantId;
+
+            s1.Title = "Başlık4";
+            s1.SubTitle = "Alt Başlık4";
+            s1.Description = "Açıklama4";
+            s1.Position = 2;
+            s1.Photo = "/uploads/5-2017/9a2ef92e2e0ca0fb061171e27596dfeb.jpg";
+            s1.CallToActionText = "Buton4";
+            s1.CallToActionUrl = "#";
+            s1.DisplayTexts = false;
+            s1.IsPublished = true;
+            s1.SliderId = 2;
+            s1.CreateDate = DateTime.Now;
+            s1.CreatedBy = "username";
+            s1.UpdateDate = DateTime.Now;
+            s1.UpdatedBy = "username";
+            context.Slides.Add(s1);
+
+            var s2 = new Slide();
+            s2.AppTenantId = tenant.AppTenantId;
+
+            s2.Title = "Başlık5";
+            s2.SubTitle = "Alt Başlık5";
+            s2.Description = "Açıklama5";
+            s2.Position = 2;
+            s2.Photo = "/uploads/5-2017/9a2ef92e2e0ca0fb061171e27596dfeb.jpg";
+            s2.CallToActionText = "Buton5";
+            s2.CallToActionUrl = "#";
+            s2.DisplayTexts = false;
+            s2.IsPublished = true;
+            s2.SliderId = 2;
+            s2.CreateDate = DateTime.Now;
+            s2.CreatedBy = "username";
+            s2.UpdateDate = DateTime.Now;
+            s2.UpdatedBy = "username";
+            context.Slides.Add(s2);
+            context.SaveChanges();
+
+
+        }
+
+        private static void BilgiDil_AddLogoSlider(ApplicationDbContext context, AppTenant tenant)
+        {
+            var slider = new Slider();
+            slider.AppTenantId = tenant.AppTenantId;
+
+            slider.IsPublished = true;
+            slider.Name = "Logo Slider";
+            slider.Template = "LogoSlider";
+            slider.CreateDate = DateTime.Now;
+            slider.CreatedBy = "username";
+            slider.UpdateDate = DateTime.Now;
+            slider.UpdatedBy = "username";
+            slider.Slides = new HashSet<Slide>();
+
+            context.Sliders.Add(slider);
+            context.SaveChanges();
+
+
+        }
+
+        private static void BilgiDil_AddLogoSlides(ApplicationDbContext context, AppTenant tenant)
+        {
+
+            var s1 = new Slide();
+            s1.AppTenantId = tenant.AppTenantId;
+
+            s1.Title = "Başlık6";
+            s1.SubTitle = "Alt Başlık6";
+            s1.Description = "Açıklama6";
+            s1.Position = 3;
+            s1.Photo = "/uploads/bilgidil/8-2017/1.png";
+            s1.CallToActionText = "Buton6";
+            s1.CallToActionUrl = "#";
+            s1.DisplayTexts = false;
+            s1.IsPublished = true;
+            s1.SliderId = 3;
+            s1.CreateDate = DateTime.Now;
+            s1.CreatedBy = "username";
+            s1.UpdateDate = DateTime.Now;
+            s1.UpdatedBy = "username";
+            context.Slides.Add(s1);
+            context.SaveChanges();
+
+
+        }
+
+
+
+        private static void BilgiDil_AddGalleries(ApplicationDbContext context, AppTenant tenant)
+        {
+
+
+
+
+            context.AddRange(
+            new Gallery { Name = "Galeri Sayfası", IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+            new Gallery { Name = "Anasayfa Galeri", IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId });
+            context.SaveChanges();
+
+
+        }
+        private static void BilgiDil_AddGalleryItemCategories(ApplicationDbContext context, AppTenant tenant)
+        {
+
+            context.AddRange(
+            new GalleryItemCategory { Name = "Flat", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "flat", ParentCategoryId = null, Slug = "flat", AppTenantId = tenant.AppTenantId },
+            new GalleryItemCategory { Name = "Standart", CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, Description = "standart", ParentCategoryId = null, Slug = "standart", AppTenantId = tenant.AppTenantId });
+            context.SaveChanges();
+
+
+        }
+        private static void BilgiDil_AddGalleryItems(ApplicationDbContext context, AppTenant tenant)
+        {
+
+
+            context.AddRange(
+                new GalleryItem { Title = "flat1", Description = "flat 1", Position = 1, Photo = "/uploads/images/1.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "Empt", Description = "Empt", Position = 11, Photo = "/uploads/images/2.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "bono", Description = "bono", Position = 7, Photo = "/uploads/images/3.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "kitcube", Description = "kit", Position = 6, Photo = "/uploads/images/4.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "sch", Description = "sch", Position = 8, Photo = "/uploads/images/5.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "m-W", Description = "m-W", Position = 11, Photo = "/uploads/images/6.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "catarse", Description = "cat", Position = 15, Photo = "/uploads/images/7.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "brand", Description = "brand", Position = 11, Photo = "/uploads/images/8.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "firefox", Description = "fire", Position = 11, Photo = "/uploads/images/9.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "joystick", Description = "x", Position = 12, Photo = "/uploads/images/10.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "fox", Description = "f", Position = 113, Photo = "/uploads/images/11.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "dc", Description = "DC", Position = 14, Photo = "/uploads/images/12.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "slug", Description = "sl", Position = 15, Photo = "/uploads/images/13.png", Video = null, Meta1 = "grid-item-height1", GalleryId = 1, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "Kalem", Description = "a", Position = 18, Photo = "/uploads/images/14.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 2, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "kareli falan bir hareket", Description = null, Position = 18, Photo = "/uploads/images/15.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 2, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "dikey", Description = "s", Position = 17, Photo = "/uploads/images/16.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 2, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new GalleryItem { Title = "web", Description = "webtrend", Position = 17, Photo = "/uploads/images/17.jpg", Video = null, Meta1 = "grid-item-height1", GalleryId = 2, IsPublished = true, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
+
+            );
+            context.SaveChanges();
+        }
+        private static void BilgiDil_AddResources(ApplicationDbContext context, AppTenant tenant)
+        {
+
+            context.AddRange(
+                new Resource { Name = "Anaokulu", Value = "Kindergarten", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İlkokul", Value = "Primary School", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Ortaokul", Value = "Middle School", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Lise", Value = "High School", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Arayınız...", Value = "Call Us", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Hızlı Ara", Value = "Fast Call", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "MUTLULUK VEREN BİLGİ'Yİ BİRLİKTE ÇOĞALTALIM", Value = "WE INCREASE HAPPY KNOWLEDGE TOGETHER", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "(Akademi ve İdari Personel Başvuruları)", Value = "Academy and Administrative Staff Applications", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Başvur", Value = "Apply", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "HAKKINDA", Value = "ABOUT", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "FooterAboutText", Value = "", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Mail", Value = "Mail", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Telefon", Value = "Phone", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Adres", Value = "Address", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "BAĞLANTILAR", Value = "LINKS", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Akademik Takvim", Value = "Academic Calendar", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Etkinlikler", Value = "Activities", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Basın", Value = "Press", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İnsan Kaynakları", Value = "Human Resources", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Kendini Değerlendir", Value = "Evaluate yourself", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Bilgi Store", Value = "Information Store", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Veli İletişim", Value = "Parent Communication", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Ek Alanlar", Value = "Additional Areas", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Site Haritası", Value = "Site Map", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "E-Bülten", Value = "E-Newsletter", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "En son yeniliklerden ve tekliflerden haberdar olmak için e-posta listemize katılın.", Value = "Join our email list to be notified of the latest innovations and offers.", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "E-posta adresi", Value = "E-mail Address", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Gizliliğinize saygı duyuyoruz.", Value = "We respect your privacy.", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "GÜNCEL DUYURULAR", Value = "Actual Announcements", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "BİLGİ KOLEJİ'NDEN EN SON HABERLER", Value = "THE LAST NEWS FROM BİLGİ KOLEJİ", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Detaylı Bilgi", Value = "More Information", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Görün Ve Hissedin", Value = "See and Feel", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Galeri", Value = "Gallery", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Daha Fazla Fotoğraf", Value = "More photographs", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Gönder", Value = "Send", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Form bulunamadı!", Value = "Form can't find!", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "EN İYİSİNDEN ÖĞRENİN", Value = "Learn The Best", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "KADROMUZ", Value = "OUR STAFF", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Devamını oku...", Value = "Read More...", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Hakkımızda", Value = "About Us", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Farkımız", Value = "Our Difference", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Eğitim Modeli", Value = "Education Model", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Okul Konsepti", Value = "School Concept", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Kampüs", Value = "Campus", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "ANAOKULU", Value = "KINDERGARTEN", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İletişim", Value = "Contact", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Buraya form gelicek", Value = "Forms should come here.", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "LİSE", Value = "HIGH SCHOOL", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Son Yazılar", Value = "Last Posts", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Çok Okunanlar", Value = "Most Read", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İş Başvuru Formu", Value = "Job Application Form", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Galeri Sayfası", Value = "Gallery Page", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Diğer", Value = "Other", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Anaokulu iletişim", Value = "Kindergarten Contact", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "AnaOkulu", Value = "Kindergarten", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "ORTAOKUL", Value = "MIDDLE SCHOOL", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "ortaokul", Value = "MiddleSchool", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İlgili Sayfalar", Value = "Related Pages", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Son Yazılar", Value = "Last Posts", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "İLKOKUL", Value = "PRIMARY SCHOOL", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "ilkokul", Value = "PrimarySchool", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Survey", Value = "Anket", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Arayınız...", Value = "Search...", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId },
+                new Resource { Name = "Hızlı Ara", Value = "Fast Search", LanguageId = 2, CreatedBy = "username", CreateDate = DateTime.Now, UpdatedBy = "username", UpdateDate = DateTime.Now, AppTenantId = tenant.AppTenantId }
+
+
+
+            );
+            context.SaveChanges();
+        }
+
 
         //Bir İnsan Belge Seed------------------------------------------------
 
