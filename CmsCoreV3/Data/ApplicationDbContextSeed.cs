@@ -16,7 +16,7 @@ namespace CmsCoreV3.Data
         public static void Seed(this ApplicationDbContext context, IHttpContextAccessor accessor)
         {
             // apply migrations to database
-            context.Database.Migrate();
+            
 
             AppTenant tenant = context.tenant;
 

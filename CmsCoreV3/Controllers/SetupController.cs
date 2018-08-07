@@ -18,8 +18,9 @@ namespace CmsCoreV3.Controllers
             this.accessor = accessor;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int migrate = 0)
         {
+            _context.Database.EnsureCreated();
             _context.Seed(accessor);
             return Content("Done!");
         }
