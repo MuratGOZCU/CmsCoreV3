@@ -22,7 +22,7 @@
             @{ bool isFirst = true; }
             @foreach (var cat in giCategories)
             {
-                <li role="presentation" @(isFirst ? "class=active" : string.Empty)><a href="#@cat.Name.ToLower()" data-toggle="tab" class="text">@cat.Name</a></li>
+                <li role="presentation" @(isFirst ? "class=active" : string.Empty)><a href="#@cat.Slug.ToLower()" data-toggle="tab" class="text">@cat.Name</a></li>
                 isFirst = false;
             }
 
@@ -36,7 +36,7 @@
             @{ isFirst = true; }
             @foreach (var cat in giCategories)
             {
-                <div id="@cat.Name.ToLower()" role="tabpanel" class="tab-pane fade in @(isFirst?"active":string.Empty)">
+                <div id="@cat.Slug.ToLower()" role="tabpanel" class="tab-pane fade in @(isFirst?"active":string.Empty)">
                     <div class="grid">
 
                         @foreach (var item in Model.Where(m => m.GalleryItemGalleryItemCategories.Any(a => a.GalleryItemCategoryId == cat.Id)).ToList())
